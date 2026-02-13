@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TipoDatoZonaDlgClass</class>
+ <widget class="DataDialog" name="TipoDatoZonaDlgClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>370</width>
+    <height>203</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Tipos de datos por zona</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Escenario</string>
+       </property>
+       <property name="buddy">
+        <cstring>escenario</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Nombre</string>
+       </property>
+       <property name="buddy">
+        <cstring>nombre</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="nombre"/>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Unidades</string>
+       </property>
+       <property name="buddy">
+        <cstring>unidades</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="unidades"/>
+     </item>
+     <item row="0" column="1">
+      <widget class="TComboBox" name="escenario"/>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="variable"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Variable JavaScript</string>
+       </property>
+       <property name="buddy">
+        <cstring>variable</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="defecto"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Valor por defecto</string>
+       </property>
+       <property name="buddy">
+        <cstring>defecto</cstring>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>0</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DataDialog</class>
+   <extends>QDialog</extends>
+   <header>ts.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TComboBox</class>
+   <extends>QComboBox</extends>
+   <header>ts.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>escenario</tabstop>
+  <tabstop>nombre</tabstop>
+  <tabstop>variable</tabstop>
+  <tabstop>defecto</tabstop>
+  <tabstop>unidades</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>TipoDatoZonaDlgClass</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>147</x>
+     <y>198</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>76</x>
+     <y>89</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>TipoDatoZonaDlgClass</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>198</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>197</x>
+     <y>93</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

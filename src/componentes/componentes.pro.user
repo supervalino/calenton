@@ -1,0 +1,584 @@
+<!DOCTYPE QtCreatorProject>
+<qtcreator>
+ <data>
+  <variable>RunConfiguration0-Arguments</variable>
+  <valuelist type="QVariantList">
+   <value type="QString">calenton.py</value>
+  </valuelist>
+ </data>
+ <data>
+  <variable>RunConfiguration0-BaseEnvironmentBase</variable>
+  <value type="int">2</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-Executable</variable>
+  <value type="QString">/usr/bin/python</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-RunConfiguration.name</variable>
+  <value type="QString">Calenton</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UseTerminal</variable>
+  <value type="bool">false</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UserEnvironmentChanges</variable>
+  <valuelist type="QVariantList"/>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UserName</variable>
+  <value type="QString">Calenton</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UserSetName</variable>
+  <value type="bool">true</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-WorkingDirectory</variable>
+  <value type="QString">/home/bruno/proyectos/emisiones/src/calenton</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-type</variable>
+  <value type="QString">ProjectExplorer.CustomExecutableRunConfiguration</value>
+ </data>
+ <data>
+  <variable>activeRunConfiguration</variable>
+  <value type="int">0</value>
+ </data>
+ <data>
+  <variable>activebuildconfiguration</variable>
+  <value type="QString">Debug</value>
+ </data>
+ <data>
+  <variable>buildConfiguration-Debug</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Debug</value>
+   <value key="QtVersionId" type="int">0</value>
+   <value key="ToolChain" type="int">0</value>
+   <value key="addQDumper" type=""></value>
+   <value key="buildConfiguration" type="int">0</value>
+   <value key="buildDirectory" type="QString">/home/bruno/proyectos/componentes</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildConfiguration-Release</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
+   <value key="QtVersionId" type="int">0</value>
+   <value key="ToolChain" type="int">0</value>
+   <value key="addQDumper" type=""></value>
+   <value key="buildConfiguration" type="int">0</value>
+   <value key="buildDirectory" type="QString">/home/bruno/proyectos/componentes</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Debug-buildstep0</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList">
+    <value type="QString">CVS_RSH=ssh</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-BCpjnVHis6,guid=87b96766df68268b4377c53b4bd01431</value>
+    <value type="QString">DESKTOP_SESSION=kde</value>
+    <value type="QString">DISPLAY=:0.0</value>
+    <value type="QString">EDITOR=vi</value>
+    <value type="QString">GDMSESSION=kde</value>
+    <value type="QString">GDM_KEYBOARD_LAYOUT=es</value>
+    <value type="QString">GDM_LANG=es_ES.UTF-8</value>
+    <value type="QString">GNOME_KEYRING_PID=1817</value>
+    <value type="QString">GNOME_KEYRING_SOCKET=/tmp/keyring-ZqdfB0/socket</value>
+    <value type="QString">GPG_AGENT_INFO=/tmp/gpg-ESmlFI/S.gpg-agent:1892:1</value>
+    <value type="QString">GS_LIB=</value>
+    <value type="QString">GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/bruno/.gtkrc-2.0::/home/bruno/.kde/share/config/gtkrc-2.0</value>
+    <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/bruno/.gtkrc::/home/bruno/.kde/share/config/gtkrc</value>
+    <value type="QString">G_BROKEN_FILENAMES=1</value>
+    <value type="QString">HISTCONTROL=ignoreboth</value>
+    <value type="QString">HISTSIZE=1000</value>
+    <value type="QString">HOME=/home/bruno</value>
+    <value type="QString">HOSTNAME=asterix.trustserver.net</value>
+    <value type="QString">KDEDIRS=/usr</value>
+    <value type="QString">KDE_FULL_SESSION=true</value>
+    <value type="QString">KDE_IS_PRELINKED=1</value>
+    <value type="QString">KDE_MULTIHEAD=false</value>
+    <value type="QString">KDE_SESSION_UID=500</value>
+    <value type="QString">KDE_SESSION_VERSION=4</value>
+    <value type="QString">KMIX_PULSEAUDIO_DISABLE=1</value>
+    <value type="QString">LANG=es_ES.UTF-8</value>
+    <value type="QString">LD_LIBRARY_PATH=:/home/bruno/usr/lib</value>
+    <value type="QString">LESSOPEN=|/usr/bin/lesspipe.sh %s</value>
+    <value type="QString">LOGNAME=bruno</value>
+    <value type="QString">MAIL=/var/spool/mail/bruno</value>
+    <value type="QString">PATH=/usr/lib/qt4/bin:/usr/lib/qt-3.3/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/bruno/usr/bin</value>
+    <value type="QString">PWD=/home/bruno</value>
+    <value type="QString">PYQTDESIGNERPATH=/home/bruno/usr/python-plugins</value>
+    <value type="QString">PYTHONPATH=/home/bruno/usr/python</value>
+    <value type="QString">QTDIR=/usr/lib/qt4</value>
+    <value type="QString">QTINC=/usr/lib/qt-3.3/include</value>
+    <value type="QString">QTLIB=/usr/lib/qt-3.3/lib</value>
+    <value type="QString">QT_PLUGIN_PATH=:/home/bruno/usr/plugins:/home/bruno/.kde/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
+    <value type="QString">SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/1946,unix/unix:/tmp/.ICE-unix/1946</value>
+    <value type="QString">SHELL=/bin/bash</value>
+    <value type="QString">SHLVL=2</value>
+    <value type="QString">SSH_AGENT_PID=1839</value>
+    <value type="QString">SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/ssh-QbEVdd1824/agent.1824</value>
+    <value type="QString">USER=bruno</value>
+    <value type="QString">USERNAME=bruno</value>
+    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-bruno-oozveK/database</value>
+    <value type="QString">XCURSOR_THEME=default</value>
+    <value type="QString">XDG_DATA_DIRS=/usr/share/kde-settings/kde-profile/default/share:/usr/local/share:/usr/share</value>
+    <value type="QString">XDG_MENU_PREFIX=kde4-</value>
+    <value type="QString">XDG_SESSION_COOKIE=3e01cd87367b5bba62cf36004769a3fa-1271927857.102714-2082213920</value>
+    <value type="QString">_=/usr/libexec/kde4/start_kdeinit_wrapper</value>
+   </valuelist>
+   <valuelist key="abstractProcess.arguments" type="QVariantList">
+    <value type="QString">/home/bruno/proyectos/componentes/componentes.pro</value>
+    <value type="QString">-spec</value>
+    <value type="QString">linux-g++</value>
+    <value type="QString">-r</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString">/usr/bin/qmake-qt4</value>
+   <value key="abstractProcess.enabled" type="bool">false</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/bruno/proyectos/componentes</value>
+   <valuelist key="qmakeArgs" type="QVariantList"/>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Debug-buildstep1</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList">
+    <value type="QString">CVS_RSH=ssh</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-BCpjnVHis6,guid=87b96766df68268b4377c53b4bd01431</value>
+    <value type="QString">DESKTOP_SESSION=kde</value>
+    <value type="QString">DISPLAY=:0.0</value>
+    <value type="QString">EDITOR=vi</value>
+    <value type="QString">GDMSESSION=kde</value>
+    <value type="QString">GDM_KEYBOARD_LAYOUT=es</value>
+    <value type="QString">GDM_LANG=es_ES.UTF-8</value>
+    <value type="QString">GNOME_KEYRING_PID=1817</value>
+    <value type="QString">GNOME_KEYRING_SOCKET=/tmp/keyring-ZqdfB0/socket</value>
+    <value type="QString">GPG_AGENT_INFO=/tmp/gpg-ESmlFI/S.gpg-agent:1892:1</value>
+    <value type="QString">GS_LIB=</value>
+    <value type="QString">GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/bruno/.gtkrc-2.0::/home/bruno/.kde/share/config/gtkrc-2.0</value>
+    <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/bruno/.gtkrc::/home/bruno/.kde/share/config/gtkrc</value>
+    <value type="QString">G_BROKEN_FILENAMES=1</value>
+    <value type="QString">HISTCONTROL=ignoreboth</value>
+    <value type="QString">HISTSIZE=1000</value>
+    <value type="QString">HOME=/home/bruno</value>
+    <value type="QString">HOSTNAME=asterix.trustserver.net</value>
+    <value type="QString">KDEDIRS=/usr</value>
+    <value type="QString">KDE_FULL_SESSION=true</value>
+    <value type="QString">KDE_IS_PRELINKED=1</value>
+    <value type="QString">KDE_MULTIHEAD=false</value>
+    <value type="QString">KDE_SESSION_UID=500</value>
+    <value type="QString">KDE_SESSION_VERSION=4</value>
+    <value type="QString">KMIX_PULSEAUDIO_DISABLE=1</value>
+    <value type="QString">LANG=es_ES.UTF-8</value>
+    <value type="QString">LD_LIBRARY_PATH=:/home/bruno/usr/lib</value>
+    <value type="QString">LESSOPEN=|/usr/bin/lesspipe.sh %s</value>
+    <value type="QString">LOGNAME=bruno</value>
+    <value type="QString">MAIL=/var/spool/mail/bruno</value>
+    <value type="QString">PATH=/usr/lib/qt4/bin:/usr/lib/qt-3.3/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/bruno/usr/bin</value>
+    <value type="QString">PWD=/home/bruno</value>
+    <value type="QString">PYQTDESIGNERPATH=/home/bruno/usr/python-plugins</value>
+    <value type="QString">PYTHONPATH=/home/bruno/usr/python</value>
+    <value type="QString">QTDIR=/usr/lib/qt4</value>
+    <value type="QString">QTINC=/usr/lib/qt-3.3/include</value>
+    <value type="QString">QTLIB=/usr/lib/qt-3.3/lib</value>
+    <value type="QString">QT_PLUGIN_PATH=:/home/bruno/usr/plugins:/home/bruno/.kde/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
+    <value type="QString">SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/1946,unix/unix:/tmp/.ICE-unix/1946</value>
+    <value type="QString">SHELL=/bin/bash</value>
+    <value type="QString">SHLVL=2</value>
+    <value type="QString">SSH_AGENT_PID=1839</value>
+    <value type="QString">SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/ssh-QbEVdd1824/agent.1824</value>
+    <value type="QString">USER=bruno</value>
+    <value type="QString">USERNAME=bruno</value>
+    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-bruno-oozveK/database</value>
+    <value type="QString">XCURSOR_THEME=default</value>
+    <value type="QString">XDG_DATA_DIRS=/usr/share/kde-settings/kde-profile/default/share:/usr/local/share:/usr/share</value>
+    <value type="QString">XDG_MENU_PREFIX=kde4-</value>
+    <value type="QString">XDG_SESSION_COOKIE=3e01cd87367b5bba62cf36004769a3fa-1271927857.102714-2082213920</value>
+    <value type="QString">_=/usr/libexec/kde4/start_kdeinit_wrapper</value>
+   </valuelist>
+   <value key="abstractProcess.IgnoreReturnValue" type="bool">false</value>
+   <valuelist key="abstractProcess.arguments" type="QVariantList">
+    <value type="QString">debug-install</value>
+    <value type="QString">-w</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString">/usr/bin/make</value>
+   <value key="abstractProcess.enabled" type="bool">true</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/bruno/proyectos/componentes</value>
+   <valuelist key="makeargs" type="QVariantList">
+    <value type="QString">debug-install</value>
+   </valuelist>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Debug-cleanstep0</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList">
+    <value type="QString">CVS_RSH=ssh</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-pjcclpGn31,guid=e59b354d090250b51b5af62f4bbd8e4f</value>
+    <value type="QString">DESKTOP_SESSION=kde</value>
+    <value type="QString">DISPLAY=:0.0</value>
+    <value type="QString">EDITOR=vi</value>
+    <value type="QString">GDMSESSION=kde</value>
+    <value type="QString">GDM_KEYBOARD_LAYOUT=es</value>
+    <value type="QString">GDM_LANG=es_ES.UTF-8</value>
+    <value type="QString">GNOME_KEYRING_PID=1840</value>
+    <value type="QString">GNOME_KEYRING_SOCKET=/tmp/keyring-OITPdh/socket</value>
+    <value type="QString">GPG_AGENT_INFO=/tmp/gpg-7qlsow/S.gpg-agent:1913:1</value>
+    <value type="QString">GS_LIB=</value>
+    <value type="QString">GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/bruno/.gtkrc-2.0::/home/bruno/.kde/share/config/gtkrc-2.0</value>
+    <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/bruno/.gtkrc::/home/bruno/.kde/share/config/gtkrc</value>
+    <value type="QString">G_BROKEN_FILENAMES=1</value>
+    <value type="QString">HISTCONTROL=ignoreboth</value>
+    <value type="QString">HISTSIZE=1000</value>
+    <value type="QString">HOME=/home/bruno</value>
+    <value type="QString">HOSTNAME=asterix.trustserver.net</value>
+    <value type="QString">KDEDIRS=/usr</value>
+    <value type="QString">KDE_FULL_SESSION=true</value>
+    <value type="QString">KDE_IS_PRELINKED=1</value>
+    <value type="QString">KDE_MULTIHEAD=false</value>
+    <value type="QString">KDE_SESSION_UID=500</value>
+    <value type="QString">KDE_SESSION_VERSION=4</value>
+    <value type="QString">KMIX_PULSEAUDIO_DISABLE=1</value>
+    <value type="QString">LANG=es_ES.UTF-8</value>
+    <value type="QString">LD_LIBRARY_PATH=:/home/bruno/usr/lib</value>
+    <value type="QString">LESSOPEN=|/usr/bin/lesspipe.sh %s</value>
+    <value type="QString">LOGNAME=bruno</value>
+    <value type="QString">MAIL=/var/spool/mail/bruno</value>
+    <value type="QString">PATH=/usr/lib/qt4/bin:/usr/lib/qt-3.3/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/bruno/usr/bin</value>
+    <value type="QString">PWD=/home/bruno</value>
+    <value type="QString">PYQTDESIGNERPATH=/home/bruno/usr/python-plugins</value>
+    <value type="QString">PYTHONPATH=/home/bruno/usr/python</value>
+    <value type="QString">QTDIR=/usr/lib/qt4</value>
+    <value type="QString">QTINC=/usr/lib/qt-3.3/include</value>
+    <value type="QString">QTLIB=/usr/lib/qt-3.3/lib</value>
+    <value type="QString">QT_PLUGIN_PATH=:/home/bruno/usr/plugins:/home/bruno/.kde/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
+    <value type="QString">SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/1968,unix/unix:/tmp/.ICE-unix/1968</value>
+    <value type="QString">SHELL=/bin/bash</value>
+    <value type="QString">SHLVL=2</value>
+    <value type="QString">SSH_AGENT_PID=1862</value>
+    <value type="QString">SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/ssh-vvaAFp1847/agent.1847</value>
+    <value type="QString">USER=bruno</value>
+    <value type="QString">USERNAME=bruno</value>
+    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-bruno-1lsEat/database</value>
+    <value type="QString">XCURSOR_THEME=default</value>
+    <value type="QString">XDG_DATA_DIRS=/usr/share/kde-settings/kde-profile/default/share:/usr/local/share:/usr/share</value>
+    <value type="QString">XDG_MENU_PREFIX=kde4-</value>
+    <value type="QString">XDG_SESSION_COOKIE=3e01cd87367b5bba62cf36004769a3fa-1270713935.268713-1841180833</value>
+    <value type="QString">_=/usr/libexec/kde4/start_kdeinit_wrapper</value>
+   </valuelist>
+   <value key="abstractProcess.IgnoreReturnValue" type="bool">true</value>
+   <valuelist key="abstractProcess.arguments" type="QVariantList">
+    <value type="QString">clean</value>
+    <value type="QString">-w</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString">/usr/bin/make</value>
+   <value key="abstractProcess.enabled" type="bool">true</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/bruno/proyectos/componentes</value>
+   <value key="cleanConfig" type="bool">true</value>
+   <valuelist key="makeargs" type="QVariantList">
+    <value type="QString">clean</value>
+   </valuelist>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-buildstep0</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList">
+    <value type="QString">CVS_RSH=ssh</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-F9xJWih1Jz,guid=184a120903bdf9378a58c9da4b838fc0</value>
+    <value type="QString">DESKTOP_SESSION=kde</value>
+    <value type="QString">DESKTOP_STARTUP_ID=</value>
+    <value type="QString">DISABLE_IMSETTINGS=1</value>
+    <value type="QString">DISPLAY=:0.0</value>
+    <value type="QString">DRY_RUN=1</value>
+    <value type="QString">EDITOR=vi</value>
+    <value type="QString">GDMSESSION=kde</value>
+    <value type="QString">GDM_KEYBOARD_LAYOUT=es</value>
+    <value type="QString">GDM_LANG=es_ES.UTF-8</value>
+    <value type="QString">GNOME_KEYRING_PID=2817</value>
+    <value type="QString">GNOME_KEYRING_SOCKET=/tmp/keyring-yKqSf2/socket</value>
+    <value type="QString">GPG_AGENT_INFO=/tmp/gpg-xagWHP/S.gpg-agent:2934:1</value>
+    <value type="QString">GS_LIB=</value>
+    <value type="QString">GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/bruno/.gtkrc-2.0::/home/bruno/.kde/share/config/gtkrc-2.0</value>
+    <value type="QString">GTK_IM_MODULE=gtk-im-context-simple</value>
+    <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/bruno/.gtkrc::/home/bruno/.kde/share/config/gtkrc</value>
+    <value type="QString">G_BROKEN_FILENAMES=1</value>
+    <value type="QString">HISTCONTROL=ignoreboth</value>
+    <value type="QString">HISTSIZE=1000</value>
+    <value type="QString">HOME=/home/bruno</value>
+    <value type="QString">HOSTNAME=obelix.trustserver.net</value>
+    <value type="QString">IMSETTINGS_INTEGRATE_DESKTOP=yes</value>
+    <value type="QString">IMSETTINGS_MODULE=none</value>
+    <value type="QString">KDEDIRS=/usr</value>
+    <value type="QString">KDE_FULL_SESSION=true</value>
+    <value type="QString">KDE_IS_PRELINKED=1</value>
+    <value type="QString">KDE_MULTIHEAD=false</value>
+    <value type="QString">KDE_SESSION_UID=500</value>
+    <value type="QString">KDE_SESSION_VERSION=4</value>
+    <value type="QString">LANG=es_ES.UTF-8</value>
+    <value type="QString">LD_LIBRARY_PATH=/opt/oracle/product/10.2.0//lib::/opt/oracle/product/10.2.0/client/lib:/home/bruno/usr/lib</value>
+    <value type="QString">LESSOPEN=|/usr/bin/lesspipe.sh %s</value>
+    <value type="QString">LOGNAME=bruno</value>
+    <value type="QString">MAIL=/var/spool/mail/bruno</value>
+    <value type="QString">ORACLE_BASE=/opt/oracle</value>
+    <value type="QString">ORACLE_HOME=/opt/oracle/product/10.2.0/</value>
+    <value type="QString">ORA_NLS33=/opt/oracle/product/10.2.0/client/ocommon/nls/admin/data</value>
+    <value type="QString">PATH=/usr/lib64/qt4/bin:/home/bruno/usr/bin:/opt/oracle/product/10.2.0//bin:/usr/lib64/qt-3.3/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/oracle/product/10.2.0/client/bin:/home/bruno/usr/bin</value>
+    <value type="QString">PWD=/home/bruno</value>
+    <value type="QString">PYQTDESIGNERPATH=/home/bruno/usr/python-plugins</value>
+    <value type="QString">PYTHONPATH=/home/bruno/usr/python</value>
+    <value type="QString">QTDIR=/usr</value>
+    <value type="QString">QTINC=/usr/lib64/qt-3.3/include</value>
+    <value type="QString">QTLIB=/usr/lib64/qt-3.3/lib</value>
+    <value type="QString">QT_IM_MODULE=xim</value>
+    <value type="QString">QT_PLUGIN_PATH=:/home/bruno/usr/plugins:/home/bruno/.kde/lib64/kde4/plugins/:/usr/lib64/kde4/plugins/</value>
+    <value type="QString">SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/3021,unix/unix:/tmp/.ICE-unix/3021</value>
+    <value type="QString">SHELL=/bin/bash</value>
+    <value type="QString">SHLVL=2</value>
+    <value type="QString">SSH_AGENT_PID=2882</value>
+    <value type="QString">SSH_ASKPASS=/usr/bin/ksshaskpass</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/ssh-uZqxPx2825/agent.2825</value>
+    <value type="QString">TERM=dumb</value>
+    <value type="QString">USER=bruno</value>
+    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-bruno-kn2ZTp/database</value>
+    <value type="QString">XCURSOR_THEME=default</value>
+    <value type="QString">XDG_DATA_DIRS=/usr/share/kde-settings/kde-profile/default/share:/usr/local/share:/usr/share</value>
+    <value type="QString">XDG_MENU_PREFIX=kde4-</value>
+    <value type="QString">XDG_SESSION_COOKIE=1a0bfee84583f73f5afb2a0c49aed234-1266913216.42402-1295931230</value>
+    <value type="QString">XMODIFIERS=@im=none</value>
+    <value type="QString">_=/usr/bin/kdeinit4</value>
+   </valuelist>
+   <valuelist key="abstractProcess.arguments" type="QVariantList">
+    <value type="QString">/home/bruno/proyectos/componentes/componentes.pro</value>
+    <value type="QString">-spec</value>
+    <value type="QString">/usr/lib64/qt4/mkspecs/linux-g++</value>
+    <value type="QString">-r</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString">/usr/bin/qmake-qt4</value>
+   <value key="abstractProcess.enabled" type="bool">false</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/bruno/proyectos/componentes</value>
+   <valuelist key="qmakeArgs" type="QVariantList"/>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-buildstep1</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList">
+    <value type="QString">CVS_RSH=ssh</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-F9xJWih1Jz,guid=184a120903bdf9378a58c9da4b838fc0</value>
+    <value type="QString">DESKTOP_SESSION=kde</value>
+    <value type="QString">DESKTOP_STARTUP_ID=</value>
+    <value type="QString">DISABLE_IMSETTINGS=1</value>
+    <value type="QString">DISPLAY=:0.0</value>
+    <value type="QString">DRY_RUN=1</value>
+    <value type="QString">EDITOR=vi</value>
+    <value type="QString">GDMSESSION=kde</value>
+    <value type="QString">GDM_KEYBOARD_LAYOUT=es</value>
+    <value type="QString">GDM_LANG=es_ES.UTF-8</value>
+    <value type="QString">GNOME_KEYRING_PID=2817</value>
+    <value type="QString">GNOME_KEYRING_SOCKET=/tmp/keyring-yKqSf2/socket</value>
+    <value type="QString">GPG_AGENT_INFO=/tmp/gpg-xagWHP/S.gpg-agent:2934:1</value>
+    <value type="QString">GS_LIB=</value>
+    <value type="QString">GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/bruno/.gtkrc-2.0::/home/bruno/.kde/share/config/gtkrc-2.0</value>
+    <value type="QString">GTK_IM_MODULE=gtk-im-context-simple</value>
+    <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/bruno/.gtkrc::/home/bruno/.kde/share/config/gtkrc</value>
+    <value type="QString">G_BROKEN_FILENAMES=1</value>
+    <value type="QString">HISTCONTROL=ignoreboth</value>
+    <value type="QString">HISTSIZE=1000</value>
+    <value type="QString">HOME=/home/bruno</value>
+    <value type="QString">HOSTNAME=obelix.trustserver.net</value>
+    <value type="QString">IMSETTINGS_INTEGRATE_DESKTOP=yes</value>
+    <value type="QString">IMSETTINGS_MODULE=none</value>
+    <value type="QString">KDEDIRS=/usr</value>
+    <value type="QString">KDE_FULL_SESSION=true</value>
+    <value type="QString">KDE_IS_PRELINKED=1</value>
+    <value type="QString">KDE_MULTIHEAD=false</value>
+    <value type="QString">KDE_SESSION_UID=500</value>
+    <value type="QString">KDE_SESSION_VERSION=4</value>
+    <value type="QString">LANG=es_ES.UTF-8</value>
+    <value type="QString">LD_LIBRARY_PATH=/opt/oracle/product/10.2.0//lib::/opt/oracle/product/10.2.0/client/lib:/home/bruno/usr/lib</value>
+    <value type="QString">LESSOPEN=|/usr/bin/lesspipe.sh %s</value>
+    <value type="QString">LOGNAME=bruno</value>
+    <value type="QString">MAIL=/var/spool/mail/bruno</value>
+    <value type="QString">ORACLE_BASE=/opt/oracle</value>
+    <value type="QString">ORACLE_HOME=/opt/oracle/product/10.2.0/</value>
+    <value type="QString">ORA_NLS33=/opt/oracle/product/10.2.0/client/ocommon/nls/admin/data</value>
+    <value type="QString">PATH=/usr/lib64/qt4/bin:/home/bruno/usr/bin:/opt/oracle/product/10.2.0//bin:/usr/lib64/qt-3.3/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/oracle/product/10.2.0/client/bin:/home/bruno/usr/bin</value>
+    <value type="QString">PWD=/home/bruno</value>
+    <value type="QString">PYQTDESIGNERPATH=/home/bruno/usr/python-plugins</value>
+    <value type="QString">PYTHONPATH=/home/bruno/usr/python</value>
+    <value type="QString">QTDIR=/usr</value>
+    <value type="QString">QTINC=/usr/lib64/qt-3.3/include</value>
+    <value type="QString">QTLIB=/usr/lib64/qt-3.3/lib</value>
+    <value type="QString">QT_IM_MODULE=xim</value>
+    <value type="QString">QT_PLUGIN_PATH=:/home/bruno/usr/plugins:/home/bruno/.kde/lib64/kde4/plugins/:/usr/lib64/kde4/plugins/</value>
+    <value type="QString">SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/3021,unix/unix:/tmp/.ICE-unix/3021</value>
+    <value type="QString">SHELL=/bin/bash</value>
+    <value type="QString">SHLVL=2</value>
+    <value type="QString">SSH_AGENT_PID=2882</value>
+    <value type="QString">SSH_ASKPASS=/usr/bin/ksshaskpass</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/ssh-uZqxPx2825/agent.2825</value>
+    <value type="QString">TERM=dumb</value>
+    <value type="QString">USER=bruno</value>
+    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-bruno-kn2ZTp/database</value>
+    <value type="QString">XCURSOR_THEME=default</value>
+    <value type="QString">XDG_DATA_DIRS=/usr/share/kde-settings/kde-profile/default/share:/usr/local/share:/usr/share</value>
+    <value type="QString">XDG_MENU_PREFIX=kde4-</value>
+    <value type="QString">XDG_SESSION_COOKIE=1a0bfee84583f73f5afb2a0c49aed234-1266913216.42402-1295931230</value>
+    <value type="QString">XMODIFIERS=@im=none</value>
+    <value type="QString">_=/usr/bin/kdeinit4</value>
+   </valuelist>
+   <value key="abstractProcess.IgnoreReturnValue" type="bool">false</value>
+   <valuelist key="abstractProcess.arguments" type="QVariantList">
+    <value type="QString">-w</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString">/usr/bin/make</value>
+   <value key="abstractProcess.enabled" type="bool">true</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/bruno/proyectos/componentes</value>
+   <valuelist key="makeargs" type="QVariantList">
+    <value type="QString">release-install</value>
+   </valuelist>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-cleanstep0</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList">
+    <value type="QString">CVS_RSH=ssh</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-F9xJWih1Jz,guid=184a120903bdf9378a58c9da4b838fc0</value>
+    <value type="QString">DESKTOP_SESSION=kde</value>
+    <value type="QString">DESKTOP_STARTUP_ID=</value>
+    <value type="QString">DISABLE_IMSETTINGS=1</value>
+    <value type="QString">DISPLAY=:0.0</value>
+    <value type="QString">DRY_RUN=1</value>
+    <value type="QString">EDITOR=vi</value>
+    <value type="QString">GDMSESSION=kde</value>
+    <value type="QString">GDM_KEYBOARD_LAYOUT=es</value>
+    <value type="QString">GDM_LANG=es_ES.UTF-8</value>
+    <value type="QString">GNOME_KEYRING_PID=2817</value>
+    <value type="QString">GNOME_KEYRING_SOCKET=/tmp/keyring-yKqSf2/socket</value>
+    <value type="QString">GPG_AGENT_INFO=/tmp/gpg-xagWHP/S.gpg-agent:2934:1</value>
+    <value type="QString">GS_LIB=</value>
+    <value type="QString">GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/bruno/.gtkrc-2.0::/home/bruno/.kde/share/config/gtkrc-2.0</value>
+    <value type="QString">GTK_IM_MODULE=gtk-im-context-simple</value>
+    <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/bruno/.gtkrc::/home/bruno/.kde/share/config/gtkrc</value>
+    <value type="QString">G_BROKEN_FILENAMES=1</value>
+    <value type="QString">HISTCONTROL=ignoreboth</value>
+    <value type="QString">HISTSIZE=1000</value>
+    <value type="QString">HOME=/home/bruno</value>
+    <value type="QString">HOSTNAME=obelix.trustserver.net</value>
+    <value type="QString">IMSETTINGS_INTEGRATE_DESKTOP=yes</value>
+    <value type="QString">IMSETTINGS_MODULE=none</value>
+    <value type="QString">KDEDIRS=/usr</value>
+    <value type="QString">KDE_FULL_SESSION=true</value>
+    <value type="QString">KDE_IS_PRELINKED=1</value>
+    <value type="QString">KDE_MULTIHEAD=false</value>
+    <value type="QString">KDE_SESSION_UID=500</value>
+    <value type="QString">KDE_SESSION_VERSION=4</value>
+    <value type="QString">LANG=es_ES.UTF-8</value>
+    <value type="QString">LD_LIBRARY_PATH=/opt/oracle/product/10.2.0//lib::/opt/oracle/product/10.2.0/client/lib:/home/bruno/usr/lib</value>
+    <value type="QString">LESSOPEN=|/usr/bin/lesspipe.sh %s</value>
+    <value type="QString">LOGNAME=bruno</value>
+    <value type="QString">MAIL=/var/spool/mail/bruno</value>
+    <value type="QString">ORACLE_BASE=/opt/oracle</value>
+    <value type="QString">ORACLE_HOME=/opt/oracle/product/10.2.0/</value>
+    <value type="QString">ORA_NLS33=/opt/oracle/product/10.2.0/client/ocommon/nls/admin/data</value>
+    <value type="QString">PATH=/usr/lib64/qt4/bin:/home/bruno/usr/bin:/opt/oracle/product/10.2.0//bin:/usr/lib64/qt-3.3/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/oracle/product/10.2.0/client/bin:/home/bruno/usr/bin</value>
+    <value type="QString">PWD=/home/bruno</value>
+    <value type="QString">PYQTDESIGNERPATH=/home/bruno/usr/python-plugins</value>
+    <value type="QString">PYTHONPATH=/home/bruno/usr/python</value>
+    <value type="QString">QTDIR=/usr</value>
+    <value type="QString">QTINC=/usr/lib64/qt-3.3/include</value>
+    <value type="QString">QTLIB=/usr/lib64/qt-3.3/lib</value>
+    <value type="QString">QT_IM_MODULE=xim</value>
+    <value type="QString">QT_PLUGIN_PATH=:/home/bruno/usr/plugins:/home/bruno/.kde/lib64/kde4/plugins/:/usr/lib64/kde4/plugins/</value>
+    <value type="QString">SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/3021,unix/unix:/tmp/.ICE-unix/3021</value>
+    <value type="QString">SHELL=/bin/bash</value>
+    <value type="QString">SHLVL=2</value>
+    <value type="QString">SSH_AGENT_PID=2882</value>
+    <value type="QString">SSH_ASKPASS=/usr/bin/ksshaskpass</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/ssh-uZqxPx2825/agent.2825</value>
+    <value type="QString">TERM=dumb</value>
+    <value type="QString">USER=bruno</value>
+    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-bruno-kn2ZTp/database</value>
+    <value type="QString">XCURSOR_THEME=default</value>
+    <value type="QString">XDG_DATA_DIRS=/usr/share/kde-settings/kde-profile/default/share:/usr/local/share:/usr/share</value>
+    <value type="QString">XDG_MENU_PREFIX=kde4-</value>
+    <value type="QString">XDG_SESSION_COOKIE=1a0bfee84583f73f5afb2a0c49aed234-1266913216.42402-1295931230</value>
+    <value type="QString">XMODIFIERS=@im=none</value>
+    <value type="QString">_=/usr/bin/kdeinit4</value>
+   </valuelist>
+   <value key="abstractProcess.IgnoreReturnValue" type="bool">true</value>
+   <valuelist key="abstractProcess.arguments" type="QVariantList">
+    <value type="QString">clean</value>
+    <value type="QString">-w</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString">/usr/bin/make</value>
+   <value key="abstractProcess.enabled" type="bool">true</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/bruno/proyectos/componentes</value>
+   <value key="cleanConfig" type="bool">true</value>
+   <valuelist key="makeargs" type="QVariantList">
+    <value type="QString">clean</value>
+   </valuelist>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfigurations</variable>
+  <valuelist type="QVariantList">
+   <value type="QString">Release</value>
+   <value type="QString">Debug</value>
+  </valuelist>
+ </data>
+ <data>
+  <variable>buildstep0</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString"></value>
+   <value key="mkspec" type="QString"></value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildstep1</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString"></value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildsteps</variable>
+  <valuelist type="QVariantList">
+   <value type="QString">trolltech.qt4projectmanager.qmake</value>
+   <value type="QString">trolltech.qt4projectmanager.make</value>
+  </valuelist>
+ </data>
+ <data>
+  <variable>cleanstep0</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString"></value>
+   <value key="clean" type="bool">true</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>cleansteps</variable>
+  <valuelist type="QVariantList">
+   <value type="QString">trolltech.qt4projectmanager.make</value>
+  </valuelist>
+ </data>
+ <data>
+  <variable>defaultFileEncoding</variable>
+  <value type="QByteArray">System</value>
+ </data>
+ <data>
+  <variable>project</variable>
+  <valuemap type="QVariantMap"/>
+ </data>
+</qtcreator>

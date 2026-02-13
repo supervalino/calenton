@@ -1,0 +1,103 @@
+Instalación en Linux/Debian
+
+
+-Paquetes debian necesarios:
+===========================
+
+Librerías python:
+python-pycha python-pychart
+
+QT4:
+python-qt4 python-qt4-sql libqt4-sql-psql
+
+Base de datos con GIS:
+libqgis1.4.0 postgis postgresql-8.4 postgresql-8.4-postgis python-qgis python-qgis-common qgis qgis-common 
+
+En Debian (testing), para tener la última versión de los paquetes qgis (la creación de mapas desde el programa sólo funciona con la última versión) tenemos que instalarlos desde el repositorio siguiente:
+
+deb http://debian.gfoss.it/ squeeze main
+
+tenemos que añadir la línea anterior al fichero "/etc/apt/source.list" 
+
+
+-Librerías propias
+====================
+
+Hay que descomprimir el fichero usr_calenton***.tar.bz2 (el que corresponda a nuestra arquitectura), 
+
+
+al descomprimirlo se copian dos librerías (no hay que hacer nada más, pero se explica a continuación el contenido del fichero comprimido)
+
+ts
+---
+se copian en $HOME/usr/python los ficheros
+__init__.py  
+ts.so
+
+
+componentes
+------------
+se copian en $HOME/usr/lib los ficheros
+libcomponentes.so.1.0.0
+y los enlaces simbólicos a la anterior librería
+libcomponentes.so
+libcomponentes.so.1.0
+libcomponentes.so.1
+
+
+
+Variables de entorno
+=====================
+
+Hay que poner en el .bashrc:
+
+export PYTHONPATH="$HOME/usr/python"
+export LD_LIBRARY_PATH="$HOME/usr/lib:$LD_LIBRARY_PATH"
+
+
+
+Base de datos (Postgres)
+=========================
+
+Si nuestra cuenta de usuario todavía no tiene permisos para crear bases de datos, hay que crear el usuario nuevo como usuario `postgres`:
+
+$ su
+# sudo postgres
+$ createuser nuestro_usuario (con permiso para crear usuarios y bases de datos, o superusuario)
+
+y volvemos al terminal de nuestra cuenta para seguir la instalación porque ya tiene permisos para trabajar en la base de datos Postgresql.
+
+después hay que crear los usuarios que hemos estado utilizando la base de datos (bruno, ana, picazo)
+
+$ createuser picazo
+$ createuser bruno
+$ createuser ana
+
+Crear contraseña de usuario y dar permisos. Hay que dar permisos a todos los usuarios anteriores pero solo es necesario poner la password del usuario que va a hacer uso de la db:
+
+$ psql template1
+ALTER USER nuestro_usuario WITH PASSWORD 'la-password-que-queramos';
+GRANT ALL ON DATABASE emisiones TO nuestro_usuario;
+
+volvemos al terminal con CTRL+d y creamos la base de datos:
+
+dropdb emisiones
+createdb -E UTF-8 emisiones
+#cd /usr/share/pgsql/contrib/postgis-1.5 (RedHat)
+cd /usr/share/postgresql/8.4/contrib/postgis-1.5/ (Debian)
+psql emisiones
+   create language plpgsql;
+   \i postgis.sql
+   \i spatial_ref_sys.sql
+   create schema temp authorization bruno;
+   Ctrl-d
+Inicialmente tenemos 2 ficheros de backup:
+pg_restore -F c -d emisiones datos.dmp
+pg_restore -F c -d emisiones mapas.dmp
+
+Pero si queremos restaurar la base de datos desde un sólo fichero de backup (backup creado con la orden "pg_dump -F c emisiones > fichero_backup_db"):
+pg_restore -F c -d emisiones fichero_backup_db
+
+(si el backup está hecho con pg_dump emisiones > fichero_backup_db)
+psql emisiones -f fichero_backup_db
+

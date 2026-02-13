@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TableListClass</class>
+ <widget class="DataList" name="TableListClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>614</width>
+    <height>457</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Lista de tablas</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Escenario:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="TComboBox" name="escenario">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>168</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tabla">
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="crear">
+       <property name="text">
+        <string>Crear Tabla</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="crearTodas">
+       <property name="text">
+        <string>Crear Todas</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="recarga">
+       <property name="text">
+        <string>Recargar</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="elimina">
+       <property name="text">
+        <string>Eliminar</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="edita">
+       <property name="text">
+        <string>Editar</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="anade">
+       <property name="text">
+        <string>Añadir</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+  <action name="insertFromClipboard">
+   <property name="text">
+    <string>Insertar desde portapapeles</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DataList</class>
+   <extends>QWidget</extends>
+   <header location="global">widgets/datalist.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TComboBox</class>
+   <extends>QComboBox</extends>
+   <header>ts.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>escenario</tabstop>
+  <tabstop>tabla</tabstop>
+  <tabstop>crear</tabstop>
+  <tabstop>crearTodas</tabstop>
+  <tabstop>recarga</tabstop>
+  <tabstop>elimina</tabstop>
+  <tabstop>edita</tabstop>
+  <tabstop>anade</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>insertFromClipboard</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>TableListClass</receiver>
+   <slot>dataFromClipboard(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>228</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

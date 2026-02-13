@@ -1,0 +1,29 @@
+Crear un informe
+================
+
+El programa tiene la capacidad de generar de forma automática las tablas y gráficas de los datos guardados. Esto nos permite elaborar informes con el sistema de creación de documentos LATEX, que nos da una presentación excelente y tiene la flexibilidad que necesitamos para insertar facilmente las tablas y gráficas.
+
+Cada tabla y gráfica necesita un fichero de configuración donde se definen los datos y la forma de presentarlos. Gracias a esto, ante cambios en los datos/metodología la actualización del informe es inmediata.
+
+
+Podemos tener varios informes asociados al programa, cada uno se guarda en su propio directorio (dentro del directorio reports). 
+
+Creación y activación del informe
+----------------------------------
+
+Menú Informe -> Plantillas 
+	- primero tenemos que crear el directorio del informe, botón "Añadir". 
+	- Como podemos tener varios informes al mismo tiempo, antes de generar las gráficas y tablas hay que activar el informe que queramos, para ello seleccionamos el informe y pulsamos "Activar" (bug, hay que reiniciar el programa para que haga efecto)
+
+
+Todos los ficheros necesarios para el informe estarán en su directorio:
+	Creados por nosotros:
+	- texto Latex (.tex ó .lyx)
+	- configuración de las tablas y gráficas (.dat)
+	- y otros posibles ficheros como fotografías.
+	
+	Creados por el programa:
+	- tablas (.tex)
+	- gráficas (.eps)
+
+

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindowClass</class>
+ <widget class="QMainWindow" name="MainWindowClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>AIRE</string>
+  </property>
+  <widget class="QWidget" name="capullo"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuArchivo">
+    <property name="title">
+     <string>Archivo</string>
+    </property>
+    <addaction name="actionOpenConnection"/>
+    <addaction name="separator"/>
+    <addaction name="actionPrint"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdici_n">
+    <property name="title">
+     <string>Edición</string>
+    </property>
+    <addaction name="actionCopiar"/>
+    <addaction name="separator"/>
+    <addaction name="actionPreferencias"/>
+   </widget>
+   <widget class="QMenu" name="menuVentanas">
+    <property name="title">
+     <string>Ventanas</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuZonas">
+    <property name="title">
+     <string>Zonas</string>
+    </property>
+    <addaction name="actionZonas"/>
+   </widget>
+   <widget class="QMenu" name="menuEscenario">
+    <property name="title">
+     <string>Maestro</string>
+    </property>
+    <addaction name="actionEscenario"/>
+    <addaction name="actionFuente"/>
+    <addaction name="actionArbolClasificacion"/>
+    <addaction name="actionCombustibles"/>
+    <addaction name="actionMotoresCalculo"/>
+   </widget>
+   <widget class="QMenu" name="menuInformes">
+    <property name="title">
+     <string>Informes</string>
+    </property>
+    <addaction name="actionPlantillas"/>
+    <addaction name="actionTablas"/>
+    <addaction name="actionGraficos"/>
+   </widget>
+   <widget class="QMenu" name="menuDatos">
+    <property name="title">
+     <string>Datos</string>
+    </property>
+    <addaction name="actionContaminante_Aforo"/>
+    <addaction name="actionContaminanteZona"/>
+   </widget>
+   <widget class="QMenu" name="menuContaminantes_2">
+    <property name="title">
+     <string>Contaminantes</string>
+    </property>
+    <addaction name="actionContaminante"/>
+    <addaction name="actionEquivalentes"/>
+    <addaction name="actionFactor_Conversi_n"/>
+    <addaction name="actionFactor_Conversi_n_por_Aforo"/>
+    <addaction name="actionMapAforoZona"/>
+   </widget>
+   <widget class="QMenu" name="menuC_lculo">
+    <property name="title">
+     <string>Cálculo</string>
+    </property>
+    <addaction name="actionCalcularEscenario"/>
+    <addaction name="separator"/>
+    <addaction name="actionResultados"/>
+    <addaction name="actionMapas"/>
+   </widget>
+   <addaction name="menuArchivo"/>
+   <addaction name="menuEdici_n"/>
+   <addaction name="menuEscenario"/>
+   <addaction name="menuContaminantes_2"/>
+   <addaction name="menuZonas"/>
+   <addaction name="menuDatos"/>
+   <addaction name="menuC_lculo"/>
+   <addaction name="menuInformes"/>
+   <addaction name="menuVentanas"/>
+  </widget>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Salir</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionOpenConnection">
+   <property name="text">
+    <string>Abre conexión</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionPreferencias">
+   <property name="text">
+    <string>Preferencias</string>
+   </property>
+  </action>
+  <action name="actionCopiar">
+   <property name="text">
+    <string>Copiar</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionMotoresCalculo">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Motores de cálculo</string>
+   </property>
+  </action>
+  <action name="actionZonas">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Zonas</string>
+   </property>
+  </action>
+  <action name="actionEscenario">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Escenario</string>
+   </property>
+  </action>
+  <action name="actionOrigen">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Origen</string>
+   </property>
+  </action>
+  <action name="actionFuente">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Fuente</string>
+   </property>
+  </action>
+  <action name="actionTipo_Clasificaci_n">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Tipo Clasificación</string>
+   </property>
+  </action>
+  <action name="actionEquivalentes">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Equivalentes</string>
+   </property>
+  </action>
+  <action name="actionContaminante">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Contaminante</string>
+   </property>
+  </action>
+  <action name="actionFuenteClasificacion">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Fuente Clasificacion</string>
+   </property>
+  </action>
+  <action name="actionAforo">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Aforo</string>
+   </property>
+  </action>
+  <action name="actionPlantillas">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Plantillas</string>
+   </property>
+  </action>
+  <action name="actionTablas">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Tablas</string>
+   </property>
+  </action>
+  <action name="actionGraficos">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Gráficos</string>
+   </property>
+  </action>
+  <action name="actionGenerar_PDF">
+   <property name="text">
+    <string>Generar PDF</string>
+   </property>
+  </action>
+  <action name="actionFactor_Conversi_n">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Factor Conversión</string>
+   </property>
+  </action>
+  <action name="actionFactor_Conversi_n_por_Aforo">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Factor Conversión por Aforo</string>
+   </property>
+  </action>
+  <action name="actionValor_Dato">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Toma en aforo</string>
+   </property>
+  </action>
+  <action name="actionContaminante_Aforo">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Contaminante en aforo</string>
+   </property>
+  </action>
+  <action name="actionMapAforoZona">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Factor por Aforo y Municipio</string>
+   </property>
+  </action>
+  <action name="actionContaminanteZona">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Contaminante en fuente</string>
+   </property>
+  </action>
+  <action name="actionArbolClasificacion">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Árbol Clasificacion</string>
+   </property>
+  </action>
+  <action name="actionCalcularEscenario">
+   <property name="text">
+    <string>Calcular escenario...</string>
+   </property>
+  </action>
+  <action name="actionResultados">
+   <property name="text">
+    <string>Resultados...</string>
+   </property>
+  </action>
+  <action name="actionCombustibles">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Combustibles</string>
+   </property>
+  </action>
+  <action name="actionMapas">
+   <property name="text">
+    <string>Mapas...</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="text">
+    <string>Imprimir...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

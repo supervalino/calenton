@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ListadoResultadosDlgClass</class>
+ <widget class="QDialog" name="ListadoResultadosDlgClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>489</width>
+    <height>199</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Seleccione el listado...</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Escenario</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1" colspan="4">
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="TComboBox" name="escenario"/>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Contaminante</string>
+       </property>
+       <property name="buddy">
+        <cstring>agregaContaminante</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QRadioButton" name="agregaContaminante">
+       <property name="text">
+        <string>Agregar equiv.</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QRadioButton" name="todosContaminante">
+       <property name="text">
+        <string>Todos</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="4">
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1">
+       <item>
+        <widget class="QRadioButton" name="soloContaminante">
+         <property name="text">
+          <string>Sólo</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="TComboBox" name="contaminante">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>1</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Fuente</string>
+       </property>
+       <property name="buddy">
+        <cstring>agregaFuente</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QRadioButton" name="agregaFuente">
+       <property name="text">
+        <string>Agregar</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QRadioButton" name="todosFuente">
+       <property name="text">
+        <string>Todos</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="4">
+      <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,1">
+       <item>
+        <widget class="QRadioButton" name="soloFuente">
+         <property name="text">
+          <string>Sólo</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="TComboBox" name="fuente">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>1</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Zona</string>
+       </property>
+       <property name="buddy">
+        <cstring>agregaZona</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QRadioButton" name="agregaZona">
+       <property name="text">
+        <string>Agregar</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QRadioButton" name="todosZona">
+       <property name="text">
+        <string>Todos</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="3">
+      <widget class="TComboBox" name="nivelZona">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="4">
+      <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,1">
+       <item>
+        <widget class="QRadioButton" name="soloZona">
+         <property name="text">
+          <string>Sólo</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="TComboBox" name="zona">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>1</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Clasificación</string>
+       </property>
+       <property name="buddy">
+        <cstring>agregaClasificacion</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QRadioButton" name="agregaClasificacion">
+       <property name="text">
+        <string>Agregar</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QRadioButton" name="todosClasificacion">
+       <property name="text">
+        <string>Todos</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <widget class="TComboBox" name="nivelClasificacion">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="4">
+      <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,1">
+       <item>
+        <widget class="QRadioButton" name="soloClasificacion">
+         <property name="text">
+          <string>Sólo</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="TComboBox" name="clasificacion">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>1</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>16</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TComboBox</class>
+   <extends>QComboBox</extends>
+   <header>ts.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>agregaContaminante</tabstop>
+  <tabstop>todosContaminante</tabstop>
+  <tabstop>soloContaminante</tabstop>
+  <tabstop>contaminante</tabstop>
+  <tabstop>agregaFuente</tabstop>
+  <tabstop>todosFuente</tabstop>
+  <tabstop>soloFuente</tabstop>
+  <tabstop>fuente</tabstop>
+  <tabstop>agregaZona</tabstop>
+  <tabstop>todosZona</tabstop>
+  <tabstop>nivelZona</tabstop>
+  <tabstop>soloZona</tabstop>
+  <tabstop>zona</tabstop>
+  <tabstop>agregaClasificacion</tabstop>
+  <tabstop>todosClasificacion</tabstop>
+  <tabstop>nivelClasificacion</tabstop>
+  <tabstop>soloClasificacion</tabstop>
+  <tabstop>clasificacion</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>ListadoResultadosDlgClass</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>257</x>
+     <y>161</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>170</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>ListadoResultadosDlgClass</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>325</x>
+     <y>161</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>170</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>soloContaminante</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>contaminante</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>344</x>
+     <y>19</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>386</x>
+     <y>24</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>soloFuente</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>fuente</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>347</x>
+     <y>45</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>382</x>
+     <y>51</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>soloZona</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>zona</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>326</x>
+     <y>83</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>384</x>
+     <y>80</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>soloClasificacion</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>clasificacion</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>364</x>
+     <y>107</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>agregaZona</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>nivelZona</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>121</x>
+     <y>73</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>253</x>
+     <y>75</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>agregaClasificacion</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>nivelClasificacion</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>127</x>
+     <y>114</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>244</x>
+     <y>109</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TSqlTableNavigator</class>
+ <widget class="QWidget" name="TSqlTableNavigator">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>433</width>
+    <height>308</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="TTableView" name="uiTableView"/>
+   </item>
+   <item>
+    <widget class="TSqlButtonBox" name="uiButtonBox">
+     <property name="addEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="editEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="deleteEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="saveEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="discardEnabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TSqlButtonBox</class>
+   <extends>QWidget</extends>
+   <header>ts.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TTableView</class>
+   <extends>QTableView</extends>
+   <header>ts.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>uiTableView</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

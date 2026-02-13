@@ -1,0 +1,76 @@
+El programa crea automáticamente las gráficas y las tablas con los valores que extrae de la base de datos. 
+
+Cada gráfica tiene asociado un fichero de configuración en el que están definidos los parámetros. Este fichero tiene que estar en el directorio del informe y tiene que tener un nombre con el formato "g_xxxxxxx.dat", la gráfica generada tendrá el nombre "g_xxxxxxx.eps"
+
+Se utiliza la librería gráfica pychart (se empezó con la librería pycha, pero no está completado). Y los tipos de gráficas son:
+
+- tarta
+	* fomato de los datos: 
+		-primera columna: etiqueta de los valores
+		-segunda columna: valor
+- barras
+- barras acumuladas
+
+
+**************************************************
+Fichero de configuración
+**************************************************
+Es un fichero de texto plano. Los parámetros se definen de la siguiente forma:
+
+nombre_parametro = valor
+
+El valor puede ir entre comillas simples 'valor' (para evitar problemas si se trata de un texto con espacios en blanco). Y puede ser un valor único o una lista de valores separados por comas. Si un valor ocupa más de una fila irá entre 3 comillas simples. La línea que comienza por # se considera un comentario
+Tenemos 2 tipos de parámetros, individuales y agrupados en secciones. Las secciones se definen comenzando con:
+
+[nombre_seccion]
+
+y a continuación van los parámetros de esa sección, hasta que empieza la siguiente sección o hasta el final de fichero.
+Primero tienen que aparecer todos los parámetros individuales y después las secciones.
+Tiene que estar todos los parámetros y secciones que se explican a continuación, aunque en el tipo de gráfica no se utilice dicho parámetro, en ese caso el valor se deja en blanco (si se trata de una lista hay que poner una coma)
+
+Los datos a representar se definen en la sección [sql], donde se pueden poner tantos parámetros como queramos con nombre; sql1, sql2, sql3,... Estas consultas sql devuelven  
+
+Hay parámetros comunes a todas las gráficas y otros que son específicos de cada tipo. Veamos un ejemplo con explicaciones:
+
+*************************************
+ejemplo de fichero de configuración
+*************************************
+
+# Identifica la gráfica pero no se utiliza en el informe, el título se pone en el fichero latex en el pie de figura
+titulo = '' 
+
+# Los siguientes no se utilizan para tipo tarta. "encabezado" es la lista con las etiquetas de la leyenda en el tipo barras acumuladas.
+nombreX = Sectores  
+nombreY = Toneladas
+encabezado = ,
+
+
+descripcion = 'Emisión de CH4 por cada grupo SNAP'
+
+# "tipo" puede ser: 
+# - libreria pychart
+#  		* tarta1
+#		* barras1
+#		* barrasAc1
+# - librería pycha
+#  		* tarta2
+#		* barras2
+#		* barrasAc2
+
+tipo = tarta1
+
+fila = sql1,
+
+[sql]
+sql1 = '''select c2.codigo, sum(valor)
+from contaminantezona cz, clasificacion c, contaminante co, clasificacion c2
+where cz.idfuente in (select id from fuente where idescenario = _ESCENARIO_) and
+    cz.idclasificacion = c.id and
+    cz.idcontaminante = co.id and
+    substr(c.codigo, 1, 2) = c2.codigo and
+    co.nombre = 'CH4'
+group by c2.codigo, co.nombre
+order by c2.codigo'''
+
+[columnas]
+

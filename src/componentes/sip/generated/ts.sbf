@@ -1,0 +1,3 @@
+target = ts
+sources = siptscmodule.cpp siptsQList0101RowControl.cpp siptsTSqlTableNavigatorDelegate.cpp siptsTSqlTableNavigator.cpp siptsTTableView.cpp siptsTSqlButtonBox.cpp siptsTTabWidget.cpp siptsFKItemDelegate.cpp siptsDimensionEdit.cpp siptsTComboBox.cpp siptsDataDialog.cpp siptsSeqTableModel.cpp siptsRelOne2OneProxy.cpp siptsRelOne2One.cpp siptsRowControlChildColumnProxy.cpp siptsRowControl.cpp siptsRowControlChild.cpp siptsForeignKey.cpp siptsFKModel.cpp siptsBaseForeignKey.cpp siptsComboDataModel.cpp siptsMagnitude.cpp siptsUnitSystem.cpp siptsUnitCollection.cpp siptsUnit.cpp siptsDimension.cpp
+headers = sipAPIts.h

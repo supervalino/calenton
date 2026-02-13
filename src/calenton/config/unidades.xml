@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  CALENTON
+  
+  (C) LITEC, 2009
+  (C) Trustserver SL, 2009
+  Todos los derechos reservados
+  
+  $Id: unidades.xml 57 2010-01-18 11:42:53Z bruno $
+  $URL: https://www.litec.csic.es/svn/emisiones/trunk/src/calenton/config/unidades.xml $
+  -->
+<unitsystem>
+<dimensions>
+	<dimension name="length" desc="Longitud">
+		<unit name="m" ratio="1" main="1" prec="2"/>
+		<unit name="mm" ratio="1000" prec="0"/>
+		<unit name="ft" ratio="3.2808" prec="2"/>
+		<unit name="in" ratio="39.37008" prec="2"/>
+	</dimension>
+	<dimension name="surface" desc="Superficie">
+		<unit name="m2" ratio="1" main="1" prec="2"/>
+	</dimension>
+	<dimension name="mass" desc="Masa">
+		<unit name="kg" ratio="1" main="1" prec="0"/>
+		<unit name="slug" ratio="0.06852" prec="2"/>
+	</dimension>
+	<dimension name="massflow" desc="Caudal másico">
+		<unit name="kg/s" ratio="1" main="1" prec="2"/>
+		<unit name="kg/h" ratio="3600" prec="2"/>
+		<unit name="slug/s" ratio="0.06852" prec="2"/>
+	</dimension>
+	<dimension name="time" desc="Tiempo">
+		<unit name="s" ratio="1" main="1" prec="0"/>
+	</dimension>
+	<dimension name="pressure" desc="Presión (aire)">
+		<unit name="Pa" ratio="1" main="1" prec="0"/>
+		<unit name="bar" ratio="1e-5" prec="2"/>
+		<unit name="Atm" ratio="9.87e-6" prec="2"/>
+		<unit name="mm ca" ratio="0.10198" prec="0"/>
+		<unit name="mm Hg" ratio="0.00752" prec="2"/>
+		<unit name="psi" ratio="1.4504e-4" prec="2"/>
+	</dimension>
+	<dimension name="waterPressure" desc="Presión (agua)">
+		<unit name="Pa" ratio="1" main="1" prec="0"/>
+		<unit name="kPa" ratio = "0.001" prec="1"/>
+		<unit name="m ca" ratio="0.00010198" prec="1"/>
+	</dimension>
+	<dimension name="temperature" desc="Temperatura">
+		<unit name="K" ratio="1" main="1" prec="1"/>
+		<unit name="ºC" ratio="1" offset="-273.15" prec="1"/>
+		<unit name="ºF" ratio="1.8" offset="-459.67" prec="1"/>
+		<unit name="ºR" ratio="1.8" prec="1"/>
+	</dimension>
+	<dimension name="flow" desc="Caudal (aire)">
+		<unit name="m3/s" ratio="2.7777e-4" prec="2"/>
+		<unit name="m3/h" ratio="1" main="1" prec="0"/>
+		<unit name="l/s" ratio="0.277777" prec="1"/>
+		<unit name="l/h" ratio="1000" prec="0"/>
+		<unit name="ft3/s" ratio="127128.24" prec="1"/>
+	</dimension>
+	<dimension name="waterFlow" desc="Caudal (agua)">
+		<unit name="m3/s" ratio="2.7777e-7" prec="2"/>
+		<unit name="l/s" ratio="0.000277777" prec="2"/>
+		<unit name="l/h" ratio="1" main="1" prec="0"/>
+	</dimension>
+	<dimension name="potential" desc="Tensión eléctrica">
+		<unit name="V" ratio="1" main="1" prec="0"/>
+	</dimension>
+	<dimension name="current" desc="Corriente eléctrica">
+		<unit name="A" ratio="1" main="1" prec="1"/>
+	</dimension>
+	<dimension name="frecuency" desc="Frecuencia">
+		<unit name="Hz" ratio="1" main="1" prec="0"/>
+	</dimension>
+	<dimension name="soundlevel" desc="Nivel sonoro">
+		<unit name="dBA" ratio="1" main="1" prec="0"/>
+	</dimension>
+	<dimension name="specSoundlevel" desc="Nivel sonoro en espectro">
+		<unit name="dB" ratio="1" main="1" prec="0"/>
+	</dimension>
+	<dimension name="power" desc="Potencia">
+		<unit name="w" ratio="1" main="1" prec="0"/>
+		<unit name="Kw" ratio="0.001" prec="2"/>
+		<unit name="CV" ratio="0.00134" prec="2"/>
+		<unit name="Btu/h" ratio="3.4123" prec="0"/>
+		<unit name="KCal/h" ratio="0.8604" prec="0"/>
+	</dimension>
+	<dimension name="energy" desc="Energía">
+		<unit name="J" ratio="1" main="1" prec="0"/>
+		<unit name="Cal" ratio="0.239" prec="0"/>
+		<unit name="Kwh" ratio="2.7e-7" prec="2"/>
+		<unit name="KCal" ratio="2.39e-4" prec="0"/>
+		<unit name="KJ" ratio="1e-3" prec="2"/>
+		<unit name="Btu" ratio="9.4787e-4" prec="2"/>
+	</dimension>
+	<dimension name="humidity" desc="Humedad relativa">
+		<unit name="% HR" ratio="1" main="1" prec="0"/>
+	</dimension>
+	<dimension name="speed" desc="Velocidad">
+		<unit name="m/s" ratio="1" main="1" prec="1"/>
+		<unit name="km/h" ratio="3.6" prec="1"/>
+		<unit name="ft/s" ratio="3.2808" prec="1"/>
+	</dimension>
+	<dimension name="rotation speed" desc="Velocidad rotación">
+		<unit name="rpm" ratio="1" main="1" prec="0"/>
+		<unit name="1/min" ratio="1" prec="0"/>
+	</dimension>
+	<dimension name="specific power" desc="Potencia específica">
+		<unit name="W/(m3/s)" ratio="1" main="1" prec="0"/>
+		<unit name="w/m3/s" ratio="1" prec="0"/>
+	</dimension>
+</dimensions>
+<systems>
+	<system name="Sistema internacional">
+		<dimension name="length" unit="m"/>
+		<dimension name="surface" unit="m2"/>
+		<dimension name="mass" unit="kg"/>
+		<dimension name="time" unit="s"/>
+		<dimension name="pressure" unit="Pa"/>
+		<dimension name="waterPressure" unit="kPa"/>
+		<dimension name="temperature" unit="K"/>
+		<dimension name="flow" unit="m3/s"/>
+		<dimension name="waterFlow" unit="l/h"/>
+		<dimension name="potential" unit="V"/>
+		<dimension name="current" unit="A"/>
+		<dimension name="frecuency" unit="Hz"/>
+		<dimension name="power" unit="w"/>
+		<dimension name="energy" unit="J"/>
+		<dimension name="humidity" unit="% HR"/>
+		<dimension name="massflow" unit="kg/s"/>
+		<dimension name="soundlevel" unit="dB"/>
+		<dimension name="speed" unit="m/s"/>
+		<dimension name="rotation speed" unit="rpm"/>
+		<dimension name="specific power" unit="W/(m3/s)"/>
+	</system>
+	<system name="Sistema técnico">
+		<dimension name="length" unit="m"/>
+		<dimension name="mass" unit="kg"/>
+		<dimension name="time" unit="s"/>
+		<dimension name="pressure" unit="mm ca"/>
+		<dimension name="waterPressure" unit="m ca"/>
+		<dimension name="temperature" unit="ºC"/>
+		<dimension name="flow" unit="m3/h"/>
+		<dimension name="waterFlow" unit="l/h"/>
+		<dimension name="potential" unit="V"/>
+		<dimension name="current" unit="A"/>
+		<dimension name="frecuency" unit="Hz"/>
+		<dimension name="power" unit="Kw"/>
+		<dimension name="energy" unit="KCal"/>
+		<dimension name="humidity" unit="% HR"/>
+		<dimension name="massflow" unit="kg/s"/>
+		<dimension name="soundlevel" unit="dB"/>
+		<dimension name="speed" unit="m/s"/>
+		<dimension name="rotation speed" unit="rpm"/>
+		<dimension name="specific power" unit="W/(m3/s)"/>
+	</system>
+	<system name="British">
+		<dimension name="length" unit="ft"/>
+		<dimension name="mass" unit="slug"/>
+		<dimension name="time" unit="s"/>
+		<dimension name="pressure" unit="bar"/>
+		<dimension name="waterPressure" unit="m ca"/>
+		<dimension name="temperature" unit="ºR"/>
+		<dimension name="flow" unit="ft3/s"/>
+		<dimension name="waterFlow" unit="l/h"/>
+		<dimension name="potential" unit="V"/>
+		<dimension name="current" unit="A"/>
+		<dimension name="frecuency" unit="Hz"/>
+		<dimension name="power" unit="Btu/h"/>
+		<dimension name="energy" unit="Btu"/>
+		<dimension name="humidity" unit="% HR"/>
+		<dimension name="massflow" unit="slug/s"/>
+		<dimension name="soundlevel" unit="dB"/>
+		<dimension name="speed" unit="ft/s"/>
+		<dimension name="rotation speed" unit="1/min"/>
+		<dimension name="specific power" unit="W/(m3/s)"/>
+	</system>
+</systems>
+</unitsystem>
+

@@ -1,0 +1,20 @@
+ya he preparado el programa que cargará las tablas desde un fichero de
+texto, grabado de excel en formato "csv".
+
+tienes que ejecutarlo en un terminal, en el directorio donde tengas los
+ficheros csv
+
+Antes de ejecutarlo, se puede editar para poner en usuario adecuado
+
+$ ./inserta_en_tabla.sh tabla fichero
+
+tabla es el nombre de la tabla en la basa de datos
+
+el fichero tiene que tener sólo los datos, sin la primera fila con los
+nombres de los campos, los campos separados por ;
+los campos de texto sin ", aunque los que ya tengas hechos no tienes que
+tocarlos porque este programa los quitará.
+
+para que funcione tienes que tener instalado el paquete
+"postgresql-client-8.4"
+
