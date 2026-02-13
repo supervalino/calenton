@@ -13,5 +13,6 @@ src/componentes/**/*.gch/
 *.tmp
 *.swp
 .DS_Store
-# Ignorar archivos compilados
+# Ignorar archivos compilados grandes
 src/componentes/debug/componentes.gch/
+src/componentes/designer/release/tsplugin.gch/
