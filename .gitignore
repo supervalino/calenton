@@ -1,3 +1,15 @@
+# Ignorar documentación y herramientas
 doc/metodologia_calenton/
 herramientas/
+
+# Ignorar reports antiguos
 src/calenton/reports/2008/
+
+# Ignorar archivos compilados grandes
+src/componentes/**/*.gch/
+
+# Ignorar otros archivos temporales del sistema
+*.log
+*.tmp
+*.swp
+.DS_Store
