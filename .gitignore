@@ -13,3 +13,5 @@ src/componentes/**/*.gch/
 *.tmp
 *.swp
 .DS_Store
+# Ignorar archivos compilados
+src/componentes/debug/componentes.gch/
