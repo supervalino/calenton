@@ -15,11 +15,11 @@
 #
 ##############################################################################
 
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from modelo import *
-from ui import Ui_valordatodlg
+from PyQt6 import QtWidgets, QtCore
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
+from ..modelo import *
+from .ui import Ui_valordatodlg
 from ts import DataDialog
 
 class ValorDatoDlg (DataDialog, Ui_valordatodlg.Ui_ValorDatoDlgClass):
@@ -41,25 +41,25 @@ class ValorDatoDlg (DataDialog, Ui_valordatodlg.Ui_ValorDatoDlgClass):
 		self.modelCbDat = dato.Dato(parent, self.app.work)
 		self.modelCbDat.select()
 		parent.putCombobox(self.dato, self.modelCbDat, 'nombre')
-		
+
 	def putData(self, r):
-		self.valor.setText(r.value('valor').toString())
-		(id, good)=r.value('idaforo').toInt()
+		self.valor.setText(str(r.value('valor') or ""))
+		id = int(r.value('idaforo') or 0)
 		n=self.aforo.findData(id)
 		self.aforo.setCurrentIndex(n)
-		(id, good)=r.value('iddato').toInt()
+		id = int(r.value('iddato') or 0)
 		n=self.dato.findData(id)
 		self.dato.setCurrentIndex(n)
-		(id, good)=r.value('idclasificacion').toInt()
+		id = int(r.value('idclasificacion') or 0)
 		n=self.clasificacion.findData(id)
 		self.clasificacion.setCurrentIndex(n)
 		return True
-		
+
 	def getData(self, r):
-		if self.valor.text().trimmed().isEmpty():
+		if self.valor.text().strip() == "":
 			self.setEditionError(self.tr("El valor no puede estar vacío"))
 			return False
-		r.setValue('valor', self.valor.text().trimmed())
+		r.setValue('valor', self.valor.text().strip())
 		i_combo=self.aforo.currentIndex()
 		id=self.aforo.itemData(i_combo)
 		r.setValue('idaforo', id)
@@ -70,12 +70,16 @@ class ValorDatoDlg (DataDialog, Ui_valordatodlg.Ui_ValorDatoDlgClass):
 		id=self.dato.itemData(i_combo)
 		r.setValue('iddato', id)
 		return True
-		
-	@pyqtSlot("int")
+
+	@pyqtSlot(int)
 	def clasificacion_currentIndexChanged(self, i_combo):
 		if i_combo==0:
 			return
-		id=self.clasificacion.itemData(i_combo).toInt()[0]
-		filtro="id = %d" % (id)
-		self.modelCbDat.setFilter(filtro)
-		
+		id_raw = self.clasificacion.itemData(i_combo)
+		if id_raw is not None:
+			try:
+				id = int(id_raw)
+			except (ValueError, TypeError):
+				return
+			filtro="id = %d" % (id)
+			self.modelCbDat.setFilter(filtro)

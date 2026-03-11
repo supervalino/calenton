@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'tsqlbuttonbox.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.6
+** Created by: Qt User Interface Compiler version 6.10.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,14 +10,11 @@
 #define UI_TSQLBUTTONBOX_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QWidget>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -35,37 +32,37 @@ public:
     void setupUi(QWidget *TSqlButtonBox)
     {
         if (TSqlButtonBox->objectName().isEmpty())
-            TSqlButtonBox->setObjectName(QString::fromUtf8("TSqlButtonBox"));
+            TSqlButtonBox->setObjectName("TSqlButtonBox");
         TSqlButtonBox->resize(425, 26);
         horizontalLayout = new QHBoxLayout(TSqlButtonBox);
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName("horizontalLayout");
         saveButton = new QPushButton(TSqlButtonBox);
-        saveButton->setObjectName(QString::fromUtf8("saveButton"));
+        saveButton->setObjectName("saveButton");
 
         horizontalLayout->addWidget(saveButton);
 
         discardButton = new QPushButton(TSqlButtonBox);
-        discardButton->setObjectName(QString::fromUtf8("discardButton"));
+        discardButton->setObjectName("discardButton");
 
         horizontalLayout->addWidget(discardButton);
 
-        horizontalSpacer = new QSpacerItem(1, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer = new QSpacerItem(1, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
 
         addButton = new QPushButton(TSqlButtonBox);
-        addButton->setObjectName(QString::fromUtf8("addButton"));
+        addButton->setObjectName("addButton");
 
         horizontalLayout->addWidget(addButton);
 
         editButton = new QPushButton(TSqlButtonBox);
-        editButton->setObjectName(QString::fromUtf8("editButton"));
+        editButton->setObjectName("editButton");
 
         horizontalLayout->addWidget(editButton);
 
         deleteButton = new QPushButton(TSqlButtonBox);
-        deleteButton->setObjectName(QString::fromUtf8("deleteButton"));
+        deleteButton->setObjectName("deleteButton");
 
         horizontalLayout->addWidget(deleteButton);
 
@@ -81,12 +78,12 @@ public:
 
     void retranslateUi(QWidget *TSqlButtonBox)
     {
-        TSqlButtonBox->setWindowTitle(QApplication::translate("TSqlButtonBox", "Form", 0, QApplication::UnicodeUTF8));
-        saveButton->setText(QApplication::translate("TSqlButtonBox", "Guardar", 0, QApplication::UnicodeUTF8));
-        discardButton->setText(QApplication::translate("TSqlButtonBox", "Descartar", 0, QApplication::UnicodeUTF8));
-        addButton->setText(QApplication::translate("TSqlButtonBox", "A\303\261adir", 0, QApplication::UnicodeUTF8));
-        editButton->setText(QApplication::translate("TSqlButtonBox", "Editar", 0, QApplication::UnicodeUTF8));
-        deleteButton->setText(QApplication::translate("TSqlButtonBox", "Eliminar", 0, QApplication::UnicodeUTF8));
+        TSqlButtonBox->setWindowTitle(QCoreApplication::translate("TSqlButtonBox", "Form", nullptr));
+        saveButton->setText(QCoreApplication::translate("TSqlButtonBox", "Guardar", nullptr));
+        discardButton->setText(QCoreApplication::translate("TSqlButtonBox", "Descartar", nullptr));
+        addButton->setText(QCoreApplication::translate("TSqlButtonBox", "A\303\261adir", nullptr));
+        editButton->setText(QCoreApplication::translate("TSqlButtonBox", "Editar", nullptr));
+        deleteButton->setText(QCoreApplication::translate("TSqlButtonBox", "Eliminar", nullptr));
     } // retranslateUi
 
 };

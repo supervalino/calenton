@@ -148,17 +148,17 @@ bool	DataDialog::edit (
 	)
 
 {
-	if (_model == NULL)
+	if (_model == nullptr)
 		return false;
 
 	_record = _model->record(row);
 	this->putData(_record);
-	
+
 	_editMode = Editing;
 	clearEditionError();
 	if (QDialog::exec() == QDialog::Accepted) {
 		if (hasEditionError()) {
-			QMessageBox::warning(this, tr("Error"), editionError(), QMessageBox::Ok, 0);
+			QMessageBox::warning(this, tr("Error"), editionError(), QMessageBox::Ok);
 			return false;
 			}
 		if (!_model->setRecord(row, _record)) {
@@ -183,7 +183,7 @@ void	DataDialog::accept()
 		QDialog::accept();
 	else {
 		if (hasEditionError())
-			QMessageBox::warning(this, tr("Error"), editionError(), QMessageBox::Ok, 0);
+			QMessageBox::warning(this, tr("Error"), editionError(), QMessageBox::Ok);
 		clearEditionError();
 		}
 	}
@@ -193,14 +193,14 @@ bool	DataDialog::realAdd (
 	)
 
 {
-	if (_model == NULL)
+	if (_model == nullptr)
 		return false;
 	_editMode = Adding;
 	_record = r;
 	clearEditionError();
 	if (QDialog::exec() == QDialog::Accepted) {
 		if (hasEditionError()) {
-			QMessageBox::warning(this, tr("Error"), editionError(), QMessageBox::Ok, 0);
+			QMessageBox::warning(this, tr("Error"), editionError(), QMessageBox::Ok);
 			return false;
 			}
 		_model->calcSeq(_record);
@@ -225,9 +225,9 @@ bool	DataDialog::realAdd (
 bool	DataDialog::add()
 
 {
-	if (_model == NULL)
+	if (_model == nullptr)
 		return false;
-		
+
 	QSqlRecord	r = _model->record();
 
 	return realAdd(r);

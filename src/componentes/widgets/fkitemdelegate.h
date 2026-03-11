@@ -27,7 +27,7 @@ private:
 					const QModelIndex &index) const;
 public:
 	FKItemDelegate(const QMap<QString, QVariant> &filters,
-			QObject *parent = 0,
+			QObject *parent = nullptr,
 			const QString &nullMessage = QString());
 	
 	virtual QWidget *createEditor(QWidget *parent, 

@@ -15,12 +15,12 @@
 #
 ##############################################################################
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from ui.Ui_zonalist import *
-#from zonadlg import ZonaDlg
-from widgets.datalist import DataList
-
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
+from .ui.Ui_zonalist import *
+#
+from zonadlg import ZonaDlg
+from ..widgets.datalist import DataList
 class RelZonaList (DataList, Ui_RelZonaListClass):
 	def __init__(self, parent = None):
 		DataList.__init__(self, parent)
@@ -33,35 +33,33 @@ class RelZonaList (DataList, Ui_RelZonaListClass):
 			self.tabla.hideColumn(self.model.fieldIndex("id"))
 			self.tabla.selectionModel().selectionChanged.connect(self.tabla_selectionChanged)
 			self.tabla.resizeColumnsToContents()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_anade_clicked(self, checked):
 		d = ZonaDlg(self, self.model)
 		if d.add():
 			self.model.submitTrans()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_elimina_clicked(self, checked):
 		self.askAndRemoveRows(self.tabla, self.model)
-		
-	@pyqtSlot("const QModelIndex &")
+
+	@pyqtSlot(QModelIndex)
 	def on_tabla_doubleClicked(self, index):
 		dm = ZonaDlg(self, self.model)
 		if dm.edit(index.row()):
 			self.model.submitTrans()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_edita_clicked(self, checked):
 		l = self.tabla.selectedIndexes()
 		l2 = self.model.selectedRows(l)
 		if len(l2) == 1:
 			self.on_tabla_doubleClicked(l[0])
-		
-	@pyqtSlot("const QItemSelection &", "const QItemSelection &")
+
+	@pyqtSlot(QItemSelection, QItemSelection)
 	def tabla_selectionChanged(self, before, after):
 		l = self.tabla.selectionModel().selectedIndexes()
 		self.elimina.setEnabled(self.model.eraseActive(l))
 		self.idZona = self.model.getId(l)
 		self.edita.setEnabled(self.idZona > 0)
-		
-

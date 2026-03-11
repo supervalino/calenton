@@ -10,131 +10,105 @@
 # (C) Trustserver SL, 2009-2010
 # Todos los derechos reservados
 #
-# $Id: motor.py 211 2010-04-20 10:22:52Z bruno $
-# $URL: https://www.litec.csic.es/svn/emisiones/trunk/src/calenton/js/motor.py $
-#
 ##############################################################################
 
-from PyQt4.QtScript import *
-from PyQt4.QtSql import QSqlQuery
-from PyQt4.QtCore import QString
-
-import types
-import copy
+from PyQt6.QtQml import QJSEngine
+from PyQt6.QtCore import QObject, pyqtSlot
 import math
 
-def isNaN(f):
-	return (f != f)
 
-class JSError (Exception):
+def isNaN(f):
+	return f != f
+
+
+class JSError(Exception):
 	def __init__(self, value):
 		self.value = value
-		
+
 	def __str__(self):
 		return str(self.value)
-		
-	def __unicode__(self):
-		return unicode(self.value)
-		
-class SyntaxError (JSError):
-	def __init__(self, error):
-		if error.isError():
-			self.value = unicode(error.toString())
-		else:
-			self.value = u"Error desconocido"
 
-class ValueError (JSError):
+
+class SyntaxError(JSError):
+	def __init__(self, msg):
+		self.value = str(msg) if msg else "Error desconocido"
+
+
+class ValueError(JSError):
 	def __init__(self, value):
-		JSError.__init__(self, unicode(value) + u" no es un número")
+		JSError.__init__(self, str(value) + " no es un número")
 
-class Motor (QScriptEngine):
-	@staticmethod
-	def myDS(context, engine):
-		if context.argumentCount() != 1:
-			return context.throwError(QString(u"ds necesita un argumento"))
-		nombre = unicode(context.argument(0).toString())
-		if engine.actualValues.has_key(nombre):
-			return QScriptValue(engine.actualValues[nombre])
-		mensaje = u"No está definido el dato '%s'" % (nombre)
-		return context.throwError(QString(mensaje))
-			
-	def __init__(self, db, emulateStack):
-		QScriptEngine.__init__(self)
+
+class JSHelper(QObject):
+	"""Objeto expuesto al motor JS para implementar la función ds()."""
+
+	def __init__(self, parent=None):
+		super().__init__(parent)
+		self.actualValues = {}
+
+	@pyqtSlot(str, result=float)
+	def ds(self, nombre):
+		if nombre in self.actualValues:
+			v = self.actualValues[nombre]
+			return float(v)
+		raise KeyError(f"No está definido el dato '{nombre}'")
+
+
+class Motor:
+	"""
+	Motor de evaluación de fórmulas JavaScript.
+
+	Reemplaza la implementación original basada en QScriptEngine (eliminado en Qt5)
+	con QJSEngine (PySide6.QtQml). La función ds() se expone a través de un
+	QObject auxiliar. Los parámetros locales se pasan mediante IIFEs de JavaScript.
+	"""
+
+	def __init__(self, db, emulateStack=False):
+		self.engine = QJSEngine()
 		self.db = db
-		self.nestLevel = 0
-		self.emulateStack = emulateStack
 		self.actualValues = {}
-		fun = self.newFunction(Motor.myDS)
-		self.globalObject().setProperty("ds", fun)
-		if self.emulateStack:
-			actual = []
-			self.stack = [ actual ]
-			
+		# Auxiliar expuesto a JS para la función ds()
+		self._helper = JSHelper()
+		self.engine.globalObject().setProperty(
+			"_helper", self.engine.newQObject(self._helper))
+		self.engine.evaluate(
+			"function ds(name) { return _helper.ds(name); }")
+
 	def setActualValues(self, values):
-		self.actualValues = {}
-		for i in values.keys():
-			self.actualValues[unicode(i)] = values[i]
-		
-	def ponValores(self, var, values):
-		for i in values.keys():
-			var.setProperty(QString(i), self.creaValor(values[i]))
-			
-	def creaValor(self, v):
-		if type(v) == types.DictType:
-			r = self.newArray()
-			# self.ponValores(r, v)
-			return r
-		else:
-			return QScriptValue(v)
-		
+		self.actualValues = {str(k): v for k, v in values.items()}
+		self._helper.actualValues = self.actualValues
+
 	def ponParametros(self, params):
-		ctx = self.currentContext()
-		ao = ctx.activationObject()
-		if self.emulateStack:
-			c = copy.deepcopy(params)
-			last = self.stack[len(self.stack) - 1]
-			last.append(c)
-		self.ponValores(ao, params)
-		
-	def rehazContexto_interna(self):
-		if not self.emulateStack:
-			return
-		ctx = self.currentContext()
-		ao = ctx.activationObject()
-		for actual in self.stack:
-			for params in actual:
-				self.ponValores(ao, params)
-		
-	def nuevoContexto(self, params = None):
-		self.pushContext()
-		self.nestLevel = self.nestLevel + 1
-		if self.emulateStack:
-			self.rehazContexto_interna()
-			self.stack.append([])
-		if params is not None:
-			self.ponParametros(params)
-		
-	def destruyeContexto(self):
-		if self.nestLevel > 0:
-			self.popContext()
-			if self.emulateStack:
-				self.stack.pop()
-			self.nestLevel = self.nestLevel - 1
-		
-	def vuelveAContextoGlobal(self):
-		while self.nestLevel > 0:
-			self.destruyeContexto()
-			
-	def evaluaFormula(self, formula, params = None):
-		self.nuevoContexto(params)
-		res = self.evaluate(formula)
-		self.destruyeContexto()
-		if self.hasUncaughtException():
-			e = self.uncaughtException()
-			raise SyntaxError(e)
-		if not res.isNumber():
-			raise ValueError(res)
-		r = res.toNumber()
+		"""Añade parámetros al contexto global del motor."""
+		for k, v in params.items():
+			js_val = self.engine.toScriptValue(v)
+			self.engine.globalObject().setProperty(str(k), js_val)
+
+	def evaluaFormula(self, formula, params=None):
+		"""
+		Evalúa una fórmula JavaScript con parámetros opcionales.
+
+		Los parámetros se pasan como variables locales mediante una IIFE
+		para evitar contaminar el scope global.
+		"""
+		if params:
+			# Serializar los valores numéricos como literales JS
+			param_items = [(str(k), v) for k, v in params.items()]
+			js_params = ", ".join(k for k, v in param_items)
+			js_vals = ", ".join(
+				str(v) if isinstance(v, (int, float)) else repr(str(v))
+				for k, v in param_items
+			)
+			wrapped = f"(function({js_params}) {{ return ({formula}); }})({js_vals})"
+		else:
+			wrapped = f"({formula})"
+
+		result = self.engine.evaluate(wrapped)
+		if result.isError():
+			raise SyntaxError(result.toString())
+		if not result.isNumber():
+			raise ValueError(result.toString())
+		r = result.toNumber()
 		if isNaN(r):
-			raise JSError(u"El resultado es NaN")
+			raise JSError("El resultado es NaN")
 		return r

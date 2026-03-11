@@ -15,17 +15,17 @@
 #
 ##############################################################################
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from ui.Ui_escenariolist import *
-from calculo.escenarios import duplicaEscenario, borraEscenario
-from calculo import escenarios
-from escenariodlg import EscenarioDlg
-from origendlg import OrigenDlg
-from parametrodlg import ParametroDlg
-from widgets.datalist import DataList
-from tipodatozonadlg import TipoDatoZonaDlg
-
+from PyQt6.QtWidgets import *
+from PyQt6.QtGui import *
+from PyQt6.QtCore import *
+from .ui.Ui_escenariolist import *
+from ..calculo.escenarios import duplicaEscenario, borraEscenario
+from ..calculo import escenarios
+from .escenariodlg import EscenarioDlg
+from .origendlg import OrigenDlg
+from .parametrodlg import ParametroDlg
+from ..widgets.datalist import DataList
+from .tipodatozonadlg import TipoDatoZonaDlg
 class EscenarioList (DataList, Ui_EscenarioListClass):
 	def __init__(self, parent = None):
 		DataList.__init__(self, parent)
@@ -57,70 +57,70 @@ class EscenarioList (DataList, Ui_EscenarioListClass):
 			self.cambiaEncabezado(self.mParametro, ['Escenario', 'Parametro', 'Valor', 'Descripción'])
 			self.tablaParametro.selectionModel().selectionChanged.connect(self.tablaParametro_selectionChanged)
 			self.tablaParametro.resizeColumnsToContents()
-			
+
 			self.mTipoDatoZona = app.mTipoDatoZona
 			self.tablaTipoDato.setModel(self.mTipoDatoZona)
 			self.tablaTipoDato.hideColumn(self.mTipoDatoZona.fieldIndex("id"))
 			self.tablaTipoDato.selectionModel().selectionChanged.connect(self.tablaTipoDato_selectionChanged)
-			
+
 			self.tablaEscenario_selectionChanged(QItemSelection(), QItemSelection())
-		
+
 	######################################################################
 	# Escenario
-	# 
-		
-	@pyqtSlot("bool")
+	#
+
+	@pyqtSlot(bool)
 	def on_anadeEscenario_clicked(self, checked):
 		d = EscenarioDlg(self, self.mEscenario)
 		if d.add():
 			self.mEscenario.submitTrans()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_eliminaEscenario_clicked(self, checked):
-		r = QMessageBox.question(self, self.tr("Borrar un escenario"), 
+		r = QMessageBox.question(self, self.tr("Borrar un escenario"),
 			self.tr("¿Está seguro que quiere borrar el escenario?" +
 				"\nesto borrará el escenario y todos sus datos asociados," +
 				"\nincluyendo entre otros: fuentes, aforos, parametros, datos de emisión..."),
-				QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-		if r != QMessageBox.Yes:
+				QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No, QMessageBox.StandardButton.No)
+		if r != QMessageBox.StandardButton.Yes:
 			return
 		try:
 			borraEscenario(self.idEscenario, self.db)
-		except Exception, e:
+		except Exception as e:
 			mb = QMessageBox(self)
 			mb.setText(self.tr("Error al borrar"))
-			mb.setInformativeText(QString(unicode(e)))
-			mb.setStandardButtons(QMessageBox.Ok)
+			mb.setInformativeText(str(e))
+			mb.setStandardButtons(QMessageBox.StandardButton.Ok)
 			mb.setDetailedText(escenarios.informe)
 			mb.setIcon(QMessageBox.Critical)
-			mb.exec_()
+			mb.exec()
 		self.mEscenario.select()
-		
+
 	@pyqtSlot("const QModelIndex &")
 	def on_tablaEscenario_doubleClicked(self, index):
 		dm = EscenarioDlg(self, self.mEscenario)
 		if dm.edit(index.row()):
 			self.mEscenario.submitTrans()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_editaEscenario_clicked(self, checked):
 		l = self.tablaEscenario.selectedIndexes()
 		l2 = self.mEscenario.selectedRows(l)
 		if len(l2) == 1:
 			self.on_tablaEscenario_doubleClicked(l[0])
-			
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_duplicaEscenario_clicked(self, checked):
-		(nombre, ok) = QInputDialog.getText(self, self.tr("Duplicar escenario"), 
+		(nombre, ok) = QInputDialog.getText(self, self.tr("Duplicar escenario"),
 				self.tr("Elija el nombre del nuevo escenario"))
-		if not ok or nombre.isEmpty():
+		if not ok or not nombre:
 			return
 		try:
 			duplicaEscenario(self.idEscenario, nombre, self.db)
-		except Exception, e:
-			QMessageBox.warning(self, self.tr("Error al borrar"), QString(unicode(e)))
+		except Exception as e:
+			QMessageBox.warning(self, self.tr("Error al borrar"), str(e))
 		self.mEscenario.select()
-		
+
 	@pyqtSlot("const QItemSelection &", "const QItemSelection &")
 	def tablaEscenario_selectionChanged(self, before, after):
 		l = self.tablaEscenario.selectionModel().selectedIndexes()
@@ -140,104 +140,104 @@ class EscenarioList (DataList, Ui_EscenarioListClass):
 		self.tablaTipoDato_selectionChanged(QItemSelection(), QItemSelection())
 		self.tablaTipoDato.resizeColumnsToContents()
 		self.tablaTipoDato.resizeRowsToContents()
-		
+
 	######################################################################
 	# Origen
 	#
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_anadeOrigen_clicked(self, checked):
 		d = OrigenDlg(self, self.mOrigen)
 		if d.add():
 			self.mOrigen.submitTrans()
 			self.tablaOrigen.resizeColumnsToContents()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_eliminaOrigen_clicked(self, checked):
 		self.askAndRemoveRows(self.tablaOrigen, self.mOrigen)
-		
+
 	@pyqtSlot("const QModelIndex &")
 	def on_tablaOrigen_doubleClicked(self, index):
 		dm = OrigenDlg(self, self.mOrigen)
 		if dm.edit(index.row()):
 			self.mOrigen.submitTrans()
 			self.tablaOrigen.resizeColumnsToContents()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_editaOrigen_clicked(self, checked):
 		l = self.tablaOrigen.selectedIndexes()
 		l2 = self.mOrigen.selectedRows(l)
 		if len(l2) == 1:
 			self.on_tablaOrigen_doubleClicked(l[0])
-		
+
 	@pyqtSlot("const QItemSelection &", "const QItemSelection &")
 	def tablaOrigen_selectionChanged(self, before, after):
 		l = self.tablaOrigen.selectionModel().selectedIndexes()
 		self.eliminaOrigen.setEnabled(self.mOrigen.eraseActive(l))
 		self.idOrigen = self.mOrigen.getId(l)
 		self.editaOrigen.setEnabled(self.idOrigen > 0)
-		
+
 	######################################################################
 	# Parametro
 	#
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_anadeParametro_clicked(self, checked):
 		d = ParametroDlg(self, self.mParametro)
 		if d.add():
 			self.mParametro.submitTrans()
 			self.tablaParametro.resizeColumnsToContents()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_eliminaParametro_clicked(self, checked):
 		self.askAndRemoveRows(self.tablaParametro, self.mParametro)
-		
+
 	@pyqtSlot("const QModelIndex &")
 	def on_tablaParametro_doubleClicked(self, index):
 		dm = ParametroDlg(self, self.mParametro)
 		if dm.edit(index.row()):
 			self.mParametro.submitTrans()
 			self.tablaParametro.resizeColumnsToContents()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_editaParametro_clicked(self, checked):
 		l = self.tablaParametro.selectedIndexes()
 		l2 = self.mParametro.selectedRows(l)
 		if len(l2) == 1:
 			self.on_tablaParametro_doubleClicked(l[0])
-		
+
 	@pyqtSlot("const QItemSelection &", "const QItemSelection &")
 	def tablaParametro_selectionChanged(self, before, after):
 		l = self.tablaParametro.selectionModel().selectedIndexes()
 		self.eliminaParametro.setEnabled(self.mParametro.eraseActive(l))
 		self.idParametro = self.mOrigen.getId(l)
 		self.editaParametro.setEnabled(self.idParametro > 0)
-		
+
 	######################################################################
 	# TipoDato
 	#
-		
+
 	@pyqtSlot("const QItemSelection &", "const QItemSelection &")
 	def tablaTipoDato_selectionChanged(self, before, after):
 		pass
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_anadeTipoDato_clicked(self, checked):
 		d = TipoDatoZonaDlg(self, self.mTipoDatoZona)
 		if d.add():
 			self.mTipoDatoZona.submitTrans()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_eliminaTipoDato_clicked(self, checked):
 		self.askAndRemoveRows(self.tablaTipoDato, self.mTipoDatoZona)
-		
+
 	@pyqtSlot("const QModelIndex &")
 	def on_tablaTipoDato_doubleClicked(self, index):
 		dm = TipoDatoZonaDlg(self, self.mTipoDatoZona)
 		if dm.edit(index.row()):
 			self.mTipoDatoZona.submitTrans()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_editaTipoDato_clicked(self, checked):
 		l = self.tablaTipoDato.selectedIndexes()
 		l2 = self.mTipoDatoZona.selectedRows(l)

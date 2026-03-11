@@ -15,25 +15,24 @@
 #
 ##############################################################################
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt6.QtCore import *
+from PyQt6.QtWidgets import *
 
 class SubWindowBase (object):
 	@pyqtSlot()
 	def copy(self):
 		pass
-		
+
 	@pyqtSlot()
 	def print_(self):
 		pass
-		
+
 	def canCopy(self):
 		return False
-		
+
 	def canPrint(self):
 		return False
 
 class SubWindow (SubWindowBase, QWidget):
-	def __init__(self, parent = None, flags = Qt.WindowFlags()):
+	def __init__(self, parent = None, flags = Qt.WindowType(0)):
 		QWidget.__init__(self, parent, flags)
-	

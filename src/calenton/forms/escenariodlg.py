@@ -15,22 +15,22 @@
 #
 ##############################################################################
 
-from PyQt4 import QtGui, QtCore
-from ui import Ui_escenariodlg
+from PyQt6 import QtWidgets, QtCore, QtGui
+from .ui import Ui_escenariodlg
 from ts import DataDialog
 
 class EscenarioDlg (DataDialog, Ui_escenariodlg.Ui_EscenarioDlgClass):
 	def __init__(self, parent, dataModel):
 		DataDialog.__init__(self, parent, dataModel)
 		self.setupUi(self)
-		
+
 	def putData(self, r):
-		self.nombre.setText(r.value('nombre').toString())
+		self.nombre.setText(str(r.value('nombre') or ""))
 		return True
-		
+
 	def getData(self, r):
-		if self.nombre.text().trimmed().isEmpty():
+		if self.nombre.text().strip() == "":
 			self.setEditionError(self.tr("El nombre no puede estar vacío"))
 			return False
-		r.setValue('nombre', self.nombre.text().trimmed())
+		r.setValue('nombre', self.nombre.text().strip())
 		return True

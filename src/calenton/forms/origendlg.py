@@ -15,14 +15,13 @@
 #
 ##############################################################################
 
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtGui import *
-from PyQt4.QtSql import *
-from modelo import *
-from ui import Ui_origendlg
+from PyQt6 import QtWidgets, QtCore
+from PyQt6.QtWidgets import *
+from PyQt6.QtSql import *
+from ..modelo import *
+from .ui import Ui_origendlg
 from ts import DataDialog
-from widgets.datalist import DataList
-
+from ..widgets.datalist import DataList
 class OrigenDlg (DataDialog, Ui_origendlg.Ui_OrigenDlgClass):
 	def __init__(self, parent, dataModel):
 		DataDialog.__init__(self, parent, dataModel)
@@ -33,19 +32,19 @@ class OrigenDlg (DataDialog, Ui_origendlg.Ui_OrigenDlgClass):
 		self.modelCb = escenario.Escenario(parent, self.app.work)
 		self.modelCb.select()
 		parent.putCombobox(self.escenario, self.modelCb, 'nombre')
-	
+
 	def putData(self, r):
-		self.nombre.setText(r.value('nombre').toString())
-		(id_escenario, good)=r.value('idescenario').toInt()
+		self.nombre.setText(str(r.value('nombre') or ""))
+		id_escenario = int(r.value('idescenario') or 0)
 		n=self.escenario.findData(id_escenario)
 		self.escenario.setCurrentIndex(n)
 		return True
-		
+
 	def getData(self, r):
-		if self.nombre.text().trimmed().isEmpty():
+		if self.nombre.text().strip() == "":
 			self.setEditionError(self.tr("El nombre no puede estar vacío"))
 			return False
-		r.setValue('nombre', self.nombre.text().trimmed())
+		r.setValue('nombre', self.nombre.text().strip())
 		i_combo=self.escenario.currentIndex()
 		id_escenario=self.escenario.itemData(i_combo)
 		r.setValue('idescenario', id_escenario)

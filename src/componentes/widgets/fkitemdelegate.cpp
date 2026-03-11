@@ -49,8 +49,8 @@ QMap<QString, QVariant> FKItemDelegate::getFilters (
 	QMap<QString, QVariant> res(_filters);
 	
 	QSqlRecord r = model->record(index.row());
-	for (QMap<QString, QVariant>::iterator i = res.begin(); i != res.end(); ++i) {
-		if (i.value().type() == QVariant::Invalid) {
+	for (auto i = res.begin(); i != res.end(); ++i) {
+		if (i.value().typeId() == QMetaType::UnknownType) {
 			QString name = i.key();
 			QVariant v = r.value(name);
 			i.value() = v;
@@ -67,11 +67,11 @@ QAbstractItemModel	*FKItemDelegate::filteredModel (
 	
 {
 	const SeqTableModel *tm = dynamic_cast<const SeqTableModel *>(model);
-	if (tm == NULL)
-		return NULL;
+	if (tm == nullptr)
+		return nullptr;
 	ForeignKey *fk = dynamic_cast<ForeignKey *>(tm->foreignKey(index.column()));
-	if (fk == NULL)
-		return NULL;
+	if (fk == nullptr)
+		return nullptr;
 	QSqlField::RequiredStatus s = tm->record().field(index.column()).requiredStatus();
 	bool nullValue = (s == QSqlField::Optional);
 	FKModel *m = fk->model(getFilters(tm, index), nullValue, _nullMessage);
@@ -85,7 +85,7 @@ void	FKItemDelegate::setEditorData (
 	
 {
 	TComboBox *e = dynamic_cast<TComboBox *>(editor);
-	if (e == 0)
+	if (e == nullptr)
 		return;
 	e->clear();
 
@@ -94,7 +94,7 @@ void	FKItemDelegate::setEditorData (
 
 	const QAbstractItemModel *tm = index.model();
 	QAbstractItemModel *m = this->filteredModel(editor, tm, index);
-	if (m == NULL)
+	if (m == nullptr)
 		return;
 	e->setModel(m);
 	bool g;
@@ -114,7 +114,7 @@ void	FKItemDelegate::setModelData (
 	
 {
 	TComboBox *e = dynamic_cast<TComboBox *>(editor);
-	if (e == 0)
+	if (e == nullptr)
 		return;
 	QVariant v = e->currentItemData();
 	bool g;

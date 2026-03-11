@@ -1,334 +1,428 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'fuentelist.ui'
-#
-# Created: Fri Feb 21 12:06:29 2014
-#      by: PyQt4 UI code generator 4.10.3
-#
-# WARNING! All changes made in this file will be lost!
+################################################################################
+## Form generated from reading UI file 'fuentelist.ui'
+##
+## Created by: Qt User Interface Compiler version 6.10.2
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 
-from PyQt4 import QtCore, QtGui
+from PyQt6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PyQt6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
+    QCursor, QFont, QFontDatabase, QGradient,
+    QIcon, QImage, QKeySequence, QLinearGradient,
+    QPainter, QPalette, QPixmap, QRadialGradient,
+    QTransform)
+from PyQt6.QtWidgets import (QAbstractItemView, QApplication, QHBoxLayout, QHeaderView,
+    QLabel, QPushButton, QSizePolicy, QSpacerItem,
+    QTableView, QVBoxLayout, QWidget)
 
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+from ts import (TComboBox, TSqlTableNavigator, TTabWidget)
+from ...widgets.datalist import DataList
 
 class Ui_FuenteListClass(object):
     def setupUi(self, FuenteListClass):
-        FuenteListClass.setObjectName(_fromUtf8("FuenteListClass"))
+        if not FuenteListClass.objectName():
+            FuenteListClass.setObjectName(u"FuenteListClass")
         FuenteListClass.resize(662, 338)
-        FuenteListClass.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-        self.verticalLayout = QtGui.QVBoxLayout(FuenteListClass)
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        FuenteListClass.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.clipboardAforo = QAction(FuenteListClass)
+        self.clipboardAforo.setObjectName(u"clipboardAforo")
+        self.clipboardDatoTabular = QAction(FuenteListClass)
+        self.clipboardDatoTabular.setObjectName(u"clipboardDatoTabular")
+        self.copyHeaderDatoTabular = QAction(FuenteListClass)
+        self.copyHeaderDatoTabular.setObjectName(u"copyHeaderDatoTabular")
+        self.clipboardDato = QAction(FuenteListClass)
+        self.clipboardDato.setObjectName(u"clipboardDato")
+        self.clipboardParametros = QAction(FuenteListClass)
+        self.clipboardParametros.setObjectName(u"clipboardParametros")
+        self.calcularAforo = QAction(FuenteListClass)
+        self.calcularAforo.setObjectName(u"calcularAforo")
+        self.calcularFuente = QAction(FuenteListClass)
+        self.calcularFuente.setObjectName(u"calcularFuente")
+        self.verticalLayout = QVBoxLayout(FuenteListClass)
+        self.verticalLayout.setObjectName(u"verticalLayout")
         self.tab = TTabWidget(FuenteListClass)
-        self.tab.setObjectName(_fromUtf8("tab"))
-        self.tab_5 = QtGui.QWidget()
-        self.tab_5.setObjectName(_fromUtf8("tab_5"))
-        self.verticalLayout_2 = QtGui.QVBoxLayout(self.tab_5)
-        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
-        self.horizontalLayout_5 = QtGui.QHBoxLayout()
-        self.horizontalLayout_5.setObjectName(_fromUtf8("horizontalLayout_5"))
-        self.label = QtGui.QLabel(self.tab_5)
-        self.label.setObjectName(_fromUtf8("label"))
+        self.tab.setObjectName(u"tab")
+        self.tab_5 = QWidget()
+        self.tab_5.setObjectName(u"tab_5")
+        self.verticalLayout_2 = QVBoxLayout(self.tab_5)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.horizontalLayout_5 = QHBoxLayout()
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.label = QLabel(self.tab_5)
+        self.label.setObjectName(u"label")
+
         self.horizontalLayout_5.addWidget(self.label)
+
         self.escenario = TComboBox(self.tab_5)
-        self.escenario.setObjectName(_fromUtf8("escenario"))
+        self.escenario.setObjectName(u"escenario")
+
         self.horizontalLayout_5.addWidget(self.escenario)
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem)
+
+        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_5.addItem(self.horizontalSpacer_5)
+
+
         self.verticalLayout_2.addLayout(self.horizontalLayout_5)
-        self.tablaFuente = QtGui.QTableView(self.tab_5)
-        self.tablaFuente.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-        self.tablaFuente.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
-        self.tablaFuente.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-        self.tablaFuente.setObjectName(_fromUtf8("tablaFuente"))
+
+        self.tablaFuente = QTableView(self.tab_5)
+        self.tablaFuente.setObjectName(u"tablaFuente")
+        self.tablaFuente.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.tablaFuente.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tablaFuente.setSelectionBehavior(QAbstractItemView.SelectRows)
+
         self.verticalLayout_2.addWidget(self.tablaFuente)
-        self.horizontalLayout = QtGui.QHBoxLayout()
-        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.deseleccionaFuente = QtGui.QPushButton(self.tab_5)
-        self.deseleccionaFuente.setObjectName(_fromUtf8("deseleccionaFuente"))
+
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.deseleccionaFuente = QPushButton(self.tab_5)
+        self.deseleccionaFuente.setObjectName(u"deseleccionaFuente")
+
         self.horizontalLayout.addWidget(self.deseleccionaFuente)
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem1)
-        self.eliminaFuente = QtGui.QPushButton(self.tab_5)
-        self.eliminaFuente.setObjectName(_fromUtf8("eliminaFuente"))
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer)
+
+        self.eliminaFuente = QPushButton(self.tab_5)
+        self.eliminaFuente.setObjectName(u"eliminaFuente")
+
         self.horizontalLayout.addWidget(self.eliminaFuente)
-        self.editaFuente = QtGui.QPushButton(self.tab_5)
-        self.editaFuente.setObjectName(_fromUtf8("editaFuente"))
+
+        self.editaFuente = QPushButton(self.tab_5)
+        self.editaFuente.setObjectName(u"editaFuente")
+
         self.horizontalLayout.addWidget(self.editaFuente)
-        self.anadeFuente = QtGui.QPushButton(self.tab_5)
-        self.anadeFuente.setObjectName(_fromUtf8("anadeFuente"))
+
+        self.anadeFuente = QPushButton(self.tab_5)
+        self.anadeFuente.setObjectName(u"anadeFuente")
+
         self.horizontalLayout.addWidget(self.anadeFuente)
+
+
         self.verticalLayout_2.addLayout(self.horizontalLayout)
-        self.tab.addTab(self.tab_5, _fromUtf8(""))
-        self.tab_6 = QtGui.QWidget()
-        self.tab_6.setObjectName(_fromUtf8("tab_6"))
-        self.verticalLayout_6 = QtGui.QVBoxLayout(self.tab_6)
-        self.verticalLayout_6.setObjectName(_fromUtf8("verticalLayout_6"))
-        self.tablaAforo = QtGui.QTableView(self.tab_6)
-        self.tablaAforo.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-        self.tablaAforo.setEditTriggers(QtGui.QAbstractItemView.SelectedClicked)
-        self.tablaAforo.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-        self.tablaAforo.setObjectName(_fromUtf8("tablaAforo"))
+
+        self.tab.addTab(self.tab_5, "")
+        self.tab_6 = QWidget()
+        self.tab_6.setObjectName(u"tab_6")
+        self.verticalLayout_6 = QVBoxLayout(self.tab_6)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.tablaAforo = QTableView(self.tab_6)
+        self.tablaAforo.setObjectName(u"tablaAforo")
+        self.tablaAforo.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.tablaAforo.setEditTriggers(QAbstractItemView.SelectedClicked)
+        self.tablaAforo.setSelectionBehavior(QAbstractItemView.SelectRows)
+
         self.verticalLayout_6.addWidget(self.tablaAforo)
-        self.horizontalLayout_2 = QtGui.QHBoxLayout()
-        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
-        self.guardaAforo = QtGui.QPushButton(self.tab_6)
-        self.guardaAforo.setObjectName(_fromUtf8("guardaAforo"))
+
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.guardaAforo = QPushButton(self.tab_6)
+        self.guardaAforo.setObjectName(u"guardaAforo")
+
         self.horizontalLayout_2.addWidget(self.guardaAforo)
-        self.descartaAforo = QtGui.QPushButton(self.tab_6)
-        self.descartaAforo.setObjectName(_fromUtf8("descartaAforo"))
+
+        self.descartaAforo = QPushButton(self.tab_6)
+        self.descartaAforo.setObjectName(u"descartaAforo")
+
         self.horizontalLayout_2.addWidget(self.descartaAforo)
-        self.deseleccionaAforo = QtGui.QPushButton(self.tab_6)
-        self.deseleccionaAforo.setObjectName(_fromUtf8("deseleccionaAforo"))
+
+        self.deseleccionaAforo = QPushButton(self.tab_6)
+        self.deseleccionaAforo.setObjectName(u"deseleccionaAforo")
+
         self.horizontalLayout_2.addWidget(self.deseleccionaAforo)
-        self.buscaAforo = QtGui.QPushButton(self.tab_6)
-        self.buscaAforo.setObjectName(_fromUtf8("buscaAforo"))
+
+        self.buscaAforo = QPushButton(self.tab_6)
+        self.buscaAforo.setObjectName(u"buscaAforo")
+
         self.horizontalLayout_2.addWidget(self.buscaAforo)
-        spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem2)
-        self.eliminaAforo = QtGui.QPushButton(self.tab_6)
-        self.eliminaAforo.setObjectName(_fromUtf8("eliminaAforo"))
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_2.addItem(self.horizontalSpacer_2)
+
+        self.eliminaAforo = QPushButton(self.tab_6)
+        self.eliminaAforo.setObjectName(u"eliminaAforo")
+
         self.horizontalLayout_2.addWidget(self.eliminaAforo)
-        self.editaAforo = QtGui.QPushButton(self.tab_6)
-        self.editaAforo.setObjectName(_fromUtf8("editaAforo"))
+
+        self.editaAforo = QPushButton(self.tab_6)
+        self.editaAforo.setObjectName(u"editaAforo")
+
         self.horizontalLayout_2.addWidget(self.editaAforo)
-        self.anadeAforo = QtGui.QPushButton(self.tab_6)
-        self.anadeAforo.setObjectName(_fromUtf8("anadeAforo"))
+
+        self.anadeAforo = QPushButton(self.tab_6)
+        self.anadeAforo.setObjectName(u"anadeAforo")
+
         self.horizontalLayout_2.addWidget(self.anadeAforo)
+
+
         self.verticalLayout_6.addLayout(self.horizontalLayout_2)
-        self.tab.addTab(self.tab_6, _fromUtf8(""))
-        self.tab_7 = QtGui.QWidget()
-        self.tab_7.setObjectName(_fromUtf8("tab_7"))
-        self.verticalLayout_3 = QtGui.QVBoxLayout(self.tab_7)
-        self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
-        self.tablaParametros = QtGui.QTableView(self.tab_7)
-        self.tablaParametros.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-        self.tablaParametros.setObjectName(_fromUtf8("tablaParametros"))
+
+        self.tab.addTab(self.tab_6, "")
+        self.tab_7 = QWidget()
+        self.tab_7.setObjectName(u"tab_7")
+        self.verticalLayout_3 = QVBoxLayout(self.tab_7)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.tablaParametros = QTableView(self.tab_7)
+        self.tablaParametros.setObjectName(u"tablaParametros")
+        self.tablaParametros.setContextMenuPolicy(Qt.CustomContextMenu)
+
         self.verticalLayout_3.addWidget(self.tablaParametros)
-        self.horizontalLayout_6 = QtGui.QHBoxLayout()
-        self.horizontalLayout_6.setObjectName(_fromUtf8("horizontalLayout_6"))
-        self.guardaParametros = QtGui.QPushButton(self.tab_7)
-        self.guardaParametros.setObjectName(_fromUtf8("guardaParametros"))
+
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.guardaParametros = QPushButton(self.tab_7)
+        self.guardaParametros.setObjectName(u"guardaParametros")
+
         self.horizontalLayout_6.addWidget(self.guardaParametros)
-        self.descartaParametros = QtGui.QPushButton(self.tab_7)
-        self.descartaParametros.setObjectName(_fromUtf8("descartaParametros"))
+
+        self.descartaParametros = QPushButton(self.tab_7)
+        self.descartaParametros.setObjectName(u"descartaParametros")
+
         self.horizontalLayout_6.addWidget(self.descartaParametros)
-        spacerItem3 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_6.addItem(spacerItem3)
-        self.anadeParametros = QtGui.QPushButton(self.tab_7)
-        self.anadeParametros.setObjectName(_fromUtf8("anadeParametros"))
+
+        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_6.addItem(self.horizontalSpacer_6)
+
+        self.anadeParametros = QPushButton(self.tab_7)
+        self.anadeParametros.setObjectName(u"anadeParametros")
+
         self.horizontalLayout_6.addWidget(self.anadeParametros)
-        self.eliminaParametros = QtGui.QPushButton(self.tab_7)
-        self.eliminaParametros.setObjectName(_fromUtf8("eliminaParametros"))
+
+        self.eliminaParametros = QPushButton(self.tab_7)
+        self.eliminaParametros.setObjectName(u"eliminaParametros")
+
         self.horizontalLayout_6.addWidget(self.eliminaParametros)
+
+
         self.verticalLayout_3.addLayout(self.horizontalLayout_6)
-        self.tab.addTab(self.tab_7, _fromUtf8(""))
-        self.tab_8 = QtGui.QWidget()
-        self.tab_8.setObjectName(_fromUtf8("tab_8"))
-        self.verticalLayout_7 = QtGui.QVBoxLayout(self.tab_8)
-        self.verticalLayout_7.setObjectName(_fromUtf8("verticalLayout_7"))
-        self.tablaDato = QtGui.QTableView(self.tab_8)
-        self.tablaDato.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-        self.tablaDato.setEditTriggers(QtGui.QAbstractItemView.SelectedClicked)
-        self.tablaDato.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-        self.tablaDato.setObjectName(_fromUtf8("tablaDato"))
+
+        self.tab.addTab(self.tab_7, "")
+        self.tab_8 = QWidget()
+        self.tab_8.setObjectName(u"tab_8")
+        self.verticalLayout_7 = QVBoxLayout(self.tab_8)
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.tablaDato = QTableView(self.tab_8)
+        self.tablaDato.setObjectName(u"tablaDato")
+        self.tablaDato.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.tablaDato.setEditTriggers(QAbstractItemView.SelectedClicked)
+        self.tablaDato.setSelectionBehavior(QAbstractItemView.SelectRows)
+
         self.verticalLayout_7.addWidget(self.tablaDato)
-        self.horizontalLayout_3 = QtGui.QHBoxLayout()
-        self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
-        self.guardaDato = QtGui.QPushButton(self.tab_8)
-        self.guardaDato.setObjectName(_fromUtf8("guardaDato"))
+
+        self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.guardaDato = QPushButton(self.tab_8)
+        self.guardaDato.setObjectName(u"guardaDato")
+
         self.horizontalLayout_3.addWidget(self.guardaDato)
-        self.descartaDato = QtGui.QPushButton(self.tab_8)
-        self.descartaDato.setObjectName(_fromUtf8("descartaDato"))
+
+        self.descartaDato = QPushButton(self.tab_8)
+        self.descartaDato.setObjectName(u"descartaDato")
+
         self.horizontalLayout_3.addWidget(self.descartaDato)
-        spacerItem4 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem4)
-        self.eliminaDato = QtGui.QPushButton(self.tab_8)
-        self.eliminaDato.setObjectName(_fromUtf8("eliminaDato"))
+
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_3.addItem(self.horizontalSpacer_3)
+
+        self.eliminaDato = QPushButton(self.tab_8)
+        self.eliminaDato.setObjectName(u"eliminaDato")
+
         self.horizontalLayout_3.addWidget(self.eliminaDato)
-        self.editaDato = QtGui.QPushButton(self.tab_8)
-        self.editaDato.setObjectName(_fromUtf8("editaDato"))
+
+        self.editaDato = QPushButton(self.tab_8)
+        self.editaDato.setObjectName(u"editaDato")
+
         self.horizontalLayout_3.addWidget(self.editaDato)
-        self.anadeDato = QtGui.QPushButton(self.tab_8)
-        self.anadeDato.setObjectName(_fromUtf8("anadeDato"))
+
+        self.anadeDato = QPushButton(self.tab_8)
+        self.anadeDato.setObjectName(u"anadeDato")
+
         self.horizontalLayout_3.addWidget(self.anadeDato)
+
+
         self.verticalLayout_7.addLayout(self.horizontalLayout_3)
-        self.tab.addTab(self.tab_8, _fromUtf8(""))
-        self.tab_9 = QtGui.QWidget()
-        self.tab_9.setObjectName(_fromUtf8("tab_9"))
-        self.verticalLayout_8 = QtGui.QVBoxLayout(self.tab_9)
-        self.verticalLayout_8.setObjectName(_fromUtf8("verticalLayout_8"))
-        self.tablaDatoTabular = QtGui.QTableView(self.tab_9)
-        self.tablaDatoTabular.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+
+        self.tab.addTab(self.tab_8, "")
+        self.tab_9 = QWidget()
+        self.tab_9.setObjectName(u"tab_9")
+        self.verticalLayout_8 = QVBoxLayout(self.tab_9)
+        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.tablaDatoTabular = QTableView(self.tab_9)
+        self.tablaDatoTabular.setObjectName(u"tablaDatoTabular")
+        self.tablaDatoTabular.setContextMenuPolicy(Qt.CustomContextMenu)
         self.tablaDatoTabular.setAlternatingRowColors(True)
-        self.tablaDatoTabular.setObjectName(_fromUtf8("tablaDatoTabular"))
+
         self.verticalLayout_8.addWidget(self.tablaDatoTabular)
-        self.horizontalLayout_4 = QtGui.QHBoxLayout()
-        self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
-        self.guardaDatoTabular = QtGui.QPushButton(self.tab_9)
+
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.guardaDatoTabular = QPushButton(self.tab_9)
+        self.guardaDatoTabular.setObjectName(u"guardaDatoTabular")
         self.guardaDatoTabular.setEnabled(False)
-        self.guardaDatoTabular.setObjectName(_fromUtf8("guardaDatoTabular"))
+
         self.horizontalLayout_4.addWidget(self.guardaDatoTabular)
-        self.descartaDatoTabular = QtGui.QPushButton(self.tab_9)
+
+        self.descartaDatoTabular = QPushButton(self.tab_9)
+        self.descartaDatoTabular.setObjectName(u"descartaDatoTabular")
         self.descartaDatoTabular.setEnabled(False)
-        self.descartaDatoTabular.setObjectName(_fromUtf8("descartaDatoTabular"))
+
         self.horizontalLayout_4.addWidget(self.descartaDatoTabular)
-        spacerItem5 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem5)
-        self.eliminaDatoTabular = QtGui.QPushButton(self.tab_9)
+
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_4.addItem(self.horizontalSpacer_4)
+
+        self.eliminaDatoTabular = QPushButton(self.tab_9)
+        self.eliminaDatoTabular.setObjectName(u"eliminaDatoTabular")
         self.eliminaDatoTabular.setEnabled(False)
-        self.eliminaDatoTabular.setObjectName(_fromUtf8("eliminaDatoTabular"))
+
         self.horizontalLayout_4.addWidget(self.eliminaDatoTabular)
-        self.editaDatoTabular = QtGui.QPushButton(self.tab_9)
+
+        self.editaDatoTabular = QPushButton(self.tab_9)
+        self.editaDatoTabular.setObjectName(u"editaDatoTabular")
         self.editaDatoTabular.setEnabled(False)
-        self.editaDatoTabular.setObjectName(_fromUtf8("editaDatoTabular"))
+
         self.horizontalLayout_4.addWidget(self.editaDatoTabular)
-        self.anadeDatoTabular = QtGui.QPushButton(self.tab_9)
+
+        self.anadeDatoTabular = QPushButton(self.tab_9)
+        self.anadeDatoTabular.setObjectName(u"anadeDatoTabular")
         self.anadeDatoTabular.setEnabled(False)
-        self.anadeDatoTabular.setObjectName(_fromUtf8("anadeDatoTabular"))
+
         self.horizontalLayout_4.addWidget(self.anadeDatoTabular)
+
+
         self.verticalLayout_8.addLayout(self.horizontalLayout_4)
-        self.tab.addTab(self.tab_9, _fromUtf8(""))
-        self.tab_2 = QtGui.QWidget()
-        self.tab_2.setObjectName(_fromUtf8("tab_2"))
-        self.verticalLayout_4 = QtGui.QVBoxLayout(self.tab_2)
-        self.verticalLayout_4.setObjectName(_fromUtf8("verticalLayout_4"))
+
+        self.tab.addTab(self.tab_9, "")
+        self.tab_2 = QWidget()
+        self.tab_2.setObjectName(u"tab_2")
+        self.verticalLayout_4 = QVBoxLayout(self.tab_2)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.navValidado = TSqlTableNavigator(self.tab_2)
+        self.navValidado.setObjectName(u"navValidado")
         self.navValidado.setAutoResizeRows(True)
         self.navValidado.setAutoResizeColumns(True)
-        self.navValidado.setObjectName(_fromUtf8("navValidado"))
+
         self.verticalLayout_4.addWidget(self.navValidado)
-        self.tab.addTab(self.tab_2, _fromUtf8(""))
-        self.tab_3 = QtGui.QWidget()
-        self.tab_3.setObjectName(_fromUtf8("tab_3"))
-        self.verticalLayout_5 = QtGui.QVBoxLayout(self.tab_3)
-        self.verticalLayout_5.setObjectName(_fromUtf8("verticalLayout_5"))
+
+        self.tab.addTab(self.tab_2, "")
+        self.tab_3 = QWidget()
+        self.tab_3.setObjectName(u"tab_3")
+        self.verticalLayout_5 = QVBoxLayout(self.tab_3)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.navResultados = TSqlTableNavigator(self.tab_3)
+        self.navResultados.setObjectName(u"navResultados")
         self.navResultados.setAutoResizeRows(True)
         self.navResultados.setAutoResizeColumns(True)
         self.navResultados.setShowButtons(False)
-        self.navResultados.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
+        self.navResultados.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.navResultados.setAlternatingRowColors(True)
-        self.navResultados.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
-        self.navResultados.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-        self.navResultados.setObjectName(_fromUtf8("navResultados"))
+        self.navResultados.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.navResultados.setSelectionBehavior(QAbstractItemView.SelectRows)
+
         self.verticalLayout_5.addWidget(self.navResultados)
-        self.tab.addTab(self.tab_3, _fromUtf8(""))
+
+        self.tab.addTab(self.tab_3, "")
+
         self.verticalLayout.addWidget(self.tab)
-        self.clipboardAforo = QtGui.QAction(FuenteListClass)
-        self.clipboardAforo.setObjectName(_fromUtf8("clipboardAforo"))
-        self.clipboardDatoTabular = QtGui.QAction(FuenteListClass)
-        self.clipboardDatoTabular.setObjectName(_fromUtf8("clipboardDatoTabular"))
-        self.copyHeaderDatoTabular = QtGui.QAction(FuenteListClass)
-        self.copyHeaderDatoTabular.setObjectName(_fromUtf8("copyHeaderDatoTabular"))
-        self.clipboardDato = QtGui.QAction(FuenteListClass)
-        self.clipboardDato.setObjectName(_fromUtf8("clipboardDato"))
-        self.clipboardParametros = QtGui.QAction(FuenteListClass)
-        self.clipboardParametros.setObjectName(_fromUtf8("clipboardParametros"))
-        self.calcularAforo = QtGui.QAction(FuenteListClass)
-        self.calcularAforo.setObjectName(_fromUtf8("calcularAforo"))
-        self.calcularFuente = QtGui.QAction(FuenteListClass)
-        self.calcularFuente.setObjectName(_fromUtf8("calcularFuente"))
+
+        QWidget.setTabOrder(self.tablaFuente, self.deseleccionaFuente)
+        QWidget.setTabOrder(self.deseleccionaFuente, self.eliminaFuente)
+        QWidget.setTabOrder(self.eliminaFuente, self.editaFuente)
+        QWidget.setTabOrder(self.editaFuente, self.anadeFuente)
+        QWidget.setTabOrder(self.anadeFuente, self.tablaAforo)
+        QWidget.setTabOrder(self.tablaAforo, self.guardaAforo)
+        QWidget.setTabOrder(self.guardaAforo, self.descartaAforo)
+        QWidget.setTabOrder(self.descartaAforo, self.deseleccionaAforo)
+        QWidget.setTabOrder(self.deseleccionaAforo, self.buscaAforo)
+        QWidget.setTabOrder(self.buscaAforo, self.eliminaAforo)
+        QWidget.setTabOrder(self.eliminaAforo, self.editaAforo)
+        QWidget.setTabOrder(self.editaAforo, self.anadeAforo)
+        QWidget.setTabOrder(self.anadeAforo, self.tablaDato)
+        QWidget.setTabOrder(self.tablaDato, self.guardaDato)
+        QWidget.setTabOrder(self.guardaDato, self.descartaDato)
+        QWidget.setTabOrder(self.descartaDato, self.eliminaDato)
+        QWidget.setTabOrder(self.eliminaDato, self.editaDato)
+        QWidget.setTabOrder(self.editaDato, self.anadeDato)
+        QWidget.setTabOrder(self.anadeDato, self.tablaDatoTabular)
+        QWidget.setTabOrder(self.tablaDatoTabular, self.guardaDatoTabular)
+        QWidget.setTabOrder(self.guardaDatoTabular, self.descartaDatoTabular)
+        QWidget.setTabOrder(self.descartaDatoTabular, self.eliminaDatoTabular)
+        QWidget.setTabOrder(self.eliminaDatoTabular, self.editaDatoTabular)
+        QWidget.setTabOrder(self.editaDatoTabular, self.anadeDatoTabular)
 
         self.retranslateUi(FuenteListClass)
+        self.tablaAforo.customContextMenuRequested.connect(FuenteListClass.showContextMenu)
+        self.tablaDatoTabular.customContextMenuRequested.connect(FuenteListClass.showContextMenu)
+        self.tablaDato.customContextMenuRequested.connect(FuenteListClass.showContextMenu)
+        self.tablaParametros.customContextMenuRequested.connect(FuenteListClass.showContextMenu)
+        self.tablaFuente.customContextMenuRequested.connect(FuenteListClass.showContextMenu)
+
         self.tab.setCurrentIndex(0)
-        QtCore.QObject.connect(self.tablaAforo, QtCore.SIGNAL(_fromUtf8("customContextMenuRequested(QPoint)")), FuenteListClass.showContextMenu)
-        QtCore.QObject.connect(self.tablaDatoTabular, QtCore.SIGNAL(_fromUtf8("customContextMenuRequested(QPoint)")), FuenteListClass.showContextMenu)
-        QtCore.QObject.connect(self.tablaDato, QtCore.SIGNAL(_fromUtf8("customContextMenuRequested(QPoint)")), FuenteListClass.showContextMenu)
-        QtCore.QObject.connect(self.tablaParametros, QtCore.SIGNAL(_fromUtf8("customContextMenuRequested(QPoint)")), FuenteListClass.showContextMenu)
-        QtCore.QObject.connect(self.tablaFuente, QtCore.SIGNAL(_fromUtf8("customContextMenuRequested(QPoint)")), FuenteListClass.showContextMenu)
-        QtCore.QMetaObject.connectSlotsByName(FuenteListClass)
-        FuenteListClass.setTabOrder(self.tablaFuente, self.deseleccionaFuente)
-        FuenteListClass.setTabOrder(self.deseleccionaFuente, self.eliminaFuente)
-        FuenteListClass.setTabOrder(self.eliminaFuente, self.editaFuente)
-        FuenteListClass.setTabOrder(self.editaFuente, self.anadeFuente)
-        FuenteListClass.setTabOrder(self.anadeFuente, self.tablaAforo)
-        FuenteListClass.setTabOrder(self.tablaAforo, self.guardaAforo)
-        FuenteListClass.setTabOrder(self.guardaAforo, self.descartaAforo)
-        FuenteListClass.setTabOrder(self.descartaAforo, self.deseleccionaAforo)
-        FuenteListClass.setTabOrder(self.deseleccionaAforo, self.buscaAforo)
-        FuenteListClass.setTabOrder(self.buscaAforo, self.eliminaAforo)
-        FuenteListClass.setTabOrder(self.eliminaAforo, self.editaAforo)
-        FuenteListClass.setTabOrder(self.editaAforo, self.anadeAforo)
-        FuenteListClass.setTabOrder(self.anadeAforo, self.tablaDato)
-        FuenteListClass.setTabOrder(self.tablaDato, self.guardaDato)
-        FuenteListClass.setTabOrder(self.guardaDato, self.descartaDato)
-        FuenteListClass.setTabOrder(self.descartaDato, self.eliminaDato)
-        FuenteListClass.setTabOrder(self.eliminaDato, self.editaDato)
-        FuenteListClass.setTabOrder(self.editaDato, self.anadeDato)
-        FuenteListClass.setTabOrder(self.anadeDato, self.tablaDatoTabular)
-        FuenteListClass.setTabOrder(self.tablaDatoTabular, self.guardaDatoTabular)
-        FuenteListClass.setTabOrder(self.guardaDatoTabular, self.descartaDatoTabular)
-        FuenteListClass.setTabOrder(self.descartaDatoTabular, self.eliminaDatoTabular)
-        FuenteListClass.setTabOrder(self.eliminaDatoTabular, self.editaDatoTabular)
-        FuenteListClass.setTabOrder(self.editaDatoTabular, self.anadeDatoTabular)
+
+
+        QMetaObject.connectSlotsByName(FuenteListClass)
+    # setupUi
 
     def retranslateUi(self, FuenteListClass):
-        FuenteListClass.setWindowTitle(_translate("FuenteListClass", "Lista de fuentes", None))
-        self.label.setText(_translate("FuenteListClass", "Escenario", None))
-        self.deseleccionaFuente.setText(_translate("FuenteListClass", "Deseleccionar", None))
-        self.eliminaFuente.setText(_translate("FuenteListClass", "Eliminar", None))
-        self.editaFuente.setText(_translate("FuenteListClass", "Editar", None))
-        self.anadeFuente.setText(_translate("FuenteListClass", "Añadir", None))
-        self.tab.setTabText(self.tab.indexOf(self.tab_5), _translate("FuenteListClass", "Fuentes", None))
-        self.guardaAforo.setText(_translate("FuenteListClass", "Guardar", None))
-        self.descartaAforo.setText(_translate("FuenteListClass", "Descartar", None))
-        self.deseleccionaAforo.setText(_translate("FuenteListClass", "Deseleccionar", None))
-        self.buscaAforo.setText(_translate("FuenteListClass", "Buscar", None))
-        self.eliminaAforo.setText(_translate("FuenteListClass", "Eliminar", None))
-        self.editaAforo.setText(_translate("FuenteListClass", "Editar", None))
-        self.anadeAforo.setText(_translate("FuenteListClass", "Añadir", None))
-        self.tab.setTabText(self.tab.indexOf(self.tab_6), _translate("FuenteListClass", "Aforos", None))
-        self.guardaParametros.setText(_translate("FuenteListClass", "Guardar", None))
-        self.descartaParametros.setText(_translate("FuenteListClass", "Descartar", None))
-        self.anadeParametros.setText(_translate("FuenteListClass", "Añadir", None))
-        self.eliminaParametros.setText(_translate("FuenteListClass", "Eliminar", None))
-        self.tab.setTabText(self.tab.indexOf(self.tab_7), _translate("FuenteListClass", "Parametros", None))
-        self.guardaDato.setText(_translate("FuenteListClass", "Guardar", None))
-        self.descartaDato.setText(_translate("FuenteListClass", "Descartar", None))
-        self.eliminaDato.setText(_translate("FuenteListClass", "Eliminar", None))
-        self.editaDato.setText(_translate("FuenteListClass", "Editar", None))
-        self.anadeDato.setText(_translate("FuenteListClass", "Añadir", None))
-        self.tab.setTabText(self.tab.indexOf(self.tab_8), _translate("FuenteListClass", "Datos", None))
-        self.guardaDatoTabular.setText(_translate("FuenteListClass", "Guardar", None))
-        self.descartaDatoTabular.setText(_translate("FuenteListClass", "Descartar", None))
-        self.eliminaDatoTabular.setText(_translate("FuenteListClass", "Eliminar", None))
-        self.editaDatoTabular.setText(_translate("FuenteListClass", "Editar", None))
-        self.anadeDatoTabular.setText(_translate("FuenteListClass", "Añadir", None))
-        self.tab.setTabText(self.tab.indexOf(self.tab_9), _translate("FuenteListClass", "Dato tabular", None))
-        self.tab.setTabText(self.tab.indexOf(self.tab_2), _translate("FuenteListClass", "Contaminantes validados", None))
-        self.tab.setTabText(self.tab.indexOf(self.tab_3), _translate("FuenteListClass", "Resultados", None))
-        self.clipboardAforo.setText(_translate("FuenteListClass", "Insertar desde portapapeles", None))
-        self.clipboardDatoTabular.setText(_translate("FuenteListClass", "Insertar dato desde portapapeles", None))
-        self.clipboardDatoTabular.setToolTip(_translate("FuenteListClass", "Insertar dato desde portapapeles", None))
-        self.copyHeaderDatoTabular.setText(_translate("FuenteListClass", "Copiar cabecera", None))
-        self.copyHeaderDatoTabular.setToolTip(_translate("FuenteListClass", "Copiar cabecera", None))
-        self.clipboardDato.setText(_translate("FuenteListClass", "Inserta dato desde portapapeles", None))
-        self.clipboardDato.setToolTip(_translate("FuenteListClass", "Inserta dato desde portapapeles", None))
-        self.clipboardParametros.setText(_translate("FuenteListClass", "Insertar desde el portapaleles...", None))
-        self.calcularAforo.setText(_translate("FuenteListClass", "Calcular", None))
-        self.calcularFuente.setText(_translate("FuenteListClass", "Calcular", None))
-
-from ts import TTabWidget, TComboBox, TSqlTableNavigator
-from widgets.datalist import DataList
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    FuenteListClass = QtGui.DataList()
-    ui = Ui_FuenteListClass()
-    ui.setupUi(FuenteListClass)
-    FuenteListClass.show()
-    sys.exit(app.exec_())
+        FuenteListClass.setWindowTitle(QCoreApplication.translate("FuenteListClass", u"Lista de fuentes", None))
+        self.clipboardAforo.setText(QCoreApplication.translate("FuenteListClass", u"Insertar desde portapapeles", None))
+        self.clipboardDatoTabular.setText(QCoreApplication.translate("FuenteListClass", u"Insertar dato desde portapapeles", None))
+#if QT_CONFIG(tooltip)
+        self.clipboardDatoTabular.setToolTip(QCoreApplication.translate("FuenteListClass", u"Insertar dato desde portapapeles", None))
+#endif // QT_CONFIG(tooltip)
+        self.copyHeaderDatoTabular.setText(QCoreApplication.translate("FuenteListClass", u"Copiar cabecera", None))
+#if QT_CONFIG(tooltip)
+        self.copyHeaderDatoTabular.setToolTip(QCoreApplication.translate("FuenteListClass", u"Copiar cabecera", None))
+#endif // QT_CONFIG(tooltip)
+        self.clipboardDato.setText(QCoreApplication.translate("FuenteListClass", u"Inserta dato desde portapapeles", None))
+#if QT_CONFIG(tooltip)
+        self.clipboardDato.setToolTip(QCoreApplication.translate("FuenteListClass", u"Inserta dato desde portapapeles", None))
+#endif // QT_CONFIG(tooltip)
+        self.clipboardParametros.setText(QCoreApplication.translate("FuenteListClass", u"Insertar desde el portapaleles...", None))
+        self.calcularAforo.setText(QCoreApplication.translate("FuenteListClass", u"Calcular", None))
+        self.calcularFuente.setText(QCoreApplication.translate("FuenteListClass", u"Calcular", None))
+        self.label.setText(QCoreApplication.translate("FuenteListClass", u"Escenario", None))
+        self.deseleccionaFuente.setText(QCoreApplication.translate("FuenteListClass", u"Deseleccionar", None))
+        self.eliminaFuente.setText(QCoreApplication.translate("FuenteListClass", u"Eliminar", None))
+        self.editaFuente.setText(QCoreApplication.translate("FuenteListClass", u"Editar", None))
+        self.anadeFuente.setText(QCoreApplication.translate("FuenteListClass", u"A\u00f1adir", None))
+        self.tab.setTabText(self.tab.indexOf(self.tab_5), QCoreApplication.translate("FuenteListClass", u"Fuentes", None))
+        self.guardaAforo.setText(QCoreApplication.translate("FuenteListClass", u"Guardar", None))
+        self.descartaAforo.setText(QCoreApplication.translate("FuenteListClass", u"Descartar", None))
+        self.deseleccionaAforo.setText(QCoreApplication.translate("FuenteListClass", u"Deseleccionar", None))
+        self.buscaAforo.setText(QCoreApplication.translate("FuenteListClass", u"Buscar", None))
+        self.eliminaAforo.setText(QCoreApplication.translate("FuenteListClass", u"Eliminar", None))
+        self.editaAforo.setText(QCoreApplication.translate("FuenteListClass", u"Editar", None))
+        self.anadeAforo.setText(QCoreApplication.translate("FuenteListClass", u"A\u00f1adir", None))
+        self.tab.setTabText(self.tab.indexOf(self.tab_6), QCoreApplication.translate("FuenteListClass", u"Aforos", None))
+        self.guardaParametros.setText(QCoreApplication.translate("FuenteListClass", u"Guardar", None))
+        self.descartaParametros.setText(QCoreApplication.translate("FuenteListClass", u"Descartar", None))
+        self.anadeParametros.setText(QCoreApplication.translate("FuenteListClass", u"A\u00f1adir", None))
+        self.eliminaParametros.setText(QCoreApplication.translate("FuenteListClass", u"Eliminar", None))
+        self.tab.setTabText(self.tab.indexOf(self.tab_7), QCoreApplication.translate("FuenteListClass", u"Parametros", None))
+        self.guardaDato.setText(QCoreApplication.translate("FuenteListClass", u"Guardar", None))
+        self.descartaDato.setText(QCoreApplication.translate("FuenteListClass", u"Descartar", None))
+        self.eliminaDato.setText(QCoreApplication.translate("FuenteListClass", u"Eliminar", None))
+        self.editaDato.setText(QCoreApplication.translate("FuenteListClass", u"Editar", None))
+        self.anadeDato.setText(QCoreApplication.translate("FuenteListClass", u"A\u00f1adir", None))
+        self.tab.setTabText(self.tab.indexOf(self.tab_8), QCoreApplication.translate("FuenteListClass", u"Datos", None))
+        self.guardaDatoTabular.setText(QCoreApplication.translate("FuenteListClass", u"Guardar", None))
+        self.descartaDatoTabular.setText(QCoreApplication.translate("FuenteListClass", u"Descartar", None))
+        self.eliminaDatoTabular.setText(QCoreApplication.translate("FuenteListClass", u"Eliminar", None))
+        self.editaDatoTabular.setText(QCoreApplication.translate("FuenteListClass", u"Editar", None))
+        self.anadeDatoTabular.setText(QCoreApplication.translate("FuenteListClass", u"A\u00f1adir", None))
+        self.tab.setTabText(self.tab.indexOf(self.tab_9), QCoreApplication.translate("FuenteListClass", u"Dato tabular", None))
+        self.tab.setTabText(self.tab.indexOf(self.tab_2), QCoreApplication.translate("FuenteListClass", u"Contaminantes validados", None))
+        self.tab.setTabText(self.tab.indexOf(self.tab_3), QCoreApplication.translate("FuenteListClass", u"Resultados", None))
+    # retranslateUi
 

@@ -35,7 +35,7 @@ bool	RelOne2OneProxy::setValue (
 {
 	RelOne2One *p = parent();
 
-	return (p != NULL) ? p->setValue(this, value, row, column, m) : false;
+	return (p != nullptr) ? p->setValue(this, value, row, column, m) : false;
 	}
 
 QVariant RelOne2OneProxy::value (
@@ -47,6 +47,6 @@ QVariant RelOne2OneProxy::value (
 {
 	RelOne2One *p = parent();
 
-	return (p != NULL) ? p->value(this, row, column, m) : QVariant();
+	return (p != nullptr) ? p->value(this, row, column, m) : QVariant();
 	}
 

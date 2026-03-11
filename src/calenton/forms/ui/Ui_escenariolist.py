@@ -1,176 +1,225 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'escenariolist.ui'
-#
-# Created: Fri Feb 21 12:06:29 2014
-#      by: PyQt4 UI code generator 4.10.3
-#
-# WARNING! All changes made in this file will be lost!
+################################################################################
+## Form generated from reading UI file 'escenariolist.ui'
+##
+## Created by: Qt User Interface Compiler version 6.10.2
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 
-from PyQt4 import QtCore, QtGui
+from PyQt6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PyQt6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PyQt6.QtWidgets import (QAbstractItemView, QApplication, QHBoxLayout, QHeaderView,
+    QPushButton, QSizePolicy, QSpacerItem, QTabWidget,
+    QTableView, QVBoxLayout, QWidget)
 
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+from ...widgets.datalist import DataList
 
 class Ui_EscenarioListClass(object):
     def setupUi(self, EscenarioListClass):
-        EscenarioListClass.setObjectName(_fromUtf8("EscenarioListClass"))
+        if not EscenarioListClass.objectName():
+            EscenarioListClass.setObjectName(u"EscenarioListClass")
         EscenarioListClass.resize(479, 387)
-        self.verticalLayout = QtGui.QVBoxLayout(EscenarioListClass)
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.tabWidget = QtGui.QTabWidget(EscenarioListClass)
-        self.tabWidget.setObjectName(_fromUtf8("tabWidget"))
-        self.tab = QtGui.QWidget()
-        self.tab.setObjectName(_fromUtf8("tab"))
-        self.verticalLayout_2 = QtGui.QVBoxLayout(self.tab)
-        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
-        self.tablaEscenario = QtGui.QTableView(self.tab)
-        self.tablaEscenario.setObjectName(_fromUtf8("tablaEscenario"))
+        self.verticalLayout = QVBoxLayout(EscenarioListClass)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.tabWidget = QTabWidget(EscenarioListClass)
+        self.tabWidget.setObjectName(u"tabWidget")
+        self.tab = QWidget()
+        self.tab.setObjectName(u"tab")
+        self.verticalLayout_2 = QVBoxLayout(self.tab)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.tablaEscenario = QTableView(self.tab)
+        self.tablaEscenario.setObjectName(u"tablaEscenario")
+
         self.verticalLayout_2.addWidget(self.tablaEscenario)
-        self.horizontalLayout = QtGui.QHBoxLayout()
-        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.duplicaEscenario = QtGui.QPushButton(self.tab)
-        self.duplicaEscenario.setObjectName(_fromUtf8("duplicaEscenario"))
+
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.duplicaEscenario = QPushButton(self.tab)
+        self.duplicaEscenario.setObjectName(u"duplicaEscenario")
+
         self.horizontalLayout.addWidget(self.duplicaEscenario)
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem)
-        self.eliminaEscenario = QtGui.QPushButton(self.tab)
-        self.eliminaEscenario.setObjectName(_fromUtf8("eliminaEscenario"))
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer)
+
+        self.eliminaEscenario = QPushButton(self.tab)
+        self.eliminaEscenario.setObjectName(u"eliminaEscenario")
+
         self.horizontalLayout.addWidget(self.eliminaEscenario)
-        self.editaEscenario = QtGui.QPushButton(self.tab)
-        self.editaEscenario.setObjectName(_fromUtf8("editaEscenario"))
+
+        self.editaEscenario = QPushButton(self.tab)
+        self.editaEscenario.setObjectName(u"editaEscenario")
+
         self.horizontalLayout.addWidget(self.editaEscenario)
-        self.anadeEscenario = QtGui.QPushButton(self.tab)
-        self.anadeEscenario.setObjectName(_fromUtf8("anadeEscenario"))
+
+        self.anadeEscenario = QPushButton(self.tab)
+        self.anadeEscenario.setObjectName(u"anadeEscenario")
+
         self.horizontalLayout.addWidget(self.anadeEscenario)
+
+
         self.verticalLayout_2.addLayout(self.horizontalLayout)
-        self.tabWidget.addTab(self.tab, _fromUtf8(""))
-        self.tab_2 = QtGui.QWidget()
-        self.tab_2.setObjectName(_fromUtf8("tab_2"))
-        self.verticalLayout_3 = QtGui.QVBoxLayout(self.tab_2)
-        self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
-        self.tablaOrigen = QtGui.QTableView(self.tab_2)
-        self.tablaOrigen.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
-        self.tablaOrigen.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-        self.tablaOrigen.setObjectName(_fromUtf8("tablaOrigen"))
+
+        self.tabWidget.addTab(self.tab, "")
+        self.tab_2 = QWidget()
+        self.tab_2.setObjectName(u"tab_2")
+        self.verticalLayout_3 = QVBoxLayout(self.tab_2)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.tablaOrigen = QTableView(self.tab_2)
+        self.tablaOrigen.setObjectName(u"tablaOrigen")
+        self.tablaOrigen.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tablaOrigen.setSelectionBehavior(QAbstractItemView.SelectRows)
+
         self.verticalLayout_3.addWidget(self.tablaOrigen)
-        self.horizontalLayout_2 = QtGui.QHBoxLayout()
-        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem1)
-        self.eliminaOrigen = QtGui.QPushButton(self.tab_2)
-        self.eliminaOrigen.setObjectName(_fromUtf8("eliminaOrigen"))
+
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_2.addItem(self.horizontalSpacer_2)
+
+        self.eliminaOrigen = QPushButton(self.tab_2)
+        self.eliminaOrigen.setObjectName(u"eliminaOrigen")
+
         self.horizontalLayout_2.addWidget(self.eliminaOrigen)
-        self.editaOrigen = QtGui.QPushButton(self.tab_2)
-        self.editaOrigen.setObjectName(_fromUtf8("editaOrigen"))
+
+        self.editaOrigen = QPushButton(self.tab_2)
+        self.editaOrigen.setObjectName(u"editaOrigen")
+
         self.horizontalLayout_2.addWidget(self.editaOrigen)
-        self.anadeOrigen = QtGui.QPushButton(self.tab_2)
-        self.anadeOrigen.setObjectName(_fromUtf8("anadeOrigen"))
+
+        self.anadeOrigen = QPushButton(self.tab_2)
+        self.anadeOrigen.setObjectName(u"anadeOrigen")
+
         self.horizontalLayout_2.addWidget(self.anadeOrigen)
+
+
         self.verticalLayout_3.addLayout(self.horizontalLayout_2)
-        self.tabWidget.addTab(self.tab_2, _fromUtf8(""))
-        self.tab_3 = QtGui.QWidget()
-        self.tab_3.setObjectName(_fromUtf8("tab_3"))
-        self.verticalLayout_4 = QtGui.QVBoxLayout(self.tab_3)
-        self.verticalLayout_4.setObjectName(_fromUtf8("verticalLayout_4"))
-        self.tablaParametro = QtGui.QTableView(self.tab_3)
-        self.tablaParametro.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
-        self.tablaParametro.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-        self.tablaParametro.setObjectName(_fromUtf8("tablaParametro"))
+
+        self.tabWidget.addTab(self.tab_2, "")
+        self.tab_3 = QWidget()
+        self.tab_3.setObjectName(u"tab_3")
+        self.verticalLayout_4 = QVBoxLayout(self.tab_3)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.tablaParametro = QTableView(self.tab_3)
+        self.tablaParametro.setObjectName(u"tablaParametro")
+        self.tablaParametro.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tablaParametro.setSelectionBehavior(QAbstractItemView.SelectRows)
+
         self.verticalLayout_4.addWidget(self.tablaParametro)
-        self.horizontalLayout_3 = QtGui.QHBoxLayout()
-        self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
-        spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem2)
-        self.eliminaParametro = QtGui.QPushButton(self.tab_3)
-        self.eliminaParametro.setObjectName(_fromUtf8("eliminaParametro"))
+
+        self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_3.addItem(self.horizontalSpacer_3)
+
+        self.eliminaParametro = QPushButton(self.tab_3)
+        self.eliminaParametro.setObjectName(u"eliminaParametro")
+
         self.horizontalLayout_3.addWidget(self.eliminaParametro)
-        self.editaParametro = QtGui.QPushButton(self.tab_3)
-        self.editaParametro.setObjectName(_fromUtf8("editaParametro"))
+
+        self.editaParametro = QPushButton(self.tab_3)
+        self.editaParametro.setObjectName(u"editaParametro")
+
         self.horizontalLayout_3.addWidget(self.editaParametro)
-        self.anadeParametro = QtGui.QPushButton(self.tab_3)
-        self.anadeParametro.setObjectName(_fromUtf8("anadeParametro"))
+
+        self.anadeParametro = QPushButton(self.tab_3)
+        self.anadeParametro.setObjectName(u"anadeParametro")
+
         self.horizontalLayout_3.addWidget(self.anadeParametro)
+
+
         self.verticalLayout_4.addLayout(self.horizontalLayout_3)
-        self.tabWidget.addTab(self.tab_3, _fromUtf8(""))
-        self.tab_4 = QtGui.QWidget()
-        self.tab_4.setObjectName(_fromUtf8("tab_4"))
-        self.verticalLayout_5 = QtGui.QVBoxLayout(self.tab_4)
-        self.verticalLayout_5.setObjectName(_fromUtf8("verticalLayout_5"))
-        self.tablaTipoDato = QtGui.QTableView(self.tab_4)
-        self.tablaTipoDato.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
+
+        self.tabWidget.addTab(self.tab_3, "")
+        self.tab_4 = QWidget()
+        self.tab_4.setObjectName(u"tab_4")
+        self.verticalLayout_5 = QVBoxLayout(self.tab_4)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.tablaTipoDato = QTableView(self.tab_4)
+        self.tablaTipoDato.setObjectName(u"tablaTipoDato")
+        self.tablaTipoDato.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.tablaTipoDato.setAlternatingRowColors(True)
-        self.tablaTipoDato.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-        self.tablaTipoDato.setObjectName(_fromUtf8("tablaTipoDato"))
+        self.tablaTipoDato.setSelectionBehavior(QAbstractItemView.SelectRows)
+
         self.verticalLayout_5.addWidget(self.tablaTipoDato)
-        self.horizontalLayout_4 = QtGui.QHBoxLayout()
-        self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
-        self.guardaTipoDato = QtGui.QPushButton(self.tab_4)
-        self.guardaTipoDato.setObjectName(_fromUtf8("guardaTipoDato"))
+
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.guardaTipoDato = QPushButton(self.tab_4)
+        self.guardaTipoDato.setObjectName(u"guardaTipoDato")
+
         self.horizontalLayout_4.addWidget(self.guardaTipoDato)
-        self.descartaTipoDato = QtGui.QPushButton(self.tab_4)
-        self.descartaTipoDato.setObjectName(_fromUtf8("descartaTipoDato"))
+
+        self.descartaTipoDato = QPushButton(self.tab_4)
+        self.descartaTipoDato.setObjectName(u"descartaTipoDato")
+
         self.horizontalLayout_4.addWidget(self.descartaTipoDato)
-        spacerItem3 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem3)
-        self.eliminaTipoDato = QtGui.QPushButton(self.tab_4)
-        self.eliminaTipoDato.setObjectName(_fromUtf8("eliminaTipoDato"))
+
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_4.addItem(self.horizontalSpacer_4)
+
+        self.eliminaTipoDato = QPushButton(self.tab_4)
+        self.eliminaTipoDato.setObjectName(u"eliminaTipoDato")
+
         self.horizontalLayout_4.addWidget(self.eliminaTipoDato)
-        self.editaTipoDato = QtGui.QPushButton(self.tab_4)
-        self.editaTipoDato.setObjectName(_fromUtf8("editaTipoDato"))
+
+        self.editaTipoDato = QPushButton(self.tab_4)
+        self.editaTipoDato.setObjectName(u"editaTipoDato")
+
         self.horizontalLayout_4.addWidget(self.editaTipoDato)
-        self.anadeTipoDato = QtGui.QPushButton(self.tab_4)
-        self.anadeTipoDato.setObjectName(_fromUtf8("anadeTipoDato"))
+
+        self.anadeTipoDato = QPushButton(self.tab_4)
+        self.anadeTipoDato.setObjectName(u"anadeTipoDato")
+
         self.horizontalLayout_4.addWidget(self.anadeTipoDato)
+
+
         self.verticalLayout_5.addLayout(self.horizontalLayout_4)
-        self.tabWidget.addTab(self.tab_4, _fromUtf8(""))
+
+        self.tabWidget.addTab(self.tab_4, "")
+
         self.verticalLayout.addWidget(self.tabWidget)
 
+
         self.retranslateUi(EscenarioListClass)
+
         self.tabWidget.setCurrentIndex(0)
-        QtCore.QMetaObject.connectSlotsByName(EscenarioListClass)
+
+
+        QMetaObject.connectSlotsByName(EscenarioListClass)
+    # setupUi
 
     def retranslateUi(self, EscenarioListClass):
-        EscenarioListClass.setWindowTitle(_translate("EscenarioListClass", "Lista de escenarios", None))
-        self.duplicaEscenario.setText(_translate("EscenarioListClass", "Duplicar", None))
-        self.eliminaEscenario.setText(_translate("EscenarioListClass", "Eliminar", None))
-        self.editaEscenario.setText(_translate("EscenarioListClass", "Editar", None))
-        self.anadeEscenario.setText(_translate("EscenarioListClass", "Añadir", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("EscenarioListClass", "Escenarios", None))
-        self.eliminaOrigen.setText(_translate("EscenarioListClass", "Eliminar", None))
-        self.editaOrigen.setText(_translate("EscenarioListClass", "Editar", None))
-        self.anadeOrigen.setText(_translate("EscenarioListClass", "Añadir", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("EscenarioListClass", "Orígenes", None))
-        self.eliminaParametro.setText(_translate("EscenarioListClass", "Eliminar", None))
-        self.editaParametro.setText(_translate("EscenarioListClass", "Editar", None))
-        self.anadeParametro.setText(_translate("EscenarioListClass", "Añadir", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("EscenarioListClass", "Parámetros", None))
-        self.guardaTipoDato.setText(_translate("EscenarioListClass", "Guardar", None))
-        self.descartaTipoDato.setText(_translate("EscenarioListClass", "Descartar", None))
-        self.eliminaTipoDato.setText(_translate("EscenarioListClass", "Eliminar", None))
-        self.editaTipoDato.setText(_translate("EscenarioListClass", "Editar", None))
-        self.anadeTipoDato.setText(_translate("EscenarioListClass", "Añadir", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("EscenarioListClass", "Datos geográficos", None))
-
-from widgets.datalist import DataList
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    EscenarioListClass = QtGui.DataList()
-    ui = Ui_EscenarioListClass()
-    ui.setupUi(EscenarioListClass)
-    EscenarioListClass.show()
-    sys.exit(app.exec_())
+        EscenarioListClass.setWindowTitle(QCoreApplication.translate("EscenarioListClass", u"Lista de escenarios", None))
+        self.duplicaEscenario.setText(QCoreApplication.translate("EscenarioListClass", u"Duplicar", None))
+        self.eliminaEscenario.setText(QCoreApplication.translate("EscenarioListClass", u"Eliminar", None))
+        self.editaEscenario.setText(QCoreApplication.translate("EscenarioListClass", u"Editar", None))
+        self.anadeEscenario.setText(QCoreApplication.translate("EscenarioListClass", u"A\u00f1adir", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("EscenarioListClass", u"Escenarios", None))
+        self.eliminaOrigen.setText(QCoreApplication.translate("EscenarioListClass", u"Eliminar", None))
+        self.editaOrigen.setText(QCoreApplication.translate("EscenarioListClass", u"Editar", None))
+        self.anadeOrigen.setText(QCoreApplication.translate("EscenarioListClass", u"A\u00f1adir", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("EscenarioListClass", u"Or\u00edgenes", None))
+        self.eliminaParametro.setText(QCoreApplication.translate("EscenarioListClass", u"Eliminar", None))
+        self.editaParametro.setText(QCoreApplication.translate("EscenarioListClass", u"Editar", None))
+        self.anadeParametro.setText(QCoreApplication.translate("EscenarioListClass", u"A\u00f1adir", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("EscenarioListClass", u"Par\u00e1metros", None))
+        self.guardaTipoDato.setText(QCoreApplication.translate("EscenarioListClass", u"Guardar", None))
+        self.descartaTipoDato.setText(QCoreApplication.translate("EscenarioListClass", u"Descartar", None))
+        self.eliminaTipoDato.setText(QCoreApplication.translate("EscenarioListClass", u"Eliminar", None))
+        self.editaTipoDato.setText(QCoreApplication.translate("EscenarioListClass", u"Editar", None))
+        self.anadeTipoDato.setText(QCoreApplication.translate("EscenarioListClass", u"A\u00f1adir", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QCoreApplication.translate("EscenarioListClass", u"Datos geogr\u00e1ficos", None))
+    # retranslateUi
 

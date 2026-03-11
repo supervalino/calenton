@@ -1,105 +1,124 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'tipodatozonadlg.ui'
-#
-# Created: Fri Feb 21 12:06:31 2014
-#      by: PyQt4 UI code generator 4.10.3
-#
-# WARNING! All changes made in this file will be lost!
+################################################################################
+## Form generated from reading UI file 'tipodatozonadlg.ui'
+##
+## Created by: Qt User Interface Compiler version 6.10.2
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 
-from PyQt4 import QtCore, QtGui
+from PyQt6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PyQt6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PyQt6.QtWidgets import (QAbstractButton, QApplication, QDialogButtonBox, QFormLayout,
+    QLabel, QLineEdit, QSizePolicy, QSpacerItem,
+    QVBoxLayout, QWidget)
 
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+from ts import (DataDialog, TComboBox)
 
 class Ui_TipoDatoZonaDlgClass(object):
     def setupUi(self, TipoDatoZonaDlgClass):
-        TipoDatoZonaDlgClass.setObjectName(_fromUtf8("TipoDatoZonaDlgClass"))
+        if not TipoDatoZonaDlgClass.objectName():
+            TipoDatoZonaDlgClass.setObjectName(u"TipoDatoZonaDlgClass")
         TipoDatoZonaDlgClass.resize(370, 203)
-        self.verticalLayout = QtGui.QVBoxLayout(TipoDatoZonaDlgClass)
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.formLayout = QtGui.QFormLayout()
-        self.formLayout.setObjectName(_fromUtf8("formLayout"))
-        self.label = QtGui.QLabel(TipoDatoZonaDlgClass)
-        self.label.setObjectName(_fromUtf8("label"))
-        self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label)
-        self.label_2 = QtGui.QLabel(TipoDatoZonaDlgClass)
-        self.label_2.setObjectName(_fromUtf8("label_2"))
-        self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label_2)
-        self.nombre = QtGui.QLineEdit(TipoDatoZonaDlgClass)
-        self.nombre.setObjectName(_fromUtf8("nombre"))
-        self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.nombre)
-        self.label_3 = QtGui.QLabel(TipoDatoZonaDlgClass)
-        self.label_3.setObjectName(_fromUtf8("label_3"))
-        self.formLayout.setWidget(4, QtGui.QFormLayout.LabelRole, self.label_3)
-        self.unidades = QtGui.QLineEdit(TipoDatoZonaDlgClass)
-        self.unidades.setObjectName(_fromUtf8("unidades"))
-        self.formLayout.setWidget(4, QtGui.QFormLayout.FieldRole, self.unidades)
+        self.verticalLayout = QVBoxLayout(TipoDatoZonaDlgClass)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.formLayout = QFormLayout()
+        self.formLayout.setObjectName(u"formLayout")
+        self.label = QLabel(TipoDatoZonaDlgClass)
+        self.label.setObjectName(u"label")
+
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label)
+
+        self.label_2 = QLabel(TipoDatoZonaDlgClass)
+        self.label_2.setObjectName(u"label_2")
+
+        self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_2)
+
+        self.nombre = QLineEdit(TipoDatoZonaDlgClass)
+        self.nombre.setObjectName(u"nombre")
+
+        self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.nombre)
+
+        self.label_3 = QLabel(TipoDatoZonaDlgClass)
+        self.label_3.setObjectName(u"label_3")
+
+        self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.label_3)
+
+        self.unidades = QLineEdit(TipoDatoZonaDlgClass)
+        self.unidades.setObjectName(u"unidades")
+
+        self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.unidades)
+
         self.escenario = TComboBox(TipoDatoZonaDlgClass)
-        self.escenario.setObjectName(_fromUtf8("escenario"))
-        self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.escenario)
-        self.variable = QtGui.QLineEdit(TipoDatoZonaDlgClass)
-        self.variable.setObjectName(_fromUtf8("variable"))
-        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.variable)
-        self.label_4 = QtGui.QLabel(TipoDatoZonaDlgClass)
-        self.label_4.setObjectName(_fromUtf8("label_4"))
-        self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_4)
-        self.defecto = QtGui.QLineEdit(TipoDatoZonaDlgClass)
-        self.defecto.setObjectName(_fromUtf8("defecto"))
-        self.formLayout.setWidget(3, QtGui.QFormLayout.FieldRole, self.defecto)
-        self.label_5 = QtGui.QLabel(TipoDatoZonaDlgClass)
-        self.label_5.setObjectName(_fromUtf8("label_5"))
-        self.formLayout.setWidget(3, QtGui.QFormLayout.LabelRole, self.label_5)
+        self.escenario.setObjectName(u"escenario")
+
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.escenario)
+
+        self.variable = QLineEdit(TipoDatoZonaDlgClass)
+        self.variable.setObjectName(u"variable")
+
+        self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.variable)
+
+        self.label_4 = QLabel(TipoDatoZonaDlgClass)
+        self.label_4.setObjectName(u"label_4")
+
+        self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.label_4)
+
+        self.defecto = QLineEdit(TipoDatoZonaDlgClass)
+        self.defecto.setObjectName(u"defecto")
+
+        self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.defecto)
+
+        self.label_5 = QLabel(TipoDatoZonaDlgClass)
+        self.label_5.setObjectName(u"label_5")
+
+        self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.label_5)
+
+
         self.verticalLayout.addLayout(self.formLayout)
-        spacerItem = QtGui.QSpacerItem(20, 0, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
-        self.verticalLayout.addItem(spacerItem)
-        self.buttonBox = QtGui.QDialogButtonBox(TipoDatoZonaDlgClass)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
+
+        self.verticalSpacer = QSpacerItem(20, 0, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout.addItem(self.verticalSpacer)
+
+        self.buttonBox = QDialogButtonBox(TipoDatoZonaDlgClass)
+        self.buttonBox.setObjectName(u"buttonBox")
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+
         self.verticalLayout.addWidget(self.buttonBox)
+
+#if QT_CONFIG(shortcut)
         self.label.setBuddy(self.escenario)
         self.label_2.setBuddy(self.nombre)
         self.label_3.setBuddy(self.unidades)
         self.label_4.setBuddy(self.variable)
         self.label_5.setBuddy(self.defecto)
+#endif // QT_CONFIG(shortcut)
+        QWidget.setTabOrder(self.escenario, self.nombre)
+        QWidget.setTabOrder(self.nombre, self.variable)
+        QWidget.setTabOrder(self.variable, self.defecto)
+        QWidget.setTabOrder(self.defecto, self.unidades)
+        QWidget.setTabOrder(self.unidades, self.buttonBox)
 
         self.retranslateUi(TipoDatoZonaDlgClass)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), TipoDatoZonaDlgClass.accept)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), TipoDatoZonaDlgClass.reject)
-        QtCore.QMetaObject.connectSlotsByName(TipoDatoZonaDlgClass)
-        TipoDatoZonaDlgClass.setTabOrder(self.escenario, self.nombre)
-        TipoDatoZonaDlgClass.setTabOrder(self.nombre, self.variable)
-        TipoDatoZonaDlgClass.setTabOrder(self.variable, self.defecto)
-        TipoDatoZonaDlgClass.setTabOrder(self.defecto, self.unidades)
-        TipoDatoZonaDlgClass.setTabOrder(self.unidades, self.buttonBox)
+        self.buttonBox.accepted.connect(TipoDatoZonaDlgClass.accept)
+        self.buttonBox.rejected.connect(TipoDatoZonaDlgClass.reject)
+
+        QMetaObject.connectSlotsByName(TipoDatoZonaDlgClass)
+    # setupUi
 
     def retranslateUi(self, TipoDatoZonaDlgClass):
-        TipoDatoZonaDlgClass.setWindowTitle(_translate("TipoDatoZonaDlgClass", "Tipos de datos por zona", None))
-        self.label.setText(_translate("TipoDatoZonaDlgClass", "Escenario", None))
-        self.label_2.setText(_translate("TipoDatoZonaDlgClass", "Nombre", None))
-        self.label_3.setText(_translate("TipoDatoZonaDlgClass", "Unidades", None))
-        self.label_4.setText(_translate("TipoDatoZonaDlgClass", "Variable JavaScript", None))
-        self.label_5.setText(_translate("TipoDatoZonaDlgClass", "Valor por defecto", None))
-
-from ts import DataDialog, TComboBox
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    TipoDatoZonaDlgClass = QtGui.DataDialog()
-    ui = Ui_TipoDatoZonaDlgClass()
-    ui.setupUi(TipoDatoZonaDlgClass)
-    TipoDatoZonaDlgClass.show()
-    sys.exit(app.exec_())
+        TipoDatoZonaDlgClass.setWindowTitle(QCoreApplication.translate("TipoDatoZonaDlgClass", u"Tipos de datos por zona", None))
+        self.label.setText(QCoreApplication.translate("TipoDatoZonaDlgClass", u"Escenario", None))
+        self.label_2.setText(QCoreApplication.translate("TipoDatoZonaDlgClass", u"Nombre", None))
+        self.label_3.setText(QCoreApplication.translate("TipoDatoZonaDlgClass", u"Unidades", None))
+        self.label_4.setText(QCoreApplication.translate("TipoDatoZonaDlgClass", u"Variable JavaScript", None))
+        self.label_5.setText(QCoreApplication.translate("TipoDatoZonaDlgClass", u"Valor por defecto", None))
+    # retranslateUi
 

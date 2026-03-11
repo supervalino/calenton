@@ -15,10 +15,10 @@
 #
 ##############################################################################
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from ui.Ui_plantillalist import *
-from widgets.datalist import DataList
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
+from .ui.Ui_plantillalist import *
+from ..widgets.datalist import DataList
 from configobj import ConfigObj
 
 class PlantillaList (DataList, Ui_PlantillaListClass):
@@ -26,8 +26,8 @@ class PlantillaList (DataList, Ui_PlantillaListClass):
 		DataList.__init__(self, parent)
 		self.setupUi(self)
 		app = QApplication.instance()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_nueva_clicked(self, checked):
 		fileName = QFileDialog.getOpenFileName(self,self.tr("Abrir Plantilla"), "reports", self.tr("Config Files .dat (*.dat)"))
 		lista = fileName.split("/")
@@ -36,4 +36,3 @@ class PlantillaList (DataList, Ui_PlantillaListClass):
 		nombreDat=self.dirGrap.filePath(fileName)
 		config = ConfigObj(str(nombreDat), encoding='UTF8')
 		self.descripcion.setText(config['descripcion'])
-

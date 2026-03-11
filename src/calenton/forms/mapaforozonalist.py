@@ -15,12 +15,12 @@
 #
 ##############################################################################
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from PyQt4.QtSql import *
-from ui.Ui_mapaforozonalist import *
-from mapaforozonadlg import MapAforoZonaDlg
-from widgets.datalist import DataList
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
+from PyQt6.QtSql import *
+from .ui.Ui_mapaforozonalist import *
+from .mapaforozonadlg import MapAforoZonaDlg
+from ..widgets.datalist import DataList
 from ts import FKItemDelegate
 
 class MapAforoZonaList (DataList, Ui_MapAforoZonaListClass):
@@ -40,40 +40,40 @@ class MapAforoZonaList (DataList, Ui_MapAforoZonaListClass):
 			self.tablaMap.selectionModel().selectionChanged.connect(self.tablaMap_selectionChanged)
 			self.tablaMap.resizeColumnsToContents()
 			self.tablaMap.show()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_anade_clicked(self, checked):
 		d = MapAforoZonaDlg(self, self.model)
 		if d.add():
 			self.model.submitTrans()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_elimina_clicked(self, checked):
 		self.askAndRemoveRows(self.tablaMap, self.model)
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_guardar_clicked(self, checked):
 		self.model.submitTrans()
 		self.anade.setEnabled(True)
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_descartar_clicked(self, checked):
 		self.model.revertAll()
 		self.anade.setEnabled(True)
-		
+
 	@pyqtSlot("const QModelIndex &")
 	def on_tablaMap_doubleClicked(self, index):
 		dm = MapAforoZonaDlg(self, self.model)
 		if dm.edit(index.row()):
 			self.model.submitTrans()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_edita_clicked(self, checked):
 		l = self.tablaMap.selectedIndexes()
 		l2 = self.model.selectedRows(l)
 		if len(l2) == 1:
 			self.on_tablaMap_doubleClicked(l[0])
-		
+
 	@pyqtSlot("const QItemSelection &", "const QItemSelection &")
 	def tablaMap_selectionChanged(self, after, before):
 		l = self.tablaMap.selectionModel().selectedIndexes()
@@ -82,10 +82,9 @@ class MapAforoZonaList (DataList, Ui_MapAforoZonaListClass):
 		self.idSel = self.model.getId(l)
 		self.edita.setEnabled(self.idSel > 0 and not self.model.pendingChanges())
 		self.anade.setEnabled(not self.model.pendingChanges())
-		
+
 	def tablaMap_contextualMenuAction(self):
-		return [ self.insertFromClipboard, self.deleteAll, self.surfaceGeneration, 
+		return [ self.insertFromClipboard, self.deleteAll, self.surfaceGeneration,
 				self.one2OneGeneration ]
-	
-	
+
 

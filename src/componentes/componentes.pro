@@ -1,11 +1,13 @@
 TEMPLATE = lib
 CONFIG += debug_and_release \
     dll \
-    precompile_header
+    precompile_header \
+    c++17
 QT += sql \
     svg \
     network \
-    xml
+    xml \
+    widgets
 INCLUDEPATH += include \
     ui_include
 PRECOMPILED_HEADER = include/static.h

@@ -58,13 +58,13 @@ SeqTableModel::SeqTableModel(
 	
 {
 	_rec = QSqlTableModel::record();
-	connect(this, SIGNAL(beforeInsert(QSqlRecord &)), SLOT(calcSeq(QSqlRecord &)));
-	connect(this, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)), 
-			SLOT(slotDataChanged(const QModelIndex &, const QModelIndex &)));
-	connect(this, SIGNAL(rowsInserted(const QModelIndex &, int, int)),
-			SLOT(slotRowsInserted(const QModelIndex &, int, int)));
-	connect(this, SIGNAL(rowsRemoved(const QModelIndex &, int, int)),
-			SLOT(slotRowsRemoved(const QModelIndex &, int, int)));
+	connect(this, &SeqTableModel::beforeInsert, this, &SeqTableModel::calcSeq);
+	connect(this, &SeqTableModel::dataChanged,
+			this, &SeqTableModel::slotDataChanged);
+	connect(this, &SeqTableModel::rowsInserted,
+			this, &SeqTableModel::slotRowsInserted);
+	connect(this, &SeqTableModel::rowsRemoved,
+			this, &SeqTableModel::slotRowsRemoved);
 	}
 
 /*! Destruye el modelo y libera todos los recursos */
@@ -251,10 +251,9 @@ QList<int>	SeqTableModel::selectedRows (
 {
 	QSet<int>	res;
 	
-	for (QModelIndexList::const_iterator i = l.begin(); i != l.end(); i++) 
-		if (!res.contains(i->row()))
-			res.insert(i->row());
-	return res.toList();
+	for (const auto &idx : l)
+		res.insert(idx.row());
+	return QList<int>(res.begin(), res.end());
 	}
 
 /*!
@@ -271,7 +270,7 @@ bool SeqTableModel::eraseActive (
 	if (l.empty())
 		return false;
 	QList<int> l2 = getIds(l);
-	foreach(int i, l2) 
+	for (const auto &i : l2)
 		if (!this->canErase(i))
 			return false;
 	return true;
@@ -288,9 +287,9 @@ QList<int>	SeqTableModel::getIds (
 {
 	QSet<int>	res;
 	
-	foreach (int i, rows) 
+	for (const auto &i : rows)
 		res.insert(this->record(i).value("id").toInt());
-	return res.toList();
+	return QList<int>(res.begin(), res.end());
 	}
 
 /*!
@@ -353,7 +352,7 @@ bool SeqTableModel::eraseRows (
 	QList<int> l3 = getIds(l);
 	QSqlDatabase db = database();
 	db.transaction();
-	foreach (int i, l3)
+	for (const auto &i : l3)
 		if (!this->eraseOneRow(i, db)) {
 			db.rollback();
 			return false;
@@ -536,7 +535,7 @@ QVariant	SeqTableModel::data (
 {
 	BaseForeignKey *fk = foreignKey(item.column());
 
-	if ((role != OriginalDataRole) && (fk != 0)) {
+	if ((role != OriginalDataRole) && (fk != nullptr)) {
 		bool accept = fk->acceptRole(role);
 		if (accept) {
 			int r = item.row();
@@ -558,8 +557,8 @@ bool	SeqTableModel::setData (
 	
 {
 	BaseForeignKey *fk = foreignKey(index.column());
-	
-	if ((fk != 0) && fk->setterAcceptRole(role))
+
+	if ((fk != nullptr) && fk->setterAcceptRole(role))
 		return fk->setValue(value, index.row(), index.column(), this);
 	return QSqlTableModel::setData(index, value, role);
 	}
@@ -575,7 +574,7 @@ BaseForeignKey	*SeqTableModel::foreignKey (
 	if ((columnIndex >= 0) && (columnIndex < _fks.size()))
 		return _fks.at(columnIndex);
 	else
-		return 0;
+		return nullptr;
 	}
 
 BaseForeignKey	*SeqTableModel::foreignKey (
@@ -618,9 +617,9 @@ void	SeqTableModel::setForeignKey (
 
 {
 	if (_normalFks.contains(columnName) && deleteOld)
-		delete _normalFks.value(columnName, NULL);
+		delete _normalFks.value(columnName, nullptr);
 	_normalFks[columnName] = fk;
-	if (fk == NULL)
+	if (fk == nullptr)
 		return;
 	initialAcceptFK(fk);
 	applyNormalFK(columnName);
@@ -634,8 +633,8 @@ void	SeqTableModel::applyNormalFK (
 	int n = QSqlTableModel::fieldIndex(name);
 	if (n == -1)
 		return;
-	BaseForeignKey *fk = _normalFks.value(name, NULL);
-	if (fk == NULL)
+	BaseForeignKey *fk = _normalFks.value(name, nullptr);
+	if (fk == nullptr)
 		return;
 	setFK(n, fk);
 	}
@@ -657,7 +656,7 @@ void	SeqTableModel::setFK (
 
 {
 	while (_fks.count() <= column)
-		_fks.append(NULL);
+		_fks.append(nullptr);
 	_fks[column] = fk;
 	fk->setColumn(column);
 	}
@@ -667,7 +666,7 @@ void	SeqTableModel::addRowControl (
 	)
 	
 {
-	if (control == NULL)
+	if (control == nullptr)
 		return;
 	control->addToTable(this);
 	_rowControls.append(control);
@@ -693,8 +692,8 @@ void	SeqTableModel::deleteAllRowControls()
 void	SeqTableModel::deleteAllNormalFK()
 
 {
-	foreach (BaseForeignKey *fk, _normalFks.values())
-		if (fk != NULL)
+	for (const auto &fk : _normalFks.values())
+		if (fk != nullptr)
 			delete fk;
 	_normalFks.clear();
 	}
@@ -713,10 +712,10 @@ void	SeqTableModel::installControlHandlers()
 	if (_needsOpControl)
 		return;
 	_needsOpControl = true;
-	connect(this, SIGNAL(primeInsert(int, QSqlRecord &)), SLOT(primeInsert(int, QSqlRecord &)));
-	connect(this, SIGNAL(beforeDelete(int)), SLOT(beforeDelete(int)));
-	connect(this, SIGNAL(beforeUpdate(int, QSqlRecord &)), SLOT(beforeUpdate(int, QSqlRecord &)));
-	connect(this, SIGNAL(beforeInsert(QSqlRecord &)), SLOT(beforeInsert(QSqlRecord &)));
+	connect(this, &SeqTableModel::primeInsert, this, &SeqTableModel::primeInsert);
+	connect(this, &SeqTableModel::beforeDelete, this, &SeqTableModel::beforeDelete);
+	connect(this, &SeqTableModel::beforeUpdate, this, &SeqTableModel::beforeUpdate);
+	connect(this, &SeqTableModel::beforeInsert, this, &SeqTableModel::beforeInsert);
 	}
 
 int	SeqTableModel::addVirtualColumn (
@@ -786,11 +785,11 @@ void	SeqTableModel::primeInsert (
 {
 	if (!_needsOpControl)
 		return;
-	foreach (RowControl *c, _rowControls)
+	for (const auto &c : _rowControls)
 		c->primeInsert(row, r);
 	for (int i = 0; i < _fks.count(); i++) {
 		BaseForeignKey *fk = _fks.at(i);
-		if ((fk != NULL) && fk->needsUpdateControl())
+		if ((fk != nullptr) && fk->needsUpdateControl())
 			fk->primeInsert(row, i, r);
 		}
 	}
@@ -802,11 +801,11 @@ void	SeqTableModel::beforeDelete (
 {
 	if (!_needsOpControl)
 		return;
-	foreach (RowControl *c, _rowControls)
+	for (const auto &c : _rowControls)
 		c->beforeDelete(row);
 	for (int i = 0; i < _fks.count(); i++) {
 		BaseForeignKey *fk = _fks.at(i);
-		if ((fk != NULL) && fk->needsUpdateControl())
+		if ((fk != nullptr) && fk->needsUpdateControl())
 			fk->beforeDelete(row, i);
 		}
 	}
@@ -819,11 +818,11 @@ void	SeqTableModel::beforeUpdate (
 {
 	if (!_needsOpControl)
 		return;
-	foreach (RowControl *c, _rowControls)
+	for (const auto &c : _rowControls)
 		c->beforeUpdate(row, r);
 	for (int i = 0; i < _fks.count(); i++) {
 		BaseForeignKey *fk = _fks.at(i);
-		if ((fk != NULL) && fk->needsUpdateControl())
+		if ((fk != nullptr) && fk->needsUpdateControl())
 			fk->beforeUpdate(row, i, r);
 		}
 	}
@@ -835,11 +834,11 @@ void	SeqTableModel::beforeInsert (
 {
 	if (!_needsOpControl)
 		return;
-	foreach (RowControl *c, _rowControls)
+	for (const auto &c : _rowControls)
 		c->beforeInsert(r);
 	for (int i = 0; i < _fks.count(); i++) {
 		BaseForeignKey *fk = _fks.at(i);
-		if ((fk != NULL) && fk->needsUpdateControl())
+		if ((fk != nullptr) && fk->needsUpdateControl())
 			fk->beforeInsert(i, r);
 		}
 	}
@@ -856,11 +855,11 @@ bool	SeqTableModel::deleteRowFromTable (
 	bool res = QSqlTableModel::deleteRowFromTable(row);
 	if (!_needsOpControl)
 		return res;
-	foreach (RowControl *c, _rowControls)
+	for (const auto &c : _rowControls)
 		c->afterDelete(row, r);
 	for (int i = 0; i < _fks.count(); i++) {
 		BaseForeignKey *fk = _fks.at(i);
-		if ((fk != NULL) && fk->needsUpdateControl())
+		if ((fk != nullptr) && fk->needsUpdateControl())
 			fk->afterDelete(row, i, r);
 		}
 	return res;
@@ -876,11 +875,11 @@ bool	SeqTableModel::insertRowIntoTable (
 	bool res = QSqlTableModel::insertRowIntoTable(values);
 	if (!_needsOpControl)
 		return res;
-	foreach (RowControl *c, _rowControls)
+	for (const auto &c : _rowControls)
 		c->afterInsert(r);
 	for (int i = 0; i < _fks.count(); i++) {
 		BaseForeignKey *fk = _fks.at(i);
-		if ((fk != NULL) && fk->needsUpdateControl())
+		if ((fk != nullptr) && fk->needsUpdateControl())
 			fk->afterInsert(i, r);
 		}
 	return res;
@@ -897,11 +896,11 @@ bool	SeqTableModel::updateRowInTable (
 	bool res = QSqlTableModel::updateRowInTable(row, values);
 	if (!_needsOpControl)
 		return res;
-	foreach (RowControl *c, _rowControls)
+	for (const auto &c : _rowControls)
 		c->afterUpdate(row, r);
 	for (int i = 0; i < _fks.count(); i++) {
 		BaseForeignKey *fk = _fks.at(i);
-		if ((fk != NULL) && fk->needsUpdateControl())
+		if ((fk != nullptr) && fk->needsUpdateControl())
 			fk->afterUpdate(row, i, r);
 		}
 	return res;
@@ -912,8 +911,8 @@ bool	SeqTableModel::updateRowInTable (
 void SeqTableModel::clearAllForeignKeys()
 
 {
-	foreach (BaseForeignKey *fk, _fks)
-		if (fk != 0)
+	for (const auto &fk : _fks)
+		if (fk != nullptr)
 			fk->clear();
 	}
 
@@ -922,22 +921,22 @@ void SeqTableModel::revertRowAllForeignKeys (
 	)
 
 {
-	foreach (BaseForeignKey *fk, _fks)
-		if (fk != 0)
+	for (const auto &fk : _fks)
+		if (fk != nullptr)
 			fk->revertRow(row);
 	}
 
 void SeqTableModel::clearAllRowControls()
 
 {
-	foreach (RowControl *c, _rowControls)
+	for (const auto &c : _rowControls)
 		c->clearCache();
 	}
 
 void SeqTableModel::reloadMetadataAllControls()
 
 {
-	foreach (RowControl *c, _rowControls)
+	for (const auto &c : _rowControls)
 		c->reloadMetadata();
 	}
 
@@ -946,7 +945,7 @@ void SeqTableModel::revertRowAllRowControls (
 	)
 
 {
-	foreach (RowControl *c, _rowControls)
+	for (const auto &c : _rowControls)
 		c->revertRow(row);
 	}
 
@@ -956,8 +955,8 @@ void SeqTableModel::reapplyFK()
 	_fks.clear();
 	_rec = QSqlTableModel::record();
 	for (int i = 0; i < _rec.count(); i++)
-		_fks.append(NULL);
-	foreach (QString name, _normalFks.keys())
+		_fks.append(nullptr);
+	for (const auto &name : _normalFks.keys())
 		applyNormalFK(name);
 	for (int i = 0; i < _virtualColumns.count(); i++)
 		applyVirtualColumn(i);
@@ -1028,7 +1027,7 @@ bool	SeqTableModel::setRecord (
 	if (!QSqlTableModel::setRecord(row, r))
 		return false;
 	_dirty = true;
-	foreach (int i, v) {
+	for (const auto &i : v) {
 		int n = _rec.indexOf(record.fieldName(i));
 		QModelIndex idx = this->index(row, n, QModelIndex());
 		QVariant v = record.value(i);

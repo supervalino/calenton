@@ -16,55 +16,52 @@
 ##############################################################################
 
 from ts import SeqTableModel
-from PyQt4.QtGui import QApplication
-from PyQt4.QtCore import Qt
+from PyQt6.QtWidgets import QApplication
+from PyQt6.QtCore import Qt
 
 class ErrorEscenario (Exception):
 	def __init__(self, value):
-		self.value = value 
-		
+		self.value = value
+
 	def __str__(self):
 		return str(self.value)
-		
-	def __unicode__(self):
-		return unicode(self.value)
-	
+
 class Escenarios:
 	def __init__(self, db, idEscenario = None):
 		self.db = db
 		self.idEscenario = idEscenario
 		self.informe = ""
-		
+
 	def initDebug(self):
 		self.informe = ""
-		
+
 	def debug(self, mensaje):
 		self.informe = self.informe + mensaje + "\n"
-		
+
 	def ejecutaSql(self, sql):
 		self.debug(sql + ";")
-		q = self.db.exec_(sql)
+		q = self.db.exec(sql)
 		if self.db.lastError().isValid():
-			raise ErrorEscenario(unicode(self.db.lastError().text()))
+			raise ErrorEscenario(str(self.db.lastError().text()))
 		return q
-		
+
 	def creaEscenario(self, nombre):
 		idNuevo = SeqTableModel.nextVal('seq_escenario', self.db)
 		sql = "insert into escenario (id, nombre) values (%d, '%s')" % (idNuevo, nombre)
 		self.ejecutaSql(sql)
 		self.idEscenario = idNuevo
 		self.nombre = nombre
-		
+
 	def borraEscenario(self):
 		sql = "delete from escenario where id = %d" % (self.idEscenario)
 		self.ejecutaSql(sql)
 		self.idEscenario = None
-		
+
 	def duplicaParametros(self, idEscenarioViejo):
 		sql = """
 			insert into parametro (id, idescenario, nombre, valor, descripcion)
 			select nextval('seq_parametro'), %d, nombre, valor, descripcion
-			from parametro 
+			from parametro
 			where idescenario = %d
 			""" % (self.idEscenario, idEscenarioViejo)
 		self.ejecutaSql(sql)
@@ -78,17 +75,17 @@ class Escenarios:
 				pn.nombre = pv.nombre
 			""" % (idEscenarioViejo, self.idEscenario)
 		self.ejecutaSql(sql)
-		
+
 	def borraParametros(self):
 		sql = """delete
-			from parametrozona 
+			from parametrozona
 			where idparametro in (
 				select id from parametro where idescenario = %d)
 			""" % (self.idEscenario)
 		self.ejecutaSql(sql)
 		sql = "delete from parametro where idescenario = %d" % (self.idEscenario)
 		self.ejecutaSql(sql)
-		
+
 	def duplicaOrigen(self, idEscenarioViejo):
 		sql = """
 			insert into origen (id, idescenario, nombre)
@@ -97,11 +94,11 @@ class Escenarios:
 			where idescenario = %d
 			""" % (self.idEscenario, idEscenarioViejo)
 		self.ejecutaSql(sql)
-		
+
 	def borraOrigen(self):
 		sql = "delete from origen where idescenario = %d" % (self.idEscenario)
 		self.ejecutaSql(sql)
-		
+
 	def duplicaTipoDatoZona(self, idEscenarioViejo):
 		sql = """
 			insert into tipodatozona (id, idescenario, nombre, unidades, valor_defecto, variable)
@@ -120,17 +117,17 @@ class Escenarios:
 				tdn.nombre = tdv.nombre
 			""" % (idEscenarioViejo, self.idEscenario)
 		self.ejecutaSql(sql)
-		
+
 	def borraTipoDatoZona(self):
-		sql = """delete 
-			from datozona 
+		sql = """delete
+			from datozona
 			where idtipodatozona in (
 				select id from tipodatozona where idescenario = %d)
 			""" % (self.idEscenario)
 		self.ejecutaSql(sql)
 		sql = "delete from tipodatozona where idescenario = %d" % (self.idEscenario)
 		self.ejecutaSql(sql)
-		
+
 	def duplicaEquivContaminante(self, idEscenarioViejo):
 		sql = """
 			insert into equivcontaminante (id, idescenario, idcontaminante, p)
@@ -139,16 +136,16 @@ class Escenarios:
 			where idescenario = %d
 			""" % (self.idEscenario, idEscenarioViejo)
 		self.ejecutaSql(sql)
-		
+
 	def borraEquivContaminante(self):
 		sql = "delete from equivcontaminante where idescenario = %d" % (self.idEscenario)
 		self.ejecutaSql(sql)
-		
+
 	def duplicaUnMapDatoContaminante(self, idMapDatoContaminante, idFormulaViejo):
 		if idFormulaViejo > 0:
 			idFormula = SeqTableModel.nextVal('seq_formula', self.db)
 			if idFormula < 0:
-				raise ErrorEscenario(unicode(self.db.lastError().text()))
+				raise ErrorEscenario(str(self.db.lastError().text()))
 			sql = """
 				insert into formula (id, idescenario, expresion, valor)
 				select %d, %d, expresion, valor
@@ -160,7 +157,7 @@ class Escenarios:
 			idFormula = "null"
 		self.ejecutaSql(sql)
 		sql = """
-			insert into mapdatocontaminante (id, idescenario, iddato, idclasificacion, 
+			insert into mapdatocontaminante (id, idescenario, iddato, idclasificacion,
 					idcontaminante, idformula)
 			select nextval('seq_mapdatocontaminante'), %d, iddato, idclasificacion,
 					idcontaminante, %s
@@ -168,24 +165,24 @@ class Escenarios:
 			where id = %d
 			""" % (self.idEscenario, idFormula, idMapDatoContaminante)
 		self.ejecutaSql(sql)
-		
+
 	def borraMapDatoContaminante(self):
 		sql = "delete from mapdatocontaminante where idescenario = %d" % (self.idEscenario)
 		self.ejecutaSql(sql)
 		sql = "delete from formula where idescenario = %d" % (self.idEscenario)
 		self.ejecutaSql(sql)
-		
+
 	def duplicaMapDatoContaminante(self, idEscenarioViejo):
 		sql = "select id, idformula from mapdatocontaminante where idescenario = %d" % (idEscenarioViejo)
 		q = self.ejecutaSql(sql)
 		while q.next():
-			id = q.value(0).toInt()[0]
-			if q.value(1).isNull():
+			id = int(q.value(0) or 0)
+			if q.value(1) is None:
 				idFormula = -1
 			else:
-				idFormula = q.value(1).toInt()[0]
+				idFormula = int(q.value(1) or 0)
 			self.duplicaUnMapDatoContaminante(id, idFormula)
-		
+
 	def duplicaAforos(self, idFuente, idFuenteVieja, idEscenarioViejo):
 		id = SeqTableModel.nextVal('seq_aforo', self.db)
 		if id < 0:
@@ -194,9 +191,9 @@ class Escenarios:
 			insert into aforo (id, idfuente, nombre, descripcion, escala, idzona, idtipodatozona)
 			select nextval('seq_aforo'), %d, a.nombre, a.descripcion, a.escala, a.idzona, tdn.id
 			from aforo a
-				left outer join tipodatozona tdv 
+				left outer join tipodatozona tdv
 					on tdv.id = a.idtipodatozona
-				left outer join tipodatozona tdn 
+				left outer join tipodatozona tdn
 					on tdn.idescenario = %d and tdn.nombre = tdv.nombre
 			where a.idfuente = %d
 			""" % (idFuente, self.idEscenario, idFuenteVieja)
@@ -227,7 +224,7 @@ class Escenarios:
 		self.ejecutaSql(sql)
 		sql = """
 			insert into contaminantevalidadoaforo (id, idclasificacion, idaforo, idcontaminante, valor)
-			select nextval('seq_contaminantevalidadoaforo'), cva.idclasificacion, 
+			select nextval('seq_contaminantevalidadoaforo'), cva.idclasificacion,
 						an.id, cva.idcontaminante, cva.valor
 			from contaminantevalidadoaforo cva, aforo av, aforo an
 			where cva.idaforo = av.id and
@@ -236,10 +233,10 @@ class Escenarios:
 				av.nombre = an.nombre
 			""" % (idFuenteVieja, idFuente)
 		self.ejecutaSql(sql)
-		
+
 	def borraAforo(self):
 		subsql = "select a.id from aforo a, fuente f where a.idfuente = f.id and f.idescenario = %d" % (self.idEscenario)
-			
+
 		sql = "delete from contaminantevalidadoaforo where idaforo in (%s)" % (subsql)
 		self.ejecutaSql(sql)
 		sql = "delete from valordato where idaforo in (%s)" % (subsql)
@@ -248,20 +245,20 @@ class Escenarios:
 		self.ejecutaSql(sql)
 		sql = "delete from aforo where idfuente in (select id from fuente where idescenario = %d)" % (self.idEscenario)
 		self.ejecutaSql(sql)
-		
+
 	def duplicaFuente(self, idFuente, idEscenarioViejo):
 		idFuenteNueva = SeqTableModel.nextVal('seq_fuente', self.db)
 		if idFuenteNueva < 0:
 			raise ErrorEscenario(self.db.lastError().text())
 		sql = """
-			insert into fuente (id, idescenario, nombre, descripcion, idorigen, idmotorcalculo, 
+			insert into fuente (id, idescenario, nombre, descripcion, idorigen, idmotorcalculo,
 						idnivelzona, idtipodatozona)
 			select %d, %d, f.nombre, f.descripcion, orn.id, f.idmotorcalculo,
 						f.idnivelzona, tdn.id
 			from fuente f
-					left outer join tipodatozona tdv 
+					left outer join tipodatozona tdv
 						on tdv.id = f.idtipodatozona
-					left outer join tipodatozona tdn 
+					left outer join tipodatozona tdn
 						on tdn.idescenario = %d and tdn.nombre = tdv.nombre,
 				origen ov, origen orn
 			where f.id = %d and
@@ -278,20 +275,20 @@ class Escenarios:
 			""" % (idFuenteNueva, idFuente)
 		self.ejecutaSql(sql)
 		self.duplicaAforos(idFuenteNueva, idFuente, idEscenarioViejo)
-		
+
 	def borraFuente(self):
 		sql = "delete from fuenteclasificacion where idfuente in (select id from fuente where idescenario = %d)" % (self.idEscenario)
 		self.ejecutaSql(sql)
 		sql = "delete from fuente where idescenario = %d" % (self.idEscenario)
 		self.ejecutaSql(sql)
-		
+
 	def duplicaFuentes(self, idEscenarioViejo):
 		sql = "select id from fuente where idescenario = %d" % (idEscenarioViejo)
 		q = self.ejecutaSql(sql)
 		while q.next():
-			idFuente = q.value(0).toInt()[0]
+			idFuente = int(q.value(0) or 0)
 			self.duplicaFuente(idFuente, idEscenarioViejo)
-		
+
 	def duplica(self, idEscenarioViejo, nombre):
 		self.db.transaction()
 		try:
@@ -306,20 +303,20 @@ class Escenarios:
 		except:
 			self.db.rollback()
 			raise
-			
+
 	def borraCalculos(self):
 		sql = "delete from contaminantezona where idfuente in (select id from fuente where idescenario = %d)" % (self.idEscenario)
 		self.ejecutaSql(sql)
-		sql = """delete 
-			from contaminanteaforo 
+		sql = """delete
+			from contaminanteaforo
 			where idaforo in (
-				select a.id 
-				from aforo a, fuente f 
+				select a.id
+				from aforo a, fuente f
 				where a.idfuente = f.id and
 					f.idescenario = %d)
 			""" % (self.idEscenario)
 		self.ejecutaSql(sql)
-		
+
 	def borra(self):
 		self.db.transaction()
 		self.initDebug()
@@ -337,7 +334,7 @@ class Escenarios:
 		except:
 			self.db.rollback()
 			raise
-	
+
 informe = None
 
 def duplicaEscenario(idEscenario, nombre, db):
@@ -351,7 +348,7 @@ def duplicaEscenario(idEscenario, nombre, db):
 
 def borraEscenario(idEscenario, db):
 	global informe
-	
+
 	es = Escenarios(db, idEscenario)
 	try:
 		QApplication.instance().setOverrideCursor(Qt.WaitCursor)

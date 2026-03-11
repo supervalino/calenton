@@ -1,132 +1,159 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'mapdatocontaminantedlg.ui'
-#
-# Created: Fri Feb 21 12:06:30 2014
-#      by: PyQt4 UI code generator 4.10.3
-#
-# WARNING! All changes made in this file will be lost!
+################################################################################
+## Form generated from reading UI file 'mapdatocontaminantedlg.ui'
+##
+## Created by: Qt User Interface Compiler version 6.10.2
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 
-from PyQt4 import QtCore, QtGui
+from PyQt6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PyQt6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PyQt6.QtWidgets import (QAbstractButton, QApplication, QDialogButtonBox, QFormLayout,
+    QHBoxLayout, QLabel, QLineEdit, QPlainTextEdit,
+    QPushButton, QSizePolicy, QVBoxLayout, QWidget)
 
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+from ts import (DataDialog, TComboBox)
 
 class Ui_MapDatoContaminanteDlgClass(object):
     def setupUi(self, MapDatoContaminanteDlgClass):
-        MapDatoContaminanteDlgClass.setObjectName(_fromUtf8("MapDatoContaminanteDlgClass"))
+        if not MapDatoContaminanteDlgClass.objectName():
+            MapDatoContaminanteDlgClass.setObjectName(u"MapDatoContaminanteDlgClass")
         MapDatoContaminanteDlgClass.resize(405, 344)
-        self.verticalLayout = QtGui.QVBoxLayout(MapDatoContaminanteDlgClass)
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.formLayout = QtGui.QFormLayout()
-        self.formLayout.setObjectName(_fromUtf8("formLayout"))
-        self.label_3 = QtGui.QLabel(MapDatoContaminanteDlgClass)
-        self.label_3.setObjectName(_fromUtf8("label_3"))
-        self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label_3)
-        self.escenario = QtGui.QLineEdit(MapDatoContaminanteDlgClass)
+        self.verticalLayout = QVBoxLayout(MapDatoContaminanteDlgClass)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.formLayout = QFormLayout()
+        self.formLayout.setObjectName(u"formLayout")
+        self.label_3 = QLabel(MapDatoContaminanteDlgClass)
+        self.label_3.setObjectName(u"label_3")
+
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_3)
+
+        self.escenario = QLineEdit(MapDatoContaminanteDlgClass)
+        self.escenario.setObjectName(u"escenario")
         self.escenario.setEnabled(False)
-        self.escenario.setObjectName(_fromUtf8("escenario"))
-        self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.escenario)
-        self.label = QtGui.QLabel(MapDatoContaminanteDlgClass)
-        self.label.setObjectName(_fromUtf8("label"))
-        self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label)
-        self.clasificacion = QtGui.QLineEdit(MapDatoContaminanteDlgClass)
+
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.escenario)
+
+        self.label = QLabel(MapDatoContaminanteDlgClass)
+        self.label.setObjectName(u"label")
+
+        self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label)
+
+        self.clasificacion = QLineEdit(MapDatoContaminanteDlgClass)
+        self.clasificacion.setObjectName(u"clasificacion")
         self.clasificacion.setEnabled(False)
-        self.clasificacion.setObjectName(_fromUtf8("clasificacion"))
-        self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.clasificacion)
-        self.label_2 = QtGui.QLabel(MapDatoContaminanteDlgClass)
-        self.label_2.setObjectName(_fromUtf8("label_2"))
-        self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_2)
-        self.dato = QtGui.QLineEdit(MapDatoContaminanteDlgClass)
+
+        self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.clasificacion)
+
+        self.label_2 = QLabel(MapDatoContaminanteDlgClass)
+        self.label_2.setObjectName(u"label_2")
+
+        self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.label_2)
+
+        self.dato = QLineEdit(MapDatoContaminanteDlgClass)
+        self.dato.setObjectName(u"dato")
         self.dato.setEnabled(False)
-        self.dato.setObjectName(_fromUtf8("dato"))
-        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.dato)
-        self.label_5 = QtGui.QLabel(MapDatoContaminanteDlgClass)
-        self.label_5.setObjectName(_fromUtf8("label_5"))
-        self.formLayout.setWidget(3, QtGui.QFormLayout.LabelRole, self.label_5)
+
+        self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.dato)
+
+        self.label_5 = QLabel(MapDatoContaminanteDlgClass)
+        self.label_5.setObjectName(u"label_5")
+
+        self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.label_5)
+
         self.comboContaminante = TComboBox(MapDatoContaminanteDlgClass)
-        self.comboContaminante.setObjectName(_fromUtf8("comboContaminante"))
-        self.formLayout.setWidget(3, QtGui.QFormLayout.FieldRole, self.comboContaminante)
-        self.label_4 = QtGui.QLabel(MapDatoContaminanteDlgClass)
-        self.label_4.setObjectName(_fromUtf8("label_4"))
-        self.formLayout.setWidget(4, QtGui.QFormLayout.LabelRole, self.label_4)
-        self.editorFormula = QtGui.QPlainTextEdit(MapDatoContaminanteDlgClass)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        self.comboContaminante.setObjectName(u"comboContaminante")
+
+        self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.comboContaminante)
+
+        self.label_4 = QLabel(MapDatoContaminanteDlgClass)
+        self.label_4.setObjectName(u"label_4")
+
+        self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.label_4)
+
+        self.editorFormula = QPlainTextEdit(MapDatoContaminanteDlgClass)
+        self.editorFormula.setObjectName(u"editorFormula")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(1)
         sizePolicy.setHeightForWidth(self.editorFormula.sizePolicy().hasHeightForWidth())
         self.editorFormula.setSizePolicy(sizePolicy)
-        self.editorFormula.setObjectName(_fromUtf8("editorFormula"))
-        self.formLayout.setWidget(4, QtGui.QFormLayout.FieldRole, self.editorFormula)
-        self.label_6 = QtGui.QLabel(MapDatoContaminanteDlgClass)
-        self.label_6.setObjectName(_fromUtf8("label_6"))
-        self.formLayout.setWidget(5, QtGui.QFormLayout.LabelRole, self.label_6)
-        self.horizontalLayout = QtGui.QHBoxLayout()
-        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.valor = QtGui.QLineEdit(MapDatoContaminanteDlgClass)
+
+        self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.editorFormula)
+
+        self.label_6 = QLabel(MapDatoContaminanteDlgClass)
+        self.label_6.setObjectName(u"label_6")
+
+        self.formLayout.setWidget(5, QFormLayout.ItemRole.LabelRole, self.label_6)
+
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.valor = QLineEdit(MapDatoContaminanteDlgClass)
+        self.valor.setObjectName(u"valor")
         self.valor.setEnabled(False)
-        self.valor.setObjectName(_fromUtf8("valor"))
+
         self.horizontalLayout.addWidget(self.valor)
-        self.indenta = QtGui.QPushButton(MapDatoContaminanteDlgClass)
-        self.indenta.setObjectName(_fromUtf8("indenta"))
+
+        self.indenta = QPushButton(MapDatoContaminanteDlgClass)
+        self.indenta.setObjectName(u"indenta")
+
         self.horizontalLayout.addWidget(self.indenta)
-        self.probar = QtGui.QPushButton(MapDatoContaminanteDlgClass)
-        self.probar.setObjectName(_fromUtf8("probar"))
+
+        self.probar = QPushButton(MapDatoContaminanteDlgClass)
+        self.probar.setObjectName(u"probar")
+
         self.horizontalLayout.addWidget(self.probar)
-        self.formLayout.setLayout(5, QtGui.QFormLayout.FieldRole, self.horizontalLayout)
+
+
+        self.formLayout.setLayout(5, QFormLayout.ItemRole.FieldRole, self.horizontalLayout)
+
+
         self.verticalLayout.addLayout(self.formLayout)
-        self.buttonBox = QtGui.QDialogButtonBox(MapDatoContaminanteDlgClass)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
+
+        self.buttonBox = QDialogButtonBox(MapDatoContaminanteDlgClass)
+        self.buttonBox.setObjectName(u"buttonBox")
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+
         self.verticalLayout.addWidget(self.buttonBox)
+
+#if QT_CONFIG(shortcut)
         self.label_3.setBuddy(self.escenario)
         self.label.setBuddy(self.clasificacion)
         self.label_2.setBuddy(self.dato)
         self.label_5.setBuddy(self.comboContaminante)
         self.label_4.setBuddy(self.editorFormula)
         self.label_6.setBuddy(self.valor)
+#endif // QT_CONFIG(shortcut)
+        QWidget.setTabOrder(self.comboContaminante, self.editorFormula)
+        QWidget.setTabOrder(self.editorFormula, self.buttonBox)
+        QWidget.setTabOrder(self.buttonBox, self.clasificacion)
+        QWidget.setTabOrder(self.clasificacion, self.dato)
+        QWidget.setTabOrder(self.dato, self.escenario)
+        QWidget.setTabOrder(self.escenario, self.valor)
 
         self.retranslateUi(MapDatoContaminanteDlgClass)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), MapDatoContaminanteDlgClass.accept)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), MapDatoContaminanteDlgClass.reject)
-        QtCore.QMetaObject.connectSlotsByName(MapDatoContaminanteDlgClass)
-        MapDatoContaminanteDlgClass.setTabOrder(self.comboContaminante, self.editorFormula)
-        MapDatoContaminanteDlgClass.setTabOrder(self.editorFormula, self.buttonBox)
-        MapDatoContaminanteDlgClass.setTabOrder(self.buttonBox, self.clasificacion)
-        MapDatoContaminanteDlgClass.setTabOrder(self.clasificacion, self.dato)
-        MapDatoContaminanteDlgClass.setTabOrder(self.dato, self.escenario)
-        MapDatoContaminanteDlgClass.setTabOrder(self.escenario, self.valor)
+        self.buttonBox.accepted.connect(MapDatoContaminanteDlgClass.accept)
+        self.buttonBox.rejected.connect(MapDatoContaminanteDlgClass.reject)
+
+        QMetaObject.connectSlotsByName(MapDatoContaminanteDlgClass)
+    # setupUi
 
     def retranslateUi(self, MapDatoContaminanteDlgClass):
-        MapDatoContaminanteDlgClass.setWindowTitle(_translate("MapDatoContaminanteDlgClass", "Datos de factores de contaminantes", None))
-        self.label_3.setText(_translate("MapDatoContaminanteDlgClass", "Escenario", None))
-        self.label.setText(_translate("MapDatoContaminanteDlgClass", "Clasificación", None))
-        self.label_2.setText(_translate("MapDatoContaminanteDlgClass", "Dato", None))
-        self.label_5.setText(_translate("MapDatoContaminanteDlgClass", "Contaminante", None))
-        self.label_4.setText(_translate("MapDatoContaminanteDlgClass", "Formula", None))
-        self.label_6.setText(_translate("MapDatoContaminanteDlgClass", "Valor Calculado", None))
-        self.indenta.setText(_translate("MapDatoContaminanteDlgClass", "Indentar", None))
-        self.probar.setText(_translate("MapDatoContaminanteDlgClass", "Probar", None))
-
-from ts import DataDialog, TComboBox
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    MapDatoContaminanteDlgClass = QtGui.DataDialog()
-    ui = Ui_MapDatoContaminanteDlgClass()
-    ui.setupUi(MapDatoContaminanteDlgClass)
-    MapDatoContaminanteDlgClass.show()
-    sys.exit(app.exec_())
+        MapDatoContaminanteDlgClass.setWindowTitle(QCoreApplication.translate("MapDatoContaminanteDlgClass", u"Datos de factores de contaminantes", None))
+        self.label_3.setText(QCoreApplication.translate("MapDatoContaminanteDlgClass", u"Escenario", None))
+        self.label.setText(QCoreApplication.translate("MapDatoContaminanteDlgClass", u"Clasificaci\u00f3n", None))
+        self.label_2.setText(QCoreApplication.translate("MapDatoContaminanteDlgClass", u"Dato", None))
+        self.label_5.setText(QCoreApplication.translate("MapDatoContaminanteDlgClass", u"Contaminante", None))
+        self.label_4.setText(QCoreApplication.translate("MapDatoContaminanteDlgClass", u"Formula", None))
+        self.label_6.setText(QCoreApplication.translate("MapDatoContaminanteDlgClass", u"Valor Calculado", None))
+        self.indenta.setText(QCoreApplication.translate("MapDatoContaminanteDlgClass", u"Indentar", None))
+        self.probar.setText(QCoreApplication.translate("MapDatoContaminanteDlgClass", u"Probar", None))
+    # retranslateUi
 

@@ -73,7 +73,7 @@ void	RelOne2One::initMetadata()
 	_cache.clear();
 	_tableRec = db().record(_relTable);
 	_idColumn = table()->record().indexOf(_idColumnName);
-	foreach (ColumnData d, _columns) {
+	for (const auto &d : _columns) {
 		_rec.append(_tableRec.field(d.origName));
 		if (d.userColumn)
 			addColumnToTable(_rec.count() - 1);
@@ -87,7 +87,7 @@ void	RelOne2One::reloadMetadata()
 	_idColumn = table()->record().indexOf(_idColumnName);
 	_index2InternalColumn.clear();
 	for (int i = 0; i < _columns.count(); i++)
-		if (_columns[i].p != NULL)
+		if (_columns[i].p != nullptr)
 			_index2InternalColumn[_columns[i].p->index()] = i;
 	}
 
@@ -122,7 +122,7 @@ void	RelOne2One::addColumnData (
 	d.userColumn = userColumn;
 	d.origName = fn;
 	d.destName = destName.toLower();
-	d.p = NULL;
+	d.p = nullptr;
 	_internalColumnNumber[fn] = _columns.count();
 	_columns.append(d);
 	if (_idColumn > -1) {

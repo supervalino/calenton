@@ -1,73 +1,77 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'buscardlg.ui'
-#
-# Created: Fri Feb 21 12:06:28 2014
-#      by: PyQt4 UI code generator 4.10.3
-#
-# WARNING! All changes made in this file will be lost!
+################################################################################
+## Form generated from reading UI file 'buscardlg.ui'
+##
+## Created by: Qt User Interface Compiler version 6.10.2
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 
-from PyQt4 import QtCore, QtGui
-
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+from PyQt6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PyQt6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PyQt6.QtWidgets import (QAbstractButton, QApplication, QComboBox, QDialog,
+    QDialogButtonBox, QGridLayout, QLabel, QLineEdit,
+    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
 
 class Ui_BuscarDlg(object):
     def setupUi(self, BuscarDlg):
-        BuscarDlg.setObjectName(_fromUtf8("BuscarDlg"))
+        if not BuscarDlg.objectName():
+            BuscarDlg.setObjectName(u"BuscarDlg")
         BuscarDlg.resize(452, 215)
-        self.verticalLayout_2 = QtGui.QVBoxLayout(BuscarDlg)
-        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
-        self.verticalLayout = QtGui.QVBoxLayout()
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.gridLayout = QtGui.QGridLayout()
-        self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        self.label = QtGui.QLabel(BuscarDlg)
-        self.label.setObjectName(_fromUtf8("label"))
+        self.verticalLayout_2 = QVBoxLayout(BuscarDlg)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.verticalLayout = QVBoxLayout()
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.gridLayout = QGridLayout()
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.label = QLabel(BuscarDlg)
+        self.label.setObjectName(u"label")
+
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
-        self.campos = QtGui.QComboBox(BuscarDlg)
-        self.campos.setObjectName(_fromUtf8("campos"))
+
+        self.campos = QComboBox(BuscarDlg)
+        self.campos.setObjectName(u"campos")
+
         self.gridLayout.addWidget(self.campos, 0, 1, 1, 1)
+
+
         self.verticalLayout.addLayout(self.gridLayout)
-        self.texto = QtGui.QLineEdit(BuscarDlg)
-        self.texto.setObjectName(_fromUtf8("texto"))
+
+        self.texto = QLineEdit(BuscarDlg)
+        self.texto.setObjectName(u"texto")
+
         self.verticalLayout.addWidget(self.texto)
+
+
         self.verticalLayout_2.addLayout(self.verticalLayout)
-        spacerItem = QtGui.QSpacerItem(20, 84, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem)
-        self.buttonBox = QtGui.QDialogButtonBox(BuscarDlg)
-        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
+
+        self.verticalSpacer = QSpacerItem(20, 84, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_2.addItem(self.verticalSpacer)
+
+        self.buttonBox = QDialogButtonBox(BuscarDlg)
+        self.buttonBox.setObjectName(u"buttonBox")
+        self.buttonBox.setOrientation(Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+
         self.verticalLayout_2.addWidget(self.buttonBox)
 
+
         self.retranslateUi(BuscarDlg)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), BuscarDlg.accept)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), BuscarDlg.reject)
-        QtCore.QMetaObject.connectSlotsByName(BuscarDlg)
+        self.buttonBox.accepted.connect(BuscarDlg.accept)
+        self.buttonBox.rejected.connect(BuscarDlg.reject)
+
+        QMetaObject.connectSlotsByName(BuscarDlg)
+    # setupUi
 
     def retranslateUi(self, BuscarDlg):
-        BuscarDlg.setWindowTitle(_translate("BuscarDlg", "Buscar", None))
-        self.label.setText(_translate("BuscarDlg", "Buscar en:", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    BuscarDlg = QtGui.QDialog()
-    ui = Ui_BuscarDlg()
-    ui.setupUi(BuscarDlg)
-    BuscarDlg.show()
-    sys.exit(app.exec_())
+        BuscarDlg.setWindowTitle(QCoreApplication.translate("BuscarDlg", u"Buscar", None))
+        self.label.setText(QCoreApplication.translate("BuscarDlg", u"Buscar en:", None))
+    # retranslateUi
 

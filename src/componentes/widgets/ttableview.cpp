@@ -32,13 +32,13 @@ void TTableView::setSelectionModel (
 {
 	QItemSelectionModel *s = this->selectionModel();
 
-	if (s != NULL)
-		disconnect(s, SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
-			this, SLOT(internalSelectionChanged(const QItemSelection &, const QItemSelection)));
+	if (s != nullptr)
+		disconnect(s, &QItemSelectionModel::selectionChanged,
+			this, &TTableView::internalSelectionChanged);
 
 	QTableView::setSelectionModel(selectionModel);
-	connect(selectionModel, SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
-		this, SLOT(internalSelectionChanged(const QItemSelection &, const QItemSelection &)));
+	connect(selectionModel, &QItemSelectionModel::selectionChanged,
+		this, &TTableView::internalSelectionChanged);
 	}
 
 void TTableView::internalSelectionChanged (

@@ -15,28 +15,29 @@
 #
 ##############################################################################
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from PyQt4.QtSql import *
-from ui.Ui_maparesultadosdlg import *
-from listaresultadodlg import *
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
+from PyQt6.QtGui import *
+from PyQt6.QtSql import *
+from .ui.Ui_maparesultadosdlg import *
+from .listaresultadodlg import *
 from ts import ComboDataModel
-from qgis.core import *
+from qgis.core import QgsApplication, QgsProject, QgsVectorLayer, QgsDataSourceUri, QgsStyle, QgsSymbol, QgsGraduatedSymbolRenderer, QgsRectangle
 
 class MapaResultadosDlg (QDialog, Ui_MapaResultadosDlgClass):
 	def __init__(self, parent = None):
 		QDialog.__init__(self, parent)
 		self.setupUi(self)
-		
+
 		self.sql = None
-		
+
 		self.app = QApplication.instance()
 		if not self.app.databaseInit:
 			return
 		self.db = self.app.workDb()
-		
+
 		self.pueblaRampas()
-		
+
 		self.gc = QButtonGroup(self)
 		self.gc.addButton(self.agregaContaminante)
 		self.gc.addButton(self.soloContaminante)
@@ -46,46 +47,46 @@ class MapaResultadosDlg (QDialog, Ui_MapaResultadosDlgClass):
 		self.gcl = QButtonGroup(self)
 		self.gcl.addButton(self.agregaClasificacion)
 		self.gcl.addButton(self.soloClasificacion)
-		
+
 		self.agregaContaminante.setChecked(True)
 		self.agregaFuente.setChecked(True)
 		self.agregaClasificacion.setChecked(True)
-		
+
 		self.mNivelZona = ComboDataModel(self)
 		self.mNivelZona.setQuery("select id, nombre from nivelzona order by id",  self.db)
 		self.nivelZona.setModel(self.mNivelZona)
-		
+
 		self.mContaminante = ComboDataModel(self)
 		self.mContaminante.setQuery("select id, nombre from contaminante order by nombre", self.db)
 		self.contaminante.setModel(self.mContaminante)
-		
+
 		self.mEscenario = ComboDataModel(self)
 		self.mEscenario.setQuery("select id, nombre from escenario order by nombre",  self.db)
 		self.escenario.setModel(self.mEscenario)
-		
+
 		self.mFuente = ComboDataModel(self)
 		self.on_escenario_activated(0)
 		self.fuente.setModel(self.mFuente)
-		
+
 		self.llena_nivelClasificacion()
-		
+
 		self.mClasificacion = ComboDataModel(self)
 		self.on_nivelClasificacion_activated(0)
 		self.clasificacion.setModel(self.mClasificacion)
-		
+
 		self.on_nivelZona_activated(0)
-		
+
 	def pueblaRampas(self):
-		self.style = QgsStyleV2.defaultStyle()
+		self.style = QgsStyle.defaultStyle()
 		size = QSize(50, 16)
 		self.comboColor.setIconSize(size)
 		lr = self.style.colorRampNames()
 		for i in lr:
 			ramp = self.style.colorRamp(i)
-			icon = QgsSymbolLayerV2Utils.colorRampPreviewIcon(ramp, size)
+			icon = QgsSymbolLayerUtils.colorRampPreviewIcon(ramp, size)
 			self.comboColor.addItem(icon, i)
 			ramp = None
-		
+
 	def llena_nivelClasificacion(self):
 		self.nivelClasificacion.addItem("SNAP XX",  "SNAP1")
 		self.nivelClasificacion.addItem("SNAP XX XX",  "SNAP2")
@@ -93,50 +94,50 @@ class MapaResultadosDlg (QDialog, Ui_MapaResultadosDlgClass):
 		self.nivelClasificacion.addItem("IPCC X",  "IPCC1")
 		self.nivelClasificacion.addItem("IPCC XX",  "IPCC2")
 		self.nivelClasificacion.addItem("IPCC XXX",  "IPCC3")
-		
-	@pyqtSlot("int")
+
+	@pyqtSlot(int)
 	def on_escenario_activated(self,  index):
-		self.idEscenario = self.escenario.currentItemData().toInt()[0]
-		self.mFuente.setQuery("select id, nombre from fuente where idescenario = %d order by nombre" 
+		self.idEscenario = int(self.escenario.currentItemData() or 0)
+		self.mFuente.setQuery("select id, nombre from fuente where idescenario = %d order by nombre"
 		                	% (self.idEscenario), self.db)
-		
-	@pyqtSlot("int")
+
+	@pyqtSlot(int)
 	def on_nivelZona_activated(self, index):
-		self.idNivelZona = self.nivelZona.currentItemData().toInt()[0]
-		
+		self.idNivelZona = int(self.nivelZona.currentItemData() or 0)
+
 	def condicionClasificacionParcial(self):
-		clas = unicode(self.nivelClasificacion.currentItemData().toString())
-		if clas[0:4] == u"SNAP":
+		clas = str(self.nivelClasificacion.currentItemData() or "")
+		if clas[0:4] == "SNAP":
 			cond = "cl.idtipoclas = 3"
-			if clas == u"SNAP1":
+			if clas == "SNAP1":
 				cond = cond + " and length(cl.codigo) = 2"
-			elif clas == u"SNAP2":
+			elif clas == "SNAP2":
 				cond = cond + " and length(cl.codigo) = 5"
-			elif clas == u"SNAP3":
+			elif clas == "SNAP3":
 				cond = cond + " and length(cl.codigo) = 8"
-		elif clas[0:4] == u"IPCC":
+		elif clas[0:4] == "IPCC":
 			cond = "cl.idtipoclas = 4"
-			if clas == u"IPCC1":
+			if clas == "IPCC1":
 				cond = cond + " and length(cl.codigo) = 1"
-			elif clas == u"IPCC2":
+			elif clas == "IPCC2":
 				cond = cond + " and length(cl.codigo) = 2"
-			elif clas == u"IPCC3":
+			elif clas == "IPCC3":
 				cond = cond + " and length(cl.codigo) = 3"
 		return cond
-		
-	@pyqtSlot("int")
+
+	@pyqtSlot(int)
 	def on_nivelClasificacion_activated(self,  index):
 		cond = self.condicionClasificacionParcial()
 		sql = """select cl.id, cl.codigo || '-' || cl.descripcion
-			from clasificacion cl 
+			from clasificacion cl
 			where %s
 			order by 2
 			""" % (cond)
 		self.mClasificacion.setQuery(sql,  self.db)
-		
+
 	def hazContaminante(self):
 		if self.soloContaminante.isChecked():
-			idContaminante = self.contaminante.currentItemData().toInt()[0]
+			idContaminante = int(self.contaminante.currentItemData() or 0)
 			cols = []
 			cn = []
 			tablas = []
@@ -147,10 +148,10 @@ class MapaResultadosDlg (QDialog, Ui_MapaResultadosDlgClass):
 			tablas = [ 'equivcontaminante ec' ]
 			where = [ 'ec.idescenario = f.idescenario',  'ec.idcontaminante = cz.idcontaminante' ]
 		return (cols,  cn,  tablas,  where)
-		
+
 	def hazFuente(self):
 		if self.soloFuente.isChecked():
-			idFuente = self.fuente.currentItemData().toInt()[0]
+			idFuente = int(self.fuente.currentItemData() or 0)
 			cols = []
 			cn = []
 			tablas = [ 'fuente f' ]
@@ -161,9 +162,9 @@ class MapaResultadosDlg (QDialog, Ui_MapaResultadosDlgClass):
 			tablas = [ 'fuente f' ]
 			where = [ 'f.id = cz.idfuente', 'f.idescenario = %d' % (self.idEscenario) ]
 		return (cols,  cn,  tablas,  where)
-		
+
 	def hazZona(self):
-		self.idNivelZona = self.nivelZona.currentItemData().toInt()[0]
+		self.idNivelZona = int(self.nivelZona.currentItemData() or 0)
 		if self.idNivelZona == 1:
 			cols = [ 'z.id' ]
 			cn = [ 'z_id' ]
@@ -173,23 +174,23 @@ class MapaResultadosDlg (QDialog, Ui_MapaResultadosDlgClass):
 			cols = [ 'z1.id' ]
 			cn = [ 'z_id' ]
 			tablas = [ 'zona z1',  'relzona rz',  'zona z' ]
-			where = [ 'rz.idzonapadre = z1.id', 'cz.idzona = z.id',  'z.idnivelzona = 1',  
+			where = [ 'rz.idzonapadre = z1.id', 'cz.idzona = z.id',  'z.idnivelzona = 1',
 				 'rz.idzona = z.id',  'z1.idnivelzona = %d' % (self.idNivelZona) ]
 		return (cols,  cn,  tablas,  where)
-		
+
 	def hazClasificacion(self):
 		if self.soloClasificacion.isChecked():
-			clas = unicode(self.nivelClasificacion.currentItemData().toString())
-			idClasificacion = self.clasificacion.currentItemData().toInt()[0]
+			clas = str(self.nivelClasificacion.currentItemData() or "")
+			idClasificacion = int(self.clasificacion.currentItemData() or 0)
 			cols = [ ]
 			cn = [ ]
-			if clas[0:4] == u"SNAP":
+			if clas[0:4] == "SNAP":
 				tablas = [ 'clasificacion cl',  'clasificacion cl2' ]
-				where = [ 'cz.idclasificacion = cl2.id', 
+				where = [ 'cz.idclasificacion = cl2.id',
 					'substr(cl2.codigo, 1, length(cl.codigo)) = cl.codigo',
 					'cl.id = %d' % (idClasificacion) ]
-			elif clas[0:4] == u"IPCC":
-				tablas = [ 'clasificacion cl', 'clasificacion cl2', 
+			elif clas[0:4] == "IPCC":
+				tablas = [ 'clasificacion cl', 'clasificacion cl2',
 					'equivclasificacion ecl', 'clasificacion clo' ]
 				where = [ 'cz.idclasificacion = clo.id',
 					'clo.id = ecl.idclasorig',
@@ -202,14 +203,14 @@ class MapaResultadosDlg (QDialog, Ui_MapaResultadosDlgClass):
 			tablas = []
 			where = []
 		return (cols,  cn,  tablas,  where)
-		
+
 	def hazQuery(self):
 		(cc,  cn, ct,  cw) = self.hazContaminante()
 		(fc,  fn, ft,  fw) = self.hazFuente()
 		(zc,  zn, zt,  zw) = self.hazZona()
 		(clc,  cln, clt,  clw) = self.hazClasificacion()
 		c = zc + cc + fc + clc + [ 'sum(cz.valor)' ]
-		n = zn + cn + fn + cln + [ u'"Emisión"' ]
+		n = zn + cn + fn + cln + [ '"Emisión"' ]
 		if len(c) > 2:
 			c = c[0:2]
 			n = n[0:2]
@@ -220,21 +221,21 @@ class MapaResultadosDlg (QDialog, Ui_MapaResultadosDlgClass):
 		for i in g1:
 			if i[0:4] != "sum(":
 				g.append(i)
-		ccn = [ "%s as %s" % (unicode(c[i]), unicode(n[i])) for i in range(len(c)) ]
-		sc = u', '.join(ccn)
-		st = u', '.join(t)
-		sw = u' and '.join(w)
-		sg = u', '.join(g)
-		sql = u"select %s from %s" % (unicode(sc),  unicode(st))
+		ccn = [ "%s as %s" % (str(c[i]), str(n[i])) for i in range(len(c)) ]
+		sc = ', '.join(ccn)
+		st = ', '.join(t)
+		sw = ' and '.join(w)
+		sg = ', '.join(g)
+		sql = "select %s from %s" % (str(sc),  str(st))
 		if len(w) > 0:
-			sql = sql + u" where %s" % (sw)
+			sql = sql + " where %s" % (sw)
 		if len(g) > 0:
-			sql = sql + u" group by %s" % (sg)
+			sql = sql + " group by %s" % (sg)
 		return sql
-		
+
 	def accept(self):
 		self.sql = self.hazQuery()
 		self.color = self.comboColor.currentText()
 #		print self.sql
 		QDialog.accept(self)
-	
+

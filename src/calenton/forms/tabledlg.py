@@ -15,11 +15,11 @@
 #
 ##############################################################################
 
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtGui import *
-from ui import Ui_tabledlg
+from PyQt6 import QtWidgets, QtCore
+from PyQt6.QtWidgets import *
+from .ui import Ui_tabledlg
 
 class TableDlg (QDialog, Ui_tabledlg.Ui_TableDlgClass):
 	def __init__(self, parent=None):
-		TableDlg.__init__(self, parent)
+		QDialog.__init__(self, parent)
 		self.setupUi(self)

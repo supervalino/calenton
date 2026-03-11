@@ -15,8 +15,8 @@
 #
 ##############################################################################
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
 from ts import FKItemDelegate
 from ts import ComboDataModel
 
@@ -25,7 +25,7 @@ class Model (ComboDataModel):
 		ComboDataModel.__init__(self, parent)
 		self.db = db
 		self.idFuente = -1
-		
+
 	def setIdFuente(self, idFuente):
 		self.idFuente = idFuente
 		sql = """
@@ -37,17 +37,16 @@ class Model (ComboDataModel):
 			order by c.codigo
 			""" % (self.idFuente)
 		self.setQuery(sql, self.db)
-				
+
 class ClasItemDelegate (FKItemDelegate):
 	def __init__(self, parent = None):
 		FKItemDelegate.__init__(self, {}, parent)
 		self.idFuente = -1
-		
+
 	def filteredModel(self, editor, model, index):
 		m = Model(model.database(), editor)
 		m.setIdFuente(self.idFuente)
 		return m
-		
+
 	def setIdFuente(self, idFuente):
 		self.idFuente = idFuente
-

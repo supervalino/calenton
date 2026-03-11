@@ -98,7 +98,7 @@ public:
 	    de medida a la unidad de medida \a unit.  Si estas dos
 	    unidades no miden la misma dimensión el resultado no tendrá
 	    ningún significado físico */
-	double convert(double value, const Unit *unit) const { return (unit != NULL) ? unit->to(this->from(value)) : 0.0; }
+	double convert(double value, const Unit *unit) const { return (unit != nullptr) ? unit->to(this->from(value)) : 0.0; }
 	};
 	
 #endif // UNIT_H

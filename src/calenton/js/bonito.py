@@ -23,6 +23,4 @@ def ponBonito(entrada):
 	(salida, error) = p.communicate(input = ec)
 	p.stdin.close()
 	p.wait
-	return unicode(salida,  'utf-8')
-	
-	
+	return salida.decode('utf-8')

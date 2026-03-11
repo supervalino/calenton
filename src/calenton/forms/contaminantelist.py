@@ -15,9 +15,10 @@
 #
 ##############################################################################
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from ui.Ui_contaminantelist import *
+from PyQt6.QtWidgets import *
+from PyQt6.QtGui import *
+from PyQt6.QtCore import *
+from .ui.Ui_contaminantelist import *
 from ts import TSqlTableNavigator
 
 class ContaminanteList (DataList, Ui_ContaminanteListClass):
@@ -31,4 +32,5 @@ class ContaminanteList (DataList, Ui_ContaminanteListClass):
 		self.nav.setModel(self.model)
 		self.nav.tableView().hideColumn(self.model.fieldIndex("id"))
 		self.cambiaEncabezado(self.model, ['Contaminante', 'Descripción', 'Unidades'])
-		
+
+

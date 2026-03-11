@@ -26,9 +26,9 @@ RowControlChildColumnProxy::RowControlChildColumnProxy (
 RowControlChildColumnProxy::~RowControlChildColumnProxy()
 
 {
-	if (parent() != NULL) {
+	if (parent() != nullptr) {
 		SeqTableModel *t = parent()->table();
-		if (t != NULL)
-			t->setForeignKey(_column, NULL, false);
+		if (t != nullptr)
+			t->setForeignKey(_column, nullptr, false);
 		}
 	}

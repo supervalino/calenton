@@ -15,12 +15,12 @@
 #
 ##############################################################################
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from PyQt4.QtSql import *
-from ui.Ui_reportlist import *
-from reportdlg import ReportDlg
-from widgets.datalist import DataList
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
+from PyQt6.QtSql import *
+from .ui.Ui_reportlist import *
+from .reportdlg import ReportDlg
+from ..widgets.datalist import DataList
 #import cairo
 #import pycha.bar
 #import pycha.stackedbar
@@ -29,7 +29,8 @@ from widgets.datalist import DataList
 
 from configobj import ConfigObj
 
-#from ts import FKItemDelegate
+#
+from ts import FKItemDelegate
 
 class ReportList (DataList, Ui_ReportListClass):
 	def __init__(self, parent = None):
@@ -43,23 +44,22 @@ class ReportList (DataList, Ui_ReportListClass):
 		self.s = QSettings()
 		self.informeAc.setText(app.informeActivo())
 		self.cargaTabla()
-			
+
 	def cargaTabla(self):
-		self.dirRep.setNameFilters(QStringList("*.dat"))
+		self.dirRep.setNameFilters(["*.dat"])
 		self.listaRepF = self.dirRep.entryList()
-#		listaGrapD = QStringList()
-#		listaGrapS = QStringList()
-		self.nRep = self.listaRepF.count()
+#		listaGrapD = []
+#		listaGrapS = []
+		self.nRep = len(self.listaRepF)
 		self.tabla.setRowCount(self.nRep)
 		self.tabla.setColumnCount(2)
-		encabezado=QStringList()
-		encabezado << self.tr("Nombre") << self.tr("Descripción")
-		#<< self.tr("Descripción") << self.tr("SQL")
+		encabezado = [self.tr("Nombre"), self.tr("Descripción")]
+		#[self.tr("Descripción"), self.tr("SQL")]
 		self.tabla.setHorizontalHeaderLabels(encabezado)
 		if self.nRep==0 :
 			return
 		for i in range(0,self.nRep):
-			nombre=self.listaRepF[i].split(".")[0]		
+			nombre=self.listaRepF[i].split(".")[0]
 			nombreDat=self.dirRep.filePath(self.listaRepF[i])
 			config = ConfigObj(str(nombreDat), encoding='UTF8')
 			self.tabla.setItem(i, 0, QTableWidgetItem(nombre))
@@ -70,96 +70,96 @@ class ReportList (DataList, Ui_ReportListClass):
 		self.edita.setEnabled(False)
 		self.crear.setEnabled(False)
 
-			
+
 	def filasSeleccionadas(self):
 		filas = []
 		i = -1
 		for g in self.tabla.selectedIndexes():
 			filas.append(g.row())
-		ln = reduce(lambda l, x: x not in l and l.append(x) or l, filas, [])
+		ln = list(dict.fromkeys(filas))
 		ln.sort()
 		return ln
 
-	@pyqtSlot("bool")
+	@pyqtSlot(bool)
 	def on_anade_clicked(self, checked):
 		d = ReportDlg(self)
-		if d.exec_():
-			nombre = d.nombre.text().trimmed()
+		if d.exec():
+			nombre = d.nombre.text().strip()
 			if not self.dirRep.exists(nombre):
 				if self.dirRep.mkdir(nombre):
 					self.escribeDat(d)
 				else:
 					QMessageBox.warning(None, self.tr("No se puede crear el directorio"),
 						self.tr("¿?"),
-						QMessageBox.Ok)
+						QMessageBox.StandardButton.Ok)
 			else:
 				QMessageBox.warning(None, self.tr("El informe ya existe"),
 					self.tr("Tiene que cambiar el nombre"),
-					QMessageBox.Ok)
+					QMessageBox.StandardButton.Ok)
 				self.on_anade_clicked(True)
 
 
 	def escribeDat(self, d):
-		nombre = d.nombre.text().trimmed()
-		nombreDat=self.dirRep.filePath(nombre).append(".dat")
+		nombre = d.nombre.text().strip()
+		nombreDat=self.dirRep.filePath(nombre) + ".dat"
 		config = ConfigObj(str(nombreDat), encoding='UTF8')
-		config['descripcion'] = unicode(d.descripcion.toPlainText().trimmed())
+		config['descripcion'] = str(d.descripcion.toPlainText().strip())
 		config.write()
 		self.cargaTabla()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_elimina_clicked(self, checked):
 		res = QMessageBox.question(self, self.tr("¿Está seguro?"),
 				self.tr("¿Desea eliminar los informes seleccionados?\n" +
 					"Esta operación es permanente e irreversible"),
-				QMessageBox.Yes | QMessageBox.Escape,
-				QMessageBox.No | QMessageBox.Default)
-		if res != QMessageBox.Yes:
+				QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Escape,
+				QMessageBox.StandardButton.No)
+		if res != QMessageBox.StandardButton.Yes:
 			return
 		for i in self.filasSeleccionadas():
 			nombre=self.tabla.item(i, 0).text()
-			nombreDat=self.dirRep.filePath(nombre).append(".dat")
+			nombreDat=self.dirRep.filePath(nombre) + ".dat"
 			F = QFile(nombreDat)
 			F.remove(nombreDat)
 			self.dirRep.rmdir(nombre)
 		self.cargaTabla()
 
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_crear_clicked(self, checked):
 		l = self.filasSeleccionadas()
 		if len(l) == 1:
 			pass
-			
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_activar_clicked(self, checked):
 		l = self.filasSeleccionadas()
 		if len(l) == 1:
 			self.informeAc.setText(self.tabla.item(l[0], 0).text())
 			self.s.setValue("inf/activo", self.tabla.item(l[0], 0).text())
 
-	@pyqtSlot("const QModelIndex &")
+	@pyqtSlot(QModelIndex)
 	def on_tabla_doubleClicked(self, index):
 		i = index.row()
 		nombreBase0 = self.tabla.item(i, 0).text().split(".")[0]
-		nombreDat=self.dirRep.filePath(nombreBase0).append(".dat")
+		nombreDat=self.dirRep.filePath(nombreBase0) + ".dat"
 		config = ConfigObj(str(nombreDat), encoding='UTF8')
 		d = ReportDlg(self)
 		d.nombre.setText(nombreBase0)
 		d.descripcion.setText(config['descripcion'])
-		if d.exec_():
-			nombreBase = d.nombre.text().trimmed()
-			nombreDat=self.dirRep.filePath(nombreBase0).append(".dat")
+		if d.exec():
+			nombreBase = d.nombre.text().strip()
+			nombreDat=self.dirRep.filePath(nombreBase0) + ".dat"
 			self.escribeDat(d)
 			self.cargaTabla()
-			
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_edita_clicked(self, checked):
 		l = self.tabla.selectedIndexes()
 		if len(self.filasSeleccionadas()) == 1:
 			self.on_tabla_doubleClicked(l[0])
-		
-	@pyqtSlot("const QItemSelection &", "const QItemSelection &")
+
+	@pyqtSlot(QItemSelection, QItemSelection)
 	def tabla_selectionChanged(self, after, before):
 		l = self.filasSeleccionadas()
 		self.elimina.setEnabled(len(l) > 0)

@@ -19,13 +19,13 @@ RowControlChild::RowControlChild (
 	_index(-1)
 	
 {
-	if (_parent != NULL)
+	if (_parent != nullptr)
 		_parent->appendChild(this);
 	}
 	
 RowControlChild::~RowControlChild()
 
 {
-	if (_parent != NULL)
+	if (_parent != nullptr)
 		_parent->removeChild(this);
 	}

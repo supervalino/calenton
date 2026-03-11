@@ -1,98 +1,111 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'reportlist.ui'
-#
-# Created: Fri Feb 21 12:06:31 2014
-#      by: PyQt4 UI code generator 4.10.3
-#
-# WARNING! All changes made in this file will be lost!
+################################################################################
+## Form generated from reading UI file 'reportlist.ui'
+##
+## Created by: Qt User Interface Compiler version 6.10.2
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 
-from PyQt4 import QtCore, QtGui
+from PyQt6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PyQt6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
+    QCursor, QFont, QFontDatabase, QGradient,
+    QIcon, QImage, QKeySequence, QLinearGradient,
+    QPainter, QPalette, QPixmap, QRadialGradient,
+    QTransform)
+from PyQt6.QtWidgets import (QAbstractItemView, QApplication, QHBoxLayout, QHeaderView,
+    QLabel, QLineEdit, QPushButton, QSizePolicy,
+    QSpacerItem, QTableWidget, QTableWidgetItem, QVBoxLayout,
+    QWidget)
 
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+from ...widgets.datalist import DataList
 
 class Ui_ReportListClass(object):
     def setupUi(self, ReportListClass):
-        ReportListClass.setObjectName(_fromUtf8("ReportListClass"))
+        if not ReportListClass.objectName():
+            ReportListClass.setObjectName(u"ReportListClass")
         ReportListClass.resize(614, 457)
-        self.verticalLayout = QtGui.QVBoxLayout(ReportListClass)
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.horizontalLayout_2 = QtGui.QHBoxLayout()
-        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
-        self.label = QtGui.QLabel(ReportListClass)
-        self.label.setObjectName(_fromUtf8("label"))
+        self.insertFromClipboard = QAction(ReportListClass)
+        self.insertFromClipboard.setObjectName(u"insertFromClipboard")
+        self.verticalLayout = QVBoxLayout(ReportListClass)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.label = QLabel(ReportListClass)
+        self.label.setObjectName(u"label")
+
         self.horizontalLayout_2.addWidget(self.label)
-        self.informeAc = QtGui.QLineEdit(ReportListClass)
+
+        self.informeAc = QLineEdit(ReportListClass)
+        self.informeAc.setObjectName(u"informeAc")
         self.informeAc.setEnabled(False)
-        self.informeAc.setObjectName(_fromUtf8("informeAc"))
+
         self.horizontalLayout_2.addWidget(self.informeAc)
+
+
         self.verticalLayout.addLayout(self.horizontalLayout_2)
-        self.tabla = QtGui.QTableWidget(ReportListClass)
-        self.tabla.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
-        self.tabla.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-        self.tabla.setObjectName(_fromUtf8("tabla"))
-        self.tabla.setColumnCount(0)
-        self.tabla.setRowCount(0)
+
+        self.tabla = QTableWidget(ReportListClass)
+        self.tabla.setObjectName(u"tabla")
+        self.tabla.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tabla.setSelectionBehavior(QAbstractItemView.SelectRows)
+
         self.verticalLayout.addWidget(self.tabla)
-        self.horizontalLayout = QtGui.QHBoxLayout()
-        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.crear = QtGui.QPushButton(ReportListClass)
-        self.crear.setObjectName(_fromUtf8("crear"))
+
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.crear = QPushButton(ReportListClass)
+        self.crear.setObjectName(u"crear")
+
         self.horizontalLayout.addWidget(self.crear)
-        self.activar = QtGui.QPushButton(ReportListClass)
-        self.activar.setObjectName(_fromUtf8("activar"))
+
+        self.activar = QPushButton(ReportListClass)
+        self.activar.setObjectName(u"activar")
+
         self.horizontalLayout.addWidget(self.activar)
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem)
-        self.elimina = QtGui.QPushButton(ReportListClass)
-        self.elimina.setObjectName(_fromUtf8("elimina"))
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer)
+
+        self.elimina = QPushButton(ReportListClass)
+        self.elimina.setObjectName(u"elimina")
+
         self.horizontalLayout.addWidget(self.elimina)
-        self.edita = QtGui.QPushButton(ReportListClass)
-        self.edita.setObjectName(_fromUtf8("edita"))
+
+        self.edita = QPushButton(ReportListClass)
+        self.edita.setObjectName(u"edita")
+
         self.horizontalLayout.addWidget(self.edita)
-        self.anade = QtGui.QPushButton(ReportListClass)
-        self.anade.setObjectName(_fromUtf8("anade"))
+
+        self.anade = QPushButton(ReportListClass)
+        self.anade.setObjectName(u"anade")
+
         self.horizontalLayout.addWidget(self.anade)
+
+
         self.verticalLayout.addLayout(self.horizontalLayout)
-        self.insertFromClipboard = QtGui.QAction(ReportListClass)
-        self.insertFromClipboard.setObjectName(_fromUtf8("insertFromClipboard"))
+
+        QWidget.setTabOrder(self.elimina, self.edita)
+        QWidget.setTabOrder(self.edita, self.anade)
 
         self.retranslateUi(ReportListClass)
-        QtCore.QObject.connect(self.insertFromClipboard, QtCore.SIGNAL(_fromUtf8("triggered(bool)")), ReportListClass.dataFromClipboard)
-        QtCore.QMetaObject.connectSlotsByName(ReportListClass)
-        ReportListClass.setTabOrder(self.elimina, self.edita)
-        ReportListClass.setTabOrder(self.edita, self.anade)
+        self.insertFromClipboard.triggered["bool"].connect(ReportListClass.dataFromClipboard)
+
+        QMetaObject.connectSlotsByName(ReportListClass)
+    # setupUi
 
     def retranslateUi(self, ReportListClass):
-        ReportListClass.setWindowTitle(_translate("ReportListClass", "Lista de informes", None))
-        self.label.setText(_translate("ReportListClass", "Informe Activo:", None))
-        self.crear.setText(_translate("ReportListClass", "Crear", None))
-        self.activar.setText(_translate("ReportListClass", "Activar", None))
-        self.elimina.setText(_translate("ReportListClass", "Eliminar", None))
-        self.edita.setText(_translate("ReportListClass", "Editar", None))
-        self.anade.setText(_translate("ReportListClass", "Añadir", None))
-        self.insertFromClipboard.setText(_translate("ReportListClass", "Insertar desde portapapeles", None))
-
-from widgets.datalist import DataList
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    ReportListClass = QtGui.DataList()
-    ui = Ui_ReportListClass()
-    ui.setupUi(ReportListClass)
-    ReportListClass.show()
-    sys.exit(app.exec_())
+        ReportListClass.setWindowTitle(QCoreApplication.translate("ReportListClass", u"Lista de informes", None))
+        self.insertFromClipboard.setText(QCoreApplication.translate("ReportListClass", u"Insertar desde portapapeles", None))
+        self.label.setText(QCoreApplication.translate("ReportListClass", u"Informe Activo:", None))
+        self.crear.setText(QCoreApplication.translate("ReportListClass", u"Crear", None))
+        self.activar.setText(QCoreApplication.translate("ReportListClass", u"Activar", None))
+        self.elimina.setText(QCoreApplication.translate("ReportListClass", u"Eliminar", None))
+        self.edita.setText(QCoreApplication.translate("ReportListClass", u"Editar", None))
+        self.anade.setText(QCoreApplication.translate("ReportListClass", u"A\u00f1adir", None))
+    # retranslateUi
 

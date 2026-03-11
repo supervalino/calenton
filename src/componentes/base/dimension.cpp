@@ -31,7 +31,7 @@ Dimension::Dimension (
 	QString description
 	) :
 	_units(),
-	_mainUnit(0),
+	_mainUnit(nullptr),
 	_name(name),
 	_description(description)
 
@@ -47,10 +47,10 @@ Dimension::Dimension (
 Dimension::~Dimension()
 
 {
-	for (UnitMap::const_iterator i = _units.begin(); i != _units.end(); ++i)
-		delete i.value();
+	for (const auto &u : _units)
+		delete u;
 	_units.clear();
-	_mainUnit = 0;
+	_mainUnit = nullptr;
 	}
 
 /*!
@@ -104,9 +104,9 @@ double Dimension::convert (
 	) const
 
 {
-	Unit *f = _units.value(from, 0);
-	Unit *t = _units.value(to, 0);
-	if ((t != 0) && (f != 0))
+	Unit *f = _units.value(from, nullptr);
+	Unit *t = _units.value(to, nullptr);
+	if ((t != nullptr) && (f != nullptr))
 		return convert(f, t, value);
 	else
 		return 0.0;
@@ -123,9 +123,9 @@ double Dimension::convert (
 	) const
 
 {
-	Unit *t = _units.value(to, 0);
+	Unit *t = _units.value(to, nullptr);
 
-	if (t != 0)
+	if (t != nullptr)
 		return convert(from, t, value);
 	else
 		return 0.0;

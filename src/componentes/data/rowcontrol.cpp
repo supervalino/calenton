@@ -36,7 +36,7 @@ RowControlChild	*RowControl::childByIndex (
 	) const
 
 {
-	return _childs.value(n, NULL);
+	return _childs.value(n, nullptr);
 	}
 
 int	RowControl::childCount() const
@@ -68,7 +68,7 @@ void	RowControl::removeChild (
 
 {
 	QList<int> l = _childs.keys(child);
-	foreach (int i, l)
+	for (const auto &i : l)
 		_childs.remove(i);
 	}
 

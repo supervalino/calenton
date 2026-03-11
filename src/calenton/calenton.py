@@ -10,24 +10,22 @@
 # (C) Trustserver SL, 2009-2010
 # Todos los derechos reservados
 #
-# $Id: calenton.py 328 2010-07-20 11:56:05Z bruno $
-# $URL: https://www.litec.csic.es/svn/emisiones/trunk/src/calenton/calenton.py $
-#
 ##############################################################################
 
-from PyQt4 import QtGui
-from PyQt4 import QtCore
-from calentonapp import CalentonApp
-from forms.main import MainWindow
 import sys
+import os
 import gc
-QtCore.QTextCodec.setCodecForTr(QtCore.QTextCodec.codecForName("UTF-8"))
+# Add src/ to sys.path so calenton package is importable
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+from PyQt6 import QtWidgets, QtCore
+from calenton.calentonapp import CalentonApp
+from calenton.forms.main import MainWindow
+
 app = CalentonApp(sys.argv)
 window = MainWindow()
-QtCore.pyqtRemoveInputHook()
 window.show()
 window.actionQuit.triggered.connect(app.quit)
-res = app.exec_()
+res = app.exec()
 window = None
 app = None
 gc.collect()

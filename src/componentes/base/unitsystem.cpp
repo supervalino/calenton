@@ -109,11 +109,11 @@ ID_URL("$URL: https://svn.trustserver.net/svn/trabajo/componentes/trunk/base/uni
     \sa UnitCollection, Dimension, Unit, Magnitude
  */
 
-UnitSystem *UnitSystem::_defaultUnitSystem = NULL;
+UnitSystem *UnitSystem::_defaultUnitSystem = nullptr;
 
 /*! Crea una nueva base de datos de unidades vacía */
 
-UnitSystem::UnitSystem() : _defaultCollection(0)
+UnitSystem::UnitSystem() : _defaultCollection(nullptr)
 
 {
 	}
@@ -124,7 +124,7 @@ UnitSystem::UnitSystem() : _defaultCollection(0)
 UnitSystem::UnitSystem (
 	QString	configFile
 	) :
-	_defaultCollection(0)
+	_defaultCollection(nullptr)
 
 {
 //	qDebug() << "Leyendo sistema de medidas de: " << configFile;
@@ -142,13 +142,13 @@ UnitSystem::UnitSystem (
 UnitSystem::~UnitSystem()
 
 {
-	for (DimensionMap::const_iterator i = _dimensions.begin(); i != _dimensions.end(); ++i)
-		delete i.value();
+	for (const auto &d : _dimensions)
+		delete d;
 	_dimensions.clear();
-	for (UnitCollectionMap::const_iterator i = _collections.begin(); i != _collections.end(); ++i)
-		delete i.value();
+	for (const auto &c : _collections)
+		delete c;
 	_collections.clear();
-	_defaultCollection = 0;
+	_defaultCollection = nullptr;
 	}
 
 /*! Añade una dimensión de nombre \a dimension */
@@ -245,11 +245,11 @@ void UnitSystem::addUnitCollection (
 		QDomElement e = l.at(i).toElement();
 		QString dName = e.attribute("name");
 		QString defUnit = e.attribute("unit");
-		Dimension *d = _dimensions.value(dName, 0);
-		if (d == 0)
+		Dimension *d = _dimensions.value(dName, nullptr);
+		if (d == nullptr)
 			continue;
 		const Unit *u = d->unit(defUnit);
-		if (u == 0)
+		if (u == nullptr)
 			continue;
 		c->addUnit(dName, u);
 //		qDebug() << "Añado unidad para" << dName << ":" << defUnit;
@@ -304,7 +304,7 @@ Dimension *UnitSystem::getDimension (
 	)
 
 {
-	return _dimensions.value(name, 0);
+	return _dimensions.value(name, nullptr);
 	}
 
 /*! Fija como sistema métrico por defecto el que tiene por nombre
@@ -317,12 +317,12 @@ bool UnitSystem::setDefaultUnitCollection (
 
 {
 	if (name.isNull()) {
-		_defaultCollection = 0;
+		_defaultCollection = nullptr;
 		return true;
 		}
-	UnitCollection *c = _collections.value(name, 0);
+	UnitCollection *c = _collections.value(name, nullptr);
 
-	if (c != 0) {
+	if (c != nullptr) {
 		_defaultCollection = c;
 		return true;
 		}
@@ -349,23 +349,23 @@ const Unit *UnitSystem::unit (
 
 {
 	if (unitName.isNull()) {
-		if (_defaultCollection == 0) {
+		if (_defaultCollection == nullptr) {
 			qWarning("Se pide unidad por defecto para %s y no existe"
-				" _defaultCollection", qPrintable(dimension)); 
-			Dimension *d = _dimensions.value(dimension, 0);
-			if (d != 0) {
+				" _defaultCollection", qPrintable(dimension));
+			Dimension *d = _dimensions.value(dimension, nullptr);
+			if (d != nullptr) {
 				const Unit *u = d->defaultUnit();
-				if (u == 0)
+				if (u == nullptr)
 					u = d->mainUnit();
 				return u;
 				}
-			return 0;
+			return nullptr;
 			}
 		const Unit *u = _defaultCollection->getUnit(dimension);
-		if (u == 0) {
-			Dimension *d = _dimensions.value(dimension, 0);
-			if (d == 0)
-				return 0;
+		if (u == nullptr) {
+			Dimension *d = _dimensions.value(dimension, nullptr);
+			if (d == nullptr)
+				return nullptr;
 			return d->mainUnit();
 			qWarning("No existe unidad por defecto para %s\n",
 				qPrintable(dimension));
@@ -373,9 +373,9 @@ const Unit *UnitSystem::unit (
 		return u;
 		}
 	else {
-		Dimension *d = _dimensions.value(dimension, 0);
-		if (d == 0)
-			return 0;
+		Dimension *d = _dimensions.value(dimension, nullptr);
+		if (d == nullptr)
+			return nullptr;
 		return d->unit(unitName);
 		}
 	}

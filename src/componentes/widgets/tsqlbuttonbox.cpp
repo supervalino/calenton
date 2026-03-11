@@ -37,7 +37,7 @@ QPushButton	*TSqlButtonBox::button (
 		case AddButton: return addButton;
 		case EditButton: return editButton;
 		case DeleteButton: return deleteButton;
-		default: return NULL;
+		default: return nullptr;
 		}
 	}
 

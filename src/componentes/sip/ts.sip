@@ -9,12 +9,11 @@
   $URL: https://svn.trustserver.net/svn/trabajo/componentes/trunk/sip/ts.sip $
 *****************************************************************************/
 
-%Module ts 0
+%Module ts
 
 %Import QtCore/QtCoremod.sip
 %Import QtSql/QtSqlmod.sip
-%Import QtGui/QtGuimod.sip
-%Import QtXml/QtXmlmod.sip
+%Import QtWidgets/QtWidgetsmod.sip
 
 %Include dimension.sip
 %Include unit.sip

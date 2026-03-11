@@ -1,80 +1,85 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'informedlg.ui'
-#
-# Created: Fri Feb 21 12:06:30 2014
-#      by: PyQt4 UI code generator 4.10.3
-#
-# WARNING! All changes made in this file will be lost!
+################################################################################
+## Form generated from reading UI file 'informedlg.ui'
+##
+## Created by: Qt User Interface Compiler version 6.10.2
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 
-from PyQt4 import QtCore, QtGui
-
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+from PyQt6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PyQt6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
+    QCursor, QFont, QFontDatabase, QGradient,
+    QIcon, QImage, QKeySequence, QLinearGradient,
+    QPainter, QPalette, QPixmap, QRadialGradient,
+    QTransform)
+from PyQt6.QtWidgets import (QAbstractButton, QApplication, QDialog, QDialogButtonBox,
+    QHBoxLayout, QLineEdit, QPlainTextEdit, QPushButton,
+    QSizePolicy, QVBoxLayout, QWidget)
 
 class Ui_InformeDlgClass(object):
     def setupUi(self, InformeDlgClass):
-        InformeDlgClass.setObjectName(_fromUtf8("InformeDlgClass"))
+        if not InformeDlgClass.objectName():
+            InformeDlgClass.setObjectName(u"InformeDlgClass")
         InformeDlgClass.resize(400, 388)
-        self.verticalLayout = QtGui.QVBoxLayout(InformeDlgClass)
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.informe = QtGui.QPlainTextEdit(InformeDlgClass)
+        self.actionCopiar = QAction(InformeDlgClass)
+        self.actionCopiar.setObjectName(u"actionCopiar")
+        self.actionSelectAll = QAction(InformeDlgClass)
+        self.actionSelectAll.setObjectName(u"actionSelectAll")
+        self.verticalLayout = QVBoxLayout(InformeDlgClass)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.informe = QPlainTextEdit(InformeDlgClass)
+        self.informe.setObjectName(u"informe")
         self.informe.setUndoRedoEnabled(False)
-        self.informe.setPlainText(_fromUtf8(""))
-        self.informe.setTextInteractionFlags(QtCore.Qt.TextSelectableByKeyboard|QtCore.Qt.TextSelectableByMouse)
-        self.informe.setObjectName(_fromUtf8("informe"))
+        self.informe.setPlainText(u"")
+        self.informe.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+
         self.verticalLayout.addWidget(self.informe)
-        self.horizontalLayout = QtGui.QHBoxLayout()
-        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.texto = QtGui.QLineEdit(InformeDlgClass)
-        self.texto.setObjectName(_fromUtf8("texto"))
+
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.texto = QLineEdit(InformeDlgClass)
+        self.texto.setObjectName(u"texto")
+
         self.horizontalLayout.addWidget(self.texto)
-        self.busca = QtGui.QPushButton(InformeDlgClass)
-        self.busca.setObjectName(_fromUtf8("busca"))
+
+        self.busca = QPushButton(InformeDlgClass)
+        self.busca.setObjectName(u"busca")
+
         self.horizontalLayout.addWidget(self.busca)
+
+
         self.verticalLayout.addLayout(self.horizontalLayout)
-        self.buttonBox = QtGui.QDialogButtonBox(InformeDlgClass)
-        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Ok|QtGui.QDialogButtonBox.Save)
-        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
+
+        self.buttonBox = QDialogButtonBox(InformeDlgClass)
+        self.buttonBox.setObjectName(u"buttonBox")
+        self.buttonBox.setOrientation(Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok|QDialogButtonBox.Save)
+
         self.verticalLayout.addWidget(self.buttonBox)
-        self.actionCopiar = QtGui.QAction(InformeDlgClass)
-        self.actionCopiar.setObjectName(_fromUtf8("actionCopiar"))
-        self.actionSelectAll = QtGui.QAction(InformeDlgClass)
-        self.actionSelectAll.setObjectName(_fromUtf8("actionSelectAll"))
+
 
         self.retranslateUi(InformeDlgClass)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), InformeDlgClass.reject)
-        QtCore.QObject.connect(self.actionCopiar, QtCore.SIGNAL(_fromUtf8("triggered()")), self.informe.copy)
-        QtCore.QObject.connect(self.actionSelectAll, QtCore.SIGNAL(_fromUtf8("triggered()")), self.informe.selectAll)
-        QtCore.QMetaObject.connectSlotsByName(InformeDlgClass)
+        self.buttonBox.rejected.connect(InformeDlgClass.reject)
+        self.actionCopiar.triggered.connect(self.informe.copy)
+        self.actionSelectAll.triggered.connect(self.informe.selectAll)
+
+        QMetaObject.connectSlotsByName(InformeDlgClass)
+    # setupUi
 
     def retranslateUi(self, InformeDlgClass):
-        InformeDlgClass.setWindowTitle(_translate("InformeDlgClass", "Informe de aforo", None))
-        self.busca.setText(_translate("InformeDlgClass", "Buscar...", None))
-        self.actionCopiar.setText(_translate("InformeDlgClass", "Copiar", None))
-        self.actionCopiar.setShortcut(_translate("InformeDlgClass", "Ctrl+C", None))
-        self.actionSelectAll.setText(_translate("InformeDlgClass", "Select All", None))
-        self.actionSelectAll.setShortcut(_translate("InformeDlgClass", "Ctrl+A", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    InformeDlgClass = QtGui.QDialog()
-    ui = Ui_InformeDlgClass()
-    ui.setupUi(InformeDlgClass)
-    InformeDlgClass.show()
-    sys.exit(app.exec_())
+        InformeDlgClass.setWindowTitle(QCoreApplication.translate("InformeDlgClass", u"Informe de aforo", None))
+        self.actionCopiar.setText(QCoreApplication.translate("InformeDlgClass", u"Copiar", None))
+#if QT_CONFIG(shortcut)
+        self.actionCopiar.setShortcut(QCoreApplication.translate("InformeDlgClass", u"Ctrl+C", None))
+#endif // QT_CONFIG(shortcut)
+        self.actionSelectAll.setText(QCoreApplication.translate("InformeDlgClass", u"Select All", None))
+#if QT_CONFIG(shortcut)
+        self.actionSelectAll.setShortcut(QCoreApplication.translate("InformeDlgClass", u"Ctrl+A", None))
+#endif // QT_CONFIG(shortcut)
+        self.busca.setText(QCoreApplication.translate("InformeDlgClass", u"Buscar...", None))
+    # retranslateUi
 

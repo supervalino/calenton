@@ -30,7 +30,7 @@ protected:
 	QSqlRecord	_lastRecord;
 	QString		_editionError;
 public:
-	DataDialog(QWidget *parent = 0, SeqTableModel *model = 0);
+	DataDialog(QWidget *parent = nullptr, SeqTableModel *model = nullptr);
 	~DataDialog();
 
 	/*! Devuelve el modelo de datos utilizado */

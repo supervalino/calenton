@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  typesystem_ts.xml — Shiboken6 typesystem for the "ts" Python module.
+
+  This file replaces the old SIP-based binding description.  Every class
+  exposed here corresponds to one of the original .sip files found in
+  src/componentes/sip/.
+
+  Rules applied:
+    • object-type  → classes that inherit QObject (directly or transitively)
+    • value-type   → plain C++ classes without Q_OBJECT (Dimension, Unit, …)
+
+  Load the PySide6 primitive typesystems first so that Qt types such as
+  QObject, QWidget, QDialog, QAbstractItemModel, etc. are already known.
+-->
+<typesystem package="ts">
+
+    <!-- ── Qt typesystems we depend on ────────────────────────────────────── -->
+    <load-typesystem name="typesystem_core.xml"    generate="no"/>
+    <load-typesystem name="typesystem_gui.xml"     generate="no"/>
+    <load-typesystem name="typesystem_widgets.xml" generate="no"/>
+    <load-typesystem name="typesystem_sql.xml"     generate="no"/>
+
+    <!-- ── C++ primitives ─────────────────────────────────────────────────── -->
+    <primitive-type name="int"/>
+    <primitive-type name="bool"/>
+    <primitive-type name="double"/>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         NON-QOBJECT CLASSES  (value-type)
+         These are plain C++ objects with value semantics: Dimension, Unit,
+         Magnitude, UnitCollection, UnitSystem.
+         ═══════════════════════════════════════════════════════════════════════ -->
+
+    <!--
+      Dimension — represents a physical dimension (e.g. "length").
+      Owns a map of Unit objects.  Source: sip/dimension.sip
+    -->
+    <value-type name="Dimension">
+        <include file-name="dimension.h" location="global"/>
+    </value-type>
+
+    <!--
+      Unit — a single measurement unit belonging to a Dimension.
+      Source: sip/unit.sip
+    -->
+    <value-type name="Unit">
+        <include file-name="unit.h" location="global"/>
+    </value-type>
+
+    <!--
+      Magnitude — a value paired with a Unit.
+      Source: sip/magnitude.sip
+    -->
+    <value-type name="Magnitude">
+        <include file-name="magnitude.h" location="global"/>
+    </value-type>
+
+    <!--
+      UnitCollection — a named collection of preferred units, one per dimension.
+      Source: sip/unitcollection.sip
+    -->
+    <value-type name="UnitCollection">
+        <include file-name="unitcollection.h" location="global"/>
+    </value-type>
+
+    <!--
+      UnitSystem — top-level registry of Dimensions and UnitCollections.
+      Also carries a global default unit system pointer.
+      Source: sip/unitsystem.sip
+    -->
+    <value-type name="UnitSystem">
+        <include file-name="unitsystem.h" location="global"/>
+    </value-type>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         QOBJECT-DERIVED CLASSES  (object-type)
+         ═══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- ── Foreign-key / model layer ─────────────────────────────────────── -->
+
+    <!--
+      BaseForeignKey — abstract base for column look-up helpers attached to
+      SeqTableModel.  Used as the sip.wrapper supertype in the old SIP.
+      Source: sip/baseforeignkey.sip
+    -->
+    <object-type name="BaseForeignKey">
+        <include file-name="baseforeignkey.h" location="global"/>
+    </object-type>
+
+    <!--
+      ForeignKey — concrete look-up helper that maps an integer id to a string
+      value stored in another SQL table.
+      Source: sip/foreignkey.sip
+    -->
+    <object-type name="ForeignKey">
+        <include file-name="foreignkey.h" location="global"/>
+    </object-type>
+
+    <!--
+      ComboDataModel — QAbstractListModel backed by a QSqlQuery; used to
+      populate combo boxes.
+      Source: sip/combodatamodel.sip
+    -->
+    <object-type name="ComboDataModel">
+        <include file-name="combodatamodel.h" location="global"/>
+    </object-type>
+
+    <!--
+      FKModel — ComboDataModel subclass pre-loaded with the results of a
+      foreign-key query.  Produced by ForeignKey::model().
+      Source: sip/fkmodel.sip
+    -->
+    <object-type name="FKModel">
+        <include file-name="fkmodel.h" location="global"/>
+    </object-type>
+
+    <!--
+      SeqTableModel — QSqlTableModel subclass with sequential-id support,
+      foreign-key columns, row-control hooks, and transactional submit.
+      Source: sip/seqtablemodel.sip
+    -->
+    <object-type name="SeqTableModel">
+        <include file-name="seqtablemodel.h" location="global"/>
+    </object-type>
+
+    <!-- ── Row-control layer ──────────────────────────────────────────────── -->
+
+    <!--
+      RowControl — abstract hook object that intercepts insert/update/delete
+      operations on a SeqTableModel row.
+      Source: sip/rowcontrol.sip
+    -->
+    <object-type name="RowControl">
+        <include file-name="rowcontrol.h" location="global"/>
+    </object-type>
+
+    <!--
+      RowControlChild — base class for child objects managed by a RowControl.
+      Source: sip/rowcontrolchild.sip
+    -->
+    <object-type name="RowControlChild">
+        <include file-name="rowcontrolchild.h" location="global"/>
+    </object-type>
+
+    <!--
+      RowControlChildColumnProxy — a RowControlChild that also acts as a
+      BaseForeignKey, proxying a column index into the parent RowControl.
+      Source: sip/rowcontrolchildcolumnproxy.sip
+    -->
+    <object-type name="RowControlChildColumnProxy">
+        <include file-name="rowcontrolchildcolumnproxy.h" location="global"/>
+    </object-type>
+
+    <!--
+      RelOne2One — RowControl that synchronises a one-to-one related table
+      with the parent SeqTableModel row.
+      Source: sip/relone2one.sip
+    -->
+    <object-type name="RelOne2One">
+        <include file-name="relone2one.h" location="global"/>
+    </object-type>
+
+    <!--
+      RelOne2OneProxy — BaseForeignKey that routes get/set operations through
+      the owning RelOne2One.
+      Source: sip/relone2oneproxy.sip
+    -->
+    <object-type name="RelOne2OneProxy">
+        <include file-name="relone2oneproxy.h" location="global"/>
+    </object-type>
+
+    <!-- ── Widget layer ───────────────────────────────────────────────────── -->
+
+    <!--
+      DataDialog — QDialog base class for master-table maintenance dialogs.
+      Handles edit/add modes and delegates data transfer to subclass virtuals.
+      Source: sip/datadialog.sip
+    -->
+    <object-type name="DataDialog">
+        <include file-name="datadialog.h" location="global"/>
+        <enum-type name="EditMode"/>
+    </object-type>
+
+    <!--
+      TTableView — QTableView subclass that re-emits selectionChanged as a
+      proper Qt signal.
+      Source: sip/ttableview.sip  (note: the .sip file was named tcombobox.sip
+      but contained TTableView)
+    -->
+    <object-type name="TTableView">
+        <include file-name="ttableview.h" location="global"/>
+    </object-type>
+
+    <!--
+      TComboBox — QComboBox with currentItemData property/slot support.
+      Source: sip/tcombobox.sip
+    -->
+    <object-type name="TComboBox">
+        <include file-name="tcombobox.h" location="global"/>
+    </object-type>
+
+    <!--
+      TTabWidget — QTabWidget with lock/unlock tab navigation.
+      Source: sip/ttabwidget.sip
+    -->
+    <object-type name="TTabWidget">
+        <include file-name="ttabwidget.h" location="global"/>
+    </object-type>
+
+    <!--
+      FKItemDelegate — QItemDelegate that pops up a TComboBox filled from a
+      ForeignKey model when a cell enters edit mode.
+      Source: sip/fkitemdelegate.sip  (note: .sip file was named
+      dimensionedit.sip but contained FKItemDelegate)
+    -->
+    <object-type name="FKItemDelegate">
+        <include file-name="fkitemdelegate.h" location="global"/>
+    </object-type>
+
+    <!--
+      DimensionEdit — QWidget combining a QLineEdit and a QComboBox for
+      entering values with physical units.
+      Source: sip/dimensionedit.sip
+    -->
+    <object-type name="DimensionEdit">
+        <include file-name="dimensionedit.h" location="global"/>
+    </object-type>
+
+    <!--
+      TSqlButtonBox — QWidget that groups Save/Discard/Add/Edit/Delete
+      push-buttons and emits typed clicked signals.
+      Source: sip/tsqlbuttonbox.sip
+    -->
+    <object-type name="TSqlButtonBox">
+        <include file-name="tsqlbuttonbox.h" location="global"/>
+        <enum-type name="Buttons"/>
+    </object-type>
+
+    <!--
+      TSqlTableNavigator — composite widget (TTableView + TSqlButtonBox) that
+      wires a SeqTableModel to a full CRUD UI.  Exposes an inner Delegate
+      class for customising the add/edit workflow.
+      Source: sip/tsqltablenavigator.sip
+    -->
+    <object-type name="TSqlTableNavigator">
+        <include file-name="tsqltablenavigator.h" location="global"/>
+        <object-type name="Delegate">
+            <include file-name="tsqltablenavigator.h" location="global"/>
+        </object-type>
+    </object-type>
+
+</typesystem>

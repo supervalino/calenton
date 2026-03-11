@@ -55,6 +55,6 @@ public:
 	static Magnitude	fromStorableString(const QString &storableString, 
 						UnitSystem *unitSystem = NULL);
 	
-	static QVariant::Type	typeId();
+	static int	typeId();
 	static void		registerMetaType();
 	};

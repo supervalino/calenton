@@ -15,10 +15,10 @@
 #
 ##############################################################################
 
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtGui import *
-from modelo import *
-from ui import Ui_mapaforozonadlg
+from PyQt6 import QtWidgets, QtCore, QtGui
+from PyQt6.QtWidgets import *
+from ..modelo import *
+from .ui import Ui_mapaforozonadlg
 from ts import DataDialog
 
 class MapAforoZonaDlg (DataDialog, Ui_mapaforozonadlg.Ui_MapAforoZonaDlgClass):
@@ -35,22 +35,22 @@ class MapAforoZonaDlg (DataDialog, Ui_mapaforozonadlg.Ui_MapAforoZonaDlgClass):
 		self.modelCbZna = zona.Zona(parent, self.app.work)
 		self.modelCbZna.select()
 		parent.putCombobox(self.zona, self.modelCbZna, 'nombre')
-		
+
 	def putData(self, r):
-		self.p.setText(r.value('p').toString())
-		(id, good)=r.value('idaforo').toInt()
+		self.p.setText(str(r.value('p') or ""))
+		id = int(r.value('idaforo') or 0)
 		n=self.aforo.findData(id)
 		self.aforo.setCurrentIndex(n)
-		(id, good)=r.value('idzona').toInt()
+		id = int(r.value('idzona') or 0)
 		n=self.zona.findData(id)
 		self.zona.setCurrentIndex(n)
 		return True
-		
+
 	def getData(self, r):
-		if self.p.text().trimmed().isEmpty():
+		if self.p.text().strip() == "":
 			self.setEditionError(self.tr("El valor no puede estar vacío"))
 			return False
-		r.setValue('p', self.p.text().trimmed())
+		r.setValue('p', self.p.text().strip())
 		i_combo=self.aforo.currentIndex()
 		id=self.aforo.itemData(i_combo)
 		r.setValue('idaforo', id)

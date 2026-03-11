@@ -15,25 +15,28 @@
 #
 ##############################################################################
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from PyQt4.QtSql import *
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
+from PyQt6.QtSql import *
 from configobj import ConfigObj
-from informe.colores import miColor
+from .colores import miColor
 import math
 import cairo
 import pycha.bar
 import pycha.stackedbar
 import pycha.pie
 import pycha.line
-from pychart import *
+try:
+    from pychart import *
+except ImportError:
+    pass  # pychart is not available; pycha is used instead
 import sys
 
 def leeConf(nombreDat, obj):
 	cfg = {}
 	config = ConfigObj(str(nombreDat), encoding='UTF8')
-	cfg['descripcion'] = unicode(config['descripcion'])
-	cfg['tipo'] = unicode(config['tipo'])
+	cfg['descripcion'] = str(config['descripcion'])
+	cfg['tipo'] = str(config['tipo'])
 	cfg['sql'] = config['sql']
 	cfg['filas'] = config['filas']
 	cfg['columnas'] = config['columnas']
@@ -74,9 +77,9 @@ def leeConf(nombreDat, obj):
 #		cfg['filtroFilas']['fSI'] = ''
 #		cfg['filtroFilas']['fNO'] = ''
 	if obj == 'g':
-		cfg['titulo'] = unicode(config['titulo'])
-		cfg['nombreX'] = unicode(config['nombreX'])
-		cfg['nombreY'] = unicode(config['nombreY'])
+		cfg['titulo'] = str(config['titulo'])
+		cfg['nombreX'] = str(config['nombreX'])
+		cfg['nombreY'] = str(config['nombreY'])
 		if cfg['tipo'] == 'tarta1':
 			cfg['orden'] = config['orden']
 			try:
@@ -93,7 +96,7 @@ def leeConf(nombreDat, obj):
 			cfg['provincia'] = config['provincia']
 		except:
 			cfg['provincia'] = []
-			
+
 	if obj == 't':
 #		cfg['encabezadoList'] = config['encabezado']
 		cfg['formato'] = config['formato']
@@ -137,21 +140,21 @@ def leeConf(nombreDat, obj):
 			except:
 				cfg['provincia'] = []
 
-			
+
 			cfg['sqlFormato'] = config['sql_formato']
 			cfg['contaminantes'] = config['contaminantes']
-#			cfg['sql'],cfg['filas'] = self.sqlTipoA1(self.tbSNAP, tbContaminantes) 
-#			tbFontSize = '\\footnotesize'		
+#			cfg['sql'],cfg['filas'] = self.sqlTipoA1(self.tbSNAP, tbContaminantes)
+#			tbFontSize = '\\footnotesize'
 #			sql_cls2 = "select descripcion from clasificacion where codigo='%s'" % self.tbSNAP
 #			q = QSqlQuery(sql_cls2, self.work)
 #			q.next()
-#			tbNombreGrupoSnap = q.value(0).toString()
+#			tbNombreGrupoSnap = str(q.value(0) or "")
 #			cfg['encabezado'][0] = cfg['']tbNombreGrupoSnap
 		if cfg['tipo'] == '1l':
 			cfg['ancho'] = config['ancho_tabla']
 #			tbColorFilas = config['color_filas']
 	return cfg
-	
+
 def dataSetGlobal(cfg, idEscenario, work):
 	ds0 = []
 	filaSuma = []
@@ -165,7 +168,7 @@ def dataSetGlobal(cfg, idEscenario, work):
 			textoSuma = ''
 		if 'gcol' in l2:
 			for l3 in range(len(cfg['columnas'][l2])):
-				if 'sql' in cfg['columnas'][l2][l3]: 
+				if 'sql' in cfg['columnas'][l2][l3]:
 					ds1 = dataSetSQL(QSqlQuery(cfg['sql'][cfg['columnas'][l2][l3]].replace('_ESCENARIO_', str(idEscenario)), work), cfg)
 					if len(ds1) > 0:
 						uneColumnas(ds0, ds1)
@@ -175,7 +178,7 @@ def dataSetGlobal(cfg, idEscenario, work):
 			haySuma = True
 			# Agrupa registros
 			textoSuma = grSumas[l2][0]
-	
+
 	return ds0
 
 
@@ -187,19 +190,20 @@ def dataSetSQL(q, cfg):
 	i = 0
 	while q.next():
 		v = []
-		v.append(q.value(0).toString()) # la primera celda de la fila es texto
+		v.append(str(q.value(0) or "")) # la primera celda de la fila es texto
 		for j in range(nCol - 1):
-			vs = q.value(j + 1).toString()
-			vn = vs.toFloat()
-			if vn[1]:
-				v.append(vn[0])
-			else:
+			vs_raw = q.value(j + 1)
+			vs = str(vs_raw or "")
+			try:
+				vn = float(vs)
+				v.append(vn)
+			except (ValueError, TypeError):
 				v.append(vs)
 #		if cfg['filtroFilas']['fNO'] == '' or v[0].contains(reSI) or not v[0].contains(reNO) :
 		ds0.append(v)
 		i = i + 1
 	return(ds0)
-	
+
 def uneColumnas(ds0, ds1):
 	len_ds0 = len(ds0[0])
 	len_ds1 = len(ds1[0])
@@ -220,28 +224,28 @@ def uneColumnas(ds0, ds1):
 		if len(ds0[j]) < len_ds0 + len_ds1 -1:
 			ds0[j][len_ds0:] = [0]*(len_ds1-1)
 	return 0
-	
+
 def eliminaColumnas(ds0,lCol):
 	ds1 = []
-	rn = range(len(ds0[0]))
+	rn = list(range(len(ds0[0])))
 	rn.reverse()
 	for i in range(len(ds0)):
 		fila = []
 		for j in rn:
-			if str(j + 1) in lCol: 
+			if str(j + 1) in lCol:
 #				fila.append(ds0[i][j])
 				ds0[i].pop(j)
 #		ds1.append(fila)
 	return ds0
-	
+
 def formatoNumero(f,ndec):
 	d0 = round(math.modf(f)[0],ndec)
 	d = str(d0).split('.')[1]	# parte decimal
 	if (d0 == 1.0):
-		f = f + 1 
+		f = f + 1
 	e = str(math.floor(f)).split('.')[0]				# parte entera
 	r = ''
-	nsec = range(len(e))
+	nsec = list(range(len(e)))
 	nsec.reverse()
 	j = 0
 	for i in nsec:
@@ -260,9 +264,9 @@ def dosCifras(a):
 	else:
 		b = str(a)
 	return b
-	
+
 def quitaFilasCero(ds):
-	rn = range(len(ds))
+	rn = list(range(len(ds)))
 	rn.reverse()
 	for i in rn:
 		t = 0.0
@@ -270,8 +274,8 @@ def quitaFilasCero(ds):
 			t = t + ds[i][j + 1]
 		if t == 0:
 			ds.pop(i)
-		
-				
+
+
 def sumaCol(ds0):
 	len_ds0 = len(ds0[0])
 	for i in range(len(ds0)):
@@ -279,14 +283,14 @@ def sumaCol(ds0):
 		for j in range(len_ds0 - 1):
 			s = s + ds0[i][j + 1]
 		ds0[i].append(s)
-		
+
 def enPorcentaje(ds0):
 	ds1 = []
 	total = [0] * len(ds0)
 	for i in range(len(ds0)):
 		for j in range(len(ds0[0]) - 1):
 			total[i] = total[i] + ds0[i][j + 1]
-		
+
 	lMenor1 = ''
 	pMenor1 = 0
 	lPop = []
@@ -299,8 +303,7 @@ def enPorcentaje(ds0):
 		ds1.append(fila)
 	return sorted(ds1, key=lambda d: d[0])
 
-	
-		
+
 def dsColor(ds0, colores):
 	j = 0
 	jMax = len(colores)
@@ -310,7 +313,7 @@ def dsColor(ds0, colores):
 		formato = '\\rowcolor{' + colores[j] + '} ' + ds0[i][0]
 		ds0[i][0] = formato
 		j = j + 1
-		
+
 def grafPycha(nombreF, ds0, cfg):
 	width, height = (500, 400)
 	surface = cairo.PSSurface(str(nombreF), width, height)
@@ -330,7 +333,7 @@ def grafPycha(nombreF, ds0, cfg):
 			'background': {'color': '#f0f0f0'},
 		'axis': {
 			'x': {
-				'ticks': [dict(v=i, label=unicode(l[0])) for i, l in enumerate(ds0)],
+				'ticks': [dict(v=i, label=str(l[0])) for i, l in enumerate(ds0)],
 				'label': cfg['nombreX'],
 				'rotate': 25,
 				'hide': xticksHide
@@ -338,7 +341,7 @@ def grafPycha(nombreF, ds0, cfg):
 			'y': {
 				'tickCount': 4,
 				'rotate': 25,
-				'label': cfg['nombreY'], 
+				'label': cfg['nombreY'],
 				'tickPrecision': 0
 			}
 		},
@@ -351,7 +354,7 @@ def grafPycha(nombreF, ds0, cfg):
 			'name': 'fixed',
 			'args': {
 #					'initialColor': 'red',
-				'colors': c.listaColor('lista2', numCols), 
+				'colors': c.listaColor('lista2', numCols),
 			},
 		},
 		'legend': {
@@ -368,7 +371,7 @@ def grafPycha(nombreF, ds0, cfg):
 
 	if 'barrasAc' in cfg['tipo']:
 		chart = pycha.stackedbar.StackedVerticalBarChart(surface, options)
-		ds = [(unicode(cfg['encabezado'][j]),[(i,ds0[i][j + 1]) for i in range(len(ds0))]) 
+		ds = [(str(cfg['encabezado'][j]),[(i,ds0[i][j + 1]) for i in range(len(ds0))])
 										for j in range(len(cfg['encabezado']))]
 	elif 'barras' in cfg['tipo']:
 		chart = pycha.bar.VerticalBarChart(surface, options)
@@ -377,7 +380,7 @@ def grafPycha(nombreF, ds0, cfg):
 			)
 	elif 'tarta' in cfg['tipo']:
 		chart = pycha.pie.PieChart(surface, options)
-		ds = [(unicode(l[0]), [[0, l[1]]]) for i,l in enumerate(ds0)]
+		ds = [(str(l[0]), [[0, l[1]]]) for i,l in enumerate(ds0)]
 	elif 'lineas' in cfg['tipo']:
 		chart = pycha.line.LineChart(surface, options)
 	chart.addDataset(ds)
@@ -389,16 +392,16 @@ def grafPychart(nombreF, ds0, cfg):
 	theme.default_font_size = 12
 	theme.reinitialize()
 	can = canvas.init()
-	
+
 #	for i in range(len(ds0)):
 #		for j in range(len(ds0[i]) - 1):
 #			ds0[i][j + 1] = eval(formatoNumero(ds0[i][j + 1] * eval(cfg['factorColumnas'][0]), cfg['decimales']) )
-	
+
 	if 'tarta' in cfg['tipo']:
 		total = 0
 		for i in range(len(ds0)):
 			total = total + ds0[i][1]
-			
+
 		lMenor1 = ''
 		pMenor1 = 0
 		lPop = []
@@ -430,7 +433,7 @@ def grafPychart(nombreF, ds0, cfg):
 		lPop.reverse()
 		for i in lPop:
 			ds0.pop(i)
-	
+
 		# Cambia el orden de los datos, según el porcentage. Alterna  los índices: 0,n,1,n-1,2,n-2
 		ds1 = sorted(ds0, key=lambda d: d[2])
 		if 'Alt' in cfg['orden']:
@@ -450,15 +453,15 @@ def grafPychart(nombreF, ds0, cfg):
 		elif 'Des' in cfg['orden']:
 			ds1.inverse()
 			ds = ds1
-		
+
 		ar = area.T(size=(430,300), legend=None, #legend=legend.T(),
 		x_grid_style = None, y_grid_style = None)
-	
+
 		plot = pie_plot.T(data=ds, arc_offsets=[5,25,5,25,5,25,5,25],
 			shadow = (2, -2, fill_style.gray50),
 			label_offset = 40,
-#			label_line_style = line_style.black, 
-			start_angle = cfg['rotacion'], 
+#			label_line_style = line_style.black,
+			start_angle = cfg['rotacion'],
 			arrow_style = arrow.a1)
 		ar.add_plot(plot)
 		ar.draw(can)
@@ -466,15 +469,15 @@ def grafPychart(nombreF, ds0, cfg):
 
 	if 'barrasAc' in cfg['tipo']:
 		ds = []
-		
+
 		ds1 = enPorcentaje(ds0)
 		for i in range(len(ds1)):
 			fila = []
-			fila.append(unicode(ds1[i][0]))
+			fila.append(str(ds1[i][0]))
 			for j in range(len(ds1[0]) - 1):
 				fila.append(ds1[i][j + 1])
 			ds.append(fila)
-								
+
 		chart_object.set_defaults(area.T, size = (450, 350), y_range = (0, 100),
 								  x_coord = category_coord.T(ds, 0))
 		chart_object.set_defaults(bar_plot.T, data = ds)
@@ -503,11 +506,11 @@ def grafPychart(nombreF, ds0, cfg):
 		ds1 = ds0
 		for i in range(len(ds1)):
 			fila = []
-			fila.append(unicode(ds1[i][0]))
+			fila.append(str(ds1[i][0]))
 			for j in range(len(ds1[0]) - 1):
 				fila.append(ds1[i][j + 1])
 			ds.append(fila)
-								
+
 		chart_object.set_defaults(area.T, size = (450, 350), y_range = (0, None),
 								  x_coord = category_coord.T(ds, 0))
 		chart_object.set_defaults(bar_plot.T, data = ds)
@@ -537,11 +540,11 @@ def grafPychart(nombreF, ds0, cfg):
 		ds1 = ds0
 		for i in range(len(ds1)):
 			fila = []
-			fila.append(unicode(ds1[i][0]))
+			fila.append(str(ds1[i][0]))
 			for j in range(len(ds1[0]) - 1):
 				fila.append(ds1[i][j + 1])
 			ds.append(fila)
-								
+
 		chart_object.set_defaults(area.T, size = (450, 350), y_range = (0, None),
 								  x_coord = category_coord.T(ds, 0))
 		chart_object.set_defaults(bar_plot.T, data = ds)
@@ -554,13 +557,13 @@ def grafPychart(nombreF, ds0, cfg):
 		ar.add_plot(plot[0])
 		ar.draw(can)
 		canvas.close()
-		
+
 # TABLAS
 
 def principioTablaTex(cfg):
 	tColor = ''
 	if cfg['enColor']:
-		tColor = '\\rowcolor{' + cfg['colorFilas'][0] + '} ' 
+		tColor = '\\rowcolor{' + cfg['colorFilas'][0] + '} '
 
 	nCol = len(cfg['encabezado'])
 	if cfg['tipo'] == 'a1':
@@ -594,13 +597,13 @@ def principioTablaTex(cfg):
 	return t
 
 def encabezado(tipo, mEncabezadoList):
-	mEncabezado=QString()
+	mEncabezado = ''
 	if tipo == '2':
-		mEncabezado.append(' \multicolumn{2}{l} ')
-	mEncabezado.append(' { \\bfseries ')
-	mEncabezado.append(mEncabezadoList[0])
-	mEncabezado.append(' } ')
+		mEncabezado += ' \multicolumn{2}{l} '
+	mEncabezado += ' { \\bfseries '
+	mEncabezado += mEncabezadoList[0]
+	mEncabezado += ' } '
 	for i in range(len(mEncabezadoList)-1):
-		mEncabezado.append(' & \\bfseries ')
-		mEncabezado.append(mEncabezadoList[i+1])
+		mEncabezado += ' & \\bfseries '
+		mEncabezado += mEncabezadoList[i+1]
 	return mEncabezado

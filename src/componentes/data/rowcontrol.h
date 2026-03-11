@@ -36,7 +36,7 @@ public:
 	QSqlDatabase db() const { return _db; }
 	
 	virtual void addToTable(SeqTableModel *table) { _table = table; this->setDb(_table->database()); }
-	virtual void removeFromTable() { _table = NULL; }
+	virtual void removeFromTable() { _table = nullptr; }
 	virtual SeqTableModel *table() { return _table; }
 	
 	virtual void primeInsert(int /* row */, QSqlRecord & /* r */) {}

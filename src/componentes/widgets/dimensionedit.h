@@ -33,7 +33,7 @@ private:
 	bool		_hasDefault;
 	bool		_textAltered;
 public:
-	DimensionEdit(QWidget *parent = 0);
+	DimensionEdit(QWidget *parent = nullptr);
 	~DimensionEdit();
 
 	void		clear();

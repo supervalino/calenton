@@ -15,12 +15,11 @@
 #
 ##############################################################################
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from ui.Ui_motorcalculolist import *
-from motorcalculodlg import MotorCalculoDlg
-from widgets.datalist import DataList
-
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
+from .ui.Ui_motorcalculolist import *
+from .motorcalculodlg import MotorCalculoDlg
+from ..widgets.datalist import DataList
 class MotorCalculoList (DataList, Ui_MotorCalculoListClass):
 	def __init__(self, parent = None):
 		DataList.__init__(self, parent)
@@ -34,35 +33,33 @@ class MotorCalculoList (DataList, Ui_MotorCalculoListClass):
 			self.tabla.selectionModel().selectionChanged.connect(self.tabla_selectionChanged)
 			self.cambiaEncabezado(self.model, ['Código', 'Motor', 'Descripción', 'Clase'])
 			self.tabla.resizeColumnsToContents()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_anade_clicked(self, checked):
 		d = MotorCalculoDlg(self, self.model)
 		if d.add():
 			self.model.submitTrans()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_elimina_clicked(self, checked):
 		self.askAndRemoveRows(self.tabla, self.model)
-		
-	@pyqtSlot("const QModelIndex &")
+
+	@pyqtSlot(QModelIndex)
 	def on_tabla_doubleClicked(self, index):
 		dm = MotorCalculoDlg(self, self.model)
 		if dm.edit(index.row()):
 			self.model.submitTrans()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_edita_clicked(self, checked):
 		l = self.tabla.selectedIndexes()
 		l2 = self.model.selectedRows(l)
 		if len(l2) == 1:
 			self.on_tabla_doubleClicked(l[0])
-		
-	@pyqtSlot("const QItemSelection &", "const QItemSelection &")
+
+	@pyqtSlot(QItemSelection, QItemSelection)
 	def tabla_selectionChanged(self, before, after):
 		l = self.tabla.selectionModel().selectedIndexes()
 		self.elimina.setEnabled(self.model.eraseActive(l))
 		self.idMotor = self.model.getId(l)
 		self.edita.setEnabled(self.idMotor > 0)
-		
-

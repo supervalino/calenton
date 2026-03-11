@@ -15,29 +15,29 @@
 #
 ##############################################################################
 
-from PyQt4 import QtGui, QtCore
-from ui.Ui_contaminantedlg import *
+from PyQt6 import QtWidgets, QtCore, QtGui
+from .ui.Ui_contaminantedlg import *
 from ts import DataDialog
 
 class ContaminanteDlg (DataDialog, Ui_ContaminanteDlgClass):
 	def __init__(self, parent, dataModel):
 		DataDialog.__init__(self, parent, dataModel)
 		self.setupUi(self)
-		
+
 	def putData(self, r):
-		self.nombre.setText(r.value('nombre').toString())
-		self.descripcion.setText(r.value('descripcion').toString())
-		self.unidades.setText(r.value('unidades').toString())
+		self.nombre.setText(str(r.value('nombre') or ""))
+		self.descripcion.setText(str(r.value('descripcion') or ""))
+		self.unidades.setText(str(r.value('unidades') or ""))
 		return True
-		
+
 	def getData(self, r):
-		if self.nombre.text().trimmed().isEmpty():
+		if self.nombre.text().strip() == "":
 			self.setEditionError(self.tr("El nombre no puede estar vacío"))
 			return False
-		if self.unidades.text().trimmed().isEmpty():
+		if self.unidades.text().strip() == "":
 			self.setEditionError(self.tr("Las unidades no pueden estar vacías"))
 			return False
-		r.setValue('nombre', self.nombre.text().trimmed())
-		r.setValue('unidades', self.unidades.text().trimmed())
-		r.setValue('descripcion', self.descripcion.toPlainText().trimmed())
+		r.setValue('nombre', self.nombre.text().strip())
+		r.setValue('unidades', self.unidades.text().strip())
+		r.setValue('descripcion', self.descripcion.toPlainText().strip())
 		return True

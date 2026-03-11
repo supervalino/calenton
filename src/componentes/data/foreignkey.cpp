@@ -45,8 +45,8 @@ ForeignKey::ForeignKey (
 	_column(column),
 	_map(),
 	_inverseMap(),
-	_model(NULL),
-	_q(NULL),
+	_model(nullptr),
+	_q(nullptr),
 	_db(),
 	_lastWhere()
 
@@ -58,9 +58,9 @@ ForeignKey::ForeignKey (
 ForeignKey::~ForeignKey()
 
 {
-	if (_model != NULL)
+	if (_model != nullptr)
 		delete _model;
-	if (_q != NULL)
+	if (_q != nullptr)
 		delete _q;
 	}
 
@@ -123,8 +123,8 @@ QString ForeignKey::constructWhere (
 		return QString();
 	QString res;
 	QStringList cond;
-	for (QMap<QString, QVariant>::const_iterator i = all.constBegin(); i != all.constEnd(); ++i)
-		if (i.value().type() != QVariant::Invalid)
+	for (auto i = all.constBegin(); i != all.constEnd(); ++i)
+		if (i.value().isValid())
 			cond.append(QString("%1 = :%1").arg(i.key()));
 	if (cond.count() > 0)
 		res = " where " + cond.join(" and ");
@@ -138,8 +138,8 @@ QString ForeignKey::constructKey (
 {
 	QStringList r;
 	
-	for (QMap<QString, QVariant>::const_iterator i = all.constBegin(); i != all.constEnd(); ++i) 
-		if (i.value().type() != QVariant::Invalid)
+	for (auto i = all.constBegin(); i != all.constEnd(); ++i)
+		if (i.value().isValid())
 			r.append(QString("%1=%2").arg(i.key()).arg(i.value().toString()));
 	QString res = r.join(",");
 	return res;
@@ -179,9 +179,9 @@ int ForeignKey::getNewInverseMap (
 
 {
 	QString where = constructWhere(all);
-	if ((_lastWhere != where) || (_q == NULL)) {
+	if ((_lastWhere != where) || (_q == nullptr)) {
 		QString sql = QString("select id from %1 %2").arg(_table).arg(where);
-		if (_q == NULL)
+		if (_q == nullptr)
 			_q = new QSqlQuery(_db);
 		_q->prepare(sql);
 		_lastWhere = where;
@@ -217,9 +217,9 @@ void	ForeignKey::clear()
 	_map.clear();
 	_inverseMap.clear();
 	_lastWhere = QString();
-	if (_q != NULL) 
+	if (_q != nullptr)
 		delete _q;
-	_q = NULL;
+	_q = nullptr;
 	}
 
 /*! Devuelve un modelo adaptado a la generación de ComboBox */
@@ -232,7 +232,7 @@ FKModel	*ForeignKey::model (
 
 {
 	QString w = constructWhere(filters);
-	if (_model != NULL) {
+	if (_model != nullptr) {
 		_model->setWhere(w, filters);
 		_model->setNullValue(nullValue);
 		_model->setNullMessage(nullMessage);

@@ -62,5 +62,5 @@ const Unit *UnitCollection::getUnit (
 	)
 
 {
-	return _units.value(dimension, 0);
+	return _units.value(dimension, nullptr);
 	}

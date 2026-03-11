@@ -15,9 +15,9 @@
 #
 ##############################################################################
 
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtGui import *
-from ui import Ui_graphicdlg
+from PyQt6 import QtWidgets, QtCore, QtGui
+from PyQt6.QtWidgets import *
+from .ui import Ui_graphicdlg
 
 class GraphicDlg (QDialog, Ui_graphicdlg.Ui_GraphicDlgClass):
 	def __init__(self, parent=None):

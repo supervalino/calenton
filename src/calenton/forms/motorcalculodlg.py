@@ -15,34 +15,34 @@
 #
 ##############################################################################
 
-from PyQt4 import QtGui, QtCore
-from ui.Ui_motorcalculodlg import *
+from PyQt6 import QtWidgets, QtCore
+from .ui.Ui_motorcalculodlg import *
 from ts import DataDialog
 
 class MotorCalculoDlg (DataDialog, Ui_MotorcalculoDialogClass):
 	def __init__(self, parent, dataModel):
 		DataDialog.__init__(self, parent, dataModel)
 		self.setupUi(self)
-		
+
 	def putData(self, r):
-		self.codigo.setText(r.value('codigo').toString())
-		self.nombre.setText(r.value('nombre').toString())
-		self.clase.setText(r.value('clase').toString())
-		self.descripcion.setText(r.value('descripcion').toString())
+		self.codigo.setText(str(r.value('codigo') or ""))
+		self.nombre.setText(str(r.value('nombre') or ""))
+		self.clase.setText(str(r.value('clase') or ""))
+		self.descripcion.setText(str(r.value('descripcion') or ""))
 		return True
-		
+
 	def getData(self, r):
-		if self.codigo.text().trimmed().isEmpty():
+		if self.codigo.text().strip() == "":
 			self.setEditionError(self.tr("El código no puede estar vacío"))
 			return False
-		if self.nombre.text().trimmed().isEmpty():
+		if self.nombre.text().strip() == "":
 			self.setEditionError(self.tr("El nombre no puede estar vacío"))
 			return False
-		if self.clase.text().trimmed().isEmpty():
+		if self.clase.text().strip() == "":
 			self.setEditionError(self.tr("La clase no puede estar vacía"))
-			return False			
-		r.setValue('codigo', self.codigo.text().trimmed())
-		r.setValue('nombre', self.nombre.text().trimmed())
-		r.setValue('clase', self.clase.text().trimmed())
-		r.setValue('descripcion', self.descripcion.toPlainText().trimmed())
+			return False
+		r.setValue('codigo', self.codigo.text().strip())
+		r.setValue('nombre', self.nombre.text().strip())
+		r.setValue('clase', self.clase.text().strip())
+		r.setValue('descripcion', self.descripcion.toPlainText().strip())
 		return True

@@ -15,7 +15,8 @@
 #
 ##############################################################################
 
-from PyQt4 import QtCore, QtGui, QtDesigner
+from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtDesigner import QDesignerCustomWidgetInterface
 
 import sys
 import os
@@ -28,11 +29,11 @@ sys.path.append(os.path.abspath(os.path.join(_DataListPluginPath_, '..')))
 
 from widgets.subwindow import SubWindow
 
-class SubWindowPlugin(QtDesigner.QPyDesignerCustomWidgetPlugin):
+class SubWindowPlugin(QDesignerCustomWidgetInterface):
 	def __init__(self, parent=None):
-		QtDesigner.QPyDesignerCustomWidgetPlugin.__init__(self, parent)
+		QDesignerCustomWidgetInterface.__init__(self, parent)
 		self._initialized = False
-		
+
 	def initialize(self, formEditor):
 		if self._initialized:
 			return
@@ -57,13 +58,13 @@ class SubWindowPlugin(QtDesigner.QPyDesignerCustomWidgetPlugin):
 		return "Base de ventana de la aplicación"
 
 	def whatsThis(self):
-		return "Base de ventana de la aplicación" 
+		return "Base de ventana de la aplicación"
 
 	def isContainer(self):
 		return True
 
 	def domXml(self):
-		return QtCore.QString()
+		return ""
 
 	def includeFile(self):
 		return "<widgets/subwindow.h>"

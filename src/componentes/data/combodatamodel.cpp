@@ -20,7 +20,7 @@ ComboDataModel::ComboDataModel (
 	const QString	&nullMessage
 	) :
 	QAbstractListModel(parent),
-	_sm(NULL),
+	_sm(nullptr),
 	_nullValue(nullValue),
 	_nullMessage(nullMessage)
 	
@@ -34,7 +34,7 @@ ComboDataModel::ComboDataModel (
 	const QString	&nullMessage
 	) :
 	QAbstractListModel(parent),
-	_sm(NULL),
+	_sm(nullptr),
 	_nullValue(nullValue),
 	_nullMessage(nullMessage)
 	
@@ -55,7 +55,7 @@ int ComboDataModel::rowCount (
 {
 	int	n;
 
-	if (_sm == NULL)
+	if (_sm == nullptr)
 		n = 0;
 	else
 		n = _sm->rowCount();
@@ -72,7 +72,7 @@ QVariant ComboDataModel::data (
 {
 	if (!index.isValid())
 		return QVariant();
-	if (_sm == NULL)
+	if (_sm == nullptr)
 		return QVariant();
 	int column;
 	switch (role) {
@@ -110,10 +110,10 @@ void ComboDataModel::setQuery (
 	
 {
 	int firstRow = _nullValue ? 1 : 0;
-	if (_sm != NULL) {
+	if (_sm != nullptr) {
 		beginRemoveRows(QModelIndex(), firstRow, _sm->rowCount() - 1 + firstRow);
 		delete _sm;
-		_sm = NULL;
+		_sm = nullptr;
 		endRemoveRows();
 		}
 	if (q.lastError().isValid()) {

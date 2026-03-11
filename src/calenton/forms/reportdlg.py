@@ -15,9 +15,9 @@
 #
 ##############################################################################
 
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtGui import *
-from ui import Ui_reportdlg
+from PyQt6 import QtWidgets, QtCore
+from PyQt6.QtWidgets import *
+from .ui import Ui_reportdlg
 
 class ReportDlg (QDialog, Ui_reportdlg.Ui_ReportDlgClass):
 	def __init__(self, parent=None):

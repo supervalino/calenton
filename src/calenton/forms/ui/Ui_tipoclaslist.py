@@ -1,76 +1,79 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'tipoclaslist.ui'
-#
-# Created: Fri Feb 21 12:06:31 2014
-#      by: PyQt4 UI code generator 4.10.3
-#
-# WARNING! All changes made in this file will be lost!
+################################################################################
+## Form generated from reading UI file 'tipoclaslist.ui'
+##
+## Created by: Qt User Interface Compiler version 6.10.2
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 
-from PyQt4 import QtCore, QtGui
+from PyQt6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PyQt6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PyQt6.QtWidgets import (QAbstractItemView, QApplication, QHBoxLayout, QHeaderView,
+    QPushButton, QSizePolicy, QSpacerItem, QTableView,
+    QVBoxLayout, QWidget)
 
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+from ...widgets.datalist import DataList
 
 class Ui_TipoclasListClass(object):
     def setupUi(self, TipoclasListClass):
-        TipoclasListClass.setObjectName(_fromUtf8("TipoclasListClass"))
+        if not TipoclasListClass.objectName():
+            TipoclasListClass.setObjectName(u"TipoclasListClass")
         TipoclasListClass.resize(400, 300)
-        self.verticalLayout = QtGui.QVBoxLayout(TipoclasListClass)
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.tabla = QtGui.QTableView(TipoclasListClass)
-        self.tabla.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
-        self.tabla.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-        self.tabla.setObjectName(_fromUtf8("tabla"))
+        self.verticalLayout = QVBoxLayout(TipoclasListClass)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.tabla = QTableView(TipoclasListClass)
+        self.tabla.setObjectName(u"tabla")
+        self.tabla.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tabla.setSelectionBehavior(QAbstractItemView.SelectRows)
+
         self.verticalLayout.addWidget(self.tabla)
-        self.horizontalLayout = QtGui.QHBoxLayout()
-        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem)
-        self.anade = QtGui.QPushButton(TipoclasListClass)
-        self.anade.setObjectName(_fromUtf8("anade"))
+
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer)
+
+        self.anade = QPushButton(TipoclasListClass)
+        self.anade.setObjectName(u"anade")
+
         self.horizontalLayout.addWidget(self.anade)
-        self.edita = QtGui.QPushButton(TipoclasListClass)
+
+        self.edita = QPushButton(TipoclasListClass)
+        self.edita.setObjectName(u"edita")
         self.edita.setEnabled(False)
-        self.edita.setObjectName(_fromUtf8("edita"))
+
         self.horizontalLayout.addWidget(self.edita)
-        self.elimina = QtGui.QPushButton(TipoclasListClass)
+
+        self.elimina = QPushButton(TipoclasListClass)
+        self.elimina.setObjectName(u"elimina")
         self.elimina.setEnabled(False)
-        self.elimina.setObjectName(_fromUtf8("elimina"))
+
         self.horizontalLayout.addWidget(self.elimina)
+
+
         self.verticalLayout.addLayout(self.horizontalLayout)
 
+        QWidget.setTabOrder(self.tabla, self.anade)
+        QWidget.setTabOrder(self.anade, self.edita)
+        QWidget.setTabOrder(self.edita, self.elimina)
+
         self.retranslateUi(TipoclasListClass)
-        QtCore.QMetaObject.connectSlotsByName(TipoclasListClass)
-        TipoclasListClass.setTabOrder(self.tabla, self.anade)
-        TipoclasListClass.setTabOrder(self.anade, self.edita)
-        TipoclasListClass.setTabOrder(self.edita, self.elimina)
+
+        QMetaObject.connectSlotsByName(TipoclasListClass)
+    # setupUi
 
     def retranslateUi(self, TipoclasListClass):
-        TipoclasListClass.setWindowTitle(_translate("TipoclasListClass", "Tipo de clasificación ...", None))
-        self.anade.setText(_translate("TipoclasListClass", "Añadir...", None))
-        self.edita.setText(_translate("TipoclasListClass", "Editar...", None))
-        self.elimina.setText(_translate("TipoclasListClass", "Eliminar", None))
-
-from widgets.datalist import DataList
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    TipoclasListClass = QtGui.DataList()
-    ui = Ui_TipoclasListClass()
-    ui.setupUi(TipoclasListClass)
-    TipoclasListClass.show()
-    sys.exit(app.exec_())
+        TipoclasListClass.setWindowTitle(QCoreApplication.translate("TipoclasListClass", u"Tipo de clasificaci\u00f3n ...", None))
+        self.anade.setText(QCoreApplication.translate("TipoclasListClass", u"A\u00f1adir...", None))
+        self.edita.setText(QCoreApplication.translate("TipoclasListClass", u"Editar...", None))
+        self.elimina.setText(QCoreApplication.translate("TipoclasListClass", u"Eliminar", None))
+    # retranslateUi
 

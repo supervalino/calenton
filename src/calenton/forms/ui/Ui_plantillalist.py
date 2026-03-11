@@ -1,86 +1,100 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'plantillalist.ui'
-#
-# Created: Fri Feb 21 12:06:31 2014
-#      by: PyQt4 UI code generator 4.10.3
-#
-# WARNING! All changes made in this file will be lost!
+################################################################################
+## Form generated from reading UI file 'plantillalist.ui'
+##
+## Created by: Qt User Interface Compiler version 6.10.2
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 
-from PyQt4 import QtCore, QtGui
+from PyQt6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PyQt6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PyQt6.QtWidgets import (QAbstractButton, QApplication, QDialogButtonBox, QGridLayout,
+    QHBoxLayout, QLabel, QLineEdit, QPushButton,
+    QSizePolicy, QSpacerItem, QTextEdit, QVBoxLayout,
+    QWidget)
 
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+from ...widgets.datalist import DataList
 
 class Ui_PlantillaListClass(object):
     def setupUi(self, PlantillaListClass):
-        PlantillaListClass.setObjectName(_fromUtf8("PlantillaListClass"))
+        if not PlantillaListClass.objectName():
+            PlantillaListClass.setObjectName(u"PlantillaListClass")
         PlantillaListClass.resize(482, 458)
-        self.verticalLayout = QtGui.QVBoxLayout(PlantillaListClass)
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.gridLayout = QtGui.QGridLayout()
-        self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        self.plantilla = QtGui.QLineEdit(PlantillaListClass)
+        self.verticalLayout = QVBoxLayout(PlantillaListClass)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.gridLayout = QGridLayout()
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.plantilla = QLineEdit(PlantillaListClass)
+        self.plantilla.setObjectName(u"plantilla")
         self.plantilla.setEnabled(False)
-        self.plantilla.setObjectName(_fromUtf8("plantilla"))
+
         self.gridLayout.addWidget(self.plantilla, 0, 2, 1, 1)
-        self.label_2 = QtGui.QLabel(PlantillaListClass)
-        self.label_2.setObjectName(_fromUtf8("label_2"))
+
+        self.label_2 = QLabel(PlantillaListClass)
+        self.label_2.setObjectName(u"label_2")
+
         self.gridLayout.addWidget(self.label_2, 1, 0, 1, 1)
-        self.descripcion = QtGui.QTextEdit(PlantillaListClass)
-        self.descripcion.setObjectName(_fromUtf8("descripcion"))
+
+        self.descripcion = QTextEdit(PlantillaListClass)
+        self.descripcion.setObjectName(u"descripcion")
+
         self.gridLayout.addWidget(self.descripcion, 1, 2, 1, 1)
-        self.label = QtGui.QLabel(PlantillaListClass)
-        self.label.setObjectName(_fromUtf8("label"))
+
+        self.label = QLabel(PlantillaListClass)
+        self.label.setObjectName(u"label")
+
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+
+
         self.verticalLayout.addLayout(self.gridLayout)
-        spacerItem = QtGui.QSpacerItem(20, 160, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
-        self.verticalLayout.addItem(spacerItem)
-        self.horizontalLayout = QtGui.QHBoxLayout()
-        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        spacerItem1 = QtGui.QSpacerItem(228, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem1)
-        self.nueva = QtGui.QPushButton(PlantillaListClass)
-        self.nueva.setObjectName(_fromUtf8("nueva"))
+
+        self.verticalSpacer = QSpacerItem(20, 160, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout.addItem(self.verticalSpacer)
+
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalSpacer_2 = QSpacerItem(228, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer_2)
+
+        self.nueva = QPushButton(PlantillaListClass)
+        self.nueva.setObjectName(u"nueva")
+
         self.horizontalLayout.addWidget(self.nueva)
+
+
         self.verticalLayout.addLayout(self.horizontalLayout)
-        self.buttonBox = QtGui.QDialogButtonBox(PlantillaListClass)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
+
+        self.buttonBox = QDialogButtonBox(PlantillaListClass)
+        self.buttonBox.setObjectName(u"buttonBox")
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+
         self.verticalLayout.addWidget(self.buttonBox)
+
+#if QT_CONFIG(shortcut)
         self.label_2.setBuddy(self.descripcion)
         self.label.setBuddy(self.plantilla)
+#endif // QT_CONFIG(shortcut)
+        QWidget.setTabOrder(self.plantilla, self.descripcion)
+        QWidget.setTabOrder(self.descripcion, self.nueva)
 
         self.retranslateUi(PlantillaListClass)
-        QtCore.QMetaObject.connectSlotsByName(PlantillaListClass)
-        PlantillaListClass.setTabOrder(self.plantilla, self.descripcion)
-        PlantillaListClass.setTabOrder(self.descripcion, self.nueva)
+
+        QMetaObject.connectSlotsByName(PlantillaListClass)
+    # setupUi
 
     def retranslateUi(self, PlantillaListClass):
-        PlantillaListClass.setWindowTitle(_translate("PlantillaListClass", "Plantillas de informes", None))
-        self.label_2.setText(_translate("PlantillaListClass", "Descripción:", None))
-        self.label.setText(_translate("PlantillaListClass", "Plantilla Actual:", None))
-        self.nueva.setText(_translate("PlantillaListClass", "Cargar Nueva", None))
-
-from widgets.datalist import DataList
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    PlantillaListClass = QtGui.DataList()
-    ui = Ui_PlantillaListClass()
-    ui.setupUi(PlantillaListClass)
-    PlantillaListClass.show()
-    sys.exit(app.exec_())
+        PlantillaListClass.setWindowTitle(QCoreApplication.translate("PlantillaListClass", u"Plantillas de informes", None))
+        self.label_2.setText(QCoreApplication.translate("PlantillaListClass", u"Descripci\u00f3n:", None))
+        self.label.setText(QCoreApplication.translate("PlantillaListClass", u"Plantilla Actual:", None))
+        self.nueva.setText(QCoreApplication.translate("PlantillaListClass", u"Cargar Nueva", None))
+    # retranslateUi
 

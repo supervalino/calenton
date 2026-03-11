@@ -52,8 +52,8 @@ protected:
 public:
 	static const int OriginalDataRole = Qt::UserRole + 1111;
 
-	SeqTableModel(QObject *parent = 0, 
-		QSqlDatabase db = QSqlDatabase(), 
+	SeqTableModel(QObject *parent = nullptr,
+		QSqlDatabase db = QSqlDatabase(),
 		QString parentIdField = QString());
 	virtual ~SeqTableModel();
 	

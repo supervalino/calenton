@@ -21,7 +21,7 @@ FKModel::FKModel (
 	bool				nullValue,
 	const QString			&nullMessage
 	) :
-	ComboDataModel(NULL, nullValue, nullMessage),
+	ComboDataModel(nullptr, nullValue, nullMessage),
 	_table(table),
 	_column(column),
 	_db(db)
@@ -44,7 +44,7 @@ void FKModel::setFilters (
 		qDebug() << "FKModel::setFilters" << q.lastError();
 		return;
 		}
-	for (QMap<QString, QVariant>::const_iterator i = filters.constBegin(); i != filters.constEnd(); ++i) {
+	for (auto i = filters.constBegin(); i != filters.constEnd(); ++i) {
 		QString n = QString(":%1").arg(i.key());
 		q.bindValue(n, i.value());
 		}

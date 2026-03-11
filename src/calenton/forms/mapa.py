@@ -15,15 +15,15 @@
 #
 ##############################################################################
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from PyQt4.QtSql import *
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
+from PyQt6.QtGui import *
+from PyQt6.QtSql import *
 from qgis.gui import *
 from qgis.core import *
-from ui.Ui_mapa import *
-from widgets.subwindow import SubWindow
-from calculo import mapas
-
+from .ui.Ui_mapa import *
+from ..widgets.subwindow import SubWindow
+from ..calculo import mapas
 class Mapa (SubWindow, Ui_MapaClass):
 	def __init__(self, sql, idNivelZona, color = None, parent = None):
 		QWidget.__init__(self, parent)
@@ -36,19 +36,18 @@ class Mapa (SubWindow, Ui_MapaClass):
 		self.mapa.renderComplete.connect(self.renderLegend)
 		self.mapa.setExtent(self.layer.layer.extent())
 		self.mapa.setLayerSet([ QgsMapCanvasLayer(self.layer.layer) ])
-		
+
 	def canPrint(self):
 		return True
-		
+
 	def closeEvent(self, evt):
 		self.mapa.setLayerSet([])
 		self.legend = None
 		self.app.mapas.eliminaLayer(self.layer)
 		self.layer = None
 		evt.accept()
-		
+
 	@pyqtSlot("QPainter *")
 	def renderLegend(self, painter):
 		if self.legend is not None:
-			self.legend.paint(painter)		
-
+			self.legend.paint(painter)

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'tsqltablenavigator.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.6
+** Created by: Qt User Interface Compiler version 6.10.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,12 +10,10 @@
 #define UI_TSQLTABLENAVIGATOR_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QHeaderView>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 #include "ts.h"
 
 QT_BEGIN_NAMESPACE
@@ -30,18 +28,18 @@ public:
     void setupUi(QWidget *TSqlTableNavigator)
     {
         if (TSqlTableNavigator->objectName().isEmpty())
-            TSqlTableNavigator->setObjectName(QString::fromUtf8("TSqlTableNavigator"));
+            TSqlTableNavigator->setObjectName("TSqlTableNavigator");
         TSqlTableNavigator->resize(433, 308);
         verticalLayout = new QVBoxLayout(TSqlTableNavigator);
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName("verticalLayout");
         uiTableView = new TTableView(TSqlTableNavigator);
-        uiTableView->setObjectName(QString::fromUtf8("uiTableView"));
+        uiTableView->setObjectName("uiTableView");
 
         verticalLayout->addWidget(uiTableView);
 
         uiButtonBox = new TSqlButtonBox(TSqlTableNavigator);
-        uiButtonBox->setObjectName(QString::fromUtf8("uiButtonBox"));
+        uiButtonBox->setObjectName("uiButtonBox");
         uiButtonBox->setAddEnabled(false);
         uiButtonBox->setEditEnabled(false);
         uiButtonBox->setDeleteEnabled(false);
@@ -58,7 +56,7 @@ public:
 
     void retranslateUi(QWidget *TSqlTableNavigator)
     {
-        TSqlTableNavigator->setWindowTitle(QApplication::translate("TSqlTableNavigator", "Form", 0, QApplication::UnicodeUTF8));
+        TSqlTableNavigator->setWindowTitle(QCoreApplication::translate("TSqlTableNavigator", "Form", nullptr));
     } // retranslateUi
 
 };

@@ -15,19 +15,19 @@
 #
 ##############################################################################
 
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from modelo import *
-from ui import Ui_hazcalculodlg
+from PyQt6 import QtWidgets, QtCore, QtGui
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
+from ..modelo import *
+from .ui import Ui_hazcalculodlg
 from ts import DataDialog, ComboDataModel
 
 class HazCalculoDlg (QDialog, Ui_hazcalculodlg.Ui_HazCalculoDlgClass):
 	def __init__(self, parent):
 		QDialog.__init__(self, parent)
 		self.setupUi(self)
-		
+
 	def daMensaje(self, msg):
-		aforo.setText(QString(msg))
+		aforo.setText(msg)
 		QApplication.processEvents()
-		
+

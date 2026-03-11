@@ -15,19 +15,18 @@
 #
 ##############################################################################
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from PyQt4.QtSql import *
-from ui.Ui_listaresultadodlg import *
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
+from PyQt6.QtSql import *
+from .ui.Ui_listaresultadodlg import *
 from ts import ComboDataModel
-from widgets.datalist import DataListBase
-
+from ..widgets.datalist import DataListBase
 class ListaResultadoDlg (QDialog, DataListBase, Ui_ListaResultadoDlgClass):
 	def __init__(self,  query,  db,  parent = None):
 		QDialog.__init__(self,  parent)
 		self.setupUi(self)
 		self.addAction(self.actionCopiar)
-		QApplication.instance().setOverrideCursor(Qt.WaitCursor)		
+		QApplication.instance().setOverrideCursor(Qt.WaitCursor)
 		self.db = db
 		self.query = query
 		self.model = QSqlQueryModel(self)
@@ -36,4 +35,4 @@ class ListaResultadoDlg (QDialog, DataListBase, Ui_ListaResultadoDlgClass):
 		self.tabla.resizeColumnsToContents()
 		self.tabla.resizeRowsToContents()
 		QApplication.instance().restoreOverrideCursor()
-	
+

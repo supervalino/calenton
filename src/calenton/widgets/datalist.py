@@ -15,12 +15,15 @@
 #
 ##############################################################################
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
 from xml.dom import minidom
-from subwindow import SubWindowBase
+from .subwindow import SubWindowBase
 import types
-import tidy
+try:
+    import tidy
+except ImportError:
+    tidy = None
 
 class DataListBase (SubWindowBase):
 	def copyDataToClipboard(self, data):
@@ -29,7 +32,7 @@ class DataListBase (SubWindowBase):
 		mimeData = QMimeData()
 		mimeData.setHtml(html)
 		clip.setMimeData(mimeData)
-		
+
 	def findActiveTable(self):
 		tab = self.findChild(QTabWidget)
 		table = None
@@ -40,11 +43,11 @@ class DataListBase (SubWindowBase):
 		if table is None:
 			table = self.findChild(QTableView)
 		return table
-		
+
 	def dataToHtml(self, data):
 		impl = minidom.getDOMImplementation()
-		dt = impl.createDocumentType('html', 
-				'-//W3C//DTD XHTML 1.0 Strict//EN', 
+		dt = impl.createDocumentType('html',
+				'-//W3C//DTD XHTML 1.0 Strict//EN',
 				'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd')
 		doc = impl.createDocument(None, 'html', dt)
 		h = doc.documentElement
@@ -66,12 +69,12 @@ class DataListBase (SubWindowBase):
 			for i in l:
 				td = doc.createElement('td')
 				tr.appendChild(td)
-				text = doc.createTextNode(unicode(i))
+				text = doc.createTextNode(str(i))
 				td.appendChild(text)
 		html = doc.toxml()
 		pos = html.find('?>')
 		return html[pos + 2:]
-		
+
 	@pyqtSlot()
 	def copy(self):
 		table = self.findActiveTable()
@@ -100,38 +103,38 @@ class DataListBase (SubWindowBase):
 			dc = []
 			for j in range(min_col,  max_col + 1):
 				v = model.data(model.index(i, j))
-				if v.type() == QVariant.Double:
-					vv = unicode(QString("%L1").arg(v.toDouble()[0], 0, 'f'))
+				if isinstance(v, float):
+					vv = str(v)
 				else:
-					vv = unicode(v.toString())
+					vv = str(v) if v is not None else ""
 				dc.append(vv)
 			d.append(dc)
 		self.copyDataToClipboard(d)
-		
+
 	def canCopy(self):
 		return True
-	
+
 class DataList (QWidget, DataListBase):
-	def __init__(self, parent = None, flags = Qt.WindowFlags()):
+	def __init__(self, parent = None, flags = Qt.WindowType(0)):
 		QWidget.__init__(self, parent, flags)
-		
+
 	def askAndRemoveRows(self, view, model):
 		l = view.selectionModel().selectedIndexes()
-		
+
 		if not model.eraseActive(l):
 			return
 		res = QMessageBox.question(self, self.tr("¿Está seguro?"),
 				self.tr("¿Desea eliminar los registros seleccionados?\n" +
 					"Esta operación es permanente e irreversible"),
-				QMessageBox.Yes | QMessageBox.Escape,
-				QMessageBox.No | QMessageBox.Default)
-		if res != QMessageBox.Yes:
+				QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Escape,
+				QMessageBox.StandardButton.No)
+		if res != QMessageBox.StandardButton.Yes:
 			return
-			
+
 		if not model.eraseRows(l):
-			QMessageBox.warning(self, self.tr("Error al borrar"), 
-					self.tr("Se produjo un error: %1").arg(model.lastError().text()),
-					QMessageBox.Ok)
+			QMessageBox.warning(self, self.tr("Error al borrar"),
+					self.tr("Se produjo un error: %s") % model.lastError().text(),
+					QMessageBox.StandardButton.Ok)
 
 	def askAndAddRow(self, r, model):
 		model.calcSeq(r)
@@ -139,22 +142,22 @@ class DataList (QWidget, DataListBase):
 			return 1
 		model.submitTrans()
 		return 0
-			
+
 	def putCombobox(self, combo, model, columna, columna2=''):
 		for i in range(model.rowCount()):
-			t=model.record(i).value(columna).toString()
+			t=str(model.record(i).value(columna) or "")
 			if not columna2=='':
-				t = t + " - " + model.record(i).value(columna2).toString()
-			n=model.record(i).value('id').toInt()[0]
+				t = t + " - " + str(model.record(i).value(columna2) or "")
+			n=int(model.record(i).value('id') or 0)
 			combo.addItem(t, n)
-		
+
 	def cambiaEncabezado(self, model, lista):
 		i=1
 		for nombre in lista:
 			model.setHeaderData(i, Qt.Horizontal, self.tr(nombre))
 			i=i+1
 		return
-	
+
 	def listActions(self, tabla):
 		l = self.children()
 		r = []
@@ -162,8 +165,8 @@ class DataList (QWidget, DataListBase):
 			if i.inherits('QAction'):
 				r.append(i)
 		return r
-		
-	@pyqtSlot("const QPoint &")
+
+	@pyqtSlot(QPoint)
 	def showContextMenu(self, point):
 		menu = QMenu(self)
 		sender = self.sender()
@@ -171,7 +174,7 @@ class DataList (QWidget, DataListBase):
 			return
 		if not sender.inherits('QObject'):
 			return
-		nombre = unicode(sender.objectName())
+		nombre = str(sender.objectName())
 		method = nombre + '_contextualMenuActions'
 		d = self.__class__.__dict__
 		if method in d and type(d[method]) is types.FunctionType:
@@ -188,26 +191,26 @@ class DataList (QWidget, DataListBase):
 			pos = sender.mapToGlobal(point)
 		else:
 			pos = point
-		menu.exec_(pos)
-	
+		menu.exec(pos)
+
 	def getDataFromClipboard(self, checked, insertData):
 		clip = QApplication.clipboard()
 		mimeData = clip.mimeData()
 		if (mimeData.hasHtml()):
-			html = unicode(mimeData.html())
+			html = str(mimeData.html())
 			data = self.dataFromHtml(html)
 			try:
 				insertData(data)
-			except Exception, e:
-				QMessageBox.critical(self, self.tr('Error en insercion'), unicode(e), QMessageBox.Ok)
+			except Exception as e:
+				QMessageBox.critical(self, self.tr('Error en insercion'), str(e), QMessageBox.StandardButton.Ok)
 
-	@pyqtSlot("bool")
+	@pyqtSlot(bool)
 	def dataFromClipboard(self, checked):
 		self.getDataFromClipboard(self, checked, self.insertData)
-		
+
 	def insertData(self, data):
 		pass
-	
+
 	def htmlGetEncoding(self, doc):
 		l = doc.getElementsByTagName('meta')
 		for i in l:
@@ -220,7 +223,7 @@ class DataList (QWidget, DataListBase):
 						return v[p:].lower()
 					break
 		return 'ascii'
-	
+
 	def elementText(self, el):
 		t = u''
 		el.normalize()
@@ -231,9 +234,9 @@ class DataList (QWidget, DataListBase):
 			elif n.nodeType == n.ELEMENT_NODE:
 				t = t + self.elementText(n)
 			n = n.nextSibling
-		t = unicode(t.encode('iso8859-1', 'ignore'), 'iso8859-1')
+		t = t.encode('iso8859-1', 'ignore').decode('iso8859-1')
 		return t
-		
+
 	def dataFromHtml(self, html):
 		options = dict(output_xhtml=1, add_xml_decl=1, indent=1, tidy_mark=0, char_encoding='utf8')
 		html_good = str(tidy.parseString(html.encode('utf8'), **options))
@@ -241,7 +244,7 @@ class DataList (QWidget, DataListBase):
 		enc = self.htmlGetEncoding(doc)
 		if enc != 'utf8' and enc != 'utf-8':
 			doc.unlink()
-			options = dict(output_xhtml=1, add_xml_decl=1, indent=1, 
+			options = dict(output_xhtml=1, add_xml_decl=1, indent=1,
 						tidy_mark=0, input_encoding=enc, output_enconding='utf8')
 			html_good = str(tidy.parseString(html.encode('utf8'), **options))
 			doc = minidom.parseString(html_good)
@@ -266,4 +269,3 @@ class DataList (QWidget, DataListBase):
 			r.append(r1)
 		doc.unlink()
 		return r
-		

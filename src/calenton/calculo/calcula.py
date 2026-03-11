@@ -15,83 +15,80 @@
 #
 ##############################################################################
 
-from PyQt4.QtSql import *
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from cache import *
-from js import motor, bonito
+from PyQt6.QtSql import *
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
+from .cache import *
+from ..js import motor, bonito
 import gc, tempfile, os, sys
 import shutil
 
 class CalcException (Exception):
 	def __init__(self, aforo, value):
-		self.value = value 
+		self.value = value
 		if aforo is not None:
 			self.value = self.value + ("\nAl calcular aforo '%s'" % (aforo.nombre)) + \
 				("\nen fuente '%s'" % (aforo.nombreFuente))
-			
+
 	def __str__(self):
 		return str(self.value)
-		
-	def __unicode__(self):
-		return unicode(self.value)
-	
+
 class Dato:
 	def __init__(self, idDato, nombre, idClasificacion, valor = 0.0):
 		self.idDato = idDato
 		self.nombre = nombre
 		self.idClasificacion = idClasificacion
 		self.valor = valor
-		
+
 	def setValor(self, valor):
 		self.valor = valor
-		
+
 	@staticmethod
 	def toDict(datos):
 		res = {}
 		for i in datos:
 			res[i.nombre] = i.valor
 		return res
-		
+
 	@staticmethod
 	def fromIdDato(idDato, db):
 		sql = "select nombre, idclasificacion from dato where id = %d" % (idDato)
 		q = QSqlQuery(sql, db)
 		if not q.isActive() or not q.next():
-			raise CalcException(self, "Error al consultar el dato %d" % (idDato))
-		nombre = q.value(0).toString()
-		idclas = q.value(1).toInt()[0]
+			raise CalcException(None, "Error al consultar el dato %d" % (idDato))
+		nombre = str(q.value(0) or "")
+		idclas = int(q.value(1) or 0)
 		return Dato(idDato, nombre, idclas)
 
 class Contaminante:
 	def __init__(self, idContaminante, nombre):
 		self.idContaminante = idContaminante
 		self.nombre = nombre
-		
+
 	@staticmethod
 	def fromIdContaminante(idContaminante, db):
 		sql = "select nombre from contaminante where id = %d" % (idContaminante)
 		q = QSqlQuery(sql, db)
 		if not q.isActive() or not q.next():
-			raise CalcException(self, "Error al consultar el contaminante %d" % (idDato))
-		nombre = q.value(0).toString()
+			raise CalcException(None, "Error al consultar el contaminante %d" % (idContaminante))
+		nombre = str(q.value(0) or "")
 		return Contaminante(idContaminante, nombre)
 
 class Clasificacion:
 	def __init__(self, idClasificacion, codigo):
 		self.idClasificacion = idClasificacion
 		self.codigo = codigo
-		
+
 	@staticmethod
 	def fromIdClasificacion(idClasificacion, db):
 		sql = "select codigo from clasificacion where id = %d" % (idClasificacion)
 		q = QSqlQuery(sql, db)
 		if not q.isActive() or not q.next():
-			raise CalcException(self, "Error al consultar la clasificacion %d" % (idDato))
-		codigo = q.value(0).toString()
+			raise CalcException(None, "Error al consultar la clasificacion %d" % (idClasificacion))
+		codigo = str(q.value(0) or "")
 		return Clasificacion(idClasificacion, codigo)
-		
-	
+
+
 class Aforo:
 	def __init__(self, db, cache, idAforo):
 		self.db = db
@@ -103,17 +100,16 @@ class Aforo:
 		self.cacheValores = {}
 		self.cacheDatos = {}
 		self.cacheClasificaciones = None
-		
+
 	def params(self):
 		if self.cacheParams is None:
 			self.cacheParams = self.cache.params(self.idAforo)
 		return self.cacheParams
-		
+
 	def consigueDatosBD(self, idClasificacion):
 		QApplication.processEvents()
-		QApplication.flush()
 		sql = """select d.id, d.nombre, d.idclasificacion, vd.valor
-			from dato d left outer join valordato vd 
+			from dato d left outer join valordato vd
 				on (vd.iddato = d.id and vd.idaforo = %d)
 			where d.idclasificacion in (select * from jerarquia_clasificacion(%d))
 			""" % (self.idAforo, idClasificacion)
@@ -121,20 +117,20 @@ class Aforo:
 		if not q.isActive():
 			self.nombre = "%d" % (self.idAforo)
 			self.nombreFuente = ""
-			raise CalcException(self, 
+			raise CalcException(self,
 				"Error al consultar los datos de la clasificacion %d " % (idClasificacion))
 		res = []
 		valores = {}
 		while q.next():
-			id = q.value(0).toInt()[0]
-			nombre = q.value(1).toString()
-			idclas = q.value(2).toInt()[0]
-			valor = q.value(3).toDouble()[0]
+			id = int(q.value(0) or 0)
+			nombre = str(q.value(1) or "")
+			idclas = int(q.value(2) or 0)
+			valor = float(q.value(3) or 0.0)
 			res.append(Dato(id, nombre, idclas, valor))
 			self.cacheValores[id] = valor
 		q.clear()
 		self.cacheDatos[idClasificacion] = res
-		
+
 	def consigueClasificacionesBD(self):
 		sql = "select idclasificacion from fuenteclasificacion where idfuente = %d" % (self.idFuente)
 		q = QSqlQuery(sql, self.db)
@@ -143,31 +139,30 @@ class Aforo:
 					"para la fuente %d" % (self.idFuente))
 		res = []
 		while q.next():
-			id = q.value(0).toInt()[0]
+			id = int(q.value(0) or 0)
 			res.append(id)
 		q.clear()
 		self.cacheClasificaciones = res
-		
+
 	def clasificaciones(self):
 		if self.cacheClasificaciones is None:
 			self.consigueClasificacionesBD()
 		return self.cacheClasificaciones
-		
+
 	def datos(self, idClasificacion):
-		if not self.cacheDatos.has_key(idClasificacion):
+		if idClasificacion not in self.cacheDatos:
 			self.consigueDatosBD(idClasificacion)
 		return self.cacheDatos[idClasificacion]
-		
+
 	def valorDato(self, idClasificacion, idDato):
-		if not self.cacheValores.has_key(idDato):
+		if idDato not in self.cacheValores:
 			self.consigueDatosBD(idClasificacion)
 		return self.cacheValores[idDato]
-		
+
 	def consigueDatosPropios(self):
 		QApplication.processEvents()
-		QApplication.flush()
 		sql = """select a.idfuente, a.nombre, f.nombre, a.escala
-			from aforo a, fuente f 
+			from aforo a, fuente f
 			where a.id = %d and
 				f.id = a.idfuente
 			""" % (self.idAforo)
@@ -177,14 +172,19 @@ class Aforo:
 		if not q.isActive():
 			raise CalcException(self, "Error en valor al buscar aforo para " + \
 					"idaforo = %d" % ( self.idAforo ))
-		if not q.next():		
+		if not q.next():
 			raise CalcException(self, "Error: no existe el aforo para " + \
 					"idaforo = %d" % ( self.idAforo ))
-		self.idFuente = q.value(0).toInt()[0]
-		self.nombre = q.value(1).toString()
-		self.nombreFuente = q.value(2).toString()
-		(self.escala, g) = q.value(3).toDouble()
-		if not g:
+		self.idFuente = int(q.value(0) or 0)
+		self.nombre = str(q.value(1) or "")
+		self.nombreFuente = str(q.value(2) or "")
+		escala_raw = q.value(3)
+		if escala_raw is not None:
+			try:
+				self.escala = float(escala_raw)
+			except (ValueError, TypeError):
+				self.escala = None
+		else:
 			self.escala = None
 		q.clear()
 
@@ -208,84 +208,82 @@ class CalculaEscenario:
 		self.ficheroInforme = None
 		self.nombreFicheroInforme = None
 		s = QSettings()
-		self.embellece = s.value("script/beautifier").toBool()
-		
+		self.embellece = bool(s.value("script/beautifier", False))
+
 	def limpiaCacheParcial(self):
 		self.cacheContaminantes = {}
 		self.cacheFormulas = {}
 		self.cacheFormulasClasificacion = {}
 		self.cacheFormulasContaminante = {}
-		
+
 	def daMensaje(self, msg):
 		if self.avisador is None:
 			return
 		if not self.avisador.daMensaje(msg, self.calculados):
 			raise CalcException(None, "Cancelada")
-		
+
 	def iniciaFicheroDebug(self):
 		self.informeAFichero = True
 		(fileno, self.nombreFicheroInforme) = tempfile.mkstemp(text = True)
-		self.ficheroInforme = os.fdopen(fileno, "w+")
-		self.ficheroInforme.write(self.informe.encode('utf-8'))
+		self.ficheroInforme = os.fdopen(fileno, "w+", encoding='utf-8')
+		self.ficheroInforme.write(self.informe)
 		self.ficheroInforme.flush()
-		
+
 	def debug(self, msg):
 		if self.generaInforme:
 			if self.informeAFichero:
 				m = msg + u"\n"
-				self.ficheroInforme.write(m.encode('utf-8'))
+				self.ficheroInforme.write(m)
 			else:
 				self.informe = self.informe + msg + u"\n"
 				if len(self.informe) > 5000:
 					self.iniciaFicheroDebug()
-					
+
 	def debugException(self, type, value, tback):
 		if self.generaInforme:
 			traceback.print_exception(tback, None, self.ficheroInforme)
-				
+
 	def getInforme(self):
 		if self.informeAFichero and self.ficheroInforme is not None:
-			f2 = open(self.nombreFicheroInforme)
-			res = unicode(f2.read(), 'utf-8')
-			f2.close()
+			with open(self.nombreFicheroInforme, encoding='utf-8') as f2:
+				res = f2.read()
 			return res
 		else:
-			return informe
-			
+			return self.informe
+
 	def guardaInforme(self, nombreFichero):
 		if self.informeAFichero and self.ficheroInforme is not None:
 			shutil.copy(self.nombreFicheroInforme, nombreFichero)
 		else:
-			f2 = open(nombreFichero, "w+")
-			f2.write(informe.encode('utf-8'))
-			f2.close()
-		
+			with open(nombreFichero, "w+", encoding='utf-8') as f2:
+				f2.write(self.informe)
+
 	def limpiaInforme(self, genera):
 		self.informe = u""
 		self.generaInforme = genera
 		self.informeAFichero = False
 		self.ficheroInforme = None
 		self.nombreFicheroInforme = None
-		
+
 	def descartaInforme(self):
 		if self.ficheroInforme is not None:
 			self.ficheroInforme.close()
 			os.unlink(self.nombreFicheroInforme)
 		self.limpiaInforme(False)
-		
+
 	def terminaInforme(self):
-		self.ficheroInforme.close()
-		
+		if self.ficheroInforme is not None:
+			self.ficheroInforme.close()
+
 	def ejecutaSql(self, sql, aforo = None):
 		QApplication.processEvents()
-		QApplication.flush()
-		q = self.db.exec_(sql)
+		q = self.db.exec(sql)
 		if not q.isActive():
-			raise CalcException(aforo, q.lastError().text())		
+			raise CalcException(aforo, q.lastError().text())
 		return q
-		
+
 	def borra(self):
-		sql = """delete 
+		sql = """delete
 			from contaminante
 			where idaforo in (
 				select a.id
@@ -295,16 +293,16 @@ class CalculaEscenario:
 				)
 			""" % (self.idEscenario)
 		self.ejecutaSql(sql).clear()
-		
+
 	def insertaContaminanteAforo(self, aforo, idContaminante, idClasificacion, valor):
-		sql = """insert 
+		sql = """insert
 			into contaminanteaforo (
 				id, idaforo, idclasificacion, idcontaminante, valor)
 			values (
 				nextval('seq_contaminanteaforo'), %d, %d, %d, %f)
 			""" % (aforo.idAforo, idClasificacion, idContaminante, valor)
 		self.ejecutaSql(sql, aforo).clear()
-		
+
 	def consigueAforosContaminanteValidado(self):
 		sql = """select distinct a.id
 			from contaminantevalidadoaforo cv, aforo a, fuente f
@@ -315,26 +313,33 @@ class CalculaEscenario:
 		q = self.ejecutaSql(sql)
 		r = set()
 		while q.next():
-			id = q.value(0).toInt()[0]
+			id = int(q.value(0) or 0)
 			r.add(id)
 		q.clear()
 		self.cacheAforosContaminanteValidado = r
-		
+
 	def intentaContaminanteValidado(self, aforo, idContaminante, idClasificacion):
 		if self.cacheAforosContaminanteValidado is None:
 			self.consigueAforosContaminanteValidado()
 		if aforo.idAforo not in self.cacheAforosContaminanteValidado:
 			return None
 		sql = """select valor
-			from contaminantevalidadoaforo 
+			from contaminantevalidadoaforo
 			where idaforo = %d and
 				idcontaminante = %d and
 				idclasificacion = %d
 			""" % (aforo.idAforo, idContaminante, idClasificacion)
 		q = self.ejecutaSql(sql, aforo)
 		if q.next():
-			(v, g) = q.value(0).toDouble()
-			if not g:
+			v_raw = q.value(0)
+			if v_raw is None:
+				q.clear()
+				raise CalcException(aforo, "Error en valor al buscar contaminantevalidadoaforo para " + \
+						"idaforo = %d, idcontaminante = %d, idclasificacion = %d" % (
+						aforo.idAforo, idContaminante, idClasificacion))
+			try:
+				v = float(v_raw)
+			except (ValueError, TypeError):
 				q.clear()
 				raise CalcException(aforo, "Error en valor al buscar contaminantevalidadoaforo para " + \
 						"idaforo = %d, idcontaminante = %d, idclasificacion = %d" % (
@@ -343,19 +348,19 @@ class CalculaEscenario:
 			return v
 		q.clear()
 		return None
-		
+
 	def consigueFormula(self, aforo, idFormula):
 		sql = "select expresion from formula where id = %d" % (idFormula)
 		q = self.ejecutaSql(sql, aforo)
 		if not q.next():
 			raise CalcException(aforo, "Error en valor al buscar fórmula con id = %d" % (
 					idFormula))
-		expresion = unicode(q.value(0).toString())
+		expresion = str(q.value(0) or "")
 		q.clear()
 		self.cacheFormulas[idFormula] = expresion
-		
+
 	def ejecutaFormula(self, aforo, idClasificacion, idContaminante, idFormula, idDato = None):
-		if not self.cacheFormulas.has_key(idFormula):
+		if idFormula not in self.cacheFormulas:
 			self.consigueFormula(aforo, idFormula)
 		expresion = self.cacheFormulas[idFormula]
 		datos = Dato.toDict(aforo.datos(idClasificacion))
@@ -375,8 +380,8 @@ class CalculaEscenario:
 			v = self.motorJS.evaluaFormula(expresion, params)
 			self.debug(u"\t\t\t\tResultado: %f" % (v))
 			return v
-		except Exception, e:
-			mensaje = unicode(e)
+		except Exception as e:
+			mensaje = str(e)
 			clasificacion = Clasificacion.fromIdClasificacion(idClasificacion, self.db)
 			contaminante = Contaminante.fromIdContaminante(idContaminante, self.db)
 			mensaje = mensaje + (u"\nen clasificacion %s, contaminante %s" % (
@@ -385,10 +390,10 @@ class CalculaEscenario:
 				dato = Dato.fromIdDato(idDato, self.db)
 				mensaje = mensaje + (u"\ndato '%s'" % (dato.nombre))
 			raise CalcException(aforo, mensaje)
-		
+
 	def consigueFormulaClasificacion(self, aforo, idContaminante, idClasificacion):
 		clave = "%d-%d" % (idContaminante, idClasificacion)
-		if self.cacheFormulaClasificacion.has_key(clave):
+		if clave in self.cacheFormulaClasificacion:
 			return self.cacheFormulaClasificacion[clave]
 		sql = """
 			select idformula
@@ -402,25 +407,31 @@ class CalculaEscenario:
 		if not q.next():
 			self.cacheFormulaClasificacion[clave] = None
 			return None
-		(idFormula, g) = q.value(0).toInt()
+		idFormula_raw = q.value(0)
 		q.clear()
-		if not g:
+		if idFormula_raw is None:
+			raise CalcException(aforo, "Error en valor al buscar fórmula de clasificación para " + \
+					"idcontaminante = %d, idclasificacion = %d" % (
+					idContaminante, idClasificacion))
+		try:
+			idFormula = int(idFormula_raw)
+		except (ValueError, TypeError):
 			raise CalcException(aforo, "Error en valor al buscar fórmula de clasificación para " + \
 					"idcontaminante = %d, idclasificacion = %d" % (
 					idContaminante, idClasificacion))
 		self.cacheFormulaClasificacion[clave] = idFormula
 		return idFormula
-		
+
 	def intentaFormulaClasificacion(self, aforo, idContaminante, idClasificacion):
 		idFormula = self.consigueFormulaClasificacion(aforo, idContaminante, idClasificacion)
 		if idFormula is None:
 			return None
 		self.debug(u"\t\tTengo fórmula de clasificación")
 		return self.ejecutaFormula(aforo, idClasificacion, idContaminante, idFormula)
-		
+
 	def consigueFormulaContaminante(self, aforo, idContaminante, idClasificacion):
 		clave = "%d-%d" % (idContaminante, idClasificacion)
-		if self.cacheFormulaContaminante.has_key(clave):
+		if clave in self.cacheFormulaContaminante:
 			return self.cacheFormulaContaminante[clave]
 		sql = """select d.id, m.idformula
 			from dato d, mapdatocontaminante m
@@ -433,13 +444,13 @@ class CalculaEscenario:
 		q = self.ejecutaSql(sql, aforo)
 		res = []
 		while q.next():
-			idDato = q.value(0).toInt()[0]
-			idFormula = q.value(1).toInt()[0]
+			idDato = int(q.value(0) or 0)
+			idFormula = int(q.value(1) or 0)
 			res.append([idDato, idFormula])
 		q.clear()
 		self.cacheFormulaContaminante[clave] = res
 		return res
-		
+
 	def intentaFormulaContaminante(self, aforo, idContaminante, idClasificacion):
 		lista = self.consigueFormulaContaminante(aforo, idContaminante, idClasificacion)
 		res = 0.0
@@ -457,21 +468,21 @@ class CalculaEscenario:
 			res = res + v
 			if self.generaInforme:
 				nombre = dato.nombre
-				while listaDatos.has_key(nombre):
+				while nombre in listaDatos:
 					nombre = nombre + " - DUP!"
 				listaDatos[nombre] = v
 		if self.generaInforme:
 			contaminante = Contaminante.fromIdContaminante(idContaminante, self.db)
 			self.debug(u"\t\tResumen para el contaminante '%s'" % (contaminante.nombre))
-			for k, v in listaDatos.iteritems():
+			for k, v in listaDatos.items():
 				self.debug(u"\t\t\t%s\t%f" % (k, v))
 		return res
-		
+
 	def calculaContaminanteAforo(self, aforo, idContaminante, idClasificacion):
 		if self.generaInforme:
 			contaminante = Contaminante.fromIdContaminante(idContaminante, self.db)
 			clasificacion = Clasificacion.fromIdClasificacion(idClasificacion, self.db)
-			self.debug(u"\tCalculo el contaminante '%s' para la clasificacion '%s'" 
+			self.debug(u"\tCalculo el contaminante '%s' para la clasificacion '%s'"
 					% (contaminante.nombre, clasificacion.codigo))
 		v = self.intentaContaminanteValidado(aforo, idContaminante, idClasificacion)
 		if v is not None:
@@ -483,7 +494,7 @@ class CalculaEscenario:
 		if v is not None:
 			return v
 		return 0.0
-		
+
 	def actualizaContaminanteAforo(self, aforo, idContaminante, idClasificacion):
 		v = self.calculaContaminanteAforo(aforo, idContaminante, idClasificacion)
 		if v is None or v == 0.0:
@@ -495,10 +506,10 @@ class CalculaEscenario:
 		if self.generaInforme:
 			contaminante = Contaminante.fromIdContaminante(idContaminante, self.db)
 			clasificacion = Clasificacion.fromIdClasificacion(idClasificacion, self.db)
-			self.debug(u"\tContaminante '%s' para la clasificacion '%s', escala %f: %f" 
+			self.debug(u"\tContaminante '%s' para la clasificacion '%s', escala %f: %f"
 					% (contaminante.nombre, clasificacion.codigo, escala, v))
 		self.insertaContaminanteAforo(aforo, idContaminante, idClasificacion, v)
-		
+
 	def consigueContaminantesBD(self, idClasificacion):
 		sql = """select distinct m.idcontaminante
 			from mapdatocontaminante m
@@ -508,16 +519,16 @@ class CalculaEscenario:
 		q = self.ejecutaSql(sql)
 		res = []
 		while q.next():
-			id = q.value(0).toInt()[0]
+			id = int(q.value(0) or 0)
 			res.append(id)
 		q.clear()
 		self.cacheContaminantes[idClasificacion] = res
-		
+
 	def contaminantes(self, idClasificacion):
-		if not self.cacheContaminantes.has_key(idClasificacion):
+		if idClasificacion not in self.cacheContaminantes:
 			self.consigueContaminantesBD(idClasificacion)
 		return self.cacheContaminantes[idClasificacion]
-		
+
 	def calculaClasificacion(self, aforo, idClasificacion):
 		if self.generaInforme:
 			clasificacion = Clasificacion.fromIdClasificacion(idClasificacion, self.db)
@@ -529,7 +540,7 @@ class CalculaEscenario:
 		contaminantes = self.contaminantes(idClasificacion)
 		for i in contaminantes:
 			self.actualizaContaminanteAforo(aforo, i, idClasificacion)
-		
+
 	def intCalculaAforo(self, idAforo):
 		aforo = Aforo(self.db, self.cache, idAforo)
 		if self.generaInforme:
@@ -552,49 +563,49 @@ class CalculaEscenario:
 			self.motorJS.destruyeContexto()
 		self.debug(u"Termino correctamente %s" % (aforo.nombre))
 		self.calculados = self.calculados + 1
-		
+
 	def intCalculaFuente(self, idFuente):
 		sql = "select id from aforo where idfuente = %d" % (idFuente)
 		q = self.ejecutaSql(sql)
 		while q.next():
-			id = q.value(0).toInt()[0]
+			id = int(q.value(0) or 0)
 			self.intCalculaAforo(id)
 		q.clear()
-		
+
 	def calculaTodo(self):
 		sql = "select id from fuente where idescenario = %d" % (self.idEscenario)
 		q = self.ejecutaSql(sql)
 		while q.next():
-			id = q.value(0).toInt()[0]
-			print "Calculando fuente %d" % (id)
+			id = int(q.value(0) or 0)
+			print("Calculando fuente %d" % (id))
 			self.intCalculaFuente(id)
 			self.limpiaCacheParcial()
 			self.motorJS.collectGarbage()
 			gc.collect()
 		q.clear()
-		
+
 	def borraDatosZona(self):
-		sql = """delete 
-			from datozona 
+		sql = """delete
+			from datozona
 			where idzona in (
-					select id 
-					from zona 
+					select id
+					from zona
 					where idnivelzona > 1
-					) and 
+					) and
 				idtipodatozona in (
-					select id 
-					from tipodatozona 
+					select id
+					from tipodatozona
 					where idescenario = %d
 					)
 			""" % (self.idEscenario)
 		self.ejecutaSql(sql).clear()
-		
+
 	def borraEscenario(self):
 		self.daMensaje("Borrando datos anteriores")
-		sql = """delete 
+		sql = """delete
 			from contaminanteaforo
 			where idaforo in (
-				select a.id 
+				select a.id
 				from aforo a, fuente f
 				where a.idfuente = f.id and
 					f.idescenario = %d
@@ -612,44 +623,44 @@ class CalculaEscenario:
 		self.ejecutaSql(sql).clear()
 		self.borraDatosZona()
 		self.calculados = self.calculados + 1
-		
+
 	def borraAforo(self, idAforo):
 		sql = "delete from contaminanteaforo where idaforo = %d" % (idAforo)
 		self.ejecutaSql(sql).clear()
-		
+
 	def borraFuente(self, idFuente):
-		sql = """delete 
-			from contaminanteaforo 
+		sql = """delete
+			from contaminanteaforo
 			where idaforo in (
 				select id
-				from aforo 
+				from aforo
 				where idfuente = %d
 				)
 			""" % (idFuente)
 		self.ejecutaSql(sql).clear()
 		self.calculados = self.calculados + 1
-		
+
 	def calculaNumAforos(self):
-		sql = """select count(*) 
-			from aforo a, fuente f 
+		sql = """select count(*)
+			from aforo a, fuente f
 			where a.idfuente = f.id and
 				f.idescenario = %d
 			""" % (self.idEscenario)
 		q = self.ejecutaSql(sql)
 		if q.next():
-			self.total = q.value(0).toInt()[0] + 1
+			self.total = int(q.value(0) or 0) + 1
 		self.avisador.setNumAforos(self.total)
-		
+
 	def calculaNumAforosFuente(self, idFuente):
-		sql = """select count(*) 
+		sql = """select count(*)
 			from aforo a
 			where a.idfuente = %d
 			""" % (idFuente)
 		q = self.ejecutaSql(sql)
 		if q.next():
-			self.total = q.value(0).toInt()[0] + 1
+			self.total = int(q.value(0) or 0) + 1
 		self.avisador.setNumAforos(self.total)
-		
+
 	def calculaDatosZona(self):
 		sql = """insert into datozona (id, idzona, idtipodatozona, dato)
 			select nextval('seq_datozona'), zp.id, tdz.id, sum(dz.dato)
@@ -663,11 +674,11 @@ class CalculaEscenario:
 			group by zp.id, tdz.id
 			""" % (self.idEscenario)
 		self.ejecutaSql(sql).clear()
-		
+
 	def mapeaContaminantesAZona(self):
-		sql = """insert into contaminantezona (id, idcontaminante, 
+		sql = """insert into contaminantezona (id, idcontaminante,
 					idfuente, idzona, idclasificacion, valor)
-			select nextval('seq_contaminantezona'), ca.idcontaminante, 
+			select nextval('seq_contaminantezona'), ca.idcontaminante,
 					a.idfuente, a.idzona, ca.idclasificacion, sum(valor)
 			from contaminanteaforo ca, aforo a, zona z, fuente f
 			where a.id = ca.idaforo and
@@ -681,17 +692,17 @@ class CalculaEscenario:
 		sql = """create temporary table contaminantezona_tmp
 			(like contaminantezona including indexes)""";
 		self.ejecutaSql(sql).clear()
-		sql = """insert into contaminantezona_tmp (id, idcontaminante, 
-						idfuente, idzona, idclasificacion, 
+		sql = """insert into contaminantezona_tmp (id, idcontaminante,
+						idfuente, idzona, idclasificacion,
 						valor)
-			select nextval('seq_contaminantezona'), t.idcontaminante, 
-						t.idfuente, z.id, t.idclasificacion, 
+			select nextval('seq_contaminantezona'), t.idcontaminante,
+						t.idfuente, z.id, t.idclasificacion,
 						sum(t.valor * dz.dato / dzp.dato)
 			from zona z, relzona rz, datozona dz, datozona dzp, (
-				select ca.idcontaminante as idcontaminante, 
-					a.idfuente as idfuente, 
-					a.idzona as idzona, 
-					ca.idclasificacion as idclasificacion, 
+				select ca.idcontaminante as idcontaminante,
+					a.idfuente as idfuente,
+					a.idzona as idzona,
+					ca.idclasificacion as idclasificacion,
 					coalesce(a.idtipodatozona, f.idtipodatozona) as idtipodatozona,
 					sum(valor) as valor
 				from contaminanteaforo ca, aforo a, zona z, fuente f
@@ -700,16 +711,16 @@ class CalculaEscenario:
 					z.id = a.idzona and
 					z.idnivelzona > 1 and
 					f.idescenario = %d
-				group by idcontaminante, idfuente, idzona, idclasificacion, 
-					coalesce(a.idtipodatozona, f.idtipodatozona) 
+				group by idcontaminante, idfuente, idzona, idclasificacion,
+					coalesce(a.idtipodatozona, f.idtipodatozona)
 				) as t
-			where t.idzona = rz.idzonapadre and 
+			where t.idzona = rz.idzonapadre and
 				z.id = rz.idzona and
-				z.idnivelzona = 1 and 
+				z.idnivelzona = 1 and
 				dzp.idzona = t.idzona and
 				dz.idzona = z.id and
 				dzp.idtipodatozona = t.idtipodatozona and
-				dz.idtipodatozona = t.idtipodatozona and 
+				dz.idtipodatozona = t.idtipodatozona and
 				dz.dato > 0
 			group by t.idcontaminante, t.idfuente, z.id, t.idclasificacion
 			""" % (self.idEscenario)
@@ -720,7 +731,7 @@ class CalculaEscenario:
 				from contaminantezona_tmp czt
 				where czt.idcontaminante = cz.idcontaminante and
 					czt.idfuente = cz.idfuente and
-					czt.idzona = cz.idzona and 
+					czt.idzona = cz.idzona and
 					czt.idclasificacion = cz.idclasificacion
 				), 0.0)
 			"""
@@ -728,27 +739,27 @@ class CalculaEscenario:
 		sql = """delete
 			from contaminantezona_tmp czt
 			where exists (
-				select 1 
+				select 1
 				from contaminantezona cz
 				where czt.idcontaminante = cz.idcontaminante and
 					czt.idfuente = cz.idfuente and
-					czt.idzona = cz.idzona and 
+					czt.idzona = cz.idzona and
 					czt.idclasificacion = cz.idclasificacion
 				)
 			"""
 		self.ejecutaSql(sql).clear()
 		sql = """insert into contaminantezona (id, idcontaminante, idfuente, idzona, idclasificacion, valor)
-			select id, idcontaminante, idfuente, idzona, idclasificacion, valor 
+			select id, idcontaminante, idfuente, idzona, idclasificacion, valor
 			from contaminantezona_tmp
 			"""
 		self.ejecutaSql(sql).clear()
 		sql = "drop table if exists contaminantezona_tmp"
 		self.ejecutaSql(sql).clear()
-		
+
 	def borraTablasTemporales(self):
 		sql = "drop table if exists contaminantezona_tmp"
 		self.ejecutaSql(sql).clear()
-		
+
 	def calcula(self):
 		try:
 			self.calculados = 0
@@ -763,7 +774,7 @@ class CalculaEscenario:
 				self.avisador.reset()
 		finally:
 			self.borraTablasTemporales()
-		
+
 	def calculaAforo(self, idAforo):
 		try:
 			QApplication.instance().setOverrideCursor(Qt.WaitCursor)
@@ -771,14 +782,14 @@ class CalculaEscenario:
 			self.cache.setIdEscenario(self.idEscenario)
 			self.borraAforo(idAforo)
 			self.intCalculaAforo(idAforo)
-		except Exception,  e:
-			self.debug(u'\nSe ha producido un error: \n' + unicode(e))
+		except Exception as e:
+			self.debug(u'\nSe ha producido un error: \n' + str(e))
 			raise
 		finally:
 			self.terminaInforme()
 			self.borraTablasTemporales()
 			QApplication.instance().restoreOverrideCursor()
-			
+
 	def calculaFuente(self, idFuente):
 		try:
 			self.limpiaInforme(False)
@@ -790,8 +801,3 @@ class CalculaEscenario:
 				self.avisador.reset()
 		finally:
 			self.borraTablasTemporales()
-	
-	
-
-	
-	

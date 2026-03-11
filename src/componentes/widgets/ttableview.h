@@ -17,7 +17,7 @@
 class TTableView: public QTableView {
 	Q_OBJECT
 public:
-	TTableView(QWidget *parent = 0);
+	TTableView(QWidget *parent = nullptr);
 	~TTableView();
 
 	virtual void	setSelectionModel(QItemSelectionModel *selectionModel);

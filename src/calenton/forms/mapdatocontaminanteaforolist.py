@@ -15,12 +15,12 @@
 #
 ##############################################################################
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from PyQt4.QtSql import *
-from ui.Ui_mapdatocontaminanteaforolist import *
-from mapdatocontaminanteaforodlg import MapDatoContaminanteAforoDlg
-from widgets.datalist import DataList
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
+from PyQt6.QtSql import *
+from .ui.Ui_mapdatocontaminanteaforolist import *
+from .mapdatocontaminanteaforodlg import MapDatoContaminanteAforoDlg
+from ..widgets.datalist import DataList
 from ts import FKItemDelegate
 
 class MapDatoContaminanteAforoList (DataList, Ui_MapDatoContaminanteAforoListClass):
@@ -42,42 +42,42 @@ class MapDatoContaminanteAforoList (DataList, Ui_MapDatoContaminanteAforoListCla
 			self.tabla.selectionModel().selectionChanged.connect(self.tabla_selectionChanged)
 			self.tabla.resizeColumnsToContents()
 			self.tabla.show()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_anade_clicked(self, checked):
 		d = MapDatoContaminanteAforoDlg(self, self.model)
 		if d.add():
 			self.model.submitTrans()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_elimina_clicked(self, checked):
 		self.askAndRemoveRows(self.tabla, self.model)
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_guardar_clicked(self, checked):
 		self.model.submitTrans()
 		self.anade.setEnabled(True)
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_descartar_clicked(self, checked):
 		self.model.select()
 		self.model.revertAll()
 		self.anade.setEnabled(True)
-		
-	@pyqtSlot("const QModelIndex &")
+
+	@pyqtSlot(QModelIndex)
 	def on_tabla_doubleClicked(self, index):
 		dm = MapDatoContaminanteAforoDlg(self, self.model)
 		if dm.edit(index.row()):
 			self.model.submitTrans()
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_edita_clicked(self, checked):
 		l = self.tabla.selectedIndexes()
 		l2 = self.model.selectedRows(l)
 		if len(l2) == 1:
 			self.on_tabla_doubleClicked(l[0])
-		
-	@pyqtSlot("const QItemSelection &", "const QItemSelection &")
+
+	@pyqtSlot(QItemSelection, QItemSelection)
 	def tabla_selectionChanged(self, after, before):
 		l = self.tabla.selectionModel().selectedIndexes()
 		p=self.model.pendingChanges()
@@ -85,5 +85,3 @@ class MapDatoContaminanteAforoList (DataList, Ui_MapDatoContaminanteAforoListCla
 		self.idSel = self.model.getId(l)
 		self.edita.setEnabled(self.idSel > 0 and not self.model.pendingChanges())
 		self.anade.setEnabled(not self.model.pendingChanges())
-		
-

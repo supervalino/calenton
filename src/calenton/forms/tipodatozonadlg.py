@@ -15,9 +15,8 @@
 #
 ##############################################################################
 
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtCore import QVariant
-from ui import Ui_tipodatozonadlg
+from PyQt6 import QtWidgets, QtCore
+from .ui import Ui_tipodatozonadlg
 from ts import DataDialog
 
 class TipoDatoZonaDlg (DataDialog, Ui_tipodatozonadlg.Ui_TipoDatoZonaDlgClass):
@@ -27,37 +26,50 @@ class TipoDatoZonaDlg (DataDialog, Ui_tipodatozonadlg.Ui_TipoDatoZonaDlgClass):
 		fk = dataModel.foreignKey(dataModel.fieldIndex('idescenario'))
 		self.modelCombo = fk.model({})
 		self.escenario.setModel(self.modelCombo)
-		
+
 	def putData(self, r):
-		self.nombre.setText(r.value('nombre').toString())
-		self.unidades.setText(r.value('unidades').toString())
-		(idescenario, good) = r.value('idescenario').toInt()
-		if good:
-			self.escenario.setCurrentItemData(idescenario)
-		self.variable.setText(r.value('variable').toString())
-		self.defecto.setText(r.value('valor_defecto').toString())
-		return True
-		
-	def getData(self, r):
-		if self.nombre.text().trimmed().isEmpty():
-			self.setEditionError(self.tr("El nombre no puede estar vacío"))
-			return False
-		if self.unidades.text().trimmed().isEmpty():
-			self.setEditionError(self.tr("El campo unidades no puede estar vacío"))
-			return False
-		if self.variable.text().trimmed().isEmpty():
-			self.setEditionError(self.tr("El campo 'Variable JavaScript' no puede estar vacío"))
-			return False
-		d = self.defecto.text().trimmed()
-		(d2, good) = d.toDouble()
-		if d.isEmpty() or not good:
-			self.setEditionError(self.tr("El campo valor por defecto no es correcto"))
-			return False
-		r.setValue('nombre', self.nombre.text().trimmed())
-		r.setValue('unidades', self.unidades.text().trimmed())
-		(idescenario, good) = self.escenario.currentItemData().toInt()
-		r.setValue('idescenario', idescenario)
-		r.setValue('valor_defecto', QVariant(d2))
-		r.setValue('variable', self.variable.text().trimmed())
+		self.nombre.setText(str(r.value('nombre') or ""))
+		self.unidades.setText(str(r.value('unidades') or ""))
+		idescenario = r.value('idescenario')
+		if idescenario is not None:
+			try:
+				self.escenario.setCurrentItemData(int(idescenario))
+			except (ValueError, TypeError):
+				pass
+		self.variable.setText(str(r.value('variable') or ""))
+		self.defecto.setText(str(r.value('valor_defecto') or ""))
 		return True
 
+	def getData(self, r):
+		if self.nombre.text().strip() == "":
+			self.setEditionError(self.tr("El nombre no puede estar vacío"))
+			return False
+		if self.unidades.text().strip() == "":
+			self.setEditionError(self.tr("El campo unidades no puede estar vacío"))
+			return False
+		if self.variable.text().strip() == "":
+			self.setEditionError(self.tr("El campo 'Variable JavaScript' no puede estar vacío"))
+			return False
+		d = self.defecto.text().strip()
+		try:
+			d2 = float(d)
+		except (ValueError, TypeError):
+			self.setEditionError(self.tr("El campo valor por defecto no es correcto"))
+			return False
+		if d == "":
+			self.setEditionError(self.tr("El campo valor por defecto no es correcto"))
+			return False
+		r.setValue('nombre', self.nombre.text().strip())
+		r.setValue('unidades', self.unidades.text().strip())
+		idescenario_raw = self.escenario.currentItemData()
+		if idescenario_raw is not None:
+			try:
+				idescenario = int(idescenario_raw)
+			except (ValueError, TypeError):
+				idescenario = -1
+		else:
+			idescenario = -1
+		r.setValue('idescenario', idescenario)
+		r.setValue('valor_defecto', d2)
+		r.setValue('variable', self.variable.text().strip())
+		return True

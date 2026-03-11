@@ -15,9 +15,9 @@
 #
 ##############################################################################
 
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtGui import *
-from ui import Ui_buscardlg
+from PyQt6 import QtWidgets, QtCore, QtGui
+from PyQt6.QtWidgets import *
+from .ui import Ui_buscardlg
 
 class BuscarDlg (QDialog, Ui_buscardlg.Ui_BuscarDlg):
 	def __init__(self, parent=None):

@@ -33,7 +33,7 @@ public:
 	public:
 		Delegate(QObject *parent) : QObject(parent) {}
 		virtual bool couldAdd(TSqlTableNavigator * /* nav */ ) { return true; };
-		virtual DataDialog *createEditor(TSqlTableNavigator * /* nav */) { return NULL; }
+		virtual DataDialog *createEditor(TSqlTableNavigator * /* nav */) { return nullptr; }
 		virtual QSqlRecord newRecord(TSqlTableNavigator * /* nav */) { return QSqlRecord(); }
 		};
 private:

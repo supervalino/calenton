@@ -26,10 +26,10 @@ private:
 	bool		_nullValue;
 	QString		_nullMessage;
 public:
-	ComboDataModel(QObject *parent = NULL,
+	ComboDataModel(QObject *parent = nullptr,
 		       bool nullValue = false,
 		       const QString &nullMessage = QString());
-	ComboDataModel(QSqlQuery &q, QObject *parent = NULL,
+	ComboDataModel(QSqlQuery &q, QObject *parent = nullptr,
 		       bool nullValue = false,
 		       const QString &nullMessage = QString());
 	~ComboDataModel();

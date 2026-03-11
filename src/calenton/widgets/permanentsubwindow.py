@@ -15,28 +15,28 @@
 #
 ##############################################################################
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
 
 class PermanentSubWindow (QMdiSubWindow):
-	visibilityChanged = pyqtSignal("bool")
-	
-	def __init__(self, parent = None, flags = Qt.WindowFlags()):
+	visibilityChanged = pyqtSignal(bool)
+
+	def __init__(self, parent = None, flags = Qt.WindowType(0)):
 		QMdiSubWindow.__init__(self, parent, flags)
 		self.setAttribute(Qt.WA_DeleteOnClose, False)
-		
+
 	def hideEvent(self, evt):
 		if (self.windowState() & Qt.WindowActive) == Qt.WindowActive:
 			self.mdiArea().activateNextSubWindow()
 		QMdiSubWindow.hideEvent(self, evt)
 		if not self.isVisible():
 			self.visibilityChanged.emit(False)
-			
+
 	def showEvent(self, evt):
 		QMdiSubWindow.showEvent(self, evt)
 		if self.isVisible():
 			self.visibilityChanged.emit(True)
-			
+
 	def closeEvent(self, evt):
 		self.hide()
 		evt.ignore()

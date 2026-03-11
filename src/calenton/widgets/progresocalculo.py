@@ -15,25 +15,24 @@
 #
 ##############################################################################
 
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt6 import QtWidgets, QtCore
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
 
 class ProgresoCalculo (QProgressDialog):
-	def __init__(self, parent = None, flags = Qt.WindowFlags()):
+	def __init__(self, parent = None, flags = Qt.WindowType(0)):
 		QProgressDialog.__init__(self, parent, flags)
 		self.setMinimumDuration(0)
-		self.setWindowTitle(QString("Calculando escenario"))
-		
+		self.setWindowTitle("Calculando escenario")
+
 	def daMensaje(self, msg, calculados):
 		QApplication.processEvents()
-		self.setLabelText(QString(msg))
+		self.setLabelText(msg)
 		self.setValue(calculados)
 		QApplication.processEvents()
-		QApplication.flush()
+		QApplication.instance().flush() if hasattr(QApplication.instance(), 'flush') else None
 		return not self.wasCanceled()
-		
+
 	def setNumAforos(self, nAforos):
 		self.setMinimum(0)
 		self.setMaximum(nAforos)
-	

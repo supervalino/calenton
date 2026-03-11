@@ -23,8 +23,8 @@ TSqlTableNavigator::TSqlTableNavigator (
 	_showButtons(true),
 	_selectedId(-1),
 	_modelDirty(),
-	_model(NULL),
-	_delegate(NULL)
+	_model(nullptr),
+	_delegate(nullptr)
 
 {
 	setupUi(this);
@@ -51,7 +51,7 @@ void TSqlTableNavigator::on_uiTableView_selectionChanged (
 	)
 
 {
-	if (_model == NULL)
+	if (_model == nullptr)
 		return;
 
 	QModelIndexList l = uiTableView->selectionModel()->selectedIndexes();
@@ -123,7 +123,7 @@ bool TSqlTableNavigator::couldAdd()
 DataDialog *TSqlTableNavigator::createEditor()
 
 {
-	return (_delegate) ? _delegate->createEditor(this) : NULL;
+	return (_delegate) ? _delegate->createEditor(this) : nullptr;
 	}
 
 void TSqlTableNavigator::on_uiButtonBox_addClicked (
@@ -230,7 +230,7 @@ void TSqlTableNavigator::on_uiButtonBox_deleteClicked (
 			}
 		else {
 			QModelIndexList idxs = r.indexes();
-			foreach(QModelIndex idx, idxs)
+			for (const QModelIndex &idx : idxs)
 				if (idx.column() > 1)
 					_model->setData(idx, QVariant(), Qt::EditRole);
 			QItemSelection s = QItemSelection(r.topLeft(), r.bottomRight());

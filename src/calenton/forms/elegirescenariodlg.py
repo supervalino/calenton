@@ -15,11 +15,11 @@
 #
 ##############################################################################
 
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from modelo import *
-from ui import Ui_elegirescenariodlg
+from PyQt6 import QtWidgets, QtCore, QtGui
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
+from ..modelo import *
+from .ui import Ui_elegirescenariodlg
 from ts import DataDialog, ComboDataModel
 
 class ElegirEscenarioDlg (QDialog, Ui_elegirescenariodlg.Ui_ElegirEscenarioDlgClass):
@@ -30,4 +30,5 @@ class ElegirEscenarioDlg (QDialog, Ui_elegirescenariodlg.Ui_ElegirEscenarioDlgCl
 		self.mEscenario = ComboDataModel(self)
 		self.mEscenario.setQuery("select id, nombre from escenario order by id", self.db)
 		self.escenario.setModel(self.mEscenario)
-	
+
+

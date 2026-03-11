@@ -18,7 +18,7 @@ class TComboBox : public QComboBox {
 	Q_OBJECT
 	Q_PROPERTY(QVariant currentItemData READ currentItemData WRITE setCurrentItemData)
 public:
-	TComboBox(QWidget *parent = 0): QComboBox(parent) {}
+	TComboBox(QWidget *parent = nullptr): QComboBox(parent) {}
 	~TComboBox() {}
 	
 	QVariant	currentItemData(int role = Qt::UserRole) const { return itemData(currentIndex(), role); }

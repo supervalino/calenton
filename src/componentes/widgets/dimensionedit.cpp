@@ -44,9 +44,9 @@ DimensionEdit::DimensionEdit (
 	_default(true),
 	_hasDefault(false),
 	_textAltered(false),
-	_hBoxLayout(0),
-	_lineEdit(0),
-	_comboBox(0)
+	_hBoxLayout(nullptr),
+	_lineEdit(nullptr),
+	_comboBox(nullptr)
 
 {
 	setupUi();
@@ -71,7 +71,7 @@ void DimensionEdit::setupUi()
 	this->resize(QSize(80, 25).expandedTo(this->minimumSizeHint()));
 	_hBoxLayout = new QHBoxLayout(this);
 	_hBoxLayout->setSpacing(6);
-	_hBoxLayout->setMargin(0);
+	_hBoxLayout->setContentsMargins(0, 0, 0, 0);
 	_hBoxLayout->setObjectName(QString::fromLocal8Bit("hBoxLayout"));
 	_lineEdit = new QLineEdit(this);
 	_lineEdit->setObjectName(QString::fromLocal8Bit("lineEdit"));
@@ -112,15 +112,14 @@ void DimensionEdit::setupCombo()
 	if (!m.correct()) 
 		return;
 	const Unit *unit = m.unit();
-	if (unit == 0) 
+	if (unit == nullptr)
 		return;
 	const Dimension *d = unit->dimension();
 	const Dimension::UnitMap &um = d->units();
-	Dimension::UnitMap::const_iterator i;
 	const Unit *defUnit = m.unit();
 	int def = 0;
-	int n;
-	for (i = um.begin(), n = 0; i != um.end(); ++i, ++n) {
+	int n = 0;
+	for (auto i = um.begin(); i != um.end(); ++i, ++n) {
 		Unit *u = i.value();
 		QString name = u->name();
 		_comboBox->insertItem(n, name);
@@ -334,11 +333,11 @@ QWidget *DimensionEdit::prevWidget()
 
 	w = this;
 	n = nextInFocusChain();
-	while ((n != this) && (n != NULL)) {
+	while ((n != this) && (n != nullptr)) {
 		w = n;
 		n = n->nextInFocusChain();
 		}
-	return ((n != NULL) ? w : NULL);
+	return ((n != nullptr) ? w : nullptr);
 	}
 	
 bool DimensionEdit::filterKey (
@@ -357,7 +356,7 @@ bool DimensionEdit::filterKey (
 			else if ((focusWidget() == _lineEdit) || 
 					((focusWidget() == _comboBox) && !_lineEdit->isEnabled())) {
 				QWidget *w = nextInFocusChain();
-				if (w != 0)
+				if (w != nullptr)
 					w->setFocus();
 				return true;
 				}
@@ -366,7 +365,7 @@ bool DimensionEdit::filterKey (
 		else if ((ke->key() == Qt::Key_Backtab) || (ke->modifiers() == Qt::ShiftModifier)) {
 //			if (focusWidget() == _comboBox) {
 				QWidget *w = prevWidget();
-				if (w != 0)
+				if (w != nullptr)
 					w->setFocus();
 				return true;
 //				}

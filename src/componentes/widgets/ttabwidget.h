@@ -21,7 +21,7 @@ private:
 	bool		_locked;
 	QList<bool>	_pageEnabled;
 public:
-	TTabWidget(QWidget *parent = 0);
+	TTabWidget(QWidget *parent = nullptr);
 	~TTabWidget();
 
 	bool	isLocked() const;

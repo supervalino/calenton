@@ -1,158 +1,190 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'graphicdlg.ui'
-#
-# Created: Fri Feb 21 12:06:30 2014
-#      by: PyQt4 UI code generator 4.10.3
-#
-# WARNING! All changes made in this file will be lost!
+################################################################################
+## Form generated from reading UI file 'graphicdlg.ui'
+##
+## Created by: Qt User Interface Compiler version 6.10.2
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 
-from PyQt4 import QtCore, QtGui
+from PyQt6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PyQt6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PyQt6.QtWidgets import (QAbstractButton, QApplication, QDialogButtonBox, QGridLayout,
+    QGroupBox, QLabel, QLineEdit, QRadioButton,
+    QSizePolicy, QSpacerItem, QTabWidget, QTextEdit,
+    QVBoxLayout, QWidget)
 
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+from ts import DataDialog
 
 class Ui_GraphicDlgClass(object):
     def setupUi(self, GraphicDlgClass):
-        GraphicDlgClass.setObjectName(_fromUtf8("GraphicDlgClass"))
+        if not GraphicDlgClass.objectName():
+            GraphicDlgClass.setObjectName(u"GraphicDlgClass")
         GraphicDlgClass.resize(492, 570)
-        self.verticalLayout_3 = QtGui.QVBoxLayout(GraphicDlgClass)
-        self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
-        self.tabs = QtGui.QTabWidget(GraphicDlgClass)
-        self.tabs.setObjectName(_fromUtf8("tabs"))
-        self.general = QtGui.QWidget()
-        self.general.setObjectName(_fromUtf8("general"))
-        self.verticalLayout = QtGui.QVBoxLayout(self.general)
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.gridLayout = QtGui.QGridLayout()
-        self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        self.label_3 = QtGui.QLabel(self.general)
-        self.label_3.setObjectName(_fromUtf8("label_3"))
+        self.verticalLayout_3 = QVBoxLayout(GraphicDlgClass)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.tabs = QTabWidget(GraphicDlgClass)
+        self.tabs.setObjectName(u"tabs")
+        self.general = QWidget()
+        self.general.setObjectName(u"general")
+        self.verticalLayout = QVBoxLayout(self.general)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.gridLayout = QGridLayout()
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.label_3 = QLabel(self.general)
+        self.label_3.setObjectName(u"label_3")
+
         self.gridLayout.addWidget(self.label_3, 0, 0, 1, 1)
-        self.nombre = QtGui.QLineEdit(self.general)
-        self.nombre.setObjectName(_fromUtf8("nombre"))
+
+        self.nombre = QLineEdit(self.general)
+        self.nombre.setObjectName(u"nombre")
+
         self.gridLayout.addWidget(self.nombre, 0, 1, 1, 1)
-        self.label = QtGui.QLabel(self.general)
-        self.label.setObjectName(_fromUtf8("label"))
+
+        self.label = QLabel(self.general)
+        self.label.setObjectName(u"label")
+
         self.gridLayout.addWidget(self.label, 1, 0, 1, 1)
-        self.descripcion = QtGui.QTextEdit(self.general)
-        self.descripcion.setObjectName(_fromUtf8("descripcion"))
+
+        self.descripcion = QTextEdit(self.general)
+        self.descripcion.setObjectName(u"descripcion")
+
         self.gridLayout.addWidget(self.descripcion, 1, 1, 1, 1)
-        self.label_2 = QtGui.QLabel(self.general)
-        self.label_2.setObjectName(_fromUtf8("label_2"))
+
+        self.label_2 = QLabel(self.general)
+        self.label_2.setObjectName(u"label_2")
+
         self.gridLayout.addWidget(self.label_2, 2, 0, 1, 1)
-        self.sql = QtGui.QTextEdit(self.general)
-        self.sql.setObjectName(_fromUtf8("sql"))
+
+        self.sql = QTextEdit(self.general)
+        self.sql.setObjectName(u"sql")
+
         self.gridLayout.addWidget(self.sql, 2, 1, 1, 1)
+
+
         self.verticalLayout.addLayout(self.gridLayout)
-        self.tabs.addTab(self.general, _fromUtf8(""))
-        self.parametros = QtGui.QWidget()
-        self.parametros.setObjectName(_fromUtf8("parametros"))
-        self.verticalLayout_2 = QtGui.QVBoxLayout(self.parametros)
-        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
-        self.gridLayout_2 = QtGui.QGridLayout()
-        self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
-        self.label_4 = QtGui.QLabel(self.parametros)
-        self.label_4.setObjectName(_fromUtf8("label_4"))
+
+        self.tabs.addTab(self.general, "")
+        self.parametros = QWidget()
+        self.parametros.setObjectName(u"parametros")
+        self.verticalLayout_2 = QVBoxLayout(self.parametros)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.gridLayout_2 = QGridLayout()
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.label_4 = QLabel(self.parametros)
+        self.label_4.setObjectName(u"label_4")
+
         self.gridLayout_2.addWidget(self.label_4, 0, 0, 1, 1)
-        self.titulo = QtGui.QLineEdit(self.parametros)
-        self.titulo.setObjectName(_fromUtf8("titulo"))
+
+        self.titulo = QLineEdit(self.parametros)
+        self.titulo.setObjectName(u"titulo")
+
         self.gridLayout_2.addWidget(self.titulo, 0, 1, 1, 1)
-        self.label_5 = QtGui.QLabel(self.parametros)
-        self.label_5.setObjectName(_fromUtf8("label_5"))
+
+        self.label_5 = QLabel(self.parametros)
+        self.label_5.setObjectName(u"label_5")
+
         self.gridLayout_2.addWidget(self.label_5, 1, 0, 1, 1)
-        self.nombreX = QtGui.QLineEdit(self.parametros)
-        self.nombreX.setObjectName(_fromUtf8("nombreX"))
+
+        self.nombreX = QLineEdit(self.parametros)
+        self.nombreX.setObjectName(u"nombreX")
+
         self.gridLayout_2.addWidget(self.nombreX, 1, 1, 1, 1)
-        self.label_6 = QtGui.QLabel(self.parametros)
-        self.label_6.setObjectName(_fromUtf8("label_6"))
+
+        self.label_6 = QLabel(self.parametros)
+        self.label_6.setObjectName(u"label_6")
+
         self.gridLayout_2.addWidget(self.label_6, 2, 0, 1, 1)
-        self.nombreY = QtGui.QLineEdit(self.parametros)
-        self.nombreY.setObjectName(_fromUtf8("nombreY"))
+
+        self.nombreY = QLineEdit(self.parametros)
+        self.nombreY.setObjectName(u"nombreY")
+
         self.gridLayout_2.addWidget(self.nombreY, 2, 1, 1, 1)
+
+
         self.verticalLayout_2.addLayout(self.gridLayout_2)
-        self.groupBox = QtGui.QGroupBox(self.parametros)
-        self.groupBox.setObjectName(_fromUtf8("groupBox"))
-        self.barras = QtGui.QRadioButton(self.groupBox)
-        self.barras.setGeometry(QtCore.QRect(20, 30, 105, 23))
-        self.barras.setObjectName(_fromUtf8("barras"))
-        self.barrasAc = QtGui.QRadioButton(self.groupBox)
-        self.barrasAc.setGeometry(QtCore.QRect(20, 60, 161, 23))
-        self.barrasAc.setObjectName(_fromUtf8("barrasAc"))
-        self.tarta = QtGui.QRadioButton(self.groupBox)
-        self.tarta.setGeometry(QtCore.QRect(20, 90, 105, 23))
-        self.tarta.setObjectName(_fromUtf8("tarta"))
-        self.lineas = QtGui.QRadioButton(self.groupBox)
-        self.lineas.setGeometry(QtCore.QRect(20, 120, 105, 23))
-        self.lineas.setObjectName(_fromUtf8("lineas"))
+
+        self.groupBox = QGroupBox(self.parametros)
+        self.groupBox.setObjectName(u"groupBox")
+        self.barras = QRadioButton(self.groupBox)
+        self.barras.setObjectName(u"barras")
+        self.barras.setGeometry(QRect(20, 30, 105, 23))
+        self.barrasAc = QRadioButton(self.groupBox)
+        self.barrasAc.setObjectName(u"barrasAc")
+        self.barrasAc.setGeometry(QRect(20, 60, 161, 23))
+        self.tarta = QRadioButton(self.groupBox)
+        self.tarta.setObjectName(u"tarta")
+        self.tarta.setGeometry(QRect(20, 90, 105, 23))
+        self.lineas = QRadioButton(self.groupBox)
+        self.lineas.setObjectName(u"lineas")
+        self.lineas.setGeometry(QRect(20, 120, 105, 23))
+
         self.verticalLayout_2.addWidget(self.groupBox)
-        self.tabs.addTab(self.parametros, _fromUtf8(""))
+
+        self.tabs.addTab(self.parametros, "")
+
         self.verticalLayout_3.addWidget(self.tabs)
-        spacerItem = QtGui.QSpacerItem(206, 31, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
-        self.verticalLayout_3.addItem(spacerItem)
-        self.buttonBox = QtGui.QDialogButtonBox(GraphicDlgClass)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
+
+        self.verticalSpacer = QSpacerItem(206, 31, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_3.addItem(self.verticalSpacer)
+
+        self.buttonBox = QDialogButtonBox(GraphicDlgClass)
+        self.buttonBox.setObjectName(u"buttonBox")
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+
         self.verticalLayout_3.addWidget(self.buttonBox)
+
+#if QT_CONFIG(shortcut)
         self.label_3.setBuddy(self.nombre)
         self.label.setBuddy(self.descripcion)
         self.label_2.setBuddy(self.sql)
         self.label_4.setBuddy(self.titulo)
         self.label_5.setBuddy(self.nombreX)
         self.label_6.setBuddy(self.nombreY)
+#endif // QT_CONFIG(shortcut)
+        QWidget.setTabOrder(self.tabs, self.nombre)
+        QWidget.setTabOrder(self.nombre, self.descripcion)
+        QWidget.setTabOrder(self.descripcion, self.sql)
+        QWidget.setTabOrder(self.sql, self.titulo)
+        QWidget.setTabOrder(self.titulo, self.nombreX)
+        QWidget.setTabOrder(self.nombreX, self.nombreY)
+        QWidget.setTabOrder(self.nombreY, self.barras)
+        QWidget.setTabOrder(self.barras, self.barrasAc)
+        QWidget.setTabOrder(self.barrasAc, self.tarta)
+        QWidget.setTabOrder(self.tarta, self.lineas)
+        QWidget.setTabOrder(self.lineas, self.buttonBox)
 
         self.retranslateUi(GraphicDlgClass)
+        self.buttonBox.accepted.connect(GraphicDlgClass.accept)
+        self.buttonBox.rejected.connect(GraphicDlgClass.reject)
+
         self.tabs.setCurrentIndex(0)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), GraphicDlgClass.accept)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), GraphicDlgClass.reject)
-        QtCore.QMetaObject.connectSlotsByName(GraphicDlgClass)
-        GraphicDlgClass.setTabOrder(self.tabs, self.nombre)
-        GraphicDlgClass.setTabOrder(self.nombre, self.descripcion)
-        GraphicDlgClass.setTabOrder(self.descripcion, self.sql)
-        GraphicDlgClass.setTabOrder(self.sql, self.titulo)
-        GraphicDlgClass.setTabOrder(self.titulo, self.nombreX)
-        GraphicDlgClass.setTabOrder(self.nombreX, self.nombreY)
-        GraphicDlgClass.setTabOrder(self.nombreY, self.barras)
-        GraphicDlgClass.setTabOrder(self.barras, self.barrasAc)
-        GraphicDlgClass.setTabOrder(self.barrasAc, self.tarta)
-        GraphicDlgClass.setTabOrder(self.tarta, self.lineas)
-        GraphicDlgClass.setTabOrder(self.lineas, self.buttonBox)
+
+
+        QMetaObject.connectSlotsByName(GraphicDlgClass)
+    # setupUi
 
     def retranslateUi(self, GraphicDlgClass):
-        GraphicDlgClass.setWindowTitle(_translate("GraphicDlgClass", "Datos del Gráfico", None))
-        self.label_3.setText(_translate("GraphicDlgClass", "Nombre", None))
-        self.label.setText(_translate("GraphicDlgClass", "Descripción", None))
-        self.label_2.setText(_translate("GraphicDlgClass", "SQL", None))
-        self.tabs.setTabText(self.tabs.indexOf(self.general), _translate("GraphicDlgClass", "General", None))
-        self.label_4.setText(_translate("GraphicDlgClass", "Título", None))
-        self.label_5.setText(_translate("GraphicDlgClass", "Nombre eje X", None))
-        self.label_6.setText(_translate("GraphicDlgClass", "Nombre eje Y", None))
-        self.groupBox.setTitle(_translate("GraphicDlgClass", "Tipo Gráfico", None))
-        self.barras.setText(_translate("GraphicDlgClass", "Barras", None))
-        self.barrasAc.setText(_translate("GraphicDlgClass", "Barras acumulativo", None))
-        self.tarta.setText(_translate("GraphicDlgClass", "Tarta", None))
-        self.lineas.setText(_translate("GraphicDlgClass", "Líneas", None))
-        self.tabs.setTabText(self.tabs.indexOf(self.parametros), _translate("GraphicDlgClass", "Parámetros", None))
-
-from ts import DataDialog
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    GraphicDlgClass = QtGui.DataDialog()
-    ui = Ui_GraphicDlgClass()
-    ui.setupUi(GraphicDlgClass)
-    GraphicDlgClass.show()
-    sys.exit(app.exec_())
+        GraphicDlgClass.setWindowTitle(QCoreApplication.translate("GraphicDlgClass", u"Datos del Gr\u00e1fico", None))
+        self.label_3.setText(QCoreApplication.translate("GraphicDlgClass", u"Nombre", None))
+        self.label.setText(QCoreApplication.translate("GraphicDlgClass", u"Descripci\u00f3n", None))
+        self.label_2.setText(QCoreApplication.translate("GraphicDlgClass", u"SQL", None))
+        self.tabs.setTabText(self.tabs.indexOf(self.general), QCoreApplication.translate("GraphicDlgClass", u"General", None))
+        self.label_4.setText(QCoreApplication.translate("GraphicDlgClass", u"T\u00edtulo", None))
+        self.label_5.setText(QCoreApplication.translate("GraphicDlgClass", u"Nombre eje X", None))
+        self.label_6.setText(QCoreApplication.translate("GraphicDlgClass", u"Nombre eje Y", None))
+        self.groupBox.setTitle(QCoreApplication.translate("GraphicDlgClass", u"Tipo Gr\u00e1fico", None))
+        self.barras.setText(QCoreApplication.translate("GraphicDlgClass", u"Barras", None))
+        self.barrasAc.setText(QCoreApplication.translate("GraphicDlgClass", u"Barras acumulativo", None))
+        self.tarta.setText(QCoreApplication.translate("GraphicDlgClass", u"Tarta", None))
+        self.lineas.setText(QCoreApplication.translate("GraphicDlgClass", u"L\u00edneas", None))
+        self.tabs.setTabText(self.tabs.indexOf(self.parametros), QCoreApplication.translate("GraphicDlgClass", u"Par\u00e1metros", None))
+    # retranslateUi
 

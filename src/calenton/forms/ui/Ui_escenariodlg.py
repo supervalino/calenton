@@ -1,69 +1,72 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'escenariodlg.ui'
-#
-# Created: Fri Feb 21 12:06:29 2014
-#      by: PyQt4 UI code generator 4.10.3
-#
-# WARNING! All changes made in this file will be lost!
+################################################################################
+## Form generated from reading UI file 'escenariodlg.ui'
+##
+## Created by: Qt User Interface Compiler version 6.10.2
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 
-from PyQt4 import QtCore, QtGui
-
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
-
-class Ui_EscenarioDlgClass(object):
-    def setupUi(self, EscenarioDlgClass):
-        EscenarioDlgClass.setObjectName(_fromUtf8("EscenarioDlgClass"))
-        EscenarioDlgClass.resize(331, 85)
-        self.verticalLayout = QtGui.QVBoxLayout(EscenarioDlgClass)
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.horizontalLayout = QtGui.QHBoxLayout()
-        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.label = QtGui.QLabel(EscenarioDlgClass)
-        self.label.setObjectName(_fromUtf8("label"))
-        self.horizontalLayout.addWidget(self.label)
-        self.nombre = QtGui.QLineEdit(EscenarioDlgClass)
-        self.nombre.setObjectName(_fromUtf8("nombre"))
-        self.horizontalLayout.addWidget(self.nombre)
-        self.verticalLayout.addLayout(self.horizontalLayout)
-        spacerItem = QtGui.QSpacerItem(20, 2, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
-        self.verticalLayout.addItem(spacerItem)
-        self.buttonBox = QtGui.QDialogButtonBox(EscenarioDlgClass)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
-        self.verticalLayout.addWidget(self.buttonBox)
-        self.label.setBuddy(self.nombre)
-
-        self.retranslateUi(EscenarioDlgClass)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), EscenarioDlgClass.accept)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), EscenarioDlgClass.reject)
-        QtCore.QMetaObject.connectSlotsByName(EscenarioDlgClass)
-        EscenarioDlgClass.setTabOrder(self.nombre, self.buttonBox)
-
-    def retranslateUi(self, EscenarioDlgClass):
-        EscenarioDlgClass.setWindowTitle(_translate("EscenarioDlgClass", "Datos de escenario", None))
-        self.label.setText(_translate("EscenarioDlgClass", "Nombre", None))
+from PyQt6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PyQt6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PyQt6.QtWidgets import (QAbstractButton, QApplication, QDialogButtonBox, QHBoxLayout,
+    QLabel, QLineEdit, QSizePolicy, QSpacerItem,
+    QVBoxLayout, QWidget)
 
 from ts import DataDialog
 
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    EscenarioDlgClass = QtGui.DataDialog()
-    ui = Ui_EscenarioDlgClass()
-    ui.setupUi(EscenarioDlgClass)
-    EscenarioDlgClass.show()
-    sys.exit(app.exec_())
+class Ui_EscenarioDlgClass(object):
+    def setupUi(self, EscenarioDlgClass):
+        if not EscenarioDlgClass.objectName():
+            EscenarioDlgClass.setObjectName(u"EscenarioDlgClass")
+        EscenarioDlgClass.resize(331, 85)
+        self.verticalLayout = QVBoxLayout(EscenarioDlgClass)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.label = QLabel(EscenarioDlgClass)
+        self.label.setObjectName(u"label")
+
+        self.horizontalLayout.addWidget(self.label)
+
+        self.nombre = QLineEdit(EscenarioDlgClass)
+        self.nombre.setObjectName(u"nombre")
+
+        self.horizontalLayout.addWidget(self.nombre)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout)
+
+        self.verticalSpacer = QSpacerItem(20, 2, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout.addItem(self.verticalSpacer)
+
+        self.buttonBox = QDialogButtonBox(EscenarioDlgClass)
+        self.buttonBox.setObjectName(u"buttonBox")
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+
+        self.verticalLayout.addWidget(self.buttonBox)
+
+#if QT_CONFIG(shortcut)
+        self.label.setBuddy(self.nombre)
+#endif // QT_CONFIG(shortcut)
+        QWidget.setTabOrder(self.nombre, self.buttonBox)
+
+        self.retranslateUi(EscenarioDlgClass)
+        self.buttonBox.accepted.connect(EscenarioDlgClass.accept)
+        self.buttonBox.rejected.connect(EscenarioDlgClass.reject)
+
+        QMetaObject.connectSlotsByName(EscenarioDlgClass)
+    # setupUi
+
+    def retranslateUi(self, EscenarioDlgClass):
+        EscenarioDlgClass.setWindowTitle(QCoreApplication.translate("EscenarioDlgClass", u"Datos de escenario", None))
+        self.label.setText(QCoreApplication.translate("EscenarioDlgClass", u"Nombre", None))
+    # retranslateUi
 

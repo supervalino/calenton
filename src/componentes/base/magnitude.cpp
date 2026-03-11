@@ -16,7 +16,7 @@ ID_URL("$URL: https://svn.trustserver.net/svn/trabajo/componentes/trunk/base/mag
 #include <Dimension>
 #include <Unit>
 
-QVariant::Type Magnitude::_typeId = QVariant::Invalid;
+int Magnitude::_typeId = QMetaType::UnknownType;
 
 Magnitude::Magnitude (
 	const QString	&s
@@ -25,7 +25,7 @@ Magnitude::Magnitude (
 {
 	allClean();
 	UnitSystem *unitSystem = UnitSystem::defaultUnitSystem();
-	if (unitSystem == NULL)
+	if (unitSystem == nullptr)
 		return;
 	if (s.isEmpty()) 
 		return;
@@ -33,7 +33,7 @@ Magnitude::Magnitude (
 	if (sl.count() < 2) 
 		return;
 	const Unit *unit = unitSystem->unit(sl.at(0), sl.at(1));
-	if (unit == NULL) 
+	if (unit == nullptr) 
 		return;
 	_unit = unit;
 	_correct = true;
@@ -58,10 +58,10 @@ Magnitude::Magnitude (
 {
 	allClean();
 	UnitSystem *unitSystem = UnitSystem::defaultUnitSystem();
-	if (unitSystem == NULL)
+	if (unitSystem == nullptr)
 		return;
 	const Unit *u = unitSystem->unit(dimension, unit);
-	if (u == NULL)
+	if (u == nullptr)
 		return;
 	_unit = u;
 	_correct = true;
@@ -95,14 +95,14 @@ void Magnitude::setValue(QString value)
 void Magnitude::registerMetaType()
 
 {
-	_typeId = QVariant::Type(qRegisterMetaType<Magnitude>("Magnitude"));
+	_typeId = qRegisterMetaType<Magnitude>("Magnitude");
 //	qDebug() << "Registrado tipo para Magnitude: " << int(_typeId);
 	}
 	
 QString	Magnitude::toString() const
 
 {
-	if (empty() || _corrupt || (!_correct) || (_unit == NULL))
+	if (empty() || _corrupt || (!_correct) || (_unit == nullptr))
 		return QString();
 	Magnitude m2;
 	m2 = toDefaultUnit();
@@ -115,7 +115,7 @@ QString	Magnitude::toString() const
 QString	Magnitude::toStorableString()
 
 {
-	if (_unit == NULL)
+	if (_unit == nullptr)
 		return QString();
 	QString f = QString("%1|%2").arg(_unit->dimension()->name()).arg(_unit->name());
 	if (empty())
@@ -130,9 +130,9 @@ Magnitude	Magnitude::fromStorableString (
 	)
 	
 {
-	if (unitSystem == NULL)
+	if (unitSystem == nullptr)
 		unitSystem = UnitSystem::defaultUnitSystem();
-	if (unitSystem == NULL)
+	if (unitSystem == nullptr)
 		return Magnitude();
 	if (storableString.isEmpty())
 		return Magnitude();
@@ -140,7 +140,7 @@ Magnitude	Magnitude::fromStorableString (
 	if (sl.count() < 2)
 		return Magnitude();
 	const Unit *unit = unitSystem->unit(sl.at(0), sl.at(1));
-	if (unit == NULL)
+	if (unit == nullptr)
 		return Magnitude();
 	Magnitude res(unit);
 	if (sl.count() == 2)
@@ -158,7 +158,7 @@ void	Magnitude::setUnit (
 	)
 	
 {
-	if (_unit == 0)
+	if (_unit == nullptr)
 		return;
 	const Dimension *d = _unit->dimension();
 	const Unit *u = d->unit(unitName);
@@ -175,7 +175,7 @@ double	Magnitude::convert (
 	if (!_correct || _corrupt)
 		return 0.0;
 	u = _unit->dimension()->unit(unitName);
-	if (u == 0)
+	if (u == nullptr)
 		return 0.0;
 	return this->convert(u);
 	}
@@ -190,7 +190,7 @@ void	Magnitude::transform (
 	if (!_correct || _corrupt)
 		return;
 	u = _unit->dimension()->unit(unitName);
-	if (u == 0)
+	if (u == nullptr)
 		return;
 	this->transform(u);
 	}
@@ -205,7 +205,7 @@ Magnitude	Magnitude::toUnit (
 	if (!_correct || _corrupt)
 		return Magnitude();
 	u = _unit->dimension()->unit(unitName);
-	if (u == 0)
+	if (u == nullptr)
 		return Magnitude();
 	double v = this->convert(u);
 	return Magnitude(v, u);
@@ -219,10 +219,10 @@ Magnitude	Magnitude::toDefaultUnit() const
 	if (!_correct || _corrupt)
 		return Magnitude();
 	UnitSystem *unitSystem = UnitSystem::defaultUnitSystem();
-	if (unitSystem == NULL)
+	if (unitSystem == nullptr)
 		return Magnitude();
 	u = unitSystem->unit(_unit->dimension()->name());
-	if (u == 0)
+	if (u == nullptr)
 		return Magnitude();
 	double v = this->convert(u);
 	return Magnitude(v, u);

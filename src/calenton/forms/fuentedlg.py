@@ -15,13 +15,13 @@
 #
 ##############################################################################
 
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from PyQt4.QtSql import *
-from modelo import *
-from ui import Ui_fuentedlg
-from ui.Ui_fuentedlg import *
+from PyQt6 import QtWidgets, QtCore, QtGui
+from PyQt6.QtWidgets import *
+from PyQt6.QtCore import *
+from PyQt6.QtSql import *
+from ..modelo import *
+from .ui import Ui_fuentedlg
+from .ui.Ui_fuentedlg import *
 from ts import DataDialog
 from ts import ForeignKey
 from ts import ComboDataModel
@@ -40,7 +40,7 @@ class FuenteDlg (DataDialog, Ui_fuentedlg.Ui_FuenteDlgClass):
 		parent.putCombobox(self.escenario, self.modelCbEsc, 'nombre')
 		# combobox de origen
 		self.modelCbOri = self.model.foreignKey('idorigen').model(
-						{ 'idescenario' : QVariant(-1) },
+						{ 'idescenario' : -1 },
 						False)
 		self.origen.setModel(self.modelCbOri)
 		# combobox de motorcalculo
@@ -54,22 +54,22 @@ class FuenteDlg (DataDialog, Ui_fuentedlg.Ui_FuenteDlgClass):
 		# lista de clasificaciones
 		self.modelLtCls = clasificacion.Clasificacion(parent, self.app.work)
 		self.modelLtCls.select()
-		
+
 		self.modelNivelZona = ComboDataModel(self, True, self.tr('No asociado'))
 		self.modelNivelZona.setQuery("select id, nombre from nivelzona order by nombre", self.db)
 		self.nivelZona.setModel(self.modelNivelZona)
-		
+
 		self.modelTipoDato = ComboDataModel(self, True, self.tr('Sin distribución automática'))
 		self.modelTipoDato = self.model.foreignKey('idtipodatozona').model(
-							{'idescenario': QVariant(-1)}, 
-							True, 
-							self.tr('Sin distribución automática'))
+						{'idescenario': -1},
+						True,
+						self.tr('Sin distribución automática'))
 		self.tipoDatoZona.setModel(self.modelTipoDato)
-		
+
 	def putData(self, r):
 		self.modelFteCls = self.app.mFuenteClasificacion
-		self.nombre.setText(r.value('nombre').toString())
-		(self.id,good) = r.value('id').toInt()
+		self.nombre.setText(str(r.value('nombre') or ""))
+		self.id = int(r.value('id') or 0)
 		self.escenario.setCurrentItemData(r.value('idescenario'))
 		self.modelCbOri.setFilters({ 'idescenario': r.value('idescenario') })
 		self.origen.setCurrentItemData(r.value('idorigen'))
@@ -85,12 +85,12 @@ class FuenteDlg (DataDialog, Ui_fuentedlg.Ui_FuenteDlgClass):
 		self.listaclasificacion.resizeColumnsToContents()
 
 		return True
-		
+
 	def getData(self, r):
-		if self.nombre.text().trimmed().isEmpty():
+		if self.nombre.text().strip() == "":
 			self.setEditionError(self.tr("El nombre no puede estar vacío"))
 			return False
-		r.setValue('nombre', self.nombre.text().trimmed())
+		r.setValue('nombre', self.nombre.text().strip())
 		r.setValue('idescenario', self.escenario.currentItemData())
 		r.setValue('idorigen', self.origen.currentItemData())
 		r.setValue('idmotorcalculo', self.motorcalculo.currentItemData())
@@ -100,13 +100,13 @@ class FuenteDlg (DataDialog, Ui_fuentedlg.Ui_FuenteDlgClass):
 
 	def filtraClasificacion(self):
 		query = QSqlQuery(self.model.database())
-		query.exec_("select fuenteclasificacion.id, clasificacion.codigo,clasificacion.descripcion\
-									from fuenteclasificacion,clasificacion \
-									where clasificacion.id=fuenteclasificacion.idclasificacion\
-									and fuenteclasificacion.idfuente= %d" % self.id)
+		query.exec("select fuenteclasificacion.id, clasificacion.codigo,clasificacion.descripcion\
+								from fuenteclasificacion,clasificacion \
+								where clasificacion.id=fuenteclasificacion.idclasificacion\
+								and fuenteclasificacion.idfuente= %d" % self.id)
 		self.modelLtCls.setQuery(query)
-		
-	@pyqtSlot("int")
+
+	@pyqtSlot(int)
 	def on_escenario_activated(self, index):
 		idescenario = self.escenario.currentItemData()
 		itdz = self.tipoDatoZona.currentItemData()
@@ -116,30 +116,30 @@ class FuenteDlg (DataDialog, Ui_fuentedlg.Ui_FuenteDlgClass):
 		self.modelCbOri.setFilters({ 'idescenario': idescenario })
 		self.origen.setCurrentItemData(io)
 
-	@pyqtSlot("bool")
+	@pyqtSlot(bool)
 	def on_asignaclasificacion_clicked(self, checked):
 		i_sel=self.clasificacion.currentIndex()
 		r=self.modelFteCls.record(0) # registro para plantilla
-		(id_clas, good) = self.modelCbCls.record(i_sel).value('id').toInt()
+		id_clas = int(self.modelCbCls.record(i_sel).value('id') or 0)
 		r.setNull('id')
 		self.modelFteCls.calcSeq(r)
 		r.setValue('idfuente', self.id)
 		r.setValue('idclasificacion', id_clas)
-		self.dialogoPadre.askAndAddRow(r, self.modelFteCls)		
+		self.dialogoPadre.askAndAddRow(r, self.modelFteCls)
 		self.filtraClasificacion()
 		return True
 
-	@pyqtSlot("bool")
+	@pyqtSlot(bool)
 	def on_borraclasificacion_clicked(self, checked):
 #		self.dialogoPadre.askAndRemoveRows(self.listaclasificacion, self.modelFteCls)
 #		self.modelFteCls.askAndRemoveRows(self.listaclasificacion, self.modelFteCls)
-			
+
 		res = QMessageBox.question(self, self.tr("¿Está seguro?"),
 				self.tr("¿Desea eliminar los registros seleccionados?\n" +
 					"Esta operación es permanente e irreversible"),
-				QMessageBox.Yes | QMessageBox.Escape,
-				QMessageBox.No | QMessageBox.Default)
-		if res != QMessageBox.Yes:
+				QMessageBox.StandardButton.Yes | QMessageBox.Escape,
+				QMessageBox.StandardButton.No | QMessageBox.Default)
+		if res != QMessageBox.StandardButton.Yes:
 			return
 		l = self.listaclasificacion.selectedIndexes()
 		if len(l) == 0:
@@ -149,16 +149,16 @@ class FuenteDlg (DataDialog, Ui_fuentedlg.Ui_FuenteDlgClass):
 		for i in l:
 			if not i.column() == 1:
 				continue
-			cod = i.data().toString()
-			query.exec_("select id from clasificacion where codigo = '%s'" % cod)
+			cod = str(i.data() or "")
+			query.exec("select id from clasificacion where codigo = '%s'" % cod)
 			if not query.first():
 				return
-			l1.append(query.record().value('id').toInt()[0])
-			
+			l1.append(int(query.record().value('id') or 0))
+
 		l0 = l1.pop(0)
-		sql = QString("delete from fuenteclasificacion \
-					where idfuente = %d and idclasificacion = %d" % (self.id, l0))
+		sql = "delete from fuenteclasificacion \
+				where idfuente = %d and idclasificacion = %d" % (self.id, l0)
 		for i in l1:
-			sql.append(" or (idfuente = %d and idclasificacion = %d)" % (self.id, i) )
-		query.exec_(sql)
+			sql += " or (idfuente = %d and idclasificacion = %d)" % (self.id, i)
+		query.exec(sql)
 		self.filtraClasificacion()

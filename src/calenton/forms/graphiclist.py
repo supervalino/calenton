@@ -15,15 +15,16 @@
 #
 ##############################################################################
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from PyQt4.QtSql import *
-from ui.Ui_graphiclist import *
-from graphicdlg import GraphicDlg
-from widgets.datalist import DataList
+from PyQt6.QtWidgets import *
+from PyQt6.QtGui import *
+from PyQt6.QtCore import *
+from PyQt6.QtSql import *
+from .ui.Ui_graphiclist import *
+from .graphicdlg import GraphicDlg
+from ..widgets.datalist import DataList
 from ts import ComboDataModel
-from informe.funciones import *
-#from informe.colores import miColor
+from ..informe.funciones import *
+#from ..informe.colores import miColor
 import cairo
 import pycha.bar
 import pycha.stackedbar
@@ -49,17 +50,14 @@ class GraphicList (DataList, Ui_GraphicListClass):
 
 		self.dirGrap = QDir("reports/%s" % (app.informeActivo()))
 		self.cargaTabla()
-			
+
 	def cargaTabla(self):
-		self.dirGrap.setNameFilters(QStringList("g_*.dat"))
+		self.dirGrap.setNameFilters(["g_*.dat"])
 		self.listaGrapF = self.dirGrap.entryList()
-		listaGrapD = QStringList()
-		listaGrapS = QStringList()
-		self.nGrap = self.listaGrapF.count()
+		self.nGrap = len(self.listaGrapF)
 		self.tabla.setRowCount(self.nGrap)
 		self.tabla.setColumnCount(1)
-		encabezado=QStringList()
-		encabezado << self.tr("Fichero") 
+		encabezado = [self.tr("Fichero")]
 		#<< self.tr("Descripción") << self.tr("SQL")
 		self.tabla.setHorizontalHeaderLabels(encabezado)
 		if self.nGrap==0 :
@@ -73,7 +71,7 @@ class GraphicList (DataList, Ui_GraphicListClass):
 		self.edita.setEnabled(False)
 		self.crear.setEnabled(False)
 		self.anade.setEnabled(False) # quitar cuando este hecho el dialogo editar
-			
+
 	def filasSeleccionadas(self):
 		filas = []
 		i = -1
@@ -85,32 +83,32 @@ class GraphicList (DataList, Ui_GraphicListClass):
 
 	def creaGrap(self, i):
 		nombre=self.tabla.item(i, 0).text().split(".")[0]
-		nombreF=self.dirGrap.filePath(nombre).append(".eps")
-		nombreDat=self.dirGrap.filePath(nombre).append(".dat")
+		nombreF=self.dirGrap.filePath(nombre) + ".eps"
+		nombreDat=self.dirGrap.filePath(nombre) + ".dat"
 		cfg = leeConf(nombreDat, 'g')
-		
+
 		if not cfg['ipcc'] == '0':
 			cfg['sql'],cfg['filas'] = self.sqlTipoB_listaIPCC(cfg['ipcc'], cfg['contaminantes'], cfg['provincia'])
 
 		ds0 = dataSetGlobal(cfg, self.idEscenario, self.work)
 
 		if len(ds0) == 0:
-			QMessageBox.warning(self, self.tr("Error al crear la gráfica"), 
+			QMessageBox.warning(self, self.tr("Error al crear la gráfica"),
 					self.tr("No hay datos"),
-					QMessageBox.Ok)
+					QMessageBox.StandardButton.Ok)
 			return
-			
+
 		if '1' in cfg['tipo']:
 			grafPychart(nombreF, ds0, cfg)
 		elif '2' in cfg['tipo']:
 			grafPycha(nombreF, ds0, cfg)
-			
+
 	def sqlTipoB_listaIPCC(self, ipcc, contaminantes, lProvincia):
 		sql_cls2 = "select codigo from clasificacion where idtipoclas=4 and codigo~'^%s' order by codigo" % ipcc
 		q = QSqlQuery(sql_cls2, self.work)
 		lista_ipcc = []
 		while q.next():
-			lista_ipcc.append(q.value(0).toString())
+			lista_ipcc.append(str(q.value(0) or ""))
 		fila = []
 		filas = {}
 		sql_lista = {}
@@ -125,11 +123,11 @@ class GraphicList (DataList, Ui_GraphicListClass):
 			ipcc_fila = i
 			if not len(lProvincia) == 0:
 				for j in lProvincia:
-					sql = sql + ''',(select sum(cz.valor * coalesce(ec.p, 0.0)) 
+					sql = sql + ''',(select sum(cz.valor * coalesce(ec.p, 0.0))
 								FROM contaminantezona cz, contaminante cte, clasificacion cl, equivcontaminante ec
 								where cz.idfuente in (select id from fuente where idescenario = _ESCENARIO_)
-									and cz.idzona in 
-										(select idzona from relzona,zona z where 
+									and cz.idzona in
+										(select idzona from relzona,zona z where
 											idzonapadre=z.id and z.nombre='PROVINCIA DE %s')
 									and cte.id=cz.idcontaminante
 									and ec.idescenario = _ESCENARIO_
@@ -141,7 +139,7 @@ class GraphicList (DataList, Ui_GraphicListClass):
 													and clo.id = ecl.idclasmap)
 									and (%s) )''' % (j, ipcc_fila, sql_cte)
 			else:
-				sql = ''',(select sum(cz.valor * coalesce(ec.p, 0.0)) 
+				sql = ''',(select sum(cz.valor * coalesce(ec.p, 0.0))
 							FROM contaminantezona cz, contaminante cte, clasificacion cl, equivcontaminante ec
 							where cz.idfuente in (select id from fuente where idescenario = _ESCENARIO_)
 								and cte.id=cz.idcontaminante
@@ -153,25 +151,25 @@ class GraphicList (DataList, Ui_GraphicListClass):
 												and cl.id = ecl.idclasorig
 												and clo.id = ecl.idclasmap)
 								and (%s) )''' % (ipcc_fila, sql_cte)
-				
+
 			vars()[sqln] = '''select (select codigo from clasificacion
 						where idtipoclas=4
 						and codigo='%s') %s
 						''' % (ipcc_fila, sql)
 			sql_lista[sqln]= vars()[sqln]
 			fila.append(sqln)
-			
+
 #		filas['fila1'] = fila
 		return sql_lista, fila
-		
-		
+
+
 	def escribeDat(self, d):
-		nombre = d.nombre.text().trimmed()
-		nombreDat=self.dirGrap.filePath(nombre).append(".dat")
+		nombre = d.nombre.text().strip()
+		nombreDat=self.dirGrap.filePath(nombre) + ".dat"
 		config = ConfigObj(str(nombreDat), encoding='UTF8')
-		config['titulo'] = unicode(d.titulo.text().trimmed())
-		config['nombreX'] = unicode(d.nombreX.text().trimmed())
-		config['nombreY'] = unicode(d.nombreY.text().trimmed())
+		config['titulo'] = str(d.titulo.text().strip())
+		config['nombreX'] = str(d.nombreX.text().strip())
+		config['nombreY'] = str(d.nombreY.text().strip())
 		if d.barras.isChecked():
 			tipo = self.tr("barras")
 		elif d.barrasAc.isChecked():
@@ -183,48 +181,48 @@ class GraphicList (DataList, Ui_GraphicListClass):
 		else:
 			tipo = barras
 		config['tipo'] = tipo
-		config['descripcion'] = unicode(d.descripcion.toPlainText().trimmed())
-		config['sql'] = unicode(d.sql.toPlainText().trimmed())
+		config['descripcion'] = str(d.descripcion.toPlainText().strip())
+		config['sql'] = str(d.sql.toPlainText().strip())
 		config.write()
 		self.cargaTabla()
-		
-	@pyqtSlot("int")
+
+	@pyqtSlot(int)
 	def on_escenario_activated(self, index):
 		self.idEscenario = -1
 		ide = self.escenario.currentItemData()
-		if ide.isValid and not ide.isNull():
-			(i, g) = ide.toInt()
-			if g:
+		if ide is not None:
+			i = int(ide or 0)
+			if i:
 				self.idEscenario = i
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_anade_clicked(self, checked):
 		d = GraphicDlg(self)
-		if d.exec_():
-			nombre = d.nombre.text().trimmed()
-			nombreF=self.dirGrap.filePath(nombre).append(".eps")
-			nombreDat=self.dirGrap.filePath(nombre).append(".dat")
+		if d.exec():
+			nombre = d.nombre.text().strip()
+			nombreF=self.dirGrap.filePath(nombre) + ".eps"
+			nombreDat=self.dirGrap.filePath(nombre) + ".dat"
 			F=QFile(nombreF)
 			F.open(QFile.WriteOnly)
 			F.close()
 			self.escribeDat(d)
 			self.cargaTabla()
 
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_elimina_clicked(self, checked):
 		res = QMessageBox.question(self, self.tr("¿Está seguro?"),
 				self.tr("¿Desea eliminar los gráficos seleccionados?\n" +
 					"Esta operación es permanente e irreversible"),
-				QMessageBox.Yes | QMessageBox.Escape,
-				QMessageBox.No | QMessageBox.Default)
-		if res != QMessageBox.Yes:
+				QMessageBox.StandardButton.Yes | QMessageBox.Escape,
+				QMessageBox.StandardButton.No | QMessageBox.Default)
+		if res != QMessageBox.StandardButton.Yes:
 			return
 		for i in self.filasSeleccionadas():
 			nombre=self.tabla.item(i, 0).text().split(".")[0]
-			nombreF=self.dirGrap.filePath(nombre).append(".eps")
-			nombreD=self.dirGrap.filePath(nombre).append(".txt")
-			nombreS=self.dirGrap.filePath(nombre).append(".sql")
+			nombreF=self.dirGrap.filePath(nombre) + ".eps"
+			nombreD=self.dirGrap.filePath(nombre) + ".txt"
+			nombreS=self.dirGrap.filePath(nombre) + ".sql"
 			F = QFile(nombreF)
 			if not F.remove(nombreF):
 				self.cargaTabla()
@@ -235,23 +233,23 @@ class GraphicList (DataList, Ui_GraphicListClass):
 			F.remove(nombreS)
 		self.cargaTabla()
 
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_crear_clicked(self, checked):
 		if self.idEscenario == -1:
 			QMessageBox.warning(None, self.tr("Falta escenario"),
 					self.tr("Es necesario primero elegir un escenario"),
-					QMessageBox.Ok)
+					QMessageBox.StandardButton.Ok)
 			return False
 		for i in self.filasSeleccionadas():
 			self.creaGrap(i)
 
-	@pyqtSlot("bool")
+	@pyqtSlot(bool)
 	def on_crearTodas_clicked(self, checked):
 		if self.idEscenario == -1:
 			QMessageBox.warning(None, self.tr("Falta escenario"),
 					self.tr("Es necesario primero elegir un escenario"),
-					QMessageBox.Ok)
+					QMessageBox.StandardButton.Ok)
 			return False
 		for i in range(self.nGrap):
 			self.creaGrap(i)
@@ -261,7 +259,7 @@ class GraphicList (DataList, Ui_GraphicListClass):
 		True
 #		i = index.row()
 #		nombreBase0 = self.tabla.item(i, 0).text().split(".")[0]
-#		nombreDat=self.dirGrap.filePath(nombreBase0).append(".dat")
+#		nombreDat=self.dirGrap.filePath(nombreBase0) + ".dat"
 #		config = ConfigObj(str(nombreDat), encoding='UTF8')
 #		d = GraphicDlg(self)
 #		d.nombre.setText(nombreBase0)
@@ -279,21 +277,21 @@ class GraphicList (DataList, Ui_GraphicListClass):
 #			d.tarta.setChecked(True)
 #		if tipo == "lineas":
 #			d.lineas.setChecked(True)
-#		if d.exec_():
-#			nombreBase = d.nombre.text().trimmed()
-#			nombreF=self.dirGrap.filePath(nombreBase0).append(".eps")
-#			nombreDat=self.dirGrap.filePath(nombreBase0).append(".dat")
+#		if d.exec():
+#			nombreBase = d.nombre.text().strip()
+#			nombreF=self.dirGrap.filePath(nombreBase0) + ".eps"
+#			nombreDat=self.dirGrap.filePath(nombreBase0) + ".dat"
 #			F=QFile(nombreF)
-#			F.rename(self.dirGrap.filePath(nombreBase).append(".eps"))
+#			F.rename(self.dirGrap.filePath(nombreBase) + ".eps")
 #			self.escribeDat(d)
 #			self.cargaTabla()
-			
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_edita_clicked(self, checked):
 		l = self.tabla.selectedIndexes()
 		if len(self.filasSeleccionadas()) == 1:
 			self.on_tabla_doubleClicked(l[0])
-		
+
 	@pyqtSlot("const QItemSelection &", "const QItemSelection &")
 	def tabla_selectionChanged(self, after, before):
 		l = self.filasSeleccionadas()

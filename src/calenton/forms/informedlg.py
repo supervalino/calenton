@@ -15,10 +15,11 @@
 #
 ##############################################################################
 
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from ui import Ui_informedlg
+from PyQt6 import QtWidgets, QtCore, QtGui
+from PyQt6.QtWidgets import *
+from PyQt6.QtGui import *
+from PyQt6.QtCore import *
+from .ui import Ui_informedlg
 import shutil
 
 class InformeDlg (QDialog, Ui_informedlg.Ui_InformeDlgClass):
@@ -28,18 +29,18 @@ class InformeDlg (QDialog, Ui_informedlg.Ui_InformeDlgClass):
 		self.addAction(self.actionCopiar)
 		self.addAction(self.actionSelectAll)
 		self.calc = None
-		
-	@pyqtSlot("bool")
+
+	@pyqtSlot(bool)
 	def on_busca_clicked(self, checked):
-		txt = self.texto.text().trimmed()
-		print txt.size(), unicode(txt)
+		txt = self.texto.text().strip()
+		print(len(txt), str(txt))
 		r = self.informe.find(txt)
 		if not r:
 			return
 		c = self.informe.textCursor()
-		c.movePosition(QTextCursor.Right, QTextCursor.KeepAnchor, txt.size())
+		c.movePosition(QTextCursor.Right, QTextCursor.KeepAnchor, len(txt))
 		self.informe.setTextCursor(c)
-		
+
 	@pyqtSlot("QAbstractButton *")
 	def on_buttonBox_clicked(self, button):
 		sb = self.buttonBox.standardButton(button)
@@ -47,15 +48,15 @@ class InformeDlg (QDialog, Ui_informedlg.Ui_InformeDlgClass):
 			self.guarda()
 		elif sb == QDialogButtonBox.Ok:
 			self.accept()
-			
+
 	def setCalc(self, calc):
 		self.calc = calc
 		self.informe.setPlainText(calc.getInforme())
-	
+
 	def guarda(self):
 		if self.calc is None:
 			return
-		fileName = QFileDialog.getSaveFileName(self, self.tr("Guardar informe..."), QString(), "*.txt")
-		if not fileName.isEmpty():
+		fileName = QFileDialog.getSaveFileName(self, self.tr("Guardar informe..."), "", "*.txt")
+		if fileName:
 			self.calc.guardaInforme(fileName)
-	
+

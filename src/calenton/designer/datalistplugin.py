@@ -15,7 +15,8 @@
 #
 ##############################################################################
 
-from PyQt4 import QtCore, QtGui, QtDesigner
+from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtDesigner import QDesignerCustomWidgetInterface
 
 import sys
 import os
@@ -28,11 +29,11 @@ sys.path.append(os.path.abspath(os.path.join(_DataListPluginPath_, '..')))
 
 from widgets.datalist import DataList
 
-class DataListPlugin(QtDesigner.QPyDesignerCustomWidgetPlugin):
+class DataListPlugin(QDesignerCustomWidgetInterface):
 	def __init__(self, parent=None):
-		QtDesigner.QPyDesignerCustomWidgetPlugin.__init__(self, parent)
+		QDesignerCustomWidgetInterface.__init__(self, parent)
 		self._initialized = False
-		
+
 	def initialize(self, formEditor):
 		if self._initialized:
 			return
@@ -57,13 +58,13 @@ class DataListPlugin(QtDesigner.QPyDesignerCustomWidgetPlugin):
 		return "Diálogo de lista de datos"
 
 	def whatsThis(self):
-		return "Diálogo de lista de datos" 
+		return "Diálogo de lista de datos"
 
 	def isContainer(self):
 		return True
 
 	def domXml(self):
-		return QtCore.QString()
+		return ""
 
 	def includeFile(self):
 		return "<widgets/datalist.h>"

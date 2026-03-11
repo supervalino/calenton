@@ -15,10 +15,10 @@
 #
 ##############################################################################
 
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtGui import *
-from modelo import *
-from ui import Ui_contaminanteaforodlg
+from PyQt6 import QtWidgets, QtCore, QtGui
+from PyQt6.QtWidgets import *
+from ..modelo import *
+from .ui import Ui_contaminanteaforodlg
 from ts import DataDialog
 
 class ContaminanteAforoDlg (DataDialog, Ui_contaminanteaforodlg.Ui_ContaminanteAforoDlgClass):
@@ -39,25 +39,25 @@ class ContaminanteAforoDlg (DataDialog, Ui_contaminanteaforodlg.Ui_ContaminanteA
 		self.modelCbCnt = contaminante.Contaminante(parent, self.app.work)
 		#self.modelCbCnt.select()
 		parent.putCombobox(self.contaminante, self.modelCbCnt, 'nombre')
-		
+
 	def putData(self, r):
-		self.factor.setText(r.value('valor').toString())
-		(id, good)=r.value('idaforo').toInt()
+		self.factor.setText(str(r.value('valor') or ""))
+		id = int(r.value('idaforo') or 0)
 		n=self.aforo.findData(id)
 		self.aforo.setCurrentIndex(n)
-		(id, good)=r.value('idcontaminante').toInt()
+		id = int(r.value('idcontaminante') or 0)
 		n=self.contaminante.findData(id)
 		self.dato.setCurrentIndex(n)
-		(id, good)=r.value('idclasificacion').toInt()
+		id = int(r.value('idclasificacion') or 0)
 		n=self.clasificacion.findData(id)
 		self.clasificacion.setCurrentIndex(n)
 		return True
-		
+
 	def getData(self, r):
-		if self.valor.text().trimmed().isEmpty():
+		if self.valor.text().strip() == "":
 			self.setEditionError(self.tr("El valor no puede estar vacío"))
 			return False
-		r.setValue('valor', self.valor.text().trimmed())
+		r.setValue('valor', self.valor.text().strip())
 		i_combo=self.aforo.currentIndex()
 		id=self.aforo.itemData(i_combo)
 		r.setValue('idaforo', id)

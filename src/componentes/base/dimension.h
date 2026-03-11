@@ -43,7 +43,7 @@ public:
 
 	/*! Devuelve la unidad de medida de esta dimensión que tiene
 	    nombre \a name */
-	const Unit *unit(const QString &name) const { return _units.value(name, 0); }
+	const Unit *unit(const QString &name) const { return _units.value(name, nullptr); }
 	
 	const Unit *defaultUnit() const { return _defaultUnit; }
 	void	setDefaultUnit(const Unit *defaultUnit) { _defaultUnit = defaultUnit; }
