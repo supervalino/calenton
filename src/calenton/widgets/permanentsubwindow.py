@@ -23,10 +23,10 @@ class PermanentSubWindow (QMdiSubWindow):
 
 	def __init__(self, parent = None, flags = Qt.WindowType(0)):
 		QMdiSubWindow.__init__(self, parent, flags)
-		self.setAttribute(Qt.WA_DeleteOnClose, False)
+		self.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose, False)
 
 	def hideEvent(self, evt):
-		if (self.windowState() & Qt.WindowActive) == Qt.WindowActive:
+		if (self.windowState() & Qt.WindowState.WindowActive) == Qt.WindowState.WindowActive:
 			self.mdiArea().activateNextSubWindow()
 		QMdiSubWindow.hideEvent(self, evt)
 		if not self.isVisible():

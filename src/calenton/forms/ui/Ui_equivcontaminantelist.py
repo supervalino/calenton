@@ -30,8 +30,8 @@ class Ui_EquivContaminanteListClass(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.tabla = QTableView(EquivContaminanteListClass)
         self.tabla.setObjectName(u"tabla")
-        self.tabla.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.tabla.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tabla.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tabla.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.verticalLayout.addWidget(self.tabla)
 

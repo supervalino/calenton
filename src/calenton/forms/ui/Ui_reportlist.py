@@ -50,8 +50,8 @@ class Ui_ReportListClass(object):
 
         self.tabla = QTableWidget(ReportListClass)
         self.tabla.setObjectName(u"tabla")
-        self.tabla.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.tabla.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tabla.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tabla.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.verticalLayout.addWidget(self.tabla)
 

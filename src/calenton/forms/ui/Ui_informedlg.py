@@ -35,7 +35,7 @@ class Ui_InformeDlgClass(object):
         self.informe.setObjectName(u"informe")
         self.informe.setUndoRedoEnabled(False)
         self.informe.setPlainText(u"")
-        self.informe.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+        self.informe.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.verticalLayout.addWidget(self.informe)
 
@@ -56,8 +56,8 @@ class Ui_InformeDlgClass(object):
 
         self.buttonBox = QDialogButtonBox(InformeDlgClass)
         self.buttonBox.setObjectName(u"buttonBox")
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok|QDialogButtonBox.Save)
+        self.buttonBox.setOrientation(Qt.Orientation.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.StandardButton.Ok|QDialogButtonBox.StandardButton.Save)
 
         self.verticalLayout.addWidget(self.buttonBox)
 

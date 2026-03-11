@@ -27,7 +27,7 @@ class Ui_ListaResultadoDlgClass(object):
         ListaResultadoDlgClass.resize(400, 300)
         self.actionCopiar = QAction(ListaResultadoDlgClass)
         self.actionCopiar.setObjectName(u"actionCopiar")
-        self.actionCopiar.setShortcutContext(Qt.WidgetWithChildrenShortcut)
+        self.actionCopiar.setShortcutContext(Qt.ShortcutContext.WidgetWithChildrenShortcut)
         self.verticalLayout = QVBoxLayout(ListaResultadoDlgClass)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.tabla = QTableView(ListaResultadoDlgClass)
@@ -37,8 +37,8 @@ class Ui_ListaResultadoDlgClass(object):
 
         self.buttonBox = QDialogButtonBox(ListaResultadoDlgClass)
         self.buttonBox.setObjectName(u"buttonBox")
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.buttonBox.setOrientation(Qt.Orientation.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.StandardButton.Cancel|QDialogButtonBox.StandardButton.Ok)
 
         self.verticalLayout.addWidget(self.buttonBox)
 

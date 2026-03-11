@@ -28,7 +28,7 @@ class Ui_FuenteListClass(object):
         if not FuenteListClass.objectName():
             FuenteListClass.setObjectName(u"FuenteListClass")
         FuenteListClass.resize(662, 338)
-        FuenteListClass.setContextMenuPolicy(Qt.CustomContextMenu)
+        FuenteListClass.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.clipboardAforo = QAction(FuenteListClass)
         self.clipboardAforo.setObjectName(u"clipboardAforo")
         self.clipboardDatoTabular = QAction(FuenteListClass)
@@ -72,9 +72,9 @@ class Ui_FuenteListClass(object):
 
         self.tablaFuente = QTableView(self.tab_5)
         self.tablaFuente.setObjectName(u"tablaFuente")
-        self.tablaFuente.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.tablaFuente.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.tablaFuente.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tablaFuente.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.tablaFuente.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tablaFuente.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.verticalLayout_2.addWidget(self.tablaFuente)
 
@@ -114,9 +114,9 @@ class Ui_FuenteListClass(object):
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.tablaAforo = QTableView(self.tab_6)
         self.tablaAforo.setObjectName(u"tablaAforo")
-        self.tablaAforo.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.tablaAforo.setEditTriggers(QAbstractItemView.SelectedClicked)
-        self.tablaAforo.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tablaAforo.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.tablaAforo.setEditTriggers(QAbstractItemView.EditTrigger.SelectedClicked)
+        self.tablaAforo.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.verticalLayout_6.addWidget(self.tablaAforo)
 
@@ -171,7 +171,7 @@ class Ui_FuenteListClass(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.tablaParametros = QTableView(self.tab_7)
         self.tablaParametros.setObjectName(u"tablaParametros")
-        self.tablaParametros.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.tablaParametros.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
 
         self.verticalLayout_3.addWidget(self.tablaParametros)
 
@@ -211,9 +211,9 @@ class Ui_FuenteListClass(object):
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.tablaDato = QTableView(self.tab_8)
         self.tablaDato.setObjectName(u"tablaDato")
-        self.tablaDato.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.tablaDato.setEditTriggers(QAbstractItemView.SelectedClicked)
-        self.tablaDato.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tablaDato.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.tablaDato.setEditTriggers(QAbstractItemView.EditTrigger.SelectedClicked)
+        self.tablaDato.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.verticalLayout_7.addWidget(self.tablaDato)
 
@@ -258,7 +258,7 @@ class Ui_FuenteListClass(object):
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.tablaDatoTabular = QTableView(self.tab_9)
         self.tablaDatoTabular.setObjectName(u"tablaDatoTabular")
-        self.tablaDatoTabular.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.tablaDatoTabular.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.tablaDatoTabular.setAlternatingRowColors(True)
 
         self.verticalLayout_8.addWidget(self.tablaDatoTabular)
@@ -324,10 +324,10 @@ class Ui_FuenteListClass(object):
         self.navResultados.setAutoResizeRows(True)
         self.navResultados.setAutoResizeColumns(True)
         self.navResultados.setShowButtons(False)
-        self.navResultados.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.navResultados.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.navResultados.setAlternatingRowColors(True)
-        self.navResultados.setSelectionMode(QAbstractItemView.SingleSelection)
-        self.navResultados.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.navResultados.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.navResultados.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.verticalLayout_5.addWidget(self.navResultados)
 

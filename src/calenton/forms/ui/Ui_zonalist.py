@@ -59,9 +59,9 @@ class Ui_ZonaListClass(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.tabla = QTableView(self.tab_5)
         self.tabla.setObjectName(u"tabla")
-        self.tabla.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tabla.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.tabla.setAlternatingRowColors(True)
-        self.tabla.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tabla.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.tabla.horizontalHeader().setCascadingSectionResizes(False)
 
         self.verticalLayout_3.addWidget(self.tabla)
@@ -119,8 +119,8 @@ class Ui_ZonaListClass(object):
 
         self.tablaDatos = QTableView(self.tab_6)
         self.tablaDatos.setObjectName(u"tablaDatos")
-        self.tablaDatos.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.tablaDatos.setEditTriggers(QAbstractItemView.AnyKeyPressed|QAbstractItemView.DoubleClicked|QAbstractItemView.EditKeyPressed|QAbstractItemView.SelectedClicked)
+        self.tablaDatos.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.tablaDatos.setEditTriggers(QAbstractItemView.EditTrigger.AnyKeyPressed|QAbstractItemView.EditTrigger.DoubleClicked|QAbstractItemView.EditTrigger.EditKeyPressed|QAbstractItemView.EditTrigger.SelectedClicked)
         self.tablaDatos.setAlternatingRowColors(True)
 
         self.verticalLayout_5.addWidget(self.tablaDatos)
@@ -180,7 +180,7 @@ class Ui_ZonaListClass(object):
 
         self.tablaParametros = QTableView(self.tab_2)
         self.tablaParametros.setObjectName(u"tablaParametros")
-        self.tablaParametros.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.tablaParametros.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
 
         self.verticalLayout_4.addWidget(self.tablaParametros)
 

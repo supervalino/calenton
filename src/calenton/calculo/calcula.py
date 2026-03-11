@@ -777,7 +777,7 @@ class CalculaEscenario:
 
 	def calculaAforo(self, idAforo):
 		try:
-			QApplication.instance().setOverrideCursor(Qt.WaitCursor)
+			QApplication.instance().setOverrideCursor(Qt.CursorShape.WaitCursor)
 			self.limpiaInforme(True)
 			self.cache.setIdEscenario(self.idEscenario)
 			self.borraAforo(idAforo)

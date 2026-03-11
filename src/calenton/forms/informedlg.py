@@ -38,15 +38,15 @@ class InformeDlg (QDialog, Ui_informedlg.Ui_InformeDlgClass):
 		if not r:
 			return
 		c = self.informe.textCursor()
-		c.movePosition(QTextCursor.Right, QTextCursor.KeepAnchor, len(txt))
+		c.movePosition(QTextCursor.MoveOperation.Right, QTextCursor.MoveMode.KeepAnchor, len(txt))
 		self.informe.setTextCursor(c)
 
 	@pyqtSlot("QAbstractButton *")
 	def on_buttonBox_clicked(self, button):
 		sb = self.buttonBox.standardButton(button)
-		if sb == QDialogButtonBox.Save:
+		if sb == QDialogButtonBox.StandardButton.Save:
 			self.guarda()
-		elif sb == QDialogButtonBox.Ok:
+		elif sb == QDialogButtonBox.StandardButton.Ok:
 			self.accept()
 
 	def setCalc(self, calc):

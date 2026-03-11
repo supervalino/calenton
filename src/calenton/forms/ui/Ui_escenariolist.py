@@ -75,8 +75,8 @@ class Ui_EscenarioListClass(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.tablaOrigen = QTableView(self.tab_2)
         self.tablaOrigen.setObjectName(u"tablaOrigen")
-        self.tablaOrigen.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.tablaOrigen.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tablaOrigen.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tablaOrigen.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.verticalLayout_3.addWidget(self.tablaOrigen)
 
@@ -111,8 +111,8 @@ class Ui_EscenarioListClass(object):
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.tablaParametro = QTableView(self.tab_3)
         self.tablaParametro.setObjectName(u"tablaParametro")
-        self.tablaParametro.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.tablaParametro.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tablaParametro.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tablaParametro.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.verticalLayout_4.addWidget(self.tablaParametro)
 
@@ -147,9 +147,9 @@ class Ui_EscenarioListClass(object):
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.tablaTipoDato = QTableView(self.tab_4)
         self.tablaTipoDato.setObjectName(u"tablaTipoDato")
-        self.tablaTipoDato.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tablaTipoDato.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.tablaTipoDato.setAlternatingRowColors(True)
-        self.tablaTipoDato.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tablaTipoDato.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.verticalLayout_5.addWidget(self.tablaTipoDato)
 

@@ -22,7 +22,7 @@ from PyQt6.QtSql import *
 from .ui.Ui_maparesultadosdlg import *
 from .listaresultadodlg import *
 from ts import ComboDataModel
-from qgis.core import QgsApplication, QgsProject, QgsVectorLayer, QgsDataSourceUri, QgsStyle, QgsSymbol, QgsGraduatedSymbolRenderer, QgsRectangle
+from qgis.core import QgsApplication, QgsProject, QgsVectorLayer, QgsDataSourceUri, QgsStyle, QgsSymbol, QgsGraduatedSymbolRenderer, QgsRectangle, QgsSymbolLayerUtils
 
 class MapaResultadosDlg (QDialog, Ui_MapaResultadosDlgClass):
 	def __init__(self, parent = None):

@@ -24,6 +24,7 @@ class TipoclasList (DataList, Ui_TipoclasListClass):
 	def __init__(self, parent = None):
 		DataList.__init__(self, parent)
 		self.setupUi(self)
+		self.model = None
 		app = QApplication.instance()
 		if app.databaseInit:
 			self.model = app.mTipoclas

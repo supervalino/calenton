@@ -30,8 +30,8 @@ class Ui_ValorDatoListClass(object):
         self.gridLayout.setObjectName(u"gridLayout")
         self.tabla = QTableView(ValorDatoListClass)
         self.tabla.setObjectName(u"tabla")
-        self.tabla.setEditTriggers(QAbstractItemView.SelectedClicked)
-        self.tabla.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tabla.setEditTriggers(QAbstractItemView.EditTrigger.SelectedClicked)
+        self.tabla.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.gridLayout.addWidget(self.tabla, 0, 0, 1, 1)
 

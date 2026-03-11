@@ -30,6 +30,7 @@ class ContaminanteZonaList (DataList, Ui_ContaminanteZonaListClass):
 		self.setupUi(self)
 		app = QApplication.instance()
 		self.cambiosSinGuardar = 0
+		self.model = None
 		if app.databaseInit:
 			self.model = app.mContaminanteZona
 			self.idSel = -1

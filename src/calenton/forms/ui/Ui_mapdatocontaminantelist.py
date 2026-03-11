@@ -41,10 +41,10 @@ class Ui_MapDatoContaminanteListClass(object):
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.tablaEscenario = QTableView(self.tab)
         self.tablaEscenario.setObjectName(u"tablaEscenario")
-        self.tablaEscenario.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tablaEscenario.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.tablaEscenario.setAlternatingRowColors(True)
-        self.tablaEscenario.setSelectionMode(QAbstractItemView.SingleSelection)
-        self.tablaEscenario.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tablaEscenario.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.tablaEscenario.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.verticalLayout_2.addWidget(self.tablaEscenario)
 
@@ -80,7 +80,7 @@ class Ui_MapDatoContaminanteListClass(object):
 
         self.arbolClasificacion = QTreeView(self.tab_2)
         self.arbolClasificacion.setObjectName(u"arbolClasificacion")
-        self.arbolClasificacion.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.arbolClasificacion.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.arbolClasificacion.setAlternatingRowColors(True)
 
         self.verticalLayout_3.addWidget(self.arbolClasificacion)
@@ -92,7 +92,7 @@ class Ui_MapDatoContaminanteListClass(object):
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.tablaMapClas = QTableView(self.tab_5)
         self.tablaMapClas.setObjectName(u"tablaMapClas")
-        self.tablaMapClas.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.tablaMapClas.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
 
         self.verticalLayout_6.addWidget(self.tablaMapClas)
 
@@ -137,10 +137,10 @@ class Ui_MapDatoContaminanteListClass(object):
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.tablaDato = QTableView(self.tab_4)
         self.tablaDato.setObjectName(u"tablaDato")
-        self.tablaDato.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tablaDato.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.tablaDato.setAlternatingRowColors(True)
-        self.tablaDato.setSelectionMode(QAbstractItemView.SingleSelection)
-        self.tablaDato.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tablaDato.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.tablaDato.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.verticalLayout_4.addWidget(self.tablaDato)
 
@@ -151,10 +151,10 @@ class Ui_MapDatoContaminanteListClass(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.tablaMap = QTableView(self.tab_3)
         self.tablaMap.setObjectName(u"tablaMap")
-        self.tablaMap.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.tablaMap.setEditTriggers(QAbstractItemView.SelectedClicked)
+        self.tablaMap.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.tablaMap.setEditTriggers(QAbstractItemView.EditTrigger.SelectedClicked)
         self.tablaMap.setAlternatingRowColors(True)
-        self.tablaMap.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tablaMap.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.verticalLayout.addWidget(self.tablaMap)
 

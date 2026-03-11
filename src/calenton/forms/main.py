@@ -205,10 +205,40 @@ class MainWindow (QMainWindow, Ui_MainWindowClass):
 	def on_actionOpenConnection_triggered(self, checked):
 		pass
 
+	def _reinitListWidgets(self):
+		"""Recreate all permanent list widgets after DB connection."""
+		pairs = [
+			(self.escenarioList,             EscenarioList),
+			(self.fuenteList,                FuenteList),
+			(self.motorCalculoList,          MotorCalculoList),
+			(self.zonaList,                  ZonaList),
+			(self.tipoclasList,              TipoclasList),
+			(self.equivcontaminanteList,     EquivContaminanteList),
+			(self.contaminanteList,          ContaminanteList),
+			(self.mapdatocontaminanteList,   MapDatoContaminanteList),
+			(self.fuenteclasificacionList,   FuenteClasificacionList),
+			(self.mapaforozonaList,          MapAforoZonaList),
+			(self.contaminanteaforoList,     ContaminanteAforoList),
+			(self.contaminantezonaList,      ContaminanteZonaList),
+			(self.reportList,                ReportList),
+			(self.arbolClasificacion,        ArbolClasificacion),
+			(self.graphicList,               GraphicList),
+			(self.tableList,                 TableList),
+			(self.combustibleList,           CombustibleList),
+		]
+		for sw, cls in pairs:
+			sw.setWidget(cls(sw))
+
 	@pyqtSlot(bool)
 	def on_actionPreferencias_triggered(self, checked):
+		app = QApplication.instance()
 		d = PreferenciasDlg(self)
 		d.exec()
+		if not app.databaseInit:
+			if app.openDatabase():
+				app.databaseInit = True
+				app.createModels()
+				self._reinitListWidgets()
 
 	@pyqtSlot(bool)
 	def on_actionArbolClasificacion_triggered(self, checked):
@@ -296,7 +326,7 @@ class MainWindow (QMainWindow, Ui_MainWindowClass):
 		if not dlg.exec():
 			return
 		p = ProgresoCalculo(self)
-		p.setWindowModality(Qt.WindowModal)
+		p.setWindowModality(Qt.WindowModality.WindowModal)
 		idEscenario = int(dlg.escenario.currentItemData() or 0)
 		if not idEscenario:
 			return

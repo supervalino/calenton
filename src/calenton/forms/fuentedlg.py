@@ -137,8 +137,8 @@ class FuenteDlg (DataDialog, Ui_fuentedlg.Ui_FuenteDlgClass):
 		res = QMessageBox.question(self, self.tr("¿Está seguro?"),
 				self.tr("¿Desea eliminar los registros seleccionados?\n" +
 					"Esta operación es permanente e irreversible"),
-				QMessageBox.StandardButton.Yes | QMessageBox.Escape,
-				QMessageBox.StandardButton.No | QMessageBox.Default)
+				QMessageBox.StandardButton.Yes ,
+				QMessageBox.StandardButton.No )
 		if res != QMessageBox.StandardButton.Yes:
 			return
 		l = self.listaclasificacion.selectedIndexes()

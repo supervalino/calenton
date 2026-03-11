@@ -15,7 +15,12 @@
 from PyQt6.QtWidgets import QMessageBox
 from PyQt6.QtCore import QSettings
 from PyQt6.QtSql import QSqlDatabase
-from .modelo import *
+from .modelo import (aforo, clascombustible, clasificacion, combustible,
+    contaminante, contaminanteaforo, contaminantevalidadoaforo, contaminantezona,
+    dato, datozona, equivcontaminante, escenario, fuente, fuenteclasificacion,
+    mapaforozona, mapdatocontaminante, mapdatocontaminanteaforo, motorcalculo,
+    nivelzona, origen, parametro, parametroaforo, parametrozona, relzona,
+    tipoclas, tipodatozona, valordato, zona)
 from .js import motor as js_motor
 from ts import Magnitude
 from ts import UnitSystem

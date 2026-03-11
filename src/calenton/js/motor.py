@@ -67,6 +67,7 @@ class Motor:
 		self.engine = QJSEngine()
 		self.db = db
 		self.actualValues = {}
+		self._contextStack = []
 		# Auxiliar expuesto a JS para la función ds()
 		self._helper = JSHelper()
 		self.engine.globalObject().setProperty(
@@ -84,26 +85,51 @@ class Motor:
 			js_val = self.engine.toScriptValue(v)
 			self.engine.globalObject().setProperty(str(k), js_val)
 
+	def nuevoContexto(self, params):
+		"""Guarda los valores actuales de las claves y establece nuevos parámetros globales."""
+		g = self.engine.globalObject()
+		saved = {}
+		for k in params:
+			prop = g.property(str(k))
+			saved[k] = prop
+		self._contextStack.append(saved)
+		for k, v in params.items():
+			g.setProperty(str(k), self.engine.toScriptValue(v))
+
+	def destruyeContexto(self):
+		"""Restaura los valores guardados por el último nuevoContexto."""
+		if not self._contextStack:
+			return
+		saved = self._contextStack.pop()
+		g = self.engine.globalObject()
+		for k, v in saved.items():
+			g.setProperty(str(k), v)
+
+	def collectGarbage(self):
+		"""Fuerza el GC del motor JS."""
+		self.engine.collectGarbage()
+
 	def evaluaFormula(self, formula, params=None):
 		"""
 		Evalúa una fórmula JavaScript con parámetros opcionales.
 
-		Los parámetros se pasan como variables locales mediante una IIFE
-		para evitar contaminar el scope global.
+		Los parámetros se establecen temporalmente como variables globales
+		(igual que hacía QScriptEngine con pushContext/popContext) para que
+		engine.toScriptValue() gestione correctamente None→null, nan→NaN, etc.
 		"""
+		g = self.engine.globalObject()
+		saved = {}
 		if params:
-			# Serializar los valores numéricos como literales JS
-			param_items = [(str(k), v) for k, v in params.items()]
-			js_params = ", ".join(k for k, v in param_items)
-			js_vals = ", ".join(
-				str(v) if isinstance(v, (int, float)) else repr(str(v))
-				for k, v in param_items
-			)
-			wrapped = f"(function({js_params}) {{ return ({formula}); }})({js_vals})"
-		else:
-			wrapped = f"({formula})"
+			for k, v in params.items():
+				key = str(k)
+				saved[key] = g.property(key)
+				g.setProperty(key, self.engine.toScriptValue(v))
+		try:
+			result = self.engine.evaluate(f"({formula})")
+		finally:
+			for key, val in saved.items():
+				g.setProperty(key, val)
 
-		result = self.engine.evaluate(wrapped)
 		if result.isError():
 			raise SyntaxError(result.toString())
 		if not result.isNumber():

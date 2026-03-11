@@ -54,8 +54,8 @@ class EditorFactory (QItemEditorFactory):
 
 	def createEditor(self, type, parent):
 		type2 = type
-		if type2 == QMetaType.Double:
-			type2 = QMetaType.QString
+		if type2 == QMetaType.Type.Double:
+			type2 = QMetaType.Type.QString
 		return self.fact.createEditor(type2, parent)
 
 class FuenteList (DataList, Ui_FuenteListClass):
@@ -65,7 +65,7 @@ class FuenteList (DataList, Ui_FuenteListClass):
 		if FuenteList.editorFactory is not None:
 			del FuenteList.editorFactory
 			FuenteList.editorFactory = None
-		DataList.__del__(self)
+		# DataList has no __del__ in Qt6
 
 	def __init__(self, parent = None):
 		DataList.__init__(self, parent)
@@ -266,7 +266,7 @@ class FuenteList (DataList, Ui_FuenteListClass):
 	@pyqtSlot(bool)
 	def on_calcularFuente_triggered(self, checked):
 		p = ProgresoCalculo(self)
-		p.setWindowModality(Qt.WindowModal)
+		p.setWindowModality(Qt.WindowModality.WindowModal)
 		calc = calcula.CalculaEscenario(self.idEscenario, self.app.workDb(),
 					self.app.cache, self.app.motorJS, p)
 		try:
@@ -548,9 +548,9 @@ class FuenteList (DataList, Ui_FuenteListClass):
 				idxs = r.indexes()
 				for idx in idxs:
 					if idx.column() > 1:
-						self.mValorDatoTabular.setData(idx, None, Qt.EditRole)
+						self.mValorDatoTabular.setData(idx, None, Qt.ItemDataRole.EditRole)
 				s = QItemSelection(r.topLeft(), r.bottomRight())
-				self.tablaDatoTabular.selectionModel().select(s, QItemSelectionModel.Deselect)
+				self.tablaDatoTabular.selectionModel().select(s, QItemSelectionModel.SelectionFlag.Deselect)
 			l = self.tablaDatoTabular.selectionModel().selection()
 
 

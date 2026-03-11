@@ -54,7 +54,7 @@ class Legend:
 			'''
 		self.text.setDefaultStyleSheet(t)
 		cursor = QTextCursor(self.text)
-		cursor.movePosition(QTextCursor.End)
+		cursor.movePosition(QTextCursor.MoveOperation.End)
 		ls = self.layer.renderer().legendSymbolItems()
 		tf = QTextTableFormat()
 		tf.setBorderStyle(QTextFrameFormat.BorderStyle_None)
@@ -77,7 +77,7 @@ class Legend:
 		myXOffset = 5
 		wm = painter.worldTransform()
 		painter.translate(myXOffset, myYOffset)
-		painter.setBrush(QBrush(Qt.white, Qt.SolidPattern))
+		painter.setBrush(QBrush(Qt.GlobalColor.white, Qt.BrushStyle.SolidPattern))
 		painter.drawRect(-1, -1, size.width()+2, size.height()+2)
 		text.drawContents(painter)
 		painter.setWorldTransform(wm)

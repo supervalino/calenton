@@ -113,9 +113,9 @@ class Ui_MapAforoZonaListClass(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.tablaMap = QTableView(self.tab_3)
         self.tablaMap.setObjectName(u"tablaMap")
-        self.tablaMap.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.tablaMap.setEditTriggers(QAbstractItemView.SelectedClicked)
-        self.tablaMap.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tablaMap.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.tablaMap.setEditTriggers(QAbstractItemView.EditTrigger.SelectedClicked)
+        self.tablaMap.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.verticalLayout.addWidget(self.tablaMap)
 

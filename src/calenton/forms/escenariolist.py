@@ -92,7 +92,7 @@ class EscenarioList (DataList, Ui_EscenarioListClass):
 			mb.setInformativeText(str(e))
 			mb.setStandardButtons(QMessageBox.StandardButton.Ok)
 			mb.setDetailedText(escenarios.informe)
-			mb.setIcon(QMessageBox.Critical)
+			mb.setIcon(QMessageBox.Icon.Critical)
 			mb.exec()
 		self.mEscenario.select()
 

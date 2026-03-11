@@ -126,8 +126,8 @@ class Ui_FuenteDlgClass(object):
 
         self.listaclasificacion = QTableView(self.groupBox)
         self.listaclasificacion.setObjectName(u"listaclasificacion")
-        self.listaclasificacion.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.listaclasificacion.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.listaclasificacion.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.listaclasificacion.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.gridLayout_2.addWidget(self.listaclasificacion, 2, 0, 1, 1)
 
@@ -143,7 +143,7 @@ class Ui_FuenteDlgClass(object):
 
         self.buttonBox = QDialogButtonBox(FuenteDlgClass)
         self.buttonBox.setObjectName(u"buttonBox")
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.StandardButton.Cancel|QDialogButtonBox.StandardButton.Ok)
 
         self.verticalLayout_2.addWidget(self.buttonBox)
 

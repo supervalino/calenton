@@ -65,7 +65,7 @@ class Ui_PreferenciasDlgClass(object):
 
         self.password = QLineEdit(self.tab)
         self.password.setObjectName(u"password")
-        self.password.setEchoMode(QLineEdit.Password)
+        self.password.setEchoMode(QLineEdit.EchoMode.Password)
 
         self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.password)
 
@@ -114,8 +114,8 @@ class Ui_PreferenciasDlgClass(object):
 
         self.botones = QDialogButtonBox(PreferenciasDlgClass)
         self.botones.setObjectName(u"botones")
-        self.botones.setOrientation(Qt.Horizontal)
-        self.botones.setStandardButtons(QDialogButtonBox.Apply|QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.botones.setOrientation(Qt.Orientation.Horizontal)
+        self.botones.setStandardButtons(QDialogButtonBox.StandardButton.Apply|QDialogButtonBox.StandardButton.Cancel|QDialogButtonBox.StandardButton.Ok)
 
         self.verticalLayout.addWidget(self.botones)
 

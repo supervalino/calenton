@@ -28,7 +28,7 @@ class Mapa (SubWindow, Ui_MapaClass):
 	def __init__(self, sql, idNivelZona, color = None, parent = None):
 		QWidget.__init__(self, parent)
 		self.setupUi(self)
-		self.mapa.setCanvasColor(Qt.white)
+		self.mapa.setCanvasColor(Qt.GlobalColor.white)
 		self.mapa.enableAntiAliasing(True)
 		self.app = QApplication.instance()
 		self.layer = self.app.mapas.layerConfigurada(sql, "base", idNivelZona, color)

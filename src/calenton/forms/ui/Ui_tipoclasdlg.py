@@ -30,7 +30,7 @@ class Ui_TipoclasDlgClass(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.formLayout = QFormLayout()
         self.formLayout.setObjectName(u"formLayout")
-        self.formLayout.setFieldGrowthPolicy(QFormLayout.AllNonFixedFieldsGrow)
+        self.formLayout.setFieldGrowthPolicy(QFormLayout.RowWrapPolicy.AllNonFixedFieldsGrow)
         self.label_8 = QLabel(TipoclasDlgClass)
         self.label_8.setObjectName(u"label_8")
 
@@ -56,8 +56,8 @@ class Ui_TipoclasDlgClass(object):
 
         self.buttonBox = QDialogButtonBox(TipoclasDlgClass)
         self.buttonBox.setObjectName(u"buttonBox")
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.buttonBox.setOrientation(Qt.Orientation.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.StandardButton.Cancel|QDialogButtonBox.StandardButton.Ok)
 
         self.verticalLayout.addWidget(self.buttonBox)
 

@@ -137,7 +137,7 @@ class Ui_GraphicDlgClass(object):
 
         self.buttonBox = QDialogButtonBox(GraphicDlgClass)
         self.buttonBox.setObjectName(u"buttonBox")
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.StandardButton.Cancel|QDialogButtonBox.StandardButton.Ok)
 
         self.verticalLayout_3.addWidget(self.buttonBox)
 

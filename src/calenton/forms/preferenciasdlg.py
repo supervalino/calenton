@@ -44,15 +44,15 @@ class PreferenciasDlg (QDialog, Ui_PreferenciasDlgClass):
 		s = QSettings()
 		ss = bool(s.value("script/stackable", False))
 		if ss:
-			ss2 = Qt.Checked
+			ss2 = Qt.CheckState.Checked
 		else:
-			ss2 = Qt.Unchecked
+			ss2 = Qt.CheckState.Unchecked
 		self.checkScriptStackable.setCheckState(ss2)
 		sb = bool(s.value("script/beautifier", False))
 		if sb:
-			sb2 = Qt.Checked
+			sb2 = Qt.CheckState.Checked
 		else:
-			sb2 = Qt.Unchecked
+			sb2 = Qt.CheckState.Unchecked
 		self.beautifier.setCheckState(sb2)
 
 	def tomaValor(self, componente, mensaje = None, puedeVacio = False):
@@ -93,10 +93,10 @@ class PreferenciasDlg (QDialog, Ui_PreferenciasDlgClass):
 	def tomaScript(self):
 		s = QSettings()
 		ss2 = self.checkScriptStackable.checkState()
-		ss = (ss2 == Qt.Checked)
+		ss = (ss2 == Qt.CheckState.Checked)
 		s.setValue("script/stackable", ss)
 		sb2 = self.beautifier.checkState()
-		sb = (sb2 == Qt.Checked)
+		sb = (sb2 == Qt.CheckState.Checked)
 		s.setValue("script/beautifier", sb)
 
 	@pyqtSlot(bool)
@@ -131,7 +131,7 @@ class PreferenciasDlg (QDialog, Ui_PreferenciasDlgClass):
 
 	@pyqtSlot(QAbstractButton)
 	def on_botones_clicked(self, button):
-		if self.botones.buttonRole(button) == QDialogButtonBox.ApplyRole:
+		if self.botones.buttonRole(button) == QDialogButtonBox.ButtonRole.ApplyRole:
 			self.aplica()
 
 	def accept(self):

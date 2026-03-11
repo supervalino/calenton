@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -rn \"PyQt4\\\\|from pyseqtablemodel\\\\|\\\\.toInt\\(\\)\\\\|\\\\.toString\\(\\)\\\\|\\\\.toDouble\\(\\)\\\\|\\\\.toBool\\(\\)\\\\|QVariant\\(\\)\\\\|QString\\(\" /home/bruno/proyectos_externos/calenton/src/calenton/modelo/*.py)",
+      "Bash(grep -rn \"except.*,\" /home/bruno/proyectos_externos/calenton/src/calenton/modelo/*.py)",
+      "Bash(ls /home/bruno/proyectos_externos/calenton/src/calenton/modelo/*.py)",
+      "Bash(grep -l \"PyQt6\" /home/bruno/proyectos_externos/calenton/src/calenton/modelo/*.py)",
+      "Bash(grep -l PyQt4 /home/bruno/proyectos_externos/calenton/src/calenton/modelo/*.py)",
+      "Bash(timeout 5 ./run.sh)",
+      "Bash(echo \"EXIT:$?\")",
+      "Read(//home/bruno/proyectos_externos/calenton/**)",
+      "Bash(python3 /tmp/fix_pyseq.py)",
+      "Bash(./run.sh)"
+    ]
+  }
+}

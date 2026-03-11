@@ -203,7 +203,7 @@ class GraphicList (DataList, Ui_GraphicListClass):
 			nombreF=self.dirGrap.filePath(nombre) + ".eps"
 			nombreDat=self.dirGrap.filePath(nombre) + ".dat"
 			F=QFile(nombreF)
-			F.open(QFile.WriteOnly)
+			F.open(QFile.OpenModeFlag.WriteOnly)
 			F.close()
 			self.escribeDat(d)
 			self.cargaTabla()
@@ -214,8 +214,8 @@ class GraphicList (DataList, Ui_GraphicListClass):
 		res = QMessageBox.question(self, self.tr("¿Está seguro?"),
 				self.tr("¿Desea eliminar los gráficos seleccionados?\n" +
 					"Esta operación es permanente e irreversible"),
-				QMessageBox.StandardButton.Yes | QMessageBox.Escape,
-				QMessageBox.StandardButton.No | QMessageBox.Default)
+				QMessageBox.StandardButton.Yes ,
+				QMessageBox.StandardButton.No )
 		if res != QMessageBox.StandardButton.Yes:
 			return
 		for i in self.filasSeleccionadas():

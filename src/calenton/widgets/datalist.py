@@ -154,7 +154,7 @@ class DataList (QWidget, DataListBase):
 	def cambiaEncabezado(self, model, lista):
 		i=1
 		for nombre in lista:
-			model.setHeaderData(i, Qt.Horizontal, self.tr(nombre))
+			model.setHeaderData(i, Qt.Orientation.Horizontal, self.tr(nombre))
 			i=i+1
 		return
 

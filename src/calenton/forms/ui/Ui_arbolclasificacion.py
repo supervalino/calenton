@@ -39,7 +39,7 @@ class Ui_ArbolClasificacionClass(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.tablaTipos = QTableView(self.tab_3)
         self.tablaTipos.setObjectName(u"tablaTipos")
-        self.tablaTipos.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tablaTipos.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.verticalLayout_3.addWidget(self.tablaTipos)
 
@@ -85,7 +85,7 @@ class Ui_ArbolClasificacionClass(object):
         self.arbolClasificacion = QTreeView(self.tab)
         self.arbolClasificacion.setObjectName(u"arbolClasificacion")
         self.arbolClasificacion.setAlternatingRowColors(True)
-        self.arbolClasificacion.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        self.arbolClasificacion.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
 
         self.verticalLayout_2.addWidget(self.arbolClasificacion)
 
@@ -96,8 +96,8 @@ class Ui_ArbolClasificacionClass(object):
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.tablaDato = QTableView(self.tab_2)
         self.tablaDato.setObjectName(u"tablaDato")
-        self.tablaDato.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.tablaDato.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tablaDato.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.tablaDato.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.verticalLayout_4.addWidget(self.tablaDato)
 

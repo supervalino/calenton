@@ -33,9 +33,9 @@ class Ui_ContaminanteAforoListClass(object):
         self.gridLayout.setObjectName(u"gridLayout")
         self.tabla = QTableView(ContaminanteAforoListClass)
         self.tabla.setObjectName(u"tabla")
-        self.tabla.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.tabla.setEditTriggers(QAbstractItemView.SelectedClicked)
-        self.tabla.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tabla.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.tabla.setEditTriggers(QAbstractItemView.EditTrigger.SelectedClicked)
+        self.tabla.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.gridLayout.addWidget(self.tabla, 0, 0, 1, 1)
 

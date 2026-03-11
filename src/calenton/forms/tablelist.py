@@ -85,7 +85,7 @@ class TableList (DataList, Ui_TableListClass):
 		nombreF=self.dir.filePath(nombre) + ".tex"
 		nombreDat=self.dir.filePath(nombre) + ".dat"
 		textoF = QFile(nombreF)
-		if ( not textoF.open(QIODevice.WriteOnly | QIODevice.Text)):
+		if ( not textoF.open(QIODevice.OpenModeFlag.WriteOnly | QIODevice.OpenModeFlag.Text)):
 			return
 
 		config = ConfigObj(str(nombreDat), encoding='UTF8')
@@ -120,7 +120,7 @@ class TableList (DataList, Ui_TableListClass):
 		filaSuma = []
 		filasSuma = []
 		textoStream=QTextStream(textoF)
-		textoStream.setRealNumberNotation(QTextStream.SmartNotation)
+		textoStream.setRealNumberNotation(QTextStream.RealNumberNotation.SmartNotation)
 		textoStream.setRealNumberPrecision(cfg['decimales'])
 		textoStream << principioTablaTex(cfg)
 		for k1,  l1 in cfg['filas'].items():
@@ -193,7 +193,7 @@ class TableList (DataList, Ui_TableListClass):
 								txt0 = '\\bottomrule '
 							else:
 								txt0 = ''
-							txt = '%s \multirow{%d}*{%s} & %s' % (txt0, len(dsGrupos[nombreGrupo].keys())
+							txt = '%s \\multirow{%d}*{%s} & %s' % (txt0, len(dsGrupos[nombreGrupo].keys())
 									, texto1
 									, lgr[0])
 						else:
@@ -207,7 +207,7 @@ class TableList (DataList, Ui_TableListClass):
 						c0 = ''
 						if cfg['enColor']:
 							c0 = '\\rowcolor{%s} ' % cfg['colorFilas'][1]
-						fSuma = self.filaSuma(dsMf0, '\midrule %s Total & %s' % (c0,texto1))
+						fSuma = self.filaSuma(dsMf0, '\\midrule %s Total & %s' % (c0,texto1))
 						dsMf0.append(fSuma)
 					else:
 						fSuma = dsMf0[0]
@@ -217,7 +217,7 @@ class TableList (DataList, Ui_TableListClass):
 
 				self.filasATex(textoStream, dsMf, cfg, [])
 				if haySuma:
-					textoSumaMf = ' \multicolumn{2}{l}{%s} ' % textoSuma
+					textoSumaMf = ' \\multicolumn{2}{l}{%s} ' % textoSuma
 					textoStream << 	'\\bottomrule\n'
 					#self.filasATex(textoStream,[self.filaSuma(dsMf,textoSumaMf, 0.5)], cfg, [])
 					sumaTotal[0] = textoSumaMf
@@ -629,7 +629,7 @@ class TableList (DataList, Ui_TableListClass):
 			nombreF=self.dir.filePath(nombre) + ".tex"
 			nombreDat=self.dir.filePath(nombre) + ".dat"
 			F=QFile(nombreF)
-			F.open(QFile.WriteOnly)
+			F.open(QFile.OpenModeFlag.WriteOnly)
 			F.close()
 			self.escribeDat(d)
 			self.cargaTabla()

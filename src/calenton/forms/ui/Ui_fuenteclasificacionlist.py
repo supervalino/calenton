@@ -33,9 +33,9 @@ class Ui_FuenteClasificacionListClass(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.tabla = QTableView(FuenteClasificacionListClass)
         self.tabla.setObjectName(u"tabla")
-        self.tabla.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.tabla.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.tabla.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tabla.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.tabla.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tabla.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         self.verticalLayout.addWidget(self.tabla)
 

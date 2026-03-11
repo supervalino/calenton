@@ -339,7 +339,7 @@ informe = None
 
 def duplicaEscenario(idEscenario, nombre, db):
 	try:
-		QApplication.instance().setOverrideCursor(Qt.WaitCursor)
+		QApplication.instance().setOverrideCursor(Qt.CursorShape.WaitCursor)
 		es = Escenarios(db)
 		es.duplica(idEscenario, nombre)
 		return es.idEscenario
@@ -351,7 +351,7 @@ def borraEscenario(idEscenario, db):
 
 	es = Escenarios(db, idEscenario)
 	try:
-		QApplication.instance().setOverrideCursor(Qt.WaitCursor)
+		QApplication.instance().setOverrideCursor(Qt.CursorShape.WaitCursor)
 		es.borra()
 	finally:
 		informe = es.informe

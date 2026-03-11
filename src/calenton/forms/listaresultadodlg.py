@@ -26,7 +26,7 @@ class ListaResultadoDlg (QDialog, DataListBase, Ui_ListaResultadoDlgClass):
 		QDialog.__init__(self,  parent)
 		self.setupUi(self)
 		self.addAction(self.actionCopiar)
-		QApplication.instance().setOverrideCursor(Qt.WaitCursor)
+		QApplication.instance().setOverrideCursor(Qt.CursorShape.WaitCursor)
 		self.db = db
 		self.query = query
 		self.model = QSqlQueryModel(self)

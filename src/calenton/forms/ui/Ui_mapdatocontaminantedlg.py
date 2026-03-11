@@ -119,7 +119,7 @@ class Ui_MapDatoContaminanteDlgClass(object):
 
         self.buttonBox = QDialogButtonBox(MapDatoContaminanteDlgClass)
         self.buttonBox.setObjectName(u"buttonBox")
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.StandardButton.Cancel|QDialogButtonBox.StandardButton.Ok)
 
         self.verticalLayout.addWidget(self.buttonBox)
 

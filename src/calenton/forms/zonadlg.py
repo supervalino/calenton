@@ -44,7 +44,7 @@ class ZonaDlg (DataDialog, Ui_ZonaDialogClass):
 		# lista de padres
 		self.filtraZonasPadre()
 		self.mapper = QDataWidgetMapper(self)
-		self.mapper.setSubmitPolicy(QDataWidgetMapper.ManualSubmit)
+		self.mapper.setSubmitPolicy(QDataWidgetMapper.SubmitPolicy.ManualSubmit)
 		self.mapper.setModel(self.modelmapperRelZonas)
 		self.mapper.setItemDelegate(QSqlRelationalDelegate(self))
 		self.listapadres.setModel(self.modelmapperRelZonas)

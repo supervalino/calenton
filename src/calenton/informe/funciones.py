@@ -599,7 +599,7 @@ def principioTablaTex(cfg):
 def encabezado(tipo, mEncabezadoList):
 	mEncabezado = ''
 	if tipo == '2':
-		mEncabezado += ' \multicolumn{2}{l} '
+		mEncabezado += ' \\multicolumn{2}{l} '
 	mEncabezado += ' { \\bfseries '
 	mEncabezado += mEncabezadoList[0]
 	mEncabezado += ' } '
