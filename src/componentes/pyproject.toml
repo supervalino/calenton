@@ -1,0 +1,18 @@
+[build-system]
+requires = ["sip >=6, <7"]
+build-backend = "sipbuild.api"
+
+[project]
+name = "ts"
+version = "1.0.0"
+
+[tool.sip.project]
+sip-files-dir = "sip"
+sip-include-dirs = ["/usr/lib64/python3.14/site-packages/PyQt6/bindings"]
+sip-module = "PyQt6.sip"
+abi-version = "13.10"
+
+[tool.sip.bindings.ts]
+include-dirs = ["include", "ui_include", "/usr/include/qt6", "/usr/include/qt6/QtCore", "/usr/include/qt6/QtSql", "/usr/include/qt6/QtWidgets", "/usr/include/qt6/QtGui", "/usr/include/qt6/QtXml"]
+libraries = ["componentes", "Qt6Core", "Qt6Sql", "Qt6Widgets", "Qt6Gui", "Qt6Xml"]
+library-dirs = ["lib", "/usr/lib64"]
