@@ -487,4 +487,6 @@ When the engine looks up a parameter value for a measurement point, it checks in
 
 ## License
 
-Copyright © 2009–2010 LITEC (CSIC) and Trustserver SL. All rights reserved.
+Copyright © 2009–2010 LITEC (CSIC) and Trustserver SL.
+
+This program is free software; you can redistribute it and/or modify it under the terms of the **GNU General Public License version 2** (or any later version) as published by the Free Software Foundation. See [LICENSE](LICENSE) for the full text.

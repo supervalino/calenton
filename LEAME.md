@@ -487,4 +487,6 @@ Cuando el motor busca el valor de un parámetro para un punto de medición, comp
 
 ## Licencia
 
-Copyright © 2009–2010 LITEC (CSIC) y Trustserver SL. Todos los derechos reservados.
+Copyright © 2009–2010 LITEC (CSIC) y Trustserver SL.
+
+Este programa es software libre; puedes redistribuirlo y/o modificarlo bajo los términos de la **GNU General Public License versión 2** (o cualquier versión posterior) publicada por la Free Software Foundation. Consulta [LICENSE](LICENSE) para el texto completo.
