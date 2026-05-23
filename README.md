@@ -75,9 +75,13 @@ pip install pycha pychart configobj
 
 > **Note:** The original documentation references Qt4 / QGIS 1.x. The current codebase targets **PyQt6** and **QGIS Qt6 build** (installed under `~/qgis-qt6` by default).
 
-### Custom compiled libraries
+### Mandatory local compilation
 
-The project includes a C++ widget library (`src/componentes/`) that must be compiled before the first run:
+**No pre-built binaries are distributed.** The source code must be compiled on the target machine before the application can run. There are two components to build:
+
+**1. C++ widget library (`src/componentes/`)**
+
+This library provides the custom Qt widgets used throughout the GUI. Without it, the application will not start.
 
 ```bash
 cd src/componentes
@@ -87,7 +91,9 @@ python -m build
 
 After a successful build, `libcomponentes.so.1.0.0` and its symlinks will be placed in `src/componentes/lib/`. The `run.sh` launcher adds this directory to `LD_LIBRARY_PATH` automatically.
 
-The project also depends on the **`ts` module** (a custom Python package providing base table models and a unit conversion system). This module should be present in `src/` or installed into the Python path before running.
+**2. `ts` Python module**
+
+A custom Python package providing base table models and the unit conversion system. It must be present in `src/` or installed into the Python path before running. No binary compilation is needed — it is pure Python.
 
 ### Python packages summary
 

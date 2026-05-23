@@ -75,9 +75,13 @@ pip install pycha pychart configobj
 
 > **Nota:** La documentación original hace referencia a Qt4 / QGIS 1.x. El código actual utiliza **PyQt6** y la **compilación Qt6 de QGIS** (instalada en `~/qgis-qt6` por defecto).
 
-### Librería C++ compilada
+### Compilación local obligatoria
 
-El proyecto incluye una librería de widgets C++ (`src/componentes/`) que debe compilarse antes del primer uso:
+**No se distribuyen ejecutables precompilados.** El código fuente debe compilarse en la máquina de destino antes de poder ejecutar la aplicación. Hay dos componentes que compilar:
+
+**1. Librería de widgets C++ (`src/componentes/`)**
+
+Esta librería proporciona los widgets Qt personalizados que se usan en toda la interfaz. Sin ella, la aplicación no arranca.
 
 ```bash
 cd src/componentes
@@ -87,7 +91,9 @@ python -m build
 
 Tras una compilación exitosa, `libcomponentes.so.1.0.0` y sus enlaces simbólicos quedarán en `src/componentes/lib/`. El lanzador `run.sh` añade ese directorio a `LD_LIBRARY_PATH` automáticamente.
 
-El proyecto también depende del módulo **`ts`** (un paquete Python personalizado que proporciona modelos de tabla base y un sistema de conversión de unidades). Este módulo debe estar presente en `src/` o instalado en el path de Python antes de ejecutar la aplicación.
+**2. Módulo Python `ts`**
+
+Un paquete Python personalizado que proporciona modelos de tabla base y el sistema de conversión de unidades. Debe estar presente en `src/` o instalado en el path de Python antes de ejecutar la aplicación. No requiere compilación binaria — es Python puro.
 
 ### Resumen de paquetes Python
 
