@@ -79,9 +79,12 @@ pip install pycha pychart configobj
 
 **No pre-built binaries are distributed.** The source code must be compiled on the target machine before the application can run. There are two components to build:
 
-**1. C++ widget library (`src/componentes/`)**
+**1. C++ widget library and `ts` Python module (`src/componentes/`)**
 
-This library provides the custom Qt widgets used throughout the GUI. Without it, the application will not start.
+A single build produces two artefacts that are both required:
+
+- `src/componentes/lib/libcomponentes.so` — the C++ shared library loaded at runtime
+- `src/componentes/sip/generated/ts.so` — the Python extension module (`import ts`) that exposes the widgets and table models to the application
 
 ```bash
 cd src/componentes
@@ -89,11 +92,9 @@ pip install sip build
 python -m build
 ```
 
-After a successful build, `libcomponentes.so.1.0.0` and its symlinks will be placed in `src/componentes/lib/`. The `run.sh` launcher adds this directory to `LD_LIBRARY_PATH` automatically.
+`run.sh` adds `src/componentes/lib/` to `LD_LIBRARY_PATH` automatically. You must also ensure `src/componentes/sip/generated/` (or wherever `ts.so` lands after the build) is on `PYTHONPATH` so Python can import it.
 
-**2. `ts` Python module**
-
-A custom Python package providing base table models and the unit conversion system. It must be present in `src/` or installed into the Python path before running. No binary compilation is needed — it is pure Python.
+> **Note:** The compiled `.so` files are not included in the repository — they are architecture-specific binaries. Every machine must build from source.
 
 ### Python packages summary
 
