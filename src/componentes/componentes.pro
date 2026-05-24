@@ -9,7 +9,8 @@ QT += sql \
     xml \
     widgets
 INCLUDEPATH += include \
-    ui_include
+    ui_include \
+    /usr/include/x86_64-linux-gnu/c++/15  # Debian — en Red Hat: /usr/include/c++/15/x86_64-redhat-linux
 PRECOMPILED_HEADER = include/static.h
 TARGET = componentes
 

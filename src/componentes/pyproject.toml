@@ -8,11 +8,17 @@ version = "1.0.0"
 
 [tool.sip.project]
 sip-files-dir = "sip"
-sip-include-dirs = ["/usr/lib64/python3.14/site-packages/PyQt6/bindings"]
+# Debian: /usr/lib/python3/dist-packages/PyQt6/bindings
+# Red Hat: /usr/lib64/python3.14/site-packages/PyQt6/bindings
+sip-include-dirs = ["/usr/lib/python3/dist-packages/PyQt6/bindings"]
 sip-module = "PyQt6.sip"
 abi-version = "13.10"
 
 [tool.sip.bindings.ts]
-include-dirs = ["include", "ui_include", "/usr/include/qt6", "/usr/include/qt6/QtCore", "/usr/include/qt6/QtSql", "/usr/include/qt6/QtWidgets", "/usr/include/qt6/QtGui", "/usr/include/qt6/QtXml"]
+# Debian: /usr/include/x86_64-linux-gnu/qt6/...
+# Red Hat: /usr/include/qt6/...
+include-dirs = ["include", "ui_include", "/usr/include/x86_64-linux-gnu/qt6", "/usr/include/x86_64-linux-gnu/qt6/QtCore", "/usr/include/x86_64-linux-gnu/qt6/QtSql", "/usr/include/x86_64-linux-gnu/qt6/QtWidgets", "/usr/include/x86_64-linux-gnu/qt6/QtGui", "/usr/include/x86_64-linux-gnu/qt6/QtXml"]
 libraries = ["componentes", "Qt6Core", "Qt6Sql", "Qt6Widgets", "Qt6Gui", "Qt6Xml"]
-library-dirs = ["lib", "/usr/lib64"]
+# Debian: /usr/lib/x86_64-linux-gnu
+# Red Hat: /usr/lib64
+library-dirs = ["lib", "/usr/lib/x86_64-linux-gnu"]
