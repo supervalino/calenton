@@ -105,7 +105,7 @@ pip install pycha pychart configobj
 
 ### Compilación local obligatoria
 
-**No se distribuyen ejecutables precompilados.** El código fuente debe compilarse en la máquina de destino antes de poder ejecutar la aplicación. Hay dos componentes que compilar:
+**No se distribuyen ejecutables precompilados.** El código fuente debe compilarse en la máquina de destino antes de poder ejecutar la aplicación. Si la compilación falla, pega el mensaje de error en un asistente de IA — suele ser suficiente para resolver problemas de dependencias o paths. Hay dos componentes que compilar:
 
 **1. Librería C++ y módulo Python `ts` (`src/componentes/`)**
 

@@ -105,7 +105,7 @@ pip install pycha pychart configobj
 
 ### Mandatory local compilation
 
-**No pre-built binaries are distributed.** The source code must be compiled on the target machine before the application can run. There are two components to build:
+**No pre-built binaries are distributed.** The source code must be compiled on the target machine before the application can run. If the build fails, paste the error message into an AI assistant — that is usually enough to resolve dependency or path issues. There are two components to build:
 
 **1. C++ widget library and `ts` Python module (`src/componentes/`)**
 
