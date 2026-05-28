@@ -57,23 +57,51 @@ Scenario
 
 ## Requirements & Dependencies
 
-### System packages (Debian/Ubuntu)
+### Supported distributions
+
+Calenton requires **QGIS 4.x built against Qt6** (`python3-qgis` Qt6). As of May 2026, the systems where this is available are:
+
+| System | Status |
+|---|---|
+| **Ubuntu 24.04 LTS** (noble) | Works — official QGIS repo |
+| **Debian 13** (trixie) | Works — official QGIS repo |
+| Debian sid/forky | Blocked — GDAL dependency conflict |
+| Ubuntu 22.04 / Debian 12 | Blocked — only Qt5 QGIS available |
+
+### System packages (Ubuntu 24.04 / Debian trixie)
 
 ```bash
-# PostgreSQL with PostGIS spatial extension
-sudo apt-get install postgresql postgis
+# Add the official QGIS repo (required to get QGIS 4.x Qt6)
+sudo mkdir -p /etc/apt/keyrings
+sudo wget -O /etc/apt/keyrings/qgis-archive-keyring.gpg \
+    https://download.qgis.org/downloads/qgis-archive-keyring.gpg
 
-# QGIS (required for map visualization)
-sudo apt-get install qgis python3-qgis
+# Create /etc/apt/sources.list.d/qgis.sources with your distro codename:
+# noble  → Ubuntu 24.04
+# trixie → Debian 13
+sudo tee /etc/apt/sources.list.d/qgis.sources <<'EOF'
+Types: deb deb-src
+URIs: https://qgis.org/debian
+Suites: noble
+Architectures: amd64
+Components: main
+Signed-By: /etc/apt/keyrings/qgis-archive-keyring.gpg
+EOF
+
+sudo apt update
+
+# PostgreSQL with PostGIS spatial extension
+sudo apt install postgresql postgis
+
+# QGIS 4.x with Qt6
+sudo apt install qgis python3-qgis
 
 # Python dependencies
-sudo apt-get install python3-pyqt6 python3-cairo
+sudo apt install python3-pyqt6 python3-cairo
 
 # Graphics libraries for report generation
 pip install pycha pychart configobj
 ```
-
-> **Note:** The original documentation references Qt4 / QGIS 1.x. The current codebase targets **PyQt6** and **QGIS Qt6 build** (installed under `~/qgis-qt6` by default).
 
 ### Mandatory local compilation
 
