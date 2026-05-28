@@ -19,9 +19,9 @@ import gc
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 from PyQt6 import QtWidgets, QtCore
 from calenton.calentonapp import CalentonApp
-from calenton.forms.main import MainWindow
 
 app = CalentonApp(sys.argv)
+from calenton.forms.main import MainWindow  # debe importarse después de crear QApplication
 window = MainWindow()
 window.show()
 window.actionQuit.triggered.connect(app.quit)
