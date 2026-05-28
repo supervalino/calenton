@@ -25,3 +25,7 @@ CMakeFiles/CMakeSystem.cmake
 moc_*.cpp
 moc_*.h
 
+# Makefiles generados por qmake (contienen rutas absolutas del desarrollador)
+src/componentes/Makefile
+src/componentes/Makefile.Debug
+src/componentes/Makefile.Release
