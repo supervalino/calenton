@@ -115,14 +115,16 @@ A single build produces two artefacts that are both required:
 - `src/componentes/sip/generated/ts.so` — the Python extension module (`import ts`) that exposes the widgets and table models to the application
 
 ```bash
-cd src/componentes
+qmake componentes.pro   # generates the Makefile with your machine's paths
+make
+cd ../..
 pip install sip build
 python -m build
 ```
 
 `run.sh` adds `src/componentes/lib/` to `LD_LIBRARY_PATH` automatically. You must also ensure `src/componentes/sip/generated/` (or wherever `ts.so` lands after the build) is on `PYTHONPATH` so Python can import it.
 
-> **Note:** The compiled `.so` files are not included in the repository — they are architecture-specific binaries. Every machine must build from source.
+> **Note:** Compiled `.so` files and qmake-generated Makefiles are not included in the repository — they contain absolute paths specific to each machine. Every user must run `qmake` before `make`.
 
 ### Python packages summary
 
