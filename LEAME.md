@@ -115,11 +115,11 @@ Un único build produce dos artefactos, ambos necesarios:
 - `src/componentes/sip/generated/ts.so` — el módulo de extensión Python (`import ts`) que expone los widgets y modelos de tabla a la aplicación
 
 ```bash
+cd src/componentes
 qmake componentes.pro   # genera el Makefile con las rutas de tu máquina
-make
-cd ../..
-pip install sip build
-python -m build
+make                    # produce lib/libcomponentes.so
+pip install "sip>=6,<7"
+sip-build               # produce el módulo ts
 ```
 
 `run.sh` añade `src/componentes/lib/` a `LD_LIBRARY_PATH` automáticamente. También hay que asegurarse de que `src/componentes/sip/generated/` (o donde quede `ts.so` tras el build) esté en `PYTHONPATH` para que Python pueda importarlo.
